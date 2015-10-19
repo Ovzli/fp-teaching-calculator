@@ -8,7 +8,7 @@ public class InputParser {
 
 	public LinkedList<Character> parseHexidecimalInput(String input){
 		LinkedList<Character> characters = new LinkedList<Character>();//rename characters?
-		for(int i = 0; i < input.length() ; i++){
+		for(int i = 0; i < input.length() ; i++){ // relabel i?
 			characters.add(input.charAt(i));
 			}
  		return characters;		
