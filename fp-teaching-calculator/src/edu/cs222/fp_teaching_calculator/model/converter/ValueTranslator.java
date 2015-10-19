@@ -2,7 +2,7 @@ package edu.cs222.fp_teaching_calculator.model.converter;
 
 import java.util.LinkedList;
 
-public class UnitTranslator {
+public class ValueTranslator {
 	//	Contributors = HexToBinConvertor
 	//	Responsibility = Translates a string character to another value
 	private String[] hexadecimalValues = {"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"};
