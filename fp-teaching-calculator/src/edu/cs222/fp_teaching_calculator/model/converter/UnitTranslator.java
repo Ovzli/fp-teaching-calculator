@@ -15,7 +15,15 @@ public class UnitTranslator {
 		for(String hexChar : hexCharacters){
 			decimalUnits.add(decimalValues[getPostitionOfValue(hexadecimalValues, hexChar)]);
 		}		
-		return hexCharacters;		
+		return decimalUnits;		
+	}
+	
+	public LinkedList<String> translateDecimalToBinary(LinkedList<String> decCharacters){
+		LinkedList<String> binaryUnits = new LinkedList<String>();
+		for(String decChar : decCharacters){
+			binaryUnits.add(binaryValues[getPostitionOfValue(decimalValues, decChar)]);
+		}		
+		return binaryUnits;	
 	}
 	
 	public int getPostitionOfValue(String[] array, String value){
