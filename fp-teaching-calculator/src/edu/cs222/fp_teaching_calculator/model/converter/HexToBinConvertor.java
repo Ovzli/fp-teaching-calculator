@@ -3,9 +3,9 @@ package edu.cs222.fp_teaching_calculator.model.converter;
 import java.util.LinkedList;
 
 public class HexToBinConvertor {
-	public LinkedList<Integer> parsedIndexOfHexInput = new LinkedList<Integer>(); 
-	public LinkedList<Integer> decimalEquivalencyIndex = new LinkedList<Integer>(); 
-	public LinkedList<Integer> binaryNotationIndex = new LinkedList<Integer>();
+	public LinkedList<String> parsedIndexOfHexInput = new LinkedList<String>(); 
+	public LinkedList<String> decimalEquivalencyIndex = new LinkedList<String>(); 
+	public LinkedList<String> binaryNotationIndex = new LinkedList<String>();
 	
 	public boolean convertHexToBin(String hexInputValue){
 		/*	Contributors = GUI
@@ -19,8 +19,8 @@ public class HexToBinConvertor {
 		 * 4) BUILD THE DECIMAL INDEX FROM PARSED HEX STRING (sample concept below)
 		 */
 		
-		CharacterTranslator hexCharTranslator = new CharacterTranslator();
-		decimalEquivalencyIndex.add( hexCharTranslator.translateToDecimal("A") );
+		/*CharactersTranslator hexCharTranslator = new CharactersTranslator();
+		decimalEquivalencyIndex.add( hexCharTranslator.translateToDecimal("A") );*/
 		// this needs to loop through all hex chars (instead of "A");
 		
 		/* 
@@ -38,7 +38,7 @@ public class HexToBinConvertor {
 		
 	}
 	
-	public LinkedList<Integer> getBinaryIndex(){
+	public LinkedList<String> getBinaryIndex(){
 		// BUILD THE INDEX
 		// TO DO - SET UP TDD TEST WITH GUI!!!
 		return binaryNotationIndex;

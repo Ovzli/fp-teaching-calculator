@@ -6,11 +6,11 @@ public class InputValidator {
 	//	Contributors = HexToBinConvertor
 	//	Responsibility = Validates each character of the
 	//			user's input string to verify it is a hex value
-	private final String validHexidecimalCharacters = "0123456789ABCDEFabcdef";
+	private final String validHexidecimalCharacters = "0123456789ABCDEF";
 	
-	public boolean hexadecimalValidator(LinkedList<Character> hexCharacters){
-		for(Character hexChar : hexCharacters){
-			if(validHexidecimalCharacters.contains(hexChar.toString()) == false){
+	public boolean hexadecimalValidator(LinkedList<String> hexCharacters){
+		for(String hexChar : hexCharacters){
+			if(validHexidecimalCharacters.contains(hexChar) == false){
 				return false;
 			}
 		}
