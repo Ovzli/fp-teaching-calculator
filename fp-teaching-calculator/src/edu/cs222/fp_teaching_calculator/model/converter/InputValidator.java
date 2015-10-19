@@ -8,7 +8,7 @@ public class InputValidator {
 	//			user's input string to verify it is a hex value
 	private final String validHexidecimalCharacters = "0123456789ABCDEF";
 	
-	public boolean hexadecimalValidator(LinkedList<String> hexCharacters){
+	public boolean isHexValueValid(LinkedList<String> hexCharacters){
 		for(String hexChar : hexCharacters){
 			if(validHexidecimalCharacters.contains(hexChar) == false){
 				return false;
@@ -17,12 +17,12 @@ public class InputValidator {
 		return true;
 	}
 	
-	public boolean decimalValidator(){
+	public boolean isDecValueValid(){
 		return true;
 		
 	}
 	
-	public boolean binaryValidator(){
+	public boolean isBinValueValid(){
 		return true;
 		
 	}

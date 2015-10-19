@@ -34,25 +34,4 @@ public class UnitTranslator {
 		}
 		return 0;
 	}
-	
-	
-	public int translateToDecimal(String character){
-		int decimalEquivalent = 0;
-		
-		// makes translation here...
-				
-		// TO DO - SET UP TDD TEST WITH HexToBinConvertor!!!
-		return decimalEquivalent;
-	}
-	
-	public int translateToBinary(int decimal){
-		int binaryEquivalent = 0;
-		
-		// makes translation here...
-		
-		// TO DO - SET UP TDD TEST WITH HexToBinConvertor!!!
-		return binaryEquivalent;
-	}
-	
-	
 }
