@@ -1,0 +1,25 @@
+.rootPane {	
+    -fx-background-color: #FF6666;
+    -fx-padding: 10;
+}
+
+.rootLayout {	
+    -fx-background-color: #FFFFAA;
+    -fx-font: 14px "Arial";
+}
+
+.toolbar{
+    -fx-background-color: #00FF00;
+    -fx-padding: 4;	
+}
+
+.boldedLabel{
+    -fx-font-weight: bold;
+}
+
+.smallItalicLabel{
+    -fx-font-style: italic;	
+    -fx-font: 10px "Serif";
+}
+
+
