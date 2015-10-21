@@ -8,10 +8,10 @@ import org.junit.Assert;
 
 public class InputParserTest {
 
-	InputParser inputParser = new InputParser();
-	
+	private InputParser inputParser = new InputParser();
+
 	@Test
-	public void testParseHexidecimalInput(){
+	public void testParseHexidecimalInput() {
 		String hexString = "C2A";
 		LinkedList<String> correctOutput = new LinkedList<String>();
 		correctOutput.add("C");
@@ -20,18 +20,18 @@ public class InputParserTest {
 		LinkedList<String> methodOutput = inputParser.parseHexidecimalInput(hexString);
 		Assert.assertEquals(methodOutput, correctOutput);
 	}
-	
+
 	@Test
-	public void testParseDecimalInput(){
+	public void testParseDecimalInput() {
 		String decString = "3114";
 		LinkedList<String> correctOutput = new LinkedList<String>();
 		correctOutput = null;
 		LinkedList<String> methodOutput = inputParser.parseDecimalInput(decString);
 		Assert.assertEquals(methodOutput, correctOutput);
 	}
-	
+
 	@Test
-	public void testParseBinaryInput(){
+	public void testParseBinaryInput() {
 		String binString = "‭110000101010";
 		LinkedList<String> correctOutput = new LinkedList<String>();
 		correctOutput = null;

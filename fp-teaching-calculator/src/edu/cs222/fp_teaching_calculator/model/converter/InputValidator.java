@@ -9,7 +9,7 @@ public class InputValidator {
 	private final String validHexidecimalCharacters = "0123456789ABCDEF";
 	
 	public boolean isHexValueValid(LinkedList<String> hexCharacters){
-		for(String hexChar : hexCharacters){
+		for(String hexChar : hexCharacters){ //add length checker?
 			if(validHexidecimalCharacters.contains(hexChar) == false){
 				return false;
 			}
