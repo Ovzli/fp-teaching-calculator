@@ -16,7 +16,7 @@ public class BinaryParser {
 			char[] binDigits = binValue.toCharArray();
 			int[] binDigitsAsInts = new int[4];
 			for(int i = 0; i < binDigits.length; i++){
-				binDigitsAsInts[i] = (int)binDigits[i];
+				binDigitsAsInts[i] = Character.getNumericValue(binDigits[i]);
 			}
 			listOfSeparatedBinaryNibbles.add(binDigitsAsInts);
 		}		
