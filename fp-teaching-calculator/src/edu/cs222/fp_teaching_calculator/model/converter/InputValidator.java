@@ -17,14 +17,14 @@ public class InputValidator {
 		return true;
 	}
 	
-	public boolean isDecValueValid(){
-		return true;
-		
-	}
+//	public boolean isDecValueValid(){
+//		return true;
+//		
+//	}
 	
-	public boolean isBinValueValid(){
-		return true;
-		
-	}
+//	public boolean isBinValueValid(){
+//		return true;
+//		
+//	}
 	
 }

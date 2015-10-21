@@ -27,12 +27,13 @@ public class ValueTranslator {
 	}
 	
 	public int getPostitionOfValue(String[] array, String value){
+		int indexPosition = -1;
 		for(int i = 0; i < array.length; i++){
 			if (array[i].equals(value)){
-				return i;
+				indexPosition = i;
 			}
 		}
-		return 0; //add exception for this!
+		return indexPosition;
 	}
 	
 	/*public class InvalidCharacterExcpetion extends Exception {

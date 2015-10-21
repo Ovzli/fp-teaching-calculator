@@ -8,31 +8,34 @@ import org.junit.Assert;
 
 public class InputValidatorTest {
 	private InputValidator inputValidator = new InputValidator();
-	
+
 	@Test
-	public void testIsHexValueValidSuccess(){
+	public void testIsHexValueValidSuccess() {
 		LinkedList<String> hexList = new LinkedList<String>();
 		hexList.add("C");
 		hexList.add("2");
 		hexList.add("A");
 		Assert.assertTrue(inputValidator.isHexValueValid(hexList));
 	}
+
 	@Test
-	public void testIsHexValueValidFail(){
+	public void testIsHexValueValidFail() {
 		LinkedList<String> hexList = new LinkedList<String>();
 		hexList.add("C");
 		hexList.add("2");
 		hexList.add("G");
 		Assert.assertFalse(inputValidator.isHexValueValid(hexList));
 	}
-	@Test
-	public void testIsDecValueValid(){
-		String decString = "3114";
-		Assert.assertTrue(inputValidator.isDecValueValid());
-	}
-	@Test
-	public void testIsBinValueValid(){
-		String binString = "‭110000101010";
-		Assert.assertTrue(inputValidator.isBinValueValid());
-	}
+
+//	@Test
+//	public void testIsDecValueValid() {
+//		String decString = "3114";
+//		Assert.assertTrue(inputValidator.isDecValueValid());
+//	}
+
+//	@Test
+//	public void testIsBinValueValid() {
+//		String binString = "‭110000101010";
+//		Assert.assertTrue(inputValidator.isBinValueValid());
+//	}
 }

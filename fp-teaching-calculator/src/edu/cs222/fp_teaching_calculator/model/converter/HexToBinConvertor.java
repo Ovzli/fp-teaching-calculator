@@ -37,13 +37,9 @@ public class HexToBinConvertor {
 		// TO DO - SET UP TDD TEST WITH HexToBinConvertor!!!
 	}
 	
-	private void makeConversion(){
-		//?
-	}
-	
-	public LinkedList<String> getBinaryIndex(){
-		// BUILD THE INDEX
-		// TO DO - SET UP TDD TEST WITH GUI!!!
-		return listOfBinaryEquivalents;
-	}
+//	public LinkedList<String> getBinaryIndex(){
+//		// BUILD THE INDEX
+//		// TO DO - SET UP TDD TEST WITH GUI!!!
+//		return listOfBinaryEquivalents;
+//	}
 }
