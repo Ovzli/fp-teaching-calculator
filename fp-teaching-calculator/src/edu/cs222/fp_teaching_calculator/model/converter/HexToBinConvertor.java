@@ -13,7 +13,7 @@ public class HexToBinConvertor {
 	private ValueTranslator valueTranslator = new ValueTranslator();
 	private BinaryParser binaryParser = new BinaryParser();
 	
-	public boolean convertHexToBin(String hexInputValue){
+	public ConversionContainer convertHexToBin(String hexInputValue){
 		/*	Contributors = GUI
 		 * Responsibility:
 		 * Produce a binary equivalent (as an index of each digit) to the hexInputValue provided
@@ -24,7 +24,7 @@ public class HexToBinConvertor {
 		 // 2) VALIDATE EACH STRING DIGITS (use InputValidator class)
 		 // 3) RETURN FALSE IF INVALID INPUT
 		 if(!inputValidator.isHexValueValid(parsedListOfHexInput)){
-			 return false;
+			 return new ConversionContainer(1);
 		 }		 
 		 // 4) BUILD THE DECIMAL INDEX FROM PARSED HEX STRING (sample concept below)
 		 listOfDecimalEquivalents = valueTranslator.translateHexadecimalToDecimal(parsedListOfHexInput);
@@ -33,9 +33,15 @@ public class HexToBinConvertor {
 		 // 6) PARSE THE BINARY VALUES INTO 4 INDEXED DIGITS FOR EACH VALUE (use BinaryParser)
 		 listOfSeparatedBinaryNibbles = binaryParser.separateBinValuesIntoDigits(listOfBinaryEquivalents);
 		 // 7) RETURN TRUE WHEN DATA IS FULLY CONVERTED
-		 return true;		
+		 return new ConversionContainer.ContainerBuilder().originalInput(hexInputValue).
+				 									parsedListOfHexInput(parsedListOfHexInput).
+				 									listOfBinaryEquivalents(listOfBinaryEquivalents).
+				 									listOfDecimalEquivalents(listOfDecimalEquivalents).
+				 									listOfSeparatedBinaryNibbles(listOfSeparatedBinaryNibbles).
+				 									build();		
 		// TO DO - SET UP TDD TEST WITH HexToBinConvertor!!!
 	}
+	
 	
 //	public LinkedList<String> getBinaryIndex(){
 //		// BUILD THE INDEX
