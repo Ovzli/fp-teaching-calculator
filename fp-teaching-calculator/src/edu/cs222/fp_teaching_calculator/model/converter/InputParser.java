@@ -14,11 +14,11 @@ public class InputParser {
  		return characters;		
 	}
 	
-	public LinkedList<Character> parseDecimalInput(String input){
+	public LinkedList<String> parseDecimalInput(String input){
 		return null;		
 	}
 	
-	public LinkedList<Character> parseBinary(String input){
+	public LinkedList<String> parseBinaryInput(String input){
 		return null;		
 	}
 }
