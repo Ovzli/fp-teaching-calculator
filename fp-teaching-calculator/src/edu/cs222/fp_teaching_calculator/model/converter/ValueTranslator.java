@@ -20,8 +20,8 @@ public class ValueTranslator {
 	
 	public LinkedList<String> translateDecimalToBinary(LinkedList<String> decCharacters){
 		LinkedList<String> binaryUnits = new LinkedList<String>();
-		for(String decChar : decCharacters){
-			binaryUnits.add(binaryValues[getPostitionOfValue(decimalValues, decChar)]);
+		for(String decValue : decCharacters){
+			binaryUnits.add(binaryValues[getPostitionOfValue(decimalValues, decValue)]);
 		}		
 		return binaryUnits;	
 	}
@@ -32,6 +32,13 @@ public class ValueTranslator {
 				return i;
 			}
 		}
-		return 0;
+		return 0; //add exception for this!
 	}
+	
+	/*public class InvalidCharacterExcpetion extends Exception {
+		  public void InvalidCharacterException(String message){
+		     super(message);
+		  }
+
+		}*/
 }

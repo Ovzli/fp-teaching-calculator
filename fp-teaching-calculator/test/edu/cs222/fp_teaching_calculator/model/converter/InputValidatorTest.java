@@ -10,7 +10,7 @@ public class InputValidatorTest {
 	private InputValidator inputValidator = new InputValidator();
 	
 	@Test
-	public void testIsHexValueValidTrue(){
+	public void testIsHexValueValidSuccess(){
 		LinkedList<String> hexList = new LinkedList<String>();
 		hexList.add("C");
 		hexList.add("2");
@@ -18,7 +18,7 @@ public class InputValidatorTest {
 		Assert.assertTrue(inputValidator.isHexValueValid(hexList));
 	}
 	@Test
-	public void testIsHexValueValidFalse(){
+	public void testIsHexValueValidFail(){
 		LinkedList<String> hexList = new LinkedList<String>();
 		hexList.add("C");
 		hexList.add("2");
