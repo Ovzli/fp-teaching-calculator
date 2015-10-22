@@ -10,16 +10,24 @@ public class Toolbar extends GridPane {
 		parentGP.add(this, 0, 1);
 		this.getStyleClass().add("toolbar");
 		this.setMinWidth(500);
-		this.setMinHeight(100);
+		this.setMinHeight(60);
 		this.setHgap(6);
 		this.setVgap(2);
 		this.setGridLinesVisible(false);
 	}
 	
-	public void addInstruction(String labelName){
+	public Label addInstruction(String labelName){
 		Label label = new Label(labelName);
 		this.add(label, 0, 0);
-		label.getStyleClass().add("boldedLabel");		
+		label.getStyleClass().add("boldedLabel");
+		return label;
+	}
+	
+	public Label addErrorText(String labelName){
+		Label label = new Label(labelName);
+		this.add(label, 0, 2);
+		label.getStyleClass().add("errorLabel");		
+		return label;
 	}
 	
 	public TextField addInputField(){

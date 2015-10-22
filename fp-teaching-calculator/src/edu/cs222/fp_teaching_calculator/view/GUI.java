@@ -3,6 +3,7 @@ package edu.cs222.fp_teaching_calculator.view;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -13,6 +14,8 @@ public class GUI extends Application {
 	private final Canvas rootCanvas = new Canvas(900,600);
 	public final GridPane rootLayout = new GridPane();
 	public final HexInputToolbar hexInputToolbar = new HexInputToolbar(rootLayout);
+	private final ScrollPane scrollDisplay = new ScrollPane();
+	private final AnchorPane displayPane = new AnchorPane();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -22,10 +25,22 @@ public class GUI extends Application {
 	public void start(Stage rootStage) throws Exception {	        
 		setupStage(rootStage);	        
 		formatRoot();
-		layoutRoot();	
+		layoutRoot();
+		setupDisplay();	
 
 		rootLayout.setGridLinesVisible(true);
 		rootStage.show();
+	}
+
+	private void setupDisplay() {
+		rootLayout.add(scrollDisplay, 0, 2);
+		GridPane.setColumnSpan(scrollDisplay, 2);	
+		scrollDisplay.setPrefSize(700, 400);
+		scrollDisplay.setMinWidth(600);	
+		scrollDisplay.setContent(displayPane);
+		//displayPane.setMinWidth(680);
+		displayPane.setMinHeight(580);	
+		displayPane.getStyleClass().add("displayPane");		
 	}
 
 	private void setupStage(Stage rootStage){

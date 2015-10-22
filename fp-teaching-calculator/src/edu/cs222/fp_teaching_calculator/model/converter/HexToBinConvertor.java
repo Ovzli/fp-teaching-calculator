@@ -3,17 +3,20 @@ package edu.cs222.fp_teaching_calculator.model.converter;
 import java.util.LinkedList;
 
 public class HexToBinConvertor {
-	public LinkedList<String> parsedListOfHexInput = new LinkedList<String>(); 
-	public LinkedList<String> listOfDecimalEquivalents = new LinkedList<String>(); 
-	public LinkedList<String> listOfBinaryEquivalents= new LinkedList<String>();
-	public LinkedList<int[]>  listOfSeparatedBinaryNibbles = new LinkedList<int[]>();
+	private LinkedList<String> parsedListOfHexInput = new LinkedList<String>(); 
+	private LinkedList<String> listOfDecimalEquivalents = new LinkedList<String>(); 
+	private LinkedList<String> listOfBinaryEquivalents= new LinkedList<String>();
+	private LinkedList<int[]>  listOfSeparatedBinaryNibbles = new LinkedList<int[]>();
 	
 	private InputParser inputParser = new InputParser();
 	private InputValidator inputValidator = new InputValidator();
 	private ValueTranslator valueTranslator = new ValueTranslator();
 	private BinaryParser binaryParser = new BinaryParser();
 	
+	private int errorCode=0;
+	
 	public ConversionContainer convertHexToBin(String hexInputValue){
+		errorCode=0;
 		/*	Contributors = GUI
 		 * Responsibility:
 		 * Produce a binary equivalent (as an index of each digit) to the hexInputValue provided
@@ -24,7 +27,10 @@ public class HexToBinConvertor {
 		 // 2) VALIDATE EACH STRING DIGITS (use InputValidator class)
 		 // 3) RETURN FALSE IF INVALID INPUT
 		 if(!inputValidator.isHexValueValid(parsedListOfHexInput)){
-			 return new ConversionContainer(1);
+			errorCode = inputValidator.getError();
+			return new ConversionContainer(errorCode);
+			// conversionContainer = new ConversionContainer(errorcode);
+			 //return new ConversionContainer(errorCode);
 		 }		 
 		 // 4) BUILD THE DECIMAL INDEX FROM PARSED HEX STRING (sample concept below)
 		 listOfDecimalEquivalents = valueTranslator.translateHexadecimalToDecimal(parsedListOfHexInput);

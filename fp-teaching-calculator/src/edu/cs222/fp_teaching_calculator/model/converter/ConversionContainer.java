@@ -3,7 +3,8 @@ package edu.cs222.fp_teaching_calculator.model.converter;
 import java.util.LinkedList;
 
 public class ConversionContainer {
-	public final int errorCode;	//boolean or int??
+	public final boolean errorOccurred;
+	public final int errorCode;
 	public final String originalInput;
 	public final LinkedList<String> parsedListOfHexInput; 
 	public final LinkedList<String> listOfDecimalEquivalents; 
@@ -11,6 +12,7 @@ public class ConversionContainer {
 	public final LinkedList<int[]>  listOfSeparatedBinaryNibbles;
 
 	public ConversionContainer(int errorCode){
+		this.errorOccurred = true;
 		this.errorCode = errorCode;
 		this.originalInput = null;
 		this.parsedListOfHexInput = null;
@@ -20,7 +22,8 @@ public class ConversionContainer {
 	}
 	
 	public ConversionContainer(ContainerBuilder builder){
-		this.errorCode = -1;
+		this.errorOccurred = false;
+		this.errorCode = 0;
 		this.originalInput = builder.originalInput;
 		this.parsedListOfHexInput = builder.parsedListOfHexInput;
 		this.listOfBinaryEquivalents = builder.listOfBinaryEquivalents;

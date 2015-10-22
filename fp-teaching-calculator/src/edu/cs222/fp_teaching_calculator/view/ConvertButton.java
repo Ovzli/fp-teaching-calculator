@@ -1,7 +1,5 @@
 package edu.cs222.fp_teaching_calculator.view;
 
-import org.junit.Assert;
-
 import edu.cs222.fp_teaching_calculator.model.converter.ConversionContainer;
 import edu.cs222.fp_teaching_calculator.model.converter.HexToBinConvertor;
 import javafx.event.ActionEvent;
@@ -10,22 +8,28 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class ConvertButton extends Button {
-
-	public ConvertButton(String buttonLabel){
-		super(buttonLabel);
-	}
+	private final HexInputToolbar parentHexToolbar;
+	private final ErrorLibrary errorLibrary = new ErrorLibrary();
 	
+	public ConvertButton(String buttonLabel, HexInputToolbar parentToolbar){
+		super(buttonLabel);
+		parentHexToolbar = parentToolbar;
+	}	
 	
 	public void handleConvert(TextField inputTarget){
 		this.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 			String inputValue = inputTarget.getText();
+				parentHexToolbar.updateErrorText("");
 				if(inputValue.equals("")){
-					System.out.println("NO VALUE WAS ENTERED");  //  NO VALUE ENTERED ERROR			-- TO DO
+					parentHexToolbar.updateErrorText(errorLibrary.readErrorMessage(0));
 				} else {
 					HexToBinConvertor hexToBin = new HexToBinConvertor();
 					ConversionContainer conversionContainer = hexToBin.convertHexToBin(inputValue);
-					if(conversionContainer.errorCode == -1){
+					if(conversionContainer.errorOccurred){
+						parentHexToolbar.updateErrorText(errorLibrary.readErrorMessage(conversionContainer.errorCode));
+					}					
+					else{
 						System.out.println(conversionContainer.parsedListOfHexInput);
 						System.out.println(conversionContainer.listOfDecimalEquivalents);
 						System.out.println(conversionContainer.listOfBinaryEquivalents);
