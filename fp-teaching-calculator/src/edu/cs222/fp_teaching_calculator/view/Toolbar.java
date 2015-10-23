@@ -16,11 +16,10 @@ public class Toolbar extends GridPane {
 		this.setGridLinesVisible(false);
 	}
 	
-	public Label addInstruction(String labelName){
+	public void addInstruction(String labelName){
 		Label label = new Label(labelName);
 		this.add(label, 0, 0);
 		label.getStyleClass().add("boldedLabel");
-		return label;
 	}
 	
 	public Label addErrorText(String labelName){

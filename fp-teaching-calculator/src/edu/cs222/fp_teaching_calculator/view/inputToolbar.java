@@ -5,16 +5,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-public class HexInputToolbar extends Toolbar {
-	private Label instructionLabel = new Label();
+public class inputToolbar extends Toolbar {
 	private Label errorLabel = new Label();
 	
-	public HexInputToolbar(GridPane parentGP) {
+	public inputToolbar(GridPane parentGP, GridTemplate displayGP) {
 		super(parentGP);
-		instructionLabel = this.addInstruction("Enter a hexadecimal value:\n(up to 8 symbols long)");
+		this.addInstruction("Enter a hexadecimal value:\n(up to 8 symbols long)");
 		errorLabel = this.addErrorText("");
+		GridPane.setColumnSpan(errorLabel, 3);
 		TextField hexInputField = this.addInputField();
-		ConvertButton convertButton = new ConvertButton("CONVERT", this);
+		ConvertButton convertButton = new ConvertButton("CONVERT", this, displayGP);
 		this.add(convertButton, 2, 0);
 		convertButton.handleConvert(hexInputField);
 

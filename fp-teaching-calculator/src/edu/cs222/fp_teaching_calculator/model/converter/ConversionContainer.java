@@ -67,7 +67,5 @@ public class ConversionContainer {
 		public ConversionContainer build(){
 			return new ConversionContainer(this);
 		}
-		
-		
 	}
 }

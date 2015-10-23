@@ -13,10 +13,11 @@ public class GUI extends Application {
 	private final AnchorPane rootPane = new AnchorPane();
 	private final Canvas rootCanvas = new Canvas(900,600);
 	public final GridPane rootLayout = new GridPane();
-	public final HexInputToolbar hexInputToolbar = new HexInputToolbar(rootLayout);
 	private final ScrollPane scrollDisplay = new ScrollPane();
 	private final AnchorPane displayPane = new AnchorPane();
-
+	public GridTemplate displayGrid = new GridTemplate(displayPane);
+	public final inputToolbar hexInputToolbar = new inputToolbar(rootLayout, displayGrid);
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -27,8 +28,9 @@ public class GUI extends Application {
 		formatRoot();
 		layoutRoot();
 		setupDisplay();	
+		//displayGrid = new GridTemplate(displayPane);
+		//.setupHexToBinTemplate();		
 
-		rootLayout.setGridLinesVisible(true);
 		rootStage.show();
 	}
 
@@ -38,9 +40,10 @@ public class GUI extends Application {
 		scrollDisplay.setPrefSize(700, 400);
 		scrollDisplay.setMinWidth(600);	
 		scrollDisplay.setContent(displayPane);
-		//displayPane.setMinWidth(680);
-		displayPane.setMinHeight(580);	
-		displayPane.getStyleClass().add("displayPane");		
+		scrollDisplay.setFitToWidth(true);
+		scrollDisplay.setFitToHeight(true);
+		displayPane.getStyleClass().add("displayPane");
+		rootLayout.setGridLinesVisible(false);
 	}
 
 	private void setupStage(Stage rootStage){
@@ -70,6 +73,10 @@ public class GUI extends Application {
         ColumnConstraints col3 = new ColumnConstraints(200);
         col3.setPercentWidth(20);
         rootLayout.getColumnConstraints().addAll(col1,col2,col3);		
+	}
+	
+	public void transferLists(){
+		System.out.println("TRANSFERRING LISTS");
 	}
 	
 }
