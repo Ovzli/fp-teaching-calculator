@@ -1,41 +1,81 @@
 .rootPane {	
-    -fx-background-color: #FF6666;
-    -fx-padding: 10;
+    -fx-background-color: #DADADA;
+    -fx-padding: 10.0;
 }
 
 .rootLayout {	
-    -fx-background-color: #FFFFAA;
-    -fx-font: 14px "Arial";
+    -fx-font: 14.0px "Arial";
 }
 
 .displayPane {	
-    -fx-background-color: #FFCC00;
-    -fx-padding: 10;
+    -fx-background-color: #E6E6E6;
+    -fx-padding: 10.0;
 }
 
 .displayGrid {	
     -fx-background-color: #FFFFFF;
-    -fx-padding: 4;
+    -fx-padding: 4.0;
 }
 
 .toolbar{
-    -fx-background-color: #00FF00;
-    -fx-padding: 4;	
+    -fx-background-color: #DADADA;
+    -fx-padding: 4.0;	
 }
 
 .boldedLabel{
     -fx-font-weight: bold;
 }
 
-.smallItalicLabel{
-    -fx-font-style: italic;	
-    -fx-font: 10px "Serif";
-}
-
 .errorLabel{
-    -fx-font: 12px "Courier";
+    -fx-font: 12.0px "Courier";
     -fx-text-fill: #FF0000;
     -fx-font-weight: bold;
 }
+
+.smallItalicLabel{
+    -fx-font-style: italic;	
+    -fx-font: 10.0px "Serif";
+}
+
+.stepLabel{
+    -fx-font: 14.0px "Arial";
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+
+.rowTag{
+    -fx-font: 12.0px "Serif";
+    -fx-text-fill: #222222;
+    -fx-font-style: italic;
+    -fx-text-alignment: right;
+}
+
+.commentTag{
+    -fx-font: 12.0px "Serif";
+    -fx-text-fill: "blue";
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
+}
+
+.bigCharCell{
+    -fx-padding: 4.0;		
+}
+
+.bigChar{
+    -fx-font: 24.0px "Arial";
+    -fx-font-weight: bold;
+    -fx-padding: 4.0;	
+}
+
+.bigExpansionChar{
+    -fx-font: 24.0px "Arial";
+    -fx-font-weight: bold;
+}
+
+.bigExpansionExponent{
+    -fx-font: 12.0px "Arial";
+    -fx-font-weight: bold;
+}
+
 
 

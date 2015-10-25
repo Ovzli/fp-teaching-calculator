@@ -5,8 +5,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 public class Toolbar extends GridPane {
-	
-	public Toolbar(GridPane parentGP){
+
+	public Toolbar(GridPane parentGP) {
 		parentGP.add(this, 0, 1);
 		this.getStyleClass().add("toolbar");
 		this.setMinWidth(500);
@@ -15,23 +15,23 @@ public class Toolbar extends GridPane {
 		this.setVgap(2);
 		this.setGridLinesVisible(false);
 	}
-	
-	public void addInstruction(String labelName){
+
+	public void addInstruction(String labelName) {
 		Label label = new Label(labelName);
 		this.add(label, 0, 0);
 		label.getStyleClass().add("boldedLabel");
 	}
-	
-	public Label addErrorText(String labelName){
+
+	public Label addErrorText(String labelName) {
 		Label label = new Label(labelName);
 		this.add(label, 0, 2);
-		label.getStyleClass().add("errorLabel");		
+		label.getStyleClass().add("errorLabel");
 		return label;
 	}
-	
-	public TextField addInputField(){
+
+	public TextField addInputField() {
 		TextField inputField = new TextField();
-		this.add(inputField, 1,0);
+		this.add(inputField, 1, 0);
 		inputField.setMaxWidth(160);
 		return inputField;
 	}

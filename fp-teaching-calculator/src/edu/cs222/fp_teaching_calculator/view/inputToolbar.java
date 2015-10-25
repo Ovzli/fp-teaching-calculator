@@ -7,26 +7,26 @@ import javafx.scene.layout.GridPane;
 
 public class inputToolbar extends Toolbar {
 	private Label errorLabel = new Label();
-	
+
 	public inputToolbar(GridPane parentGP, GridTemplate displayGP) {
 		super(parentGP);
 		this.addInstruction("Enter a hexadecimal value:\n(up to 8 symbols long)");
 		errorLabel = this.addErrorText("");
 		GridPane.setColumnSpan(errorLabel, 3);
 		TextField hexInputField = this.addInputField();
-		ConvertButton convertButton = new ConvertButton("CONVERT", this, displayGP);
+		ConvertButton convertButton = new ConvertButton("CONVERT", this,
+				displayGP);
 		this.add(convertButton, 2, 0);
 		convertButton.handleConvert(hexInputField);
 
 		Label toLabel = new Label("(TO DECIMAL)");
 		this.add(toLabel, 2, 1);
-		toLabel.getStyleClass().add("smallItalicLabel");	
+		toLabel.getStyleClass().add("smallItalicLabel");
 		GridPane.setHalignment(toLabel, HPos.CENTER);
 	}
-	
-	public void updateErrorText(String errorMessage){
-		errorLabel.setText(errorMessage);		
+
+	public void updateErrorText(String errorMessage) {
+		errorLabel.setText(errorMessage);
 	}
-	
 
 }

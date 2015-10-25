@@ -28,21 +28,19 @@ public class GUI extends Application {
 		formatRoot();
 		layoutRoot();
 		setupDisplay();	
-		//displayGrid = new GridTemplate(displayPane);
-		//.setupHexToBinTemplate();		
-
 		rootStage.show();
 	}
 
 	private void setupDisplay() {
 		rootLayout.add(scrollDisplay, 0, 2);
 		GridPane.setColumnSpan(scrollDisplay, 2);	
-		scrollDisplay.setPrefSize(700, 400);
+		scrollDisplay.setPrefSize(700, 500);
 		scrollDisplay.setMinWidth(600);	
 		scrollDisplay.setContent(displayPane);
 		scrollDisplay.setFitToWidth(true);
 		scrollDisplay.setFitToHeight(true);
 		displayPane.getStyleClass().add("displayPane");
+		displayGrid.setMinHeight(474);
 		rootLayout.setGridLinesVisible(false);
 	}
 
