@@ -17,25 +17,7 @@ public class InputParserTest {
 		correctOutput.add("C");
 		correctOutput.add("2");
 		correctOutput.add("A");
-		LinkedList<String> methodOutput = inputParser.parseHexidecimalInput(hexString);
+		LinkedList<String> methodOutput = inputParser.parseHexInput(hexString);
 		Assert.assertEquals(methodOutput, correctOutput);
 	}
-
-//	@Test
-//	public void testParseDecimalInput() {
-//		String decString = "3114";
-//		LinkedList<String> correctOutput = new LinkedList<String>();
-//		correctOutput = null;
-//		LinkedList<String> methodOutput = inputParser.parseDecimalInput(decString);
-//		Assert.assertEquals(methodOutput, correctOutput);
-//	}
-
-//	@Test
-//	public void testParseBinaryInput() {
-//		String binString = "‭110000101010";
-//		LinkedList<String> correctOutput = new LinkedList<String>();
-//		correctOutput = null;
-//		LinkedList<String> methodOutput = inputParser.parseBinaryInput(binString);
-//		Assert.assertEquals(methodOutput, correctOutput);
-//	}
 }

@@ -16,7 +16,7 @@ public class GUI extends Application {
 	private final ScrollPane scrollDisplay = new ScrollPane();
 	private final AnchorPane displayPane = new AnchorPane();
 	public GridTemplate displayGrid = new GridTemplate(displayPane);
-	public final inputToolbar hexInputToolbar = new inputToolbar(rootLayout, displayGrid);
+	public final InputToolbar hexInputToolbar = new InputToolbar(rootLayout, displayGrid);
 	
 	public static void main(String[] args) {
 		launch(args);

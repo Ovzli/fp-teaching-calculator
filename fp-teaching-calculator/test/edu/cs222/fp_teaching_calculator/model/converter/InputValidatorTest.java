@@ -19,7 +19,7 @@ public class InputValidatorTest {
 	}
 
 	@Test
-	public void testIsHexValueValidFail() {
+	public void testIsHexValueValidSymbolFail() {
 		LinkedList<String> hexList = new LinkedList<String>();
 		hexList.add("C");
 		hexList.add("2");
@@ -27,15 +27,18 @@ public class InputValidatorTest {
 		Assert.assertFalse(inputValidator.isHexValueValid(hexList));
 	}
 
-//	@Test
-//	public void testIsDecValueValid() {
-//		String decString = "3114";
-//		Assert.assertTrue(inputValidator.isDecValueValid());
-//	}
-
-//	@Test
-//	public void testIsBinValueValid() {
-//		String binString = "‭110000101010";
-//		Assert.assertTrue(inputValidator.isBinValueValid());
-//	}
+	@Test
+	public void testIsHexValueValidLengthFail() {
+		LinkedList<String> hexList = new LinkedList<String>();
+		hexList.add("C");
+		hexList.add("2");
+		hexList.add("A");
+		hexList.add("C");
+		hexList.add("2");
+		hexList.add("A");
+		hexList.add("C");
+		hexList.add("2");
+		hexList.add("A");
+		Assert.assertFalse(inputValidator.isHexValueValid(hexList));
+	}
 }

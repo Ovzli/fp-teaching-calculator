@@ -14,10 +14,10 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class GridTemplate extends GridPane {
-	public LinkedList<String> hexChars = new LinkedList<String>();
-	public LinkedList<String> decChars = new LinkedList<String>();
+	public LinkedList<String> hexSymbols = new LinkedList<String>();
+	public LinkedList<String> decValues = new LinkedList<String>();
 	public LinkedList<int[]> binDigits = new LinkedList<int[]>();
-	int col1Width = 200;
+	private final int column1Width = 200;
 
 	public GridTemplate(AnchorPane parentAP) {
 		super();
@@ -38,15 +38,15 @@ public class GridTemplate extends GridPane {
 		this.add(inputReprintRow, 0, 0);
 		GridPane step1GP = buildStep(1, "decimal equivalents:  ", 1);
 		this.add(step1GP, 0, 1);
-		GridPane decimalChars = makeBigCharLabelGrid(decChars, "#9900ff");
+		GridPane decimalChars = makeBigCharLabelGrid(decValues, "#9900ff");
 		step1GP.add(decimalChars, 1, 1);
 		GridPane step2GP = buildStep(2, "decimal expansion:  ", 2);
 		this.add(step2GP, 0, 2);
-		GridPane expansionGrid = makeExpansionGrid(decChars);
+		GridPane expansionGrid = makeExpansionGrid(decValues);
 		step2GP.add(expansionGrid, 1, 1);
 		GridPane step3GP = buildStep(3, "binary evaluation:  ", 3);
 		this.add(step3GP, 0, 3);
-		GridPane evaluationGrid = makeEvaluationGrid(decChars);
+		GridPane evaluationGrid = makeEvaluationGrid(decValues);
 		step3GP.add(evaluationGrid, 1, 1);
 		GridPane step4GP = buildStep(4, "binary evaluation:  ", 4);
 		this.add(step4GP, 0, 4);
@@ -57,19 +57,19 @@ public class GridTemplate extends GridPane {
 
 	private GridPane makeInputReprintRow() {
 		GridPane inputRowGP = new GridPane();
-		setCol1Constraints(inputRowGP);
+		setColumn1Constraints(inputRowGP);
 		Label rowTag = makeRowTag("original input:  ");
 		inputRowGP.add(rowTag, 0, 0);
-		GridPane inputLabel = makeBigCharLabelGrid(hexChars, "#0066CC");
+		GridPane inputLabel = makeBigCharLabelGrid(hexSymbols, "#0066CC");
 		inputRowGP.add(inputLabel, 1, 0);
 		return inputRowGP;
 	}
 
 	private GridPane buildStep(int stepID, String rowTagString, int commentID) {
 		GridPane stepGP = new GridPane();
-		setCol1Constraints(stepGP);
+		setColumn1Constraints(stepGP);
 		Rectangle bgRect = new Rectangle();
-		bgRect.setWidth(col1Width);
+		bgRect.setWidth(column1Width);
 		bgRect.setHeight(20);
 		bgRect.setFill(Paint.valueOf("#0066CC"));
 		stepGP.add(bgRect, 0, 0);
@@ -249,8 +249,8 @@ public class GridTemplate extends GridPane {
 		emptyRect.setFill(Paint.valueOf("#FFFFFF"));
 	}
 
-	private void setCol1Constraints(GridPane gridPane) {
-		ColumnConstraints col1 = new ColumnConstraints(col1Width);
+	private void setColumn1Constraints(GridPane gridPane) {
+		ColumnConstraints col1 = new ColumnConstraints(column1Width);
 		gridPane.getColumnConstraints().add(col1);
 	}
 

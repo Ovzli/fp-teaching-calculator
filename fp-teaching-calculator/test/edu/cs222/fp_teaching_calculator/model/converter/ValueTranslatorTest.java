@@ -10,7 +10,7 @@ public class ValueTranslatorTest {
 	private ValueTranslator valueTranslator = new ValueTranslator();
 
 	@Test
-	public void testTranslateHexadecimalToDecimal() {
+	public void testTranslateHexToDec() {
 		LinkedList<String> hexList = new LinkedList<String>();
 		hexList.add("C");
 		hexList.add("2");
@@ -19,12 +19,12 @@ public class ValueTranslatorTest {
 		correctList.add("12");
 		correctList.add("2");
 		correctList.add("10");
-		LinkedList<String> outputList = valueTranslator.translateHexadecimalToDecimal(hexList);
+		LinkedList<String> outputList = valueTranslator.translateHexToDec(hexList);
 		Assert.assertEquals(correctList, outputList);
 	}
 
 	@Test
-	public void testTranslateDecimalToBinary() {
+	public void testTranslateDecToBin() {
 		LinkedList<String> decList = new LinkedList<String>();
 		decList.add("12");
 		decList.add("2");
@@ -33,26 +33,26 @@ public class ValueTranslatorTest {
 		correctList.add("1100");
 		correctList.add("0010");
 		correctList.add("1010");
-		LinkedList<String> outputList = valueTranslator.translateDecimalToBinary(decList);
+		LinkedList<String> outputList = valueTranslator.translateDecToBin(decList);
 		System.out.println(outputList);
 		Assert.assertEquals(correctList, outputList);
 	}
 
 	@Test
 	public void testGetPositionOfValueSuccess() {
-		String[] hexadecimalValues = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
+		String[] hexValues = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
 		String test = "A";
 		int correctOutput = 10;
-		int testOutput = valueTranslator.getPostitionOfValue(hexadecimalValues, test);
+		int testOutput = valueTranslator.getPostitionOfValue(hexValues, test);
 		Assert.assertEquals(correctOutput, testOutput);
 	}
 
 	@Test
 	public void testGetPositionOfValueFail() {
-		String[] hexadecimalValues = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
+		String[] hexValues = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
 		String test = "H";
 		int correctOutput = -1;
-		int testOutput = valueTranslator.getPostitionOfValue(hexadecimalValues, test);
+		int testOutput = valueTranslator.getPostitionOfValue(hexValues, test);
 		Assert.assertEquals(correctOutput, testOutput);
 	}
 }

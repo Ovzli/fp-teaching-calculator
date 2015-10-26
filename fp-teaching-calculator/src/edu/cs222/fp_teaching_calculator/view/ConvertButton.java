@@ -9,13 +9,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class ConvertButton extends Button {
-	private final inputToolbar parentInputToolbar;
+	private final InputToolbar parentInputToolbar;
 	private final ErrorLibrary errorLibrary = new ErrorLibrary();
 	private String inputValue;
 	private GridTemplate rootDisplayGrid;
 
-	public ConvertButton(String buttonLabel, inputToolbar parentToolbar,
-			GridTemplate rootDisplay) {
+	public ConvertButton(String buttonLabel, InputToolbar parentToolbar, GridTemplate rootDisplay) {
 		super(buttonLabel);
 		parentInputToolbar = parentToolbar;
 		rootDisplayGrid = rootDisplay;
@@ -27,24 +26,24 @@ public class ConvertButton extends Button {
 				inputValue = inputTarget.getText();
 				parentInputToolbar.updateErrorText("");
 				if (inputValue.equals("")) {
-					parentInputToolbar.updateErrorText(errorLibrary
-							.readErrorMessage(0));
+					parentInputToolbar.updateErrorText(errorLibrary.readErrorMessage(0));
 				} else {
-					HexToBinConvertor hexToBin = new HexToBinConvertor();
-					ConversionContainer conversionContainer = hexToBin
-							.convertHexToBin(inputValue);
-					if (conversionContainer.errorOccurred) {
-						parentInputToolbar.updateErrorText(errorLibrary
-								.readErrorMessage(conversionContainer.errorCode));
-					} else {
-						rootDisplayGrid.hexChars = conversionContainer.parsedListOfHexInput;
-						rootDisplayGrid.decChars = conversionContainer.listOfDecimalEquivalents;
-						rootDisplayGrid.binDigits = conversionContainer.listOfSeparatedBinaryNibbles;
-						rootDisplayGrid.updateDisplay();
-					}
+					doConversion();
 				}
 			}
 		});
 	}
 
+	public void doConversion() {
+		HexToBinConvertor hexToBin = new HexToBinConvertor();
+		ConversionContainer conversionContainer = hexToBin.convertHexToBin(inputValue);
+		if (conversionContainer.errorOccurred) {
+			parentInputToolbar.updateErrorText(errorLibrary.readErrorMessage(conversionContainer.errorCode));
+		} else {
+			rootDisplayGrid.hexSymbols = conversionContainer.parsedListOfHexInput;
+			rootDisplayGrid.decValues = conversionContainer.listOfDecEquivalents;
+			rootDisplayGrid.binDigits = conversionContainer.listOfSeparatedBinNibbles;
+			rootDisplayGrid.updateDisplay();
+		}
+	}
 }
