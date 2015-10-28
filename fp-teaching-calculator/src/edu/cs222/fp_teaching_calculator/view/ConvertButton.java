@@ -14,7 +14,8 @@ public class ConvertButton extends Button {
 	private String inputValue;
 	private GridTemplate rootDisplayGrid;
 
-	public ConvertButton(String buttonLabel, InputToolbar parentToolbar, GridTemplate rootDisplay) {
+	public ConvertButton(String buttonLabel, InputToolbar parentToolbar,
+			GridTemplate rootDisplay) {
 		super(buttonLabel);
 		parentInputToolbar = parentToolbar;
 		rootDisplayGrid = rootDisplay;
@@ -26,7 +27,8 @@ public class ConvertButton extends Button {
 				inputValue = inputTarget.getText();
 				parentInputToolbar.updateErrorText("");
 				if (inputValue.equals("")) {
-					parentInputToolbar.updateErrorText(errorLibrary.readErrorMessage(0));
+					parentInputToolbar.updateErrorText(errorLibrary
+							.readErrorMessage(0));
 				} else {
 					doConversion();
 				}
@@ -36,9 +38,11 @@ public class ConvertButton extends Button {
 
 	public void doConversion() {
 		HexToBinConvertor hexToBin = new HexToBinConvertor();
-		ConversionContainer conversionContainer = hexToBin.convertHexToBin(inputValue);
+		ConversionContainer conversionContainer = hexToBin
+				.convertHexToBin(inputValue);
 		if (conversionContainer.errorOccurred) {
-			parentInputToolbar.updateErrorText(errorLibrary.readErrorMessage(conversionContainer.errorCode));
+			parentInputToolbar.updateErrorText(errorLibrary
+					.readErrorMessage(conversionContainer.errorCode));
 		} else {
 			rootDisplayGrid.hexSymbols = conversionContainer.parsedListOfHexInput;
 			rootDisplayGrid.decValues = conversionContainer.listOfDecEquivalents;

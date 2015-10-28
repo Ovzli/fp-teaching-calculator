@@ -18,9 +18,11 @@ public class GridTemplate extends GridPane {
 	public LinkedList<String> decValues = new LinkedList<String>();
 	public LinkedList<int[]> binDigits = new LinkedList<int[]>();
 	private final int column1Width = 200;
+	private SideBarPanel sideBarPanel;
 
-	public GridTemplate(AnchorPane parentAP) {
+	public GridTemplate(AnchorPane parentAP, SideBarPanel sideBar) {
 		super();
+		sideBarPanel = sideBar;
 		parentAP.getChildren().add(this);
 		AnchorPane.setTopAnchor(this, 0.0);
 		AnchorPane.setLeftAnchor(this, 0.0);
@@ -39,19 +41,19 @@ public class GridTemplate extends GridPane {
 		GridPane step1GP = buildStep(1, "decimal equivalents:  ", 1);
 		this.add(step1GP, 0, 1);
 		GridPane decimalChars = makeBigCharLabelGrid(decValues, "#9900ff");
-		step1GP.add(decimalChars, 1, 1);
+		step1GP.add(decimalChars, 1, 2);
 		GridPane step2GP = buildStep(2, "decimal expansion:  ", 2);
 		this.add(step2GP, 0, 2);
 		GridPane expansionGrid = makeExpansionGrid(decValues);
-		step2GP.add(expansionGrid, 1, 1);
+		step2GP.add(expansionGrid, 1, 2);
 		GridPane step3GP = buildStep(3, "binary evaluation:  ", 3);
 		this.add(step3GP, 0, 3);
 		GridPane evaluationGrid = makeEvaluationGrid(decValues);
-		step3GP.add(evaluationGrid, 1, 1);
+		step3GP.add(evaluationGrid, 1, 2);
 		GridPane step4GP = buildStep(4, "binary evaluation:  ", 4);
 		this.add(step4GP, 0, 4);
 		GridPane binaryGrid = makeBinaryGrid(binDigits);
-		step4GP.add(binaryGrid, 1, 1);
+		step4GP.add(binaryGrid, 1, 2);
 		makeEmptyRow(this, 5);
 	}
 
@@ -68,28 +70,58 @@ public class GridTemplate extends GridPane {
 	private GridPane buildStep(int stepID, String rowTagString, int commentID) {
 		GridPane stepGP = new GridPane();
 		setColumn1Constraints(stepGP);
-		Rectangle bgRect = new Rectangle();
-		bgRect.setWidth(column1Width);
-		bgRect.setHeight(20);
-		bgRect.setFill(Paint.valueOf("#0066CC"));
-		stepGP.add(bgRect, 0, 0);
-		Label stepTag = new Label();
-		stepGP.add(stepTag, 0, 0);
-		stepTag.setText(" STEP " + stepID);
-		stepTag.getStyleClass().add("stepLabel");
-		Label rowTag = makeRowTag(rowTagString);
-		stepGP.add(rowTag, 0, 1);
+		stepGP.setHgap(2);
+		Rectangle horizLine = horizontalLine();
+		stepGP.add(horizLine, 0, 0);
+		GridPane stepLabel = makeStepLabel(stepID, rowTagString);
+		stepGP.add(stepLabel, 0, 1);
 		Label tutorText = new Label();
-		stepGP.add(tutorText, 1, 2);
+		stepGP.add(tutorText, 1, 1);
 		CommentLibrary comment = new CommentLibrary();
 		tutorText.setText("Step " + stepID + " "
-				+ comment.readComment(commentID) + "\n.");
+				+ comment.readComment(commentID));
 		tutorText.setWrapText(true);
 		tutorText.setMinWidth(350);
 		tutorText.getStyleClass().add("commentTag");
 		GridPane.setValignment(tutorText, VPos.TOP);
+		Rectangle bgRect = makeBGRect("#FFFFFF");
+		stepGP.add(bgRect, 1, 5);
 		stepGP.setGridLinesVisible(false);
 		return stepGP;
+	}
+
+	private Rectangle horizontalLine() {
+		Rectangle horizLine = new Rectangle();
+		horizLine.setWidth(750);
+		horizLine.setHeight(2);
+		horizLine.setFill(Paint.valueOf("#0066CC"));
+		return horizLine;
+	}
+
+	private Rectangle makeBGRect(String color) {
+		Rectangle bgRect = new Rectangle();
+		bgRect.setWidth(column1Width);
+		bgRect.setHeight(24);
+		bgRect.setFill(Paint.valueOf(color));
+		return bgRect;
+	}
+
+	private Label makeStepTag(int stepID) {
+		Label stepTag = new Label();
+		stepTag.setText(" STEP " + stepID);
+		stepTag.getStyleClass().add("stepLabel");
+		return stepTag;
+	}
+
+	private GridPane makeStepLabel(int stepID, String rowTagString) {
+		GridPane stepLabel = new GridPane();
+		Rectangle bgRect = makeBGRect("#0066CC");
+		stepLabel.add(bgRect, 0, 0);
+		Label stepTag = makeStepTag(stepID);
+		stepLabel.add(stepTag, 0, 0);
+		Label rowTag = makeRowTag(rowTagString);
+		stepLabel.add(rowTag, 0, 1);
+		return stepLabel;
 	}
 
 	private Label makeRowTag(String labelName) {
@@ -229,18 +261,17 @@ public class GridTemplate extends GridPane {
 
 	private GridPane makeBinaryGrid(LinkedList<int[]> binDigitList) {
 		GridPane binaryGP = new GridPane();
-		//binaryGP.setHgap(5);
 		binaryGP.getStyleClass().add("bigCharCell");
 		for (int i = 0; i < binDigitList.size(); i++) {
 			String binDigit = String.valueOf(binDigits.get(i)[0])
 					+ String.valueOf(binDigits.get(i)[1])
 					+ String.valueOf(binDigits.get(i)[2])
-					+ String.valueOf(binDigits.get(i)[3]);					
-			makeBigChar(binaryGP, i, 0, binDigit, "#9900ff");			
+					+ String.valueOf(binDigits.get(i)[3]);
+			makeBigChar(binaryGP, i, 0, binDigit, "#9900ff");
 		}
 		return binaryGP;
 	}
-	
+
 	private void makeEmptyRow(GridPane parentGP, int indexRow) {
 		Rectangle emptyRect = new Rectangle();
 		parentGP.add(emptyRect, 0, indexRow);
@@ -256,6 +287,7 @@ public class GridTemplate extends GridPane {
 
 	public void updateDisplay() {
 		this.getChildren().clear();
+		sideBarPanel.setVisible(true);
 		setupHexToBinTemplate();
 	}
 }
