@@ -53,13 +53,13 @@ public class HexToBinConverterTest {
 
 	private void AssertConversionContainersAreEqual(Conversion completedConversion,
 			Conversion expectedResult) {
-		Assert.assertEquals(expectedResult.originalInput, completedConversion.originalInput);
-		Assert.assertEquals(expectedResult.parsedListOfHexInput, completedConversion.parsedListOfHexInput);
-		Assert.assertEquals(expectedResult.listOfDecEquivalents, completedConversion.listOfDecEquivalents);
-		Assert.assertEquals(expectedResult.listOfBinEquivalents, completedConversion.listOfBinEquivalents);
-		for (int i = 0; i < expectedResult.listOfSeparatedBinNibbles.size(); i++) {
-			AssertArraysAreEqual(expectedResult.listOfSeparatedBinNibbles.get(i),
-					completedConversion.listOfSeparatedBinNibbles.get(i));
+		Assert.assertEquals(expectedResult.getOriginalInput(), completedConversion.getOriginalInput());
+		Assert.assertEquals(expectedResult.getParsedListOfHexInput(), completedConversion.getParsedListOfHexInput());
+		Assert.assertEquals(expectedResult.getListOfDecEquivalents(), completedConversion.getListOfDecEquivalents());
+		Assert.assertEquals(expectedResult.getListOfBinEquivalents(), completedConversion.getListOfBinEquivalents());
+		for (int i = 0; i < expectedResult.getListOfSeparatedBinNibbles().size(); i++) {
+			AssertArraysAreEqual(expectedResult.getListOfSeparatedBinNibbles().get(i),
+					completedConversion.getListOfSeparatedBinNibbles().get(i));
 		}
 	}
 
@@ -68,6 +68,6 @@ public class HexToBinConverterTest {
 		String invalidInput = "C2aq";
 		Conversion completedConversion = hexToBinConverter.convertHexToBin(invalidInput);
 		Conversion expectedResult = new Conversion(1);
-		Assert.assertEquals(expectedResult.errorCode, completedConversion.errorCode);
+		Assert.assertEquals(expectedResult.getErrorCode(), completedConversion.getErrorCode());
 	}
 }

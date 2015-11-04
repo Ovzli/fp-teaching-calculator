@@ -3,13 +3,13 @@ package edu.cs222.fpteachingcalculator.model.converter;
 import java.util.LinkedList;
 
 public class Conversion {
-	public final boolean errorOccurred;
-	public final int errorCode;
-	public final String originalInput;
-	public final LinkedList<String> parsedListOfHexInput;
-	public final LinkedList<String> listOfDecEquivalents;
-	public final LinkedList<String> listOfBinEquivalents;
-	public final LinkedList<int[]> listOfSeparatedBinNibbles;
+	private final boolean errorOccurred;
+	private final int errorCode;
+	private final String originalInput;
+	private final LinkedList<String> parsedListOfHexInput;
+	private final LinkedList<String> listOfDecEquivalents;
+	private final LinkedList<String> listOfBinEquivalents;
+	private final LinkedList<int[]> listOfSeparatedBinNibbles;
 
 	public Conversion(int errorCode) {
 		this.errorOccurred = true;
@@ -29,6 +29,33 @@ public class Conversion {
 		this.listOfBinEquivalents = builder.listOfBinEquivalents;
 		this.listOfDecEquivalents = builder.listOfDecEquivalents;
 		this.listOfSeparatedBinNibbles = builder.listOfSeparatedBinNibbles;
+	}
+	
+	public boolean getErrorOccurred(){
+		return errorOccurred;
+	}
+	
+	public int getErrorCode(){
+		return errorCode;
+	}
+	
+	public String getOriginalInput(){
+		return originalInput;
+	}
+	
+	public LinkedList<String> getParsedListOfHexInput(){
+		return parsedListOfHexInput;
+	}
+	public LinkedList<String> getListOfDecEquivalents(){
+		return listOfDecEquivalents;
+	}
+	
+	public LinkedList<String> getListOfBinEquivalents(){
+		return listOfBinEquivalents;
+	}
+	
+	public LinkedList<int[]> getListOfSeparatedBinNibbles(){
+		return listOfSeparatedBinNibbles;
 	}
 
 	public static class ConversionBuilder {

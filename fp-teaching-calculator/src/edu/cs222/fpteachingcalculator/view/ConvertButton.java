@@ -40,13 +40,13 @@ public class ConvertButton extends Button {
 		HexToBinConverter hexToBin = new HexToBinConverter();
 		Conversion conversionContainer = hexToBin
 				.convertHexToBin(inputValue);
-		if (conversionContainer.errorOccurred) {
+		if (conversionContainer.getErrorOccurred()) {
 			parentInputToolbar.updateErrorText(errorLibrary
-					.readErrorMessage(conversionContainer.errorCode));
+					.readErrorMessage(conversionContainer.getErrorCode()));
 		} else {
-			rootDisplayGrid.hexSymbols = conversionContainer.parsedListOfHexInput;
-			rootDisplayGrid.decValues = conversionContainer.listOfDecEquivalents;
-			rootDisplayGrid.binDigits = conversionContainer.listOfSeparatedBinNibbles;
+			rootDisplayGrid.hexSymbols = conversionContainer.getParsedListOfHexInput();
+			rootDisplayGrid.decValues = conversionContainer.getListOfDecEquivalents();
+			rootDisplayGrid.binDigits = conversionContainer.getListOfSeparatedBinNibbles();
 			rootDisplayGrid.updateDisplay();
 		}
 	}
