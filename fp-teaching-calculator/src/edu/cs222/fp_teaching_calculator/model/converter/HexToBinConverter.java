@@ -2,7 +2,7 @@ package edu.cs222.fp_teaching_calculator.model.converter;
 
 import java.util.LinkedList;
 
-public class HexToBinConvertor {
+public class HexToBinConverter {
 	private LinkedList<String> parsedListOfHexInput = new LinkedList<String>();
 	private LinkedList<String> listOfDecimalEquivalents = new LinkedList<String>();
 	private LinkedList<String> listOfBinaryEquivalents = new LinkedList<String>();

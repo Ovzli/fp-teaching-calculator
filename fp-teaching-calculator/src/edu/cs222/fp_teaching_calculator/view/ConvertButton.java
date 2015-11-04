@@ -1,7 +1,7 @@
 package edu.cs222.fp_teaching_calculator.view;
 
 import edu.cs222.fp_teaching_calculator.model.converter.ConversionContainer;
-import edu.cs222.fp_teaching_calculator.model.converter.HexToBinConvertor;
+import edu.cs222.fp_teaching_calculator.model.converter.HexToBinConverter;
 import edu.cs222.fp_teaching_calculator.view.GridTemplate;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -37,7 +37,7 @@ public class ConvertButton extends Button {
 	}
 
 	public void doConversion() {
-		HexToBinConvertor hexToBin = new HexToBinConvertor();
+		HexToBinConverter hexToBin = new HexToBinConverter();
 		ConversionContainer conversionContainer = hexToBin
 				.convertHexToBin(inputValue);
 		if (conversionContainer.errorOccurred) {

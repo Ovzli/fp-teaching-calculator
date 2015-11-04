@@ -11,31 +11,26 @@ public class ValueTranslatorTest {
 
 	@Test
 	public void testTranslateHexToDec() {
-		LinkedList<String> hexList = new LinkedList<String>();
-		hexList.add("C");
-		hexList.add("2");
-		hexList.add("A");
-		LinkedList<String> correctList = new LinkedList<String>();
-		correctList.add("12");
-		correctList.add("2");
-		correctList.add("10");
+		LinkedList<String> hexList = createLinkedListOfStrings("C", "2", "A");
+		LinkedList<String> correctList = createLinkedListOfStrings("12", "2", "10");
 		LinkedList<String> outputList = valueTranslator.translateHexToDec(hexList);
 		Assert.assertEquals(correctList, outputList);
 	}
 
 	@Test
 	public void testTranslateDecToBin() {
-		LinkedList<String> decList = new LinkedList<String>();
-		decList.add("12");
-		decList.add("2");
-		decList.add("10");
-		LinkedList<String> correctList = new LinkedList<String>();
-		correctList.add("1100");
-		correctList.add("0010");
-		correctList.add("1010");
+		LinkedList<String> decList = createLinkedListOfStrings("12", "2", "10");
+		LinkedList<String> correctList = createLinkedListOfStrings("1100", "0010", "1010");
 		LinkedList<String> outputList = valueTranslator.translateDecToBin(decList);
-		System.out.println(outputList);
 		Assert.assertEquals(correctList, outputList);
+	}
+	
+	private LinkedList<String> createLinkedListOfStrings(String string1, String string2, String string3) {
+		LinkedList<String> output = new LinkedList<String>();
+		output.add(string1);
+		output.add(string2);
+		output.add(string3);
+		return output;
 	}
 
 	@Test
