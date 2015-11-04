@@ -19,7 +19,7 @@ public class InputToolbar extends Toolbar {
 		this.add(convertButton, 2, 0);
 		convertButton.handleConvert(hexInputField);
 
-		Label toLabel = new Label("(TO DECIMAL)");
+		Label toLabel = new Label("(TO BINARY)");
 		this.add(toLabel, 2, 1);
 		toLabel.getStyleClass().add("smallItalicLabel");
 		GridPane.setHalignment(toLabel, HPos.CENTER);

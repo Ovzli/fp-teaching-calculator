@@ -38,20 +38,28 @@ public class GridTemplate extends GridPane {
 	public void setupHexToBinTemplate() {
 		GridPane inputReprintRow = makeInputReprintRow();
 		this.add(inputReprintRow, 0, 0);
-		GridPane step1GP = buildStep(1, "decimal equivalents:  ", 1);
+		GridPane step1GP = buildStep(1, "decimal equivalents:  ");
 		this.add(step1GP, 0, 1);
+		Label Step1Label = addStepComment(1, "hexDecStep");
+		step1GP.add(Step1Label, 1, 1);
 		GridPane decimalChars = makeBigCharLabelGrid(decValues, "#9900ff");
 		step1GP.add(decimalChars, 1, 2);
-		GridPane step2GP = buildStep(2, "decimal expansion:  ", 2);
+		GridPane step2GP = buildStep(2, "decimal expansion:  ");
 		this.add(step2GP, 0, 2);
+		Label Step2Label = addStepComment(2, "decExpansionStep");
+		step2GP.add(Step2Label, 1, 1);
 		GridPane expansionGrid = makeExpansionGrid(decValues);
 		step2GP.add(expansionGrid, 1, 2);
-		GridPane step3GP = buildStep(3, "binary evaluation:  ", 3);
+		GridPane step3GP = buildStep(3, "binary evaluation:  ");
 		this.add(step3GP, 0, 3);
+		Label Step3Label = addStepComment(3, "binEvaluationStep");
+		step3GP.add(Step3Label, 1, 1);
 		GridPane evaluationGrid = makeEvaluationGrid(decValues);
 		step3GP.add(evaluationGrid, 1, 2);
-		GridPane step4GP = buildStep(4, "binary evaluation:  ", 4);
+		GridPane step4GP = buildStep(4, "binary concatenation:  ");
 		this.add(step4GP, 0, 4);
+		Label Step4Label = addStepComment(4, "binConcatenationStep");
+		step4GP.add(Step4Label, 1, 1);
 		GridPane binaryGrid = makeBinaryGrid(binDigits);
 		step4GP.add(binaryGrid, 1, 2);
 		makeEmptyRow(this, 5);
@@ -67,7 +75,7 @@ public class GridTemplate extends GridPane {
 		return inputRowGP;
 	}
 
-	private GridPane buildStep(int stepID, String rowTagString, int commentID) {
+	private GridPane buildStep(int stepID, String rowTagString) {
 		GridPane stepGP = new GridPane();
 		setColumn1Constraints(stepGP);
 		stepGP.setHgap(2);
@@ -75,8 +83,14 @@ public class GridTemplate extends GridPane {
 		stepGP.add(horizLine, 0, 0);
 		GridPane stepLabel = makeStepLabel(stepID, rowTagString);
 		stepGP.add(stepLabel, 0, 1);
+		Rectangle bgRect = makeBGRect("#FFFFFF");
+		stepGP.add(bgRect, 1, 5);
+		stepGP.setGridLinesVisible(false);
+		return stepGP;
+	}
+	
+	private Label addStepComment(int stepID, String commentID){
 		Label tutorText = new Label();
-		stepGP.add(tutorText, 1, 1);
 		CommentLibrary comment = new CommentLibrary();
 		tutorText.setText("Step " + stepID + " "
 				+ comment.readComment(commentID));
@@ -84,10 +98,7 @@ public class GridTemplate extends GridPane {
 		tutorText.setMinWidth(350);
 		tutorText.getStyleClass().add("commentTag");
 		GridPane.setValignment(tutorText, VPos.TOP);
-		Rectangle bgRect = makeBGRect("#FFFFFF");
-		stepGP.add(bgRect, 1, 5);
-		stepGP.setGridLinesVisible(false);
-		return stepGP;
+		return tutorText;		
 	}
 
 	private Rectangle horizontalLine() {
@@ -227,11 +238,11 @@ public class GridTemplate extends GridPane {
 			makeBigCharLabelBox(evaluationGP, 0, i, charList.get(i), "#9900ff");
 			makeBigChar(evaluationGP, 1, i, "=", "#9900ff");
 			makeEvaluationBit(evaluationGP, 2, i, binDigits.get(i)[0]);
-			makeBigChar(evaluationGP, 3, i, "+", "#9900ff");
+			makeBigChar(evaluationGP, 3, i, "⌒", "#9900ff");
 			makeEvaluationBit(evaluationGP, 4, i, binDigits.get(i)[1]);
-			makeBigChar(evaluationGP, 5, i, "+", "#9900ff");
+			makeBigChar(evaluationGP, 5, i, "⌒", "#9900ff");
 			makeEvaluationBit(evaluationGP, 6, i, binDigits.get(i)[2]);
-			makeBigChar(evaluationGP, 7, i, "+", "#9900ff");
+			makeBigChar(evaluationGP, 7, i, "⌒", "#9900ff");
 			makeEvaluationBit(evaluationGP, 8, i, binDigits.get(i)[3]);
 			makeBigChar(evaluationGP, 9, i, "=", "#9900ff");
 			makeBigChar(evaluationGP, 10, i,

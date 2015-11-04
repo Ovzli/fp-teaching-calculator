@@ -78,8 +78,4 @@ public class GUI extends Application {
 		rootLayout.getColumnConstraints().addAll(col1, col2, col3);
 		rootLayout.add(sideBarPanel, 2, 2);
 	}
-
-	public void transferLists() {
-		System.out.println("TRANSFERRING LISTS");
-	}
 }
