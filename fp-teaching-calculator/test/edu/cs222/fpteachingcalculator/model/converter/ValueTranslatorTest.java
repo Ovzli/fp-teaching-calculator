@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import edu.cs222.fpteachingcalculator.model.converter.ValueTranslator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 import org.junit.Assert;
@@ -13,25 +15,23 @@ public class ValueTranslatorTest {
 
 	@Test
 	public void testTranslateHexToDec() {
-		LinkedList<String> hexList = createLinkedListOfStrings("C", "2", "A");
-		LinkedList<String> correctList = createLinkedListOfStrings("12", "2", "10");
+		LinkedList<String> hexList = createLinkedListOfStrings("C 2 A");
+		LinkedList<String> correctList = createLinkedListOfStrings("12 2 10");
 		LinkedList<String> outputList = valueTranslator.translateHexToDec(hexList);
 		Assert.assertEquals(correctList, outputList);
 	}
 
 	@Test
 	public void testTranslateDecToBin() {
-		LinkedList<String> decList = createLinkedListOfStrings("12", "2", "10");
-		LinkedList<String> correctList = createLinkedListOfStrings("1100", "0010", "1010");
+		LinkedList<String> decList = createLinkedListOfStrings("12 2 10");
+		LinkedList<String> correctList = createLinkedListOfStrings("1100 0010 1010");
 		LinkedList<String> outputList = valueTranslator.translateDecToBin(decList);
 		Assert.assertEquals(correctList, outputList);
 	}
 	
-	private LinkedList<String> createLinkedListOfStrings(String string1, String string2, String string3) {
+	private LinkedList<String> createLinkedListOfStrings(String input){
 		LinkedList<String> output = new LinkedList<String>();
-		output.add(string1);
-		output.add(string2);
-		output.add(string3);
+		output.addAll(new ArrayList<String>(Arrays.asList(input.split(" "))));
 		return output;
 	}
 

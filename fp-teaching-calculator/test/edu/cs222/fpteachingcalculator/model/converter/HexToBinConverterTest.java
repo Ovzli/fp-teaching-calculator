@@ -5,6 +5,8 @@ import org.junit.Test;
 import edu.cs222.fpteachingcalculator.model.converter.Conversion;
 import edu.cs222.fpteachingcalculator.model.converter.HexToBinConverter;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 import org.junit.Assert;
@@ -16,9 +18,9 @@ public class HexToBinConverterTest {
 	public void testConvertHexToBinSuccess() {
 		String validInput = "C2a";
 		Conversion completedConversion = hexToBinConverter.convertHexToBin(validInput);
-		LinkedList<String> expectedParsedHex = createLinkedListOfStrings("C", "2", "A");
-		LinkedList<String> expectedParsedDec = createLinkedListOfStrings("12", "2", "10");
-		LinkedList<String> expectedBinList = createLinkedListOfStrings("1100", "0010", "1010");
+		LinkedList<String> expectedParsedHex = createLinkedListOfStrings("C 2 A");
+		LinkedList<String> expectedParsedDec = createLinkedListOfStrings("12 2 10");
+		LinkedList<String> expectedBinList = createLinkedListOfStrings("1100 0010 1010");
 		LinkedList<int[]> expectedSeparatedNibbles = createListOfExpectedSeparatedNibbles();
 		Conversion expectedResult = new Conversion.ConversionBuilder().originalInput(validInput)
 				.parsedListOfHexInput(expectedParsedHex).listOfDecEquivalents(expectedParsedDec)
@@ -26,11 +28,9 @@ public class HexToBinConverterTest {
 		AssertConversionContainersAreEqual(completedConversion, expectedResult);
 	}
 
-	private LinkedList<String> createLinkedListOfStrings(String string1, String string2, String string3) {
+	private LinkedList<String> createLinkedListOfStrings(String input){
 		LinkedList<String> output = new LinkedList<String>();
-		output.add(string1);
-		output.add(string2);
-		output.add(string3);
+		output.addAll(new ArrayList<String>(Arrays.asList(input.split(" "))));
 		return output;
 	}
 
