@@ -1,4 +1,4 @@
-package edu.cs222.fp_teaching_calculator.view;
+package edu.cs222.fpteachingcalculator.view;
 
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
@@ -8,7 +8,7 @@ import javafx.scene.layout.GridPane;
 public class InputToolbar extends Toolbar {
 	private Label errorLabel = new Label();
 
-	public InputToolbar(GridPane parentGridPane, GridTemplate displayGridPane) {
+	public InputToolbar(GridPane parentGridPane, DisplayTemplate displayGridPane) {
 		super(parentGridPane);
 		this.addInstruction("Enter a hexadecimal value:\n(up to 8 symbols long)");
 		errorLabel = this.addErrorText("");

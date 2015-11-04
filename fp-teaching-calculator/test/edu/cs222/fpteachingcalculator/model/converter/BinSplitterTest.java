@@ -1,13 +1,15 @@
-package edu.cs222.fp_teaching_calculator.model.converter;
+package edu.cs222.fpteachingcalculator.model.converter;
 
 import org.junit.Test;
+
+import edu.cs222.fpteachingcalculator.model.converter.BinSplitter;
 
 import java.util.LinkedList;
 
 import org.junit.Assert;
 
-public class BinParserTest {
-	private BinParser binParser = new BinParser();
+public class BinSplitterTest {
+	private BinSplitter binParser = new BinSplitter();
 
 	@Test
 	public void testSeparateBinValueIntoDigits() {

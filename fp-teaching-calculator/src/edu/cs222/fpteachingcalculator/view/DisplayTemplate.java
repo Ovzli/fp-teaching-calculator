@@ -1,4 +1,4 @@
-package edu.cs222.fp_teaching_calculator.view;
+package edu.cs222.fpteachingcalculator.view;
 
 import java.util.LinkedList;
 
@@ -13,14 +13,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
-public class GridTemplate extends GridPane {
+public class DisplayTemplate extends GridPane {
 	public LinkedList<String> hexSymbols = new LinkedList<String>();
 	public LinkedList<String> decValues = new LinkedList<String>();
 	public LinkedList<int[]> binDigits = new LinkedList<int[]>();
 	private final int column1Width = 200;
 	private SideBarPanel sideBarPanel;
 
-	public GridTemplate(AnchorPane parentAP, SideBarPanel sideBar) {
+	public DisplayTemplate(AnchorPane parentAP, SideBarPanel sideBar) {
 		super();
 		sideBarPanel = sideBar;
 		parentAP.getChildren().add(this);
@@ -50,15 +50,15 @@ public class GridTemplate extends GridPane {
 		step2GP.add(Step2Label, 1, 1);
 		GridPane expansionGrid = makeExpansionGrid(decValues);
 		step2GP.add(expansionGrid, 1, 2);
-		GridPane step3GP = buildStep(3, "binary evaluation:  ");
+		GridPane step3GP = buildStep(3, "binary concatenation:  ");
 		this.add(step3GP, 0, 3);
-		Label Step3Label = addStepComment(3, "binEvaluationStep");
+		Label Step3Label = addStepComment(3, "binConcatenationStep");
 		step3GP.add(Step3Label, 1, 1);
 		GridPane evaluationGrid = makeEvaluationGrid(decValues);
 		step3GP.add(evaluationGrid, 1, 2);
-		GridPane step4GP = buildStep(4, "binary concatenation:  ");
+		GridPane step4GP = buildStep(4, "binary representation:  ");
 		this.add(step4GP, 0, 4);
-		Label Step4Label = addStepComment(4, "binConcatenationStep");
+		Label Step4Label = addStepComment(4, "binRepresentationStep");
 		step4GP.add(Step4Label, 1, 1);
 		GridPane binaryGrid = makeBinaryGrid(binDigits);
 		step4GP.add(binaryGrid, 1, 2);

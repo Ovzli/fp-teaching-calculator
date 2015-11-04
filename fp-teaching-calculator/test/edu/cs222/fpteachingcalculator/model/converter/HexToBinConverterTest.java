@@ -1,6 +1,9 @@
-package edu.cs222.fp_teaching_calculator.model.converter;
+package edu.cs222.fpteachingcalculator.model.converter;
 
 import org.junit.Test;
+
+import edu.cs222.fpteachingcalculator.model.converter.Conversion;
+import edu.cs222.fpteachingcalculator.model.converter.HexToBinConverter;
 
 import java.util.LinkedList;
 
@@ -12,12 +15,12 @@ public class HexToBinConverterTest {
 	@Test
 	public void testConvertHexToBinSuccess() {
 		String validInput = "C2a";
-		ConversionContainer completedConversion = hexToBinConverter.convertHexToBin(validInput);
+		Conversion completedConversion = hexToBinConverter.convertHexToBin(validInput);
 		LinkedList<String> expectedParsedHex = createLinkedListOfStrings("C", "2", "A");
 		LinkedList<String> expectedParsedDec = createLinkedListOfStrings("12", "2", "10");
 		LinkedList<String> expectedBinList = createLinkedListOfStrings("1100", "0010", "1010");
 		LinkedList<int[]> expectedSeparatedNibbles = createListOfExpectedSeparatedNibbles();
-		ConversionContainer expectedResult = new ConversionContainer.ContainerBuilder().originalInput(validInput)
+		Conversion expectedResult = new Conversion.ConversionBuilder().originalInput(validInput)
 				.parsedListOfHexInput(expectedParsedHex).listOfDecEquivalents(expectedParsedDec)
 				.listOfBinEquivalents(expectedBinList).listOfSeparatedBinNibbles(expectedSeparatedNibbles).build();
 		AssertConversionContainersAreEqual(completedConversion, expectedResult);
@@ -48,8 +51,8 @@ public class HexToBinConverterTest {
 		}
 	}
 
-	private void AssertConversionContainersAreEqual(ConversionContainer completedConversion,
-			ConversionContainer expectedResult) {
+	private void AssertConversionContainersAreEqual(Conversion completedConversion,
+			Conversion expectedResult) {
 		Assert.assertEquals(expectedResult.originalInput, completedConversion.originalInput);
 		Assert.assertEquals(expectedResult.parsedListOfHexInput, completedConversion.parsedListOfHexInput);
 		Assert.assertEquals(expectedResult.listOfDecEquivalents, completedConversion.listOfDecEquivalents);
@@ -63,8 +66,8 @@ public class HexToBinConverterTest {
 	@Test
 	public void testConvertHexToBinFail() {
 		String invalidInput = "C2aq";
-		ConversionContainer completedConversion = hexToBinConverter.convertHexToBin(invalidInput);
-		ConversionContainer expectedResult = new ConversionContainer(1);
+		Conversion completedConversion = hexToBinConverter.convertHexToBin(invalidInput);
+		Conversion expectedResult = new Conversion(1);
 		Assert.assertEquals(expectedResult.errorCode, completedConversion.errorCode);
 	}
 }

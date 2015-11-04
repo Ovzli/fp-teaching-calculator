@@ -1,4 +1,4 @@
-package edu.cs222.fp_teaching_calculator.model.converter;
+package edu.cs222.fpteachingcalculator.model.converter;
 
 import java.util.LinkedList;
 
@@ -9,21 +9,21 @@ public class HexToBinConverter {
 	private LinkedList<int[]> listOfSeparatedBinaryNibbles = new LinkedList<int[]>();
 	private int errorCode = 0;
 
-	private InputParser inputParser = new InputParser();
+	private InputSplitter inputParser = new InputSplitter();
 	private InputValidator inputValidator = new InputValidator();
 	private ValueTranslator valueTranslator = new ValueTranslator();
-	private BinParser binaryParser = new BinParser();	
+	private BinSplitter binaryParser = new BinSplitter();	
 
-	public ConversionContainer convertHexToBin(String hexInputValue) {
+	public Conversion convertHexToBin(String hexInputValue) {
 		parsedListOfHexInput = inputParser.parseHexInput(hexInputValue);
 		if (!inputValidator.isHexValueValid(parsedListOfHexInput)) {
 			errorCode = inputValidator.getError();
-			return new ConversionContainer(errorCode);
+			return new Conversion(errorCode);
 		}
 		listOfDecimalEquivalents = valueTranslator.translateHexToDec(parsedListOfHexInput);
 		listOfBinaryEquivalents = valueTranslator.translateDecToBin(listOfDecimalEquivalents);
 		listOfSeparatedBinaryNibbles = binaryParser.separateBinValuesIntoDigits(listOfBinaryEquivalents);
-		return new ConversionContainer.ContainerBuilder().originalInput(hexInputValue)
+		return new Conversion.ConversionBuilder().originalInput(hexInputValue)
 				.parsedListOfHexInput(parsedListOfHexInput)
 				.listOfBinEquivalents(listOfBinaryEquivalents)
 				.listOfDecEquivalents(listOfDecimalEquivalents)

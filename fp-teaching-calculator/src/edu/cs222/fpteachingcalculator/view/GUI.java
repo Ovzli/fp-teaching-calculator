@@ -1,4 +1,4 @@
-package edu.cs222.fp_teaching_calculator.view;
+package edu.cs222.fpteachingcalculator.view;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -16,7 +16,7 @@ public class GUI extends Application {
 	private final ScrollPane scrollDisplay = new ScrollPane();
 	private final AnchorPane displayPane = new AnchorPane();
 	public HexDecPanel sideBarPanel = new HexDecPanel("HEX to DEC\nEQUIVALENTS");
-	public GridTemplate displayGrid = new GridTemplate(displayPane,
+	public DisplayTemplate displayGrid = new DisplayTemplate(displayPane,
 			sideBarPanel);
 	public final InputToolbar hexInputToolbar = new InputToolbar(rootLayout,
 			displayGrid);

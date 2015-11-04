@@ -1,14 +1,16 @@
-package edu.cs222.fp_teaching_calculator.model.converter;
+package edu.cs222.fpteachingcalculator.model.converter;
 
 import org.junit.Test;
+
+import edu.cs222.fpteachingcalculator.model.converter.InputSplitter;
 
 import java.util.LinkedList;
 
 import org.junit.Assert;
 
-public class InputParserTest {
+public class InputSplitterTest {
 
-	private InputParser inputParser = new InputParser();
+	private InputSplitter inputParser = new InputSplitter();
 
 	@Test
 	public void testParseHexidecimalInput() {

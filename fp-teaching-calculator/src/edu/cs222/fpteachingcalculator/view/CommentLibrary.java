@@ -1,4 +1,4 @@
-package edu.cs222.fp_teaching_calculator.view;
+package edu.cs222.fpteachingcalculator.view;
 
 import java.util.HashMap;
 
@@ -18,11 +18,11 @@ public class CommentLibrary {
 					+ "red represent values of zero in the sum (not needed). The green "
 					+ "expansions show values that are used in constructing the base 2 "
 					+ "value of the decimal."));
-		commentMessage.put("binEvaluationStep", new String(
+		commentMessage.put("binConcatenationStep", new String(
 				"shows how the binary multipliers in the decimal expansions algorithms "
 					+ "(of the previous step) are then extracted and combined into "
 					+ "expanded binary representation."));
-		commentMessage.put("binConcatenationStep", new String(
+		commentMessage.put("binRepresentationStep", new String(
 				"shows the final binary representation rewritten as a binary number."));
 	}
 

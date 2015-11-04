@@ -1,8 +1,8 @@
-package edu.cs222.fp_teaching_calculator.view;
+package edu.cs222.fpteachingcalculator.view;
 
-import edu.cs222.fp_teaching_calculator.model.converter.ConversionContainer;
-import edu.cs222.fp_teaching_calculator.model.converter.HexToBinConverter;
-import edu.cs222.fp_teaching_calculator.view.GridTemplate;
+import edu.cs222.fpteachingcalculator.model.converter.Conversion;
+import edu.cs222.fpteachingcalculator.model.converter.HexToBinConverter;
+import edu.cs222.fpteachingcalculator.view.DisplayTemplate;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -12,10 +12,10 @@ public class ConvertButton extends Button {
 	private final InputToolbar parentInputToolbar;
 	private final ErrorLibrary errorLibrary = new ErrorLibrary();
 	private String inputValue;
-	private GridTemplate rootDisplayGrid;
+	private DisplayTemplate rootDisplayGrid;
 
 	public ConvertButton(String buttonLabel, InputToolbar parentToolbar,
-			GridTemplate rootDisplay) {
+			DisplayTemplate rootDisplay) {
 		super(buttonLabel);
 		parentInputToolbar = parentToolbar;
 		rootDisplayGrid = rootDisplay;
@@ -38,7 +38,7 @@ public class ConvertButton extends Button {
 
 	public void doConversion() {
 		HexToBinConverter hexToBin = new HexToBinConverter();
-		ConversionContainer conversionContainer = hexToBin
+		Conversion conversionContainer = hexToBin
 				.convertHexToBin(inputValue);
 		if (conversionContainer.errorOccurred) {
 			parentInputToolbar.updateErrorText(errorLibrary

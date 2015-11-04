@@ -1,6 +1,8 @@
-package edu.cs222.fp_teaching_calculator.model.converter;
+package edu.cs222.fpteachingcalculator.model.converter;
 
 import org.junit.Test;
+
+import edu.cs222.fpteachingcalculator.model.converter.ValueTranslator;
 
 import java.util.LinkedList;
 

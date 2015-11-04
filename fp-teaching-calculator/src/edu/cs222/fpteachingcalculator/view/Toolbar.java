@@ -1,4 +1,4 @@
-package edu.cs222.fp_teaching_calculator.view;
+package edu.cs222.fpteachingcalculator.view;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;

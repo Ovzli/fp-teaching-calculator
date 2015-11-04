@@ -1,8 +1,8 @@
-package edu.cs222.fp_teaching_calculator.model.converter;
+package edu.cs222.fpteachingcalculator.model.converter;
 
 import java.util.LinkedList;
 
-public class InputParser {
+public class InputSplitter {
 	public LinkedList<String> parseHexInput(String input) {
 		LinkedList<String> hexSymbols = new LinkedList<String>();
 		for (int i = 0; i < input.length(); i++) {
