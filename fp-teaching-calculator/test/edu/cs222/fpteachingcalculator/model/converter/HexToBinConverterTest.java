@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import edu.cs222.fpteachingcalculator.model.converter.Conversion;
 import edu.cs222.fpteachingcalculator.model.converter.HexToBinConverter;
+import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.EmptyInputException;
+import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.InvalidHexNumberLengthException;
+import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.InvalidHexSymbolException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +20,13 @@ public class HexToBinConverterTest {
 	@Test
 	public void testConvertHexToBinSuccess() {
 		String validInput = "C2a";
-		Conversion completedConversion = hexToBinConverter.convertHexToBin(validInput);
+		Conversion completedConversion = null;
+		try {
+			completedConversion = hexToBinConverter.convertHexToBin(validInput);
+		} catch (InvalidHexSymbolException | InvalidHexNumberLengthException | EmptyInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		LinkedList<String> expectedParsedHex = createLinkedListOfStrings("C 2 A");
 		LinkedList<String> expectedParsedDec = createLinkedListOfStrings("12 2 10");
 		LinkedList<String> expectedBinList = createLinkedListOfStrings("1100 0010 1010");
@@ -63,10 +72,19 @@ public class HexToBinConverterTest {
 		}
 	}
 
+	
+	
+	
 	@Test
 	public void testConvertHexToBinFail() {
 		String invalidInput = "C2aq";
-		Conversion completedConversion = hexToBinConverter.convertHexToBin(invalidInput);
+		Conversion completedConversion = null;
+		try {
+			completedConversion = hexToBinConverter.convertHexToBin(invalidInput);
+		} catch (InvalidHexSymbolException | InvalidHexNumberLengthException | EmptyInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Conversion expectedResult = new Conversion(1);
 		Assert.assertEquals(expectedResult.getErrorCode(), completedConversion.getErrorCode());
 	}
