@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 
 public class ConvertButton extends Button {
 	private final InputToolbar parentInputToolbar;
-	private final ErrorLibrary errorLibrary = new ErrorLibrary();
 	private String inputValue;
 	private DisplayTemplate rootDisplayGrid;
 

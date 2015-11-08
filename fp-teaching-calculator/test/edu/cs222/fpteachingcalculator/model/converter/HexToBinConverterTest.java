@@ -71,21 +71,4 @@ public class HexToBinConverterTest {
 					completedConversion.getListOfSeparatedBinNibbles().get(i));
 		}
 	}
-
-	
-	
-	
-	@Test
-	public void testConvertHexToBinFail() {
-		String invalidInput = "C2aq";
-		Conversion completedConversion = null;
-		try {
-			completedConversion = hexToBinConverter.convertHexToBin(invalidInput);
-		} catch (InvalidHexSymbolException | InvalidHexNumberLengthException | EmptyInputException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Conversion expectedResult = new Conversion(1);
-		Assert.assertEquals(expectedResult.getErrorCode(), completedConversion.getErrorCode());
-	}
 }

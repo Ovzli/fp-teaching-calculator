@@ -19,9 +19,8 @@ public class InputValidatorTest {
 	public void testIsHexValueValidSuccess() {
 		LinkedList<String> hexList = createLinkedListOfStrings("C 2 A");
 		try {
-			Assert.assertTrue(inputValidator.isHexValueValid(hexList));
+			Assert.assertTrue(inputValidator.checkIfHexValueIsValid(hexList));
 		} catch (InvalidHexSymbolException | InvalidHexNumberLengthException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -30,9 +29,8 @@ public class InputValidatorTest {
 	public void testIsHexValueValidSymbolFail() {
 		LinkedList<String> hexList = createLinkedListOfStrings("C 2 G");
 		try {
-			Assert.assertFalse(inputValidator.isHexValueValid(hexList));
+			Assert.assertFalse(inputValidator.checkIfHexValueIsValid(hexList));
 		} catch (InvalidHexSymbolException | InvalidHexNumberLengthException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -41,9 +39,8 @@ public class InputValidatorTest {
 	public void testIsHexValueValidLengthFail() {
 		LinkedList<String> hexList = createLinkedListOfStrings("C 2 A C 2 A C 2 A");
 		try {
-			Assert.assertFalse(inputValidator.isHexValueValid(hexList));
+			Assert.assertFalse(inputValidator.checkIfHexValueIsValid(hexList));
 		} catch (InvalidHexSymbolException | InvalidHexNumberLengthException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

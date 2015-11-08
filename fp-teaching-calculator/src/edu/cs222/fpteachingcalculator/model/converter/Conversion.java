@@ -3,40 +3,18 @@ package edu.cs222.fpteachingcalculator.model.converter;
 import java.util.LinkedList;
 
 public class Conversion {
-	private final boolean errorOccurred;
-	private final int errorCode;
 	private final String originalInput;
 	private final LinkedList<String> parsedListOfHexInput;
 	private final LinkedList<String> listOfDecEquivalents;
 	private final LinkedList<String> listOfBinEquivalents;
 	private final LinkedList<int[]> listOfSeparatedBinNibbles;
 
-	public Conversion(int errorCode) {
-		this.errorOccurred = true;
-		this.errorCode = errorCode;
-		this.originalInput = null;
-		this.parsedListOfHexInput = null;
-		this.listOfBinEquivalents = null;
-		this.listOfDecEquivalents = null;
-		this.listOfSeparatedBinNibbles = null;
-	}
-
 	public Conversion(ConversionBuilder builder) {
-		this.errorOccurred = false;
-		this.errorCode = 0;
 		this.originalInput = builder.originalInput;
 		this.parsedListOfHexInput = builder.parsedListOfHexInput;
 		this.listOfBinEquivalents = builder.listOfBinEquivalents;
 		this.listOfDecEquivalents = builder.listOfDecEquivalents;
 		this.listOfSeparatedBinNibbles = builder.listOfSeparatedBinNibbles;
-	}
-	
-	public boolean getErrorOccurred(){
-		return errorOccurred;
-	}
-	
-	public int getErrorCode(){
-		return errorCode;
 	}
 	
 	public String getOriginalInput(){

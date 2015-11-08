@@ -6,13 +6,12 @@ import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.*;
 public class InputValidator {
 	private final int maxHexInputLength = 8;
 	private final String validHexSymbols = "0123456789ABCDEF";
-	private int errorCode = 0;
-
-	public boolean isHexValueValid(LinkedList<String> hexSymbols) throws InvalidHexSymbolException, InvalidHexNumberLengthException {
+	
+	public boolean checkIfHexValueIsValid(LinkedList<String> hexSymbols) throws InvalidHexSymbolException, InvalidHexNumberLengthException {
 		return areHexSymbolsValid(hexSymbols) && isHexNumberTooLong(hexSymbols);
 	}
 	
-	public boolean isInputEmpty(String input) throws EmptyInputException{
+	public boolean checkIfInputIsEmpty(String input) throws EmptyInputException{
 		if(input.isEmpty()){
 			throw new EmptyInputException();
 		}
@@ -34,10 +33,4 @@ public class InputValidator {
 		}
 		return true;
 	}
-	
-	public int getError() {
-		return errorCode;
-	}
-	
-	
 }

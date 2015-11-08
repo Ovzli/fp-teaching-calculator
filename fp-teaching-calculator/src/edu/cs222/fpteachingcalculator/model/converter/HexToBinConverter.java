@@ -9,7 +9,6 @@ public class HexToBinConverter {
 	private LinkedList<String> listOfDecimalEquivalents = new LinkedList<String>();
 	private LinkedList<String> listOfBinaryEquivalents = new LinkedList<String>();
 	private LinkedList<int[]> listOfSeparatedBinaryNibbles = new LinkedList<int[]>();
-	private int errorCode = 0;
 
 	private InputSplitter inputSplitter = new InputSplitter();
 	private InputValidator inputValidator = new InputValidator();
@@ -17,12 +16,9 @@ public class HexToBinConverter {
 	private BinSplitter binaryParser = new BinSplitter();	
 
 	public Conversion convertHexToBin(String hexInputValue) throws InvalidHexSymbolException, InvalidHexNumberLengthException, EmptyInputException {
-		inputValidator.isInputEmpty(hexInputValue);
+		inputValidator.checkIfInputIsEmpty(hexInputValue);
 		parsedListOfHexInput = inputSplitter.parseHexInput(hexInputValue);
-		if (!inputValidator.isHexValueValid(parsedListOfHexInput)) {
-			errorCode = inputValidator.getError();
-			return new Conversion(errorCode);
-		}
+		inputValidator.checkIfHexValueIsValid(parsedListOfHexInput);
 		listOfDecimalEquivalents = valueTranslator.translateHexToDec(parsedListOfHexInput);
 		listOfBinaryEquivalents = valueTranslator.translateDecToBin(listOfDecimalEquivalents);
 		listOfSeparatedBinaryNibbles = binaryParser.separateBinValuesIntoDigits(listOfBinaryEquivalents);
