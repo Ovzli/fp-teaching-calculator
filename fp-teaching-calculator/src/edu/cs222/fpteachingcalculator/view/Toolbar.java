@@ -6,8 +6,7 @@ import javafx.scene.layout.GridPane;
 
 public class Toolbar extends GridPane {
 
-	public Toolbar(GridPane parentGridPane) {
-		parentGridPane.add(this, 0, 1);
+	public Toolbar() {
 		this.getStyleClass().add("toolbar");
 		this.setMinWidth(500);
 		this.setMinHeight(60);

@@ -16,10 +16,8 @@ public class GUI extends Application {
 	private final ScrollPane scrollDisplay = new ScrollPane();
 	private final AnchorPane displayPane = new AnchorPane();
 	public HexDecPanel sideBarPanel = new HexDecPanel("HEX to DEC\nEQUIVALENTS");
-	public DisplayTemplate displayGrid = new DisplayTemplate(displayPane,
-			sideBarPanel);
-	public final InputToolbar hexInputToolbar = new InputToolbar(rootLayout,
-			displayGrid);
+	public DisplayTemplate displayGrid = new DisplayTemplate(sideBarPanel);
+	public final InputToolbar hexInputToolbar = new InputToolbar(displayGrid);
 
 	public static void main(String[] args) {
 		launch(args);
@@ -32,19 +30,6 @@ public class GUI extends Application {
 		layoutRoot();
 		setupDisplay();
 		rootStage.show();
-	}
-
-	private void setupDisplay() {
-		rootLayout.add(scrollDisplay, 0, 2);
-		GridPane.setColumnSpan(scrollDisplay, 2);
-		scrollDisplay.setPrefSize(700, 500);
-		scrollDisplay.setMinWidth(600);
-		scrollDisplay.setContent(displayPane);
-		scrollDisplay.setFitToWidth(true);
-		scrollDisplay.setFitToHeight(true);
-		displayPane.getStyleClass().add("displayPane");
-		displayGrid.setMinHeight(474);
-		rootLayout.setGridLinesVisible(false);
 	}
 
 	private void setupStage(Stage rootStage) {
@@ -61,9 +46,7 @@ public class GUI extends Application {
 	}
 
 	private void formatRoot() {
-		rootPane.getStylesheets().add(
-				this.getClass().getResource("layoutStyles.css")
-						.toExternalForm());
+		rootPane.getStylesheets().add(this.getClass().getResource("layoutStyles.css").toExternalForm());
 		rootPane.getStyleClass().add("rootPane");
 		rootLayout.getStyleClass().add("rootLayout");
 	}
@@ -77,5 +60,26 @@ public class GUI extends Application {
 		col3.setPercentWidth(20);
 		rootLayout.getColumnConstraints().addAll(col1, col2, col3);
 		rootLayout.add(sideBarPanel, 2, 2);
+		rootLayout.add(hexInputToolbar, 0, 1);
+	}
+
+	private void setupDisplay() {
+		rootLayout.add(scrollDisplay, 0, 2);
+		GridPane.setColumnSpan(scrollDisplay, 2);
+		scrollDisplay.setPrefSize(700, 500);
+		scrollDisplay.setMinWidth(600);
+		scrollDisplay.setContent(displayPane);
+		scrollDisplay.setFitToWidth(true);
+		scrollDisplay.setFitToHeight(true);
+		displayPane.getStyleClass().add("displayPane");
+		displayPane.getChildren().add(displayGrid);
+		displayGrid.setMinHeight(474);
+		rootLayout.setGridLinesVisible(false);
+	}
+	
+	public void updateDisplay() {
+		displayGrid.getChildren().clear();
+		sideBarPanel.setVisible(true);
+		displayGrid.setupHexToBinTemplate();
 	}
 }

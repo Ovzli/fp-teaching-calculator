@@ -20,10 +20,9 @@ public class DisplayTemplate extends GridPane {
 	private final int column1Width = 200;
 	private SideBarPanel sideBarPanel;
 
-	public DisplayTemplate(AnchorPane parentAP, SideBarPanel sideBar) {
+	public DisplayTemplate(SideBarPanel sideBar) {
 		super();
 		sideBarPanel = sideBar;
-		parentAP.getChildren().add(this);
 		AnchorPane.setTopAnchor(this, 0.0);
 		AnchorPane.setLeftAnchor(this, 0.0);
 		AnchorPane.setRightAnchor(this, 0.0);
@@ -35,6 +34,12 @@ public class DisplayTemplate extends GridPane {
 		this.setGridLinesVisible(false);
 	}
 
+	public void updateDisplay() {
+		this.getChildren().clear();
+		sideBarPanel.setVisible(true);
+		setupHexToBinTemplate();
+	}
+	
 	public void setupHexToBinTemplate() {
 		GridPane inputReprintRow = makeInputReprintRow();
 		this.add(inputReprintRow, 0, 0);
@@ -296,9 +301,4 @@ public class DisplayTemplate extends GridPane {
 		gridPane.getColumnConstraints().add(col1);
 	}
 
-	public void updateDisplay() {
-		this.getChildren().clear();
-		sideBarPanel.setVisible(true);
-		setupHexToBinTemplate();
-	}
 }

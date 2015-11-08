@@ -8,17 +8,15 @@ import javafx.scene.layout.GridPane;
 public class InputToolbar extends Toolbar {
 	private Label errorLabel = new Label();
 
-	public InputToolbar(GridPane parentGridPane, DisplayTemplate displayGridPane) {
-		super(parentGridPane);
+	public InputToolbar(DisplayTemplate displayGridPane) {
+		super();
 		this.addInstruction("Enter a hexadecimal value:\n(up to 8 symbols long)");
 		errorLabel = this.addErrorText("");
 		GridPane.setColumnSpan(errorLabel, 3);
 		TextField hexInputField = this.addInputField();
-		ConvertButton convertButton = new ConvertButton("CONVERT", this,
-				displayGridPane);
+		ConvertButton convertButton = new ConvertButton("CONVERT", this, displayGridPane);
 		this.add(convertButton, 2, 0);
 		convertButton.handleConvert(hexInputField);
-
 		Label toLabel = new Label("(TO BINARY)");
 		this.add(toLabel, 2, 1);
 		toLabel.getStyleClass().add("smallItalicLabel");
