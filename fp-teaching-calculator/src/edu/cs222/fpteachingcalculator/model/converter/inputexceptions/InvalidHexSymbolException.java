@@ -8,9 +8,4 @@ public class InvalidHexSymbolException extends Exception
 	private static final long serialVersionUID = 1L;
 
 	public InvalidHexSymbolException() {}
-
-      public InvalidHexSymbolException(String message)
-      {
-         super(message);
-      }
  }
