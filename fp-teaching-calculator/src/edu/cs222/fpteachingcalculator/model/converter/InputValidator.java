@@ -6,31 +6,29 @@ import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.*;
 public class InputValidator {
 	private final int maxHexInputLength = 8;
 	private final String validHexSymbols = "0123456789ABCDEF";
-	
-	public boolean checkIfHexValueIsValid(LinkedList<String> hexSymbols) throws InvalidHexSymbolException, InvalidHexNumberLengthException {
-		return areHexSymbolsValid(hexSymbols) && isHexNumberTooLong(hexSymbols);
+
+	public void checkIfHexValueIsValid(LinkedList<String> hexSymbols) throws InvalidHexSymbolException, InvalidHexNumberLengthException {
+		areHexSymbolsValid(hexSymbols);
+		isHexNumberTooLong(hexSymbols);
 	}
-	
-	public boolean checkIfInputIsEmpty(String input) throws EmptyInputException{
-		if(input.isEmpty()){
+
+	public void checkIfInputIsEmpty(String input) throws EmptyInputException {
+		if (input.isEmpty()) {
 			throw new EmptyInputException();
 		}
-		return true;
 	}
-	
-	private boolean areHexSymbolsValid(LinkedList<String> hexSymbols) throws InvalidHexSymbolException {
+
+	private void areHexSymbolsValid(LinkedList<String> hexSymbols) throws InvalidHexSymbolException {
 		for (String hexChar : hexSymbols) {
 			if (!validHexSymbols.contains(hexChar)) {
 				throw new InvalidHexSymbolException();
 			}
 		}
-		return true;
 	}
-	
-	private boolean isHexNumberTooLong(LinkedList<String> hexSymbols) throws InvalidHexNumberLengthException {
+
+	private void isHexNumberTooLong(LinkedList<String> hexSymbols) throws InvalidHexNumberLengthException {
 		if (hexSymbols.size() > maxHexInputLength) {
 			throw new InvalidHexNumberLengthException();
 		}
-		return true;
 	}
 }

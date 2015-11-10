@@ -18,15 +18,10 @@ public class HexToBinConverterTest {
 	private HexToBinConverter hexToBinConverter = new HexToBinConverter();
 
 	@Test
-	public void testConvertHexToBinSuccess() {
+	public void testConvertHexToBinSuccess() throws InvalidHexSymbolException, InvalidHexNumberLengthException, EmptyInputException {
 		String validInput = "C2a";
 		Conversion completedConversion = null;
-		try {
-			completedConversion = hexToBinConverter.convertHexToBin(validInput);
-		} catch (InvalidHexSymbolException | InvalidHexNumberLengthException | EmptyInputException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		completedConversion = hexToBinConverter.convertHexToBin(validInput);
 		LinkedList<String> expectedParsedHex = createLinkedListOfStrings("C 2 A");
 		LinkedList<String> expectedParsedDec = createLinkedListOfStrings("12 2 10");
 		LinkedList<String> expectedBinList = createLinkedListOfStrings("1100 0010 1010");

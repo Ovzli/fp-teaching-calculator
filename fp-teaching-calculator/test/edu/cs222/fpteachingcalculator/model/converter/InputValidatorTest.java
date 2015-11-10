@@ -1,8 +1,10 @@
 package edu.cs222.fpteachingcalculator.model.converter;
 
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import edu.cs222.fpteachingcalculator.model.converter.InputValidator;
+import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.EmptyInputException;
 import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.InvalidHexNumberLengthException;
 import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.InvalidHexSymbolException;
 
@@ -11,38 +13,32 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 import org.junit.Assert;
+import org.junit.Rule;
 
 public class InputValidatorTest {
 	private InputValidator inputValidator = new InputValidator();
+	
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
-	public void testIsHexValueValidSuccess() {
-		LinkedList<String> hexList = createLinkedListOfStrings("C 2 A");
-		try {
-			Assert.assertTrue(inputValidator.checkIfHexValueIsValid(hexList));
-		} catch (InvalidHexSymbolException | InvalidHexNumberLengthException e) {
-			e.printStackTrace();
-		}
+	public void testCheckIfInputIsEmpty() throws EmptyInputException{
+		thrown.expect(EmptyInputException.class);
+		inputValidator.checkIfInputIsEmpty("");
 	}
-
+	
 	@Test
-	public void testIsHexValueValidSymbolFail() {
+	public void testCheckIfHexValueIsValidSymbolFail() throws InvalidHexSymbolException, InvalidHexNumberLengthException {
+		thrown.expect(InvalidHexSymbolException.class);
 		LinkedList<String> hexList = createLinkedListOfStrings("C 2 G");
-		try {
-			Assert.assertFalse(inputValidator.checkIfHexValueIsValid(hexList));
-		} catch (InvalidHexSymbolException | InvalidHexNumberLengthException e) {
-			e.printStackTrace();
-		}
+		inputValidator.checkIfHexValueIsValid(hexList);
 	}
 
 	@Test
-	public void testIsHexValueValidLengthFail() {
+	public void testCheckIfHexValueIsValidLengthFail() throws InvalidHexSymbolException, InvalidHexNumberLengthException {
+		thrown.expect(InvalidHexNumberLengthException.class);
 		LinkedList<String> hexList = createLinkedListOfStrings("C 2 A C 2 A C 2 A");
-		try {
-			Assert.assertFalse(inputValidator.checkIfHexValueIsValid(hexList));
-		} catch (InvalidHexSymbolException | InvalidHexNumberLengthException e) {
-			e.printStackTrace();
-		}
+		inputValidator.checkIfHexValueIsValid(hexList);
 	}
 	
 	private LinkedList<String> createLinkedListOfStrings(String input){
