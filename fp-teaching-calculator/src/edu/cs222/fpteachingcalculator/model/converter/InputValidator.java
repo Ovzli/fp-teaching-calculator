@@ -7,16 +7,17 @@ public class InputValidator {
 	private final int maxHexInputLength = 8;
 	private final String validHexSymbols = "0123456789ABCDEF";
 
-	public void checkIfHexValueIsValid(LinkedList<String> hexSymbols) throws InvalidHexSymbolException, InvalidHexNumberLengthException {
-		areHexSymbolsValid(hexSymbols);
-		isHexNumberTooLong(hexSymbols);
-	}
-
 	public void checkIfInputIsEmpty(String input) throws EmptyInputException {
 		if (input.isEmpty()) {
 			throw new EmptyInputException();
 		}
 	}
+	
+	public void checkIfHexValueIsValid(LinkedList<String> hexSymbols) throws InvalidHexSymbolException, InvalidHexNumberLengthException {
+		areHexSymbolsValid(hexSymbols);
+		isHexNumberTooLong(hexSymbols);
+	}
+
 
 	private void areHexSymbolsValid(LinkedList<String> hexSymbols) throws InvalidHexSymbolException {
 		for (String hexChar : hexSymbols) {
