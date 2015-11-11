@@ -8,7 +8,7 @@ public class Toolbar extends GridPane {
 
 	public Toolbar() {
 		this.getStyleClass().add("toolbar");
-		this.setMinWidth(500);
+		this.setMinWidth(620);
 		this.setMinHeight(60);
 		this.setHgap(6);
 		this.setVgap(2);
