@@ -61,7 +61,9 @@ public class GUI extends Application {
 	}
 
 	private void formatRoot() {
-		rootPane.getStylesheets().add(this.getClass().getResource("layoutStyles.css").toExternalForm());
+		rootPane.getStylesheets().add(
+				this.getClass().getResource("layoutStyles.css")
+						.toExternalForm());
 		rootPane.getStyleClass().add("rootPane");
 		rootLayout.getStyleClass().add("rootLayout");
 	}
@@ -90,17 +92,17 @@ public class GUI extends Application {
 		displayPane.getChildren().add(displayTemplate);
 		displayTemplate.setMinHeight(474);
 		handleConvert(hexInputToolbar.convertButton);
+		handleGenerate(hexInputToolbar.generateButton);
 		rootLayout.setGridLinesVisible(false);
 	}
 
-	
 	public void doConversion() {
 		HexToBinConverter hexToBin = new HexToBinConverter();
 		Conversion conversion = null;
 		try {
 			String inputValue = hexInputToolbar.getInputText();
 			conversion = hexToBin.convertHexToBin(inputValue);
-		} catch (EmptyInputException e){
+		} catch (EmptyInputException e) {
 			hexInputToolbar.updateErrorText("NO VALUE WAS ENTERED");
 			return;
 		} catch (InvalidHexSymbolException e) {
@@ -114,22 +116,35 @@ public class GUI extends Application {
 		displayTemplate.decValues = conversion.getListOfDecEquivalents();
 		displayTemplate.binDigits = conversion.getListOfSeparatedBinNibbles();
 		updateDisplay();
-
 	}
-	
+
 	public void updateDisplay() {
 		displayTemplate.getChildren().clear();
 		sideBarPanel.setVisible(true);
 		displayTemplate.setupHexToBinTemplate();
 	}
-	
+
 	public void handleConvert(Button button) {
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				hexInputToolbar.updateErrorText("");
+				resetErrorText();
 				doConversion();
 			}
 		});
 	}
-	
+
+	public void handleGenerate(Button button) {
+		button.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				resetErrorText();
+				hexInputToolbar.setInputText();
+				//doConversion();
+			}
+		});
+	}
+
+	private void resetErrorText() {
+		hexInputToolbar.updateErrorText("");
+	}
+
 }

@@ -18,11 +18,9 @@ public class DisplayTemplate extends GridPane {
 	public LinkedList<String> decValues = new LinkedList<String>();
 	public LinkedList<int[]> binDigits = new LinkedList<int[]>();
 	private final int column1Width = 200;
-	//private SideBarPanel sideBarPanel;
 
 	public DisplayTemplate() {
 		super();
-		//sideBarPanel = sideBar;
 		AnchorPane.setTopAnchor(this, 0.0);
 		AnchorPane.setLeftAnchor(this, 0.0);
 		AnchorPane.setRightAnchor(this, 0.0);
