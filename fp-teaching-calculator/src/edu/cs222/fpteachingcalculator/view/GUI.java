@@ -1,8 +1,17 @@
 package edu.cs222.fpteachingcalculator.view;
 
+import edu.cs222.fpteachingcalculator.model.converter.Conversion;
+import edu.cs222.fpteachingcalculator.model.converter.ConversionObserver;
+import edu.cs222.fpteachingcalculator.model.converter.HexToBinConverter;
+import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.EmptyInputException;
+import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.InvalidHexNumberLengthException;
+import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.InvalidHexSymbolException;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -16,8 +25,9 @@ public class GUI extends Application {
 	private final ScrollPane scrollDisplay = new ScrollPane();
 	private final AnchorPane displayPane = new AnchorPane();
 	public HexDecPanel sideBarPanel = new HexDecPanel("HEX to DEC\nEQUIVALENTS");
-	public DisplayTemplate displayGrid = new DisplayTemplate(sideBarPanel);
-	public final InputToolbar hexInputToolbar = new InputToolbar(displayGrid);
+	public DisplayTemplate displayTemplate = new DisplayTemplate();
+	public final InputToolbar hexInputToolbar = new InputToolbar();
+	public final ConversionObserver conversionObserver = new ConversionObserver();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -29,7 +39,12 @@ public class GUI extends Application {
 		formatRoot();
 		layoutRoot();
 		setupDisplay();
+		setupObserver();
 		rootStage.show();
+	}
+
+	private void setupObserver() {
+		conversionObserver.addObservers(sideBarPanel);
 	}
 
 	private void setupStage(Stage rootStage) {
@@ -72,14 +87,49 @@ public class GUI extends Application {
 		scrollDisplay.setFitToWidth(true);
 		scrollDisplay.setFitToHeight(true);
 		displayPane.getStyleClass().add("displayPane");
-		displayPane.getChildren().add(displayGrid);
-		displayGrid.setMinHeight(474);
+		displayPane.getChildren().add(displayTemplate);
+		displayTemplate.setMinHeight(474);
+		handleConvert(hexInputToolbar.convertButton);
 		rootLayout.setGridLinesVisible(false);
+	}
+
+	
+	public void doConversion() {
+		HexToBinConverter hexToBin = new HexToBinConverter();
+		Conversion conversion = null;
+		try {
+			String inputValue = hexInputToolbar.getInputText();
+			conversion = hexToBin.convertHexToBin(inputValue);
+		} catch (EmptyInputException e){
+			hexInputToolbar.updateErrorText("NO VALUE WAS ENTERED");
+			return;
+		} catch (InvalidHexSymbolException e) {
+			hexInputToolbar.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
+			return;
+		} catch (InvalidHexNumberLengthException e) {
+			hexInputToolbar.updateErrorText("THE INPUT ENTERED IS TOO LONG");
+			return;
+		}
+		displayTemplate.hexSymbols = conversion.getParsedListOfHexInput();
+		displayTemplate.decValues = conversion.getListOfDecEquivalents();
+		displayTemplate.binDigits = conversion.getListOfSeparatedBinNibbles();
+		updateDisplay();
+
 	}
 	
 	public void updateDisplay() {
-		displayGrid.getChildren().clear();
+		displayTemplate.getChildren().clear();
 		sideBarPanel.setVisible(true);
-		displayGrid.setupHexToBinTemplate();
+		displayTemplate.setupHexToBinTemplate();
 	}
+	
+	public void handleConvert(Button button) {
+		button.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				hexInputToolbar.updateErrorText("");
+				doConversion();
+			}
+		});
+	}
+	
 }

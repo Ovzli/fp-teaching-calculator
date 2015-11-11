@@ -42,4 +42,5 @@ public class SideBarPanel extends GridPane {
 		GridPane.setHalignment(customRectangle, HPos.CENTER);
 		return customRectangle;
 	}
+
 }

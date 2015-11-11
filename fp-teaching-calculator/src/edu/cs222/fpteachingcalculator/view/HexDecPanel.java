@@ -1,5 +1,8 @@
 package edu.cs222.fpteachingcalculator.view;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,7 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class HexDecPanel extends SideBarPanel {
+public class HexDecPanel extends SideBarPanel implements Observer{
 	private static int panelWidth = 150;
 	private final GridPane tableColumns = new GridPane();
 	private final String[] hexadecimals = { "0", "1", "2", "3", "4", "5", "6",
@@ -77,6 +80,11 @@ public class HexDecPanel extends SideBarPanel {
 		GridPane.setHalignment(charDigit, HPos.CENTER);
 		GridPane.setValignment(charDigit, VPos.CENTER);
 		return charDigit;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		this.setVisible(true);
 	}
 
 }

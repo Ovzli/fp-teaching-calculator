@@ -1,10 +1,9 @@
 package edu.cs222.fpteachingcalculator.model.converter;
 
 import java.util.LinkedList;
-
 import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.*;
 
-public class HexToBinConverter {
+public class HexToBinConverter{
 	private LinkedList<String> parsedListOfHexInput = new LinkedList<String>();
 	private LinkedList<String> listOfDecimalEquivalents = new LinkedList<String>();
 	private LinkedList<String> listOfBinaryEquivalents = new LinkedList<String>();
@@ -28,4 +27,5 @@ public class HexToBinConverter {
 				.listOfDecEquivalents(listOfDecimalEquivalents)
 				.listOfSeparatedBinNibbles(listOfSeparatedBinaryNibbles).build();
 	}
+	
 }
