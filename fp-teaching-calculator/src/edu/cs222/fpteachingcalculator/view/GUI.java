@@ -1,7 +1,6 @@
 package edu.cs222.fpteachingcalculator.view;
 
 import edu.cs222.fpteachingcalculator.model.converter.Conversion;
-import edu.cs222.fpteachingcalculator.model.converter.ConversionObserver;
 import edu.cs222.fpteachingcalculator.model.converter.HexToBinConverter;
 import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.EmptyInputException;
 import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.InvalidHexNumberLengthException;
@@ -27,7 +26,6 @@ public class GUI extends Application {
 	public HexDecPanel sideBarPanel = new HexDecPanel("HEX to DEC\nEQUIVALENTS");
 	public DisplayTemplate displayTemplate = new DisplayTemplate();
 	public final InputToolbar hexInputToolbar = new InputToolbar();
-	public final ConversionObserver conversionObserver = new ConversionObserver();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -39,12 +37,7 @@ public class GUI extends Application {
 		formatRoot();
 		layoutRoot();
 		setupDisplay();
-		setupObserver();
 		rootStage.show();
-	}
-
-	private void setupObserver() {
-		conversionObserver.addObservers(sideBarPanel);
 	}
 
 	private void setupStage(Stage rootStage) {
@@ -138,7 +131,6 @@ public class GUI extends Application {
 			public void handle(ActionEvent event) {
 				resetErrorText();
 				hexInputToolbar.setInputText();
-				//doConversion();
 			}
 		});
 	}
