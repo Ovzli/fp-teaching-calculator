@@ -31,7 +31,7 @@ public class InputToolbar extends Toolbar {
 	}
 	
 	private Label makeButtonSubLabel(String labelName){
-		Label label = new Label("(TO BINARY)");
+		Label label = new Label(labelName);
 		label.getStyleClass().add("smallItalicLabel");
 		GridPane.setHalignment(label, HPos.CENTER);
 		return label;

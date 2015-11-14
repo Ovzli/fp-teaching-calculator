@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -26,6 +27,9 @@ public class GUI extends Application {
 	public HexDecPanel sideBarPanel = new HexDecPanel("HEX to DEC\nEQUIVALENTS");
 	public DisplayTemplate displayTemplate = new DisplayTemplate();
 	public final InputToolbar hexInputToolbar = new InputToolbar();
+	public final ModeOptionBar modeOptionBar = new ModeOptionBar();
+	public final FooterToolbar footerToolbar = new FooterToolbar();
+	public String displayMode = "SUMMARY";
 
 	public static void main(String[] args) {
 		launch(args);
@@ -62,47 +66,82 @@ public class GUI extends Application {
 	}
 
 	private void layoutRoot() {
-		ColumnConstraints col1 = new ColumnConstraints(500);
-		col1.setPercentWidth(50);
-		ColumnConstraints col2 = new ColumnConstraints(300);
-		col2.setPercentWidth(30);
-		ColumnConstraints col3 = new ColumnConstraints(200);
-		col3.setPercentWidth(20);
-		rootLayout.getColumnConstraints().addAll(col1, col2, col3);
-		rootLayout.add(sideBarPanel, 2, 2);
+		ColumnConstraints col1 = new ColumnConstraints(800);
+		col1.setPercentWidth(80);
+		ColumnConstraints col2 = new ColumnConstraints(200);
+		col2.setPercentWidth(20);
+		rootLayout.getColumnConstraints().addAll(col1, col2);
+		rootLayout.add(sideBarPanel, 1, 4);
 		rootLayout.add(hexInputToolbar, 0, 1);
+		rootLayout.add(modeOptionBar, 0, 3);
+		rootLayout.add(footerToolbar, 0, 5);
 	}
 
 	private void setupDisplay() {
-		rootLayout.add(scrollDisplay, 0, 2);
-		GridPane.setColumnSpan(scrollDisplay, 2);
-		scrollDisplay.setPrefSize(700, 500);
+		rootLayout.add(scrollDisplay, 0, 4);
+		scrollDisplay.setPrefSize(700, 450);
 		scrollDisplay.setMinWidth(600);
 		scrollDisplay.setContent(displayPane);
 		scrollDisplay.setFitToWidth(true);
 		scrollDisplay.setFitToHeight(true);
 		displayPane.getStyleClass().add("displayPane");
 		displayPane.getChildren().add(displayTemplate);
-		displayTemplate.setMinHeight(474);
+		displayTemplate.setMinHeight(424);
 		handleConvert(hexInputToolbar.convertButton);
 		handleGenerate(hexInputToolbar.generateButton);
+		handlePreviousSlide(footerToolbar.previousButton);
+		handleNextSlide(footerToolbar.nextButton);
+		addRadioButtonHandler(modeOptionBar.summaryModeRadio, "SUMMARY");
+		addRadioButtonHandler(modeOptionBar.tutorialModeRadio, "TUTORIAL");
+		addRadioButtonHandler(modeOptionBar.practiceModeRadio, "PRACTICE");
 		rootLayout.setGridLinesVisible(false);
 	}
 
-	public void doConversion() {
+	private void addRadioButtonHandler(RadioButton radioButton, String mode) {
+		radioButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				radioSetModeOption(mode);
+			}
+		});
+	}
+
+	private void radioSetModeOption(String mode) {
+		displayMode = mode;
+		modeOptionBar.summaryModeRadio.setSelected(false);
+		modeOptionBar.tutorialModeRadio.setSelected(false);
+		modeOptionBar.practiceModeRadio.setSelected(false);
+		if (displayMode.equals("PRACTICE")) {
+			modeOptionBar.practiceModeRadio.setSelected(true);
+		} else if (displayMode.equals("TUTORIAL")) {
+			modeOptionBar.tutorialModeRadio.setSelected(true);
+		} else {
+			modeOptionBar.summaryModeRadio.setSelected(true);
+		}
+		doConversion("MODE");
+	}
+
+	public void doConversion(String callee) {
 		HexToBinConverter hexToBin = new HexToBinConverter();
 		Conversion conversion = null;
 		try {
 			String inputValue = hexInputToolbar.getInputText();
 			conversion = hexToBin.convertHexToBin(inputValue);
 		} catch (EmptyInputException e) {
-			hexInputToolbar.updateErrorText("NO VALUE WAS ENTERED");
+			if (callee == "CONVERT") {
+				hexInputToolbar.updateErrorText("NO VALUE WAS ENTERED");
+			}
 			return;
 		} catch (InvalidHexSymbolException e) {
-			hexInputToolbar.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
+			if (callee == "CONVERT") {
+				hexInputToolbar
+						.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
+			}
 			return;
 		} catch (InvalidHexNumberLengthException e) {
-			hexInputToolbar.updateErrorText("THE INPUT ENTERED IS TOO LONG");
+			if (callee == "CONVERT") {
+				hexInputToolbar
+						.updateErrorText("THE INPUT ENTERED IS TOO LONG");
+			}
 			return;
 		}
 		displayTemplate.hexSymbols = conversion.getParsedListOfHexInput();
@@ -115,13 +154,14 @@ public class GUI extends Application {
 		displayTemplate.getChildren().clear();
 		sideBarPanel.setVisible(true);
 		displayTemplate.setupHexToBinTemplate();
+		footerToolbar.resetFooterToDefaults(displayMode);
 	}
 
 	public void handleConvert(Button button) {
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				resetErrorText();
-				doConversion();
+				doConversion("CONVERT");
 			}
 		});
 	}
@@ -131,6 +171,22 @@ public class GUI extends Application {
 			public void handle(ActionEvent event) {
 				resetErrorText();
 				hexInputToolbar.setInputText();
+			}
+		});
+	}
+
+	public void handlePreviousSlide(Button button) {
+		button.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				// TO DO
+			}
+		});
+	}
+
+	public void handleNextSlide(Button button) {
+		button.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				// TO DO
 			}
 		});
 	}

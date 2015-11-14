@@ -25,7 +25,7 @@ public class SideBarPanel extends GridPane {
 		title.getStyleClass().add("sideBarTitle");
 		GridPane.setHalignment(title, HPos.CENTER);
 		GridPane.setValignment(title, VPos.TOP);
-		Rectangle tableBGRect = makeRectangle(panelWidth, 450, "royalblue");
+		Rectangle tableBGRect = makeRectangle(panelWidth, 400, "royalblue");
 		tableBGRect.setStroke(Color.NAVY);
 		tableBGRect.setStrokeWidth(2.0);
 		GridPane.setValignment(tableBGRect, VPos.TOP);

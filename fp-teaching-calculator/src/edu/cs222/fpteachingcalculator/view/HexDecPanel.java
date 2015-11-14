@@ -45,7 +45,7 @@ public class HexDecPanel extends SideBarPanel {
 		GridPane column = new GridPane();
 		column.setVgap(2);
 		column.getStyleClass().add("sideBarTable");
-		for (int i = 0; i < 15; i++) {
+		for (int i = 0; i < 12; i++) {
 			Rectangle digitBG = this.makeRectangle(20, 24, "royalblue");
 			digitBG.setStroke(Color.ROYALBLUE);
 			column.add(digitBG, 0, i);
@@ -60,7 +60,7 @@ public class HexDecPanel extends SideBarPanel {
 		GridPane column = new GridPane();
 		column.setVgap(2);
 		column.getStyleClass().add("sideBarTable");
-		for (int i = 0; i < 15; i++) {
+		for (int i = 0; i < 12; i++) {
 			Rectangle digitBG = this.makeRectangle(40, 24, "white");
 			digitBG.setStroke(Color.NAVY);
 			column.add(digitBG, 0, i);

@@ -22,6 +22,15 @@
     -fx-padding: 4.0;	
 }
 
+.modeOptionPane {	
+    -fx-padding: 5.0;
+}
+
+.footerPane {	
+    -fx-background-color: #C7C7C7;
+    -fx-padding: 5.0;
+}
+
 .boldedLabel{
     -fx-font-weight: bold;
 }
@@ -34,7 +43,7 @@
 
 .smallItalicLabel{
     -fx-font-style: italic;	
-    -fx-font: 10.0px "Serif";
+    -fx-font: 11.0px "Serif";
 }
 
 .stepLabel{
