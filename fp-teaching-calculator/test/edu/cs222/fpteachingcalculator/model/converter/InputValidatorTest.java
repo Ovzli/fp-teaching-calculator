@@ -20,9 +20,8 @@ public class InputValidatorTest {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
-	@Test
+	@Test(expected=EmptyInputException.class)
 	public void testCheckIfInputIsEmpty() throws EmptyInputException{
-		thrown.expect(EmptyInputException.class);
 		inputValidator.checkIfInputIsEmpty("");
 	}
 	

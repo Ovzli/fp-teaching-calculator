@@ -117,16 +117,19 @@ public class FooterToolbar extends GridPane {
 		previousButton.setDisable(true);		
 	}
 	
-	public void resetFooterToDefaults(String mode){
+	public void resetFooterToDefaults(){
 		disablePreviousButton();
 		resetCurrentSlideDefault();
 		enableNextButton();
 		updateSlideThumbDisplay();
+	}
+	
+	public void updateFooterVisibility(String mode){
 		if(mode.equals("SUMMARY")){
 			this.setVisible(false);
 		} else {
 			this.setVisible(true);
-		}
+		}		
 	}
 	
 }

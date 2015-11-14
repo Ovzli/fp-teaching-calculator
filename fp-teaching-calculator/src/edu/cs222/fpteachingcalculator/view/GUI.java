@@ -25,7 +25,7 @@ public class GUI extends Application {
 	private final ScrollPane scrollDisplay = new ScrollPane();
 	private final AnchorPane displayPane = new AnchorPane();
 	public HexDecPanel sideBarPanel = new HexDecPanel("HEX to DEC\nEQUIVALENTS");
-	public DisplayTemplate displayTemplate = new DisplayTemplate();
+	public HexToBinTemplate displayTemplate = new HexToBinTemplate();
 	public final InputToolbar hexInputToolbar = new InputToolbar();
 	public final ModeOptionBar modeOptionBar = new ModeOptionBar();
 	public final FooterToolbar footerToolbar = new FooterToolbar();
@@ -58,9 +58,7 @@ public class GUI extends Application {
 	}
 
 	private void formatRoot() {
-		rootPane.getStylesheets().add(
-				this.getClass().getResource("layoutStyles.css")
-						.toExternalForm());
+		rootPane.getStylesheets().add(this.getClass().getResource("layoutStyles.css").toExternalForm());
 		rootPane.getStyleClass().add("rootPane");
 		rootLayout.getStyleClass().add("rootLayout");
 	}
@@ -97,6 +95,54 @@ public class GUI extends Application {
 		rootLayout.setGridLinesVisible(false);
 	}
 
+	public void doConversion(String callee) {
+		HexToBinConverter hexToBin = new HexToBinConverter();
+		Conversion conversion = null;
+		footerToolbar.updateFooterVisibility(displayMode);
+		try {
+			String inputValue = hexInputToolbar.getInputText();
+			conversion = hexToBin.convertHexToBin(inputValue);
+		} catch (EmptyInputException e) {
+			if (callee == "CONVERT") {
+				hexInputToolbar.updateErrorText("NO VALUE WAS ENTERED");
+			}
+			return;
+		} catch (InvalidHexSymbolException e) {
+			if (callee == "CONVERT") {
+				hexInputToolbar.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
+			}
+			return;
+		} catch (InvalidHexNumberLengthException e) {
+			if (callee == "CONVERT") {
+				hexInputToolbar.updateErrorText("THE INPUT ENTERED IS TOO LONG");
+			}
+			return;
+		}
+		displayTemplate.hexSymbols = conversion.getParsedListOfHexInput();
+		displayTemplate.decValues = conversion.getListOfDecEquivalents();
+		displayTemplate.binDigits = conversion.getListOfSeparatedBinNibbles();
+		updateDisplay();
+	}
+
+	public void updateDisplay() {
+		displayTemplate.getChildren().clear();
+		if (displayMode.equals("PRACTICE")) {
+			sideBarPanel.setVisible(false);
+		} else {
+			sideBarPanel.setVisible(true);
+		}
+		displayTemplate.throttleTemplate(displayMode);
+	}
+
+	public void handleConvert(Button button) {
+		button.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				resetErrorText();
+				doConversion("CONVERT");
+			}
+		});
+	}
+
 	private void addRadioButtonHandler(RadioButton radioButton, String mode) {
 		radioButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -118,52 +164,6 @@ public class GUI extends Application {
 			modeOptionBar.summaryModeRadio.setSelected(true);
 		}
 		doConversion("MODE");
-	}
-
-	public void doConversion(String callee) {
-		HexToBinConverter hexToBin = new HexToBinConverter();
-		Conversion conversion = null;
-		try {
-			String inputValue = hexInputToolbar.getInputText();
-			conversion = hexToBin.convertHexToBin(inputValue);
-		} catch (EmptyInputException e) {
-			if (callee == "CONVERT") {
-				hexInputToolbar.updateErrorText("NO VALUE WAS ENTERED");
-			}
-			return;
-		} catch (InvalidHexSymbolException e) {
-			if (callee == "CONVERT") {
-				hexInputToolbar
-						.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
-			}
-			return;
-		} catch (InvalidHexNumberLengthException e) {
-			if (callee == "CONVERT") {
-				hexInputToolbar
-						.updateErrorText("THE INPUT ENTERED IS TOO LONG");
-			}
-			return;
-		}
-		displayTemplate.hexSymbols = conversion.getParsedListOfHexInput();
-		displayTemplate.decValues = conversion.getListOfDecEquivalents();
-		displayTemplate.binDigits = conversion.getListOfSeparatedBinNibbles();
-		updateDisplay();
-	}
-
-	public void updateDisplay() {
-		displayTemplate.getChildren().clear();
-		sideBarPanel.setVisible(true);
-		displayTemplate.setupHexToBinTemplate();
-		footerToolbar.resetFooterToDefaults(displayMode);
-	}
-
-	public void handleConvert(Button button) {
-		button.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				resetErrorText();
-				doConversion("CONVERT");
-			}
-		});
 	}
 
 	public void handleGenerate(Button button) {

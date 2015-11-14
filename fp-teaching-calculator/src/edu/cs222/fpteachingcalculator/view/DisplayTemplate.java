@@ -30,44 +30,9 @@ public class DisplayTemplate extends GridPane {
 		col1.setPercentWidth(100);
 		this.getColumnConstraints().add(col1);
 		this.setGridLinesVisible(false);
-	}	
-	
-	public void setupHexToBinTemplate() {
-		GridPane inputReprintRow = makeInputReprintRow();
-		this.add(inputReprintRow, 0, 0);
-		
-		GridPane step1GP = buildStep(1, "decimal equivalents:  ");
-		this.add(step1GP, 0, 1);
-		Label Step1Label = addStepComment(1, "hexDecStep");
-		step1GP.add(Step1Label, 1, 1);
-		GridPane decimalChars = makeBigCharLabelGrid(decValues, "#9900ff");
-		step1GP.add(decimalChars, 1, 2);
-		
-		GridPane step2GP = buildStep(2, "decimal expansion:  ");
-		this.add(step2GP, 0, 2);
-		Label Step2Label = addStepComment(2, "decExpansionStep");
-		step2GP.add(Step2Label, 1, 1);
-		GridPane expansionGrid = makeExpansionGrid(decValues);
-		step2GP.add(expansionGrid, 1, 2);
-		
-		GridPane step3GP = buildStep(3, "binary concatenation:  ");
-		this.add(step3GP, 0, 3);
-		Label Step3Label = addStepComment(3, "binConcatenationStep");
-		step3GP.add(Step3Label, 1, 1);
-		GridPane evaluationGrid = makeEvaluationGrid(decValues);
-		step3GP.add(evaluationGrid, 1, 2);
-		
-		GridPane step4GP = buildStep(4, "binary representation:  ");
-		this.add(step4GP, 0, 4);
-		Label Step4Label = addStepComment(4, "binRepresentationStep");
-		step4GP.add(Step4Label, 1, 1);
-		GridPane binaryGrid = makeBinaryGrid(binDigits);
-		step4GP.add(binaryGrid, 1, 2);
-		
-		makeEmptyRow(this, 5);
 	}
 
-	private GridPane makeInputReprintRow() {
+	protected GridPane makeInputReprintRow() {
 		GridPane inputRowGP = new GridPane();
 		setColumn1Constraints(inputRowGP);
 		Label rowTag = makeRowTag("original input:  ");
@@ -77,7 +42,7 @@ public class DisplayTemplate extends GridPane {
 		return inputRowGP;
 	}
 
-	private GridPane buildStep(int stepID, String rowTagString) {
+	protected GridPane buildStep(int stepID, String rowTagString) {
 		GridPane stepGP = new GridPane();
 		setColumn1Constraints(stepGP);
 		stepGP.setHgap(2);
@@ -91,7 +56,7 @@ public class DisplayTemplate extends GridPane {
 		return stepGP;
 	}
 	
-	private Label addStepComment(int stepID, String commentID){
+	protected Label addStepComment(int stepID, String commentID){
 		Label tutorText = new Label();
 		CommentLibrary comment = new CommentLibrary();
 		tutorText.setText("Step " + stepID + " "
@@ -145,7 +110,7 @@ public class DisplayTemplate extends GridPane {
 		return rowTagLabel;
 	}
 
-	private GridPane makeBigCharLabelGrid(LinkedList<String> charList,
+	protected GridPane makeBigCharLabelGrid(LinkedList<String> charList,
 			String colorHex) {
 		GridPane bigCharGP = new GridPane();
 		bigCharGP.setHgap(5);
@@ -177,7 +142,7 @@ public class DisplayTemplate extends GridPane {
 		bigLabel.setTextFill(Color.web(colorHex));
 	}
 
-	private GridPane makeExpansionGrid(LinkedList<String> charList) {
+	protected GridPane makeExpansionGrid(LinkedList<String> charList) {
 		GridPane expansionGP = new GridPane();
 		expansionGP.setVgap(5);
 		expansionGP.getStyleClass().add("bigCharCell");
@@ -232,7 +197,7 @@ public class DisplayTemplate extends GridPane {
 		bitGP.setGridLinesVisible(false);
 	}
 
-	private GridPane makeEvaluationGrid(LinkedList<String> charList) {
+	protected GridPane makeEvaluationGrid(LinkedList<String> charList) {
 		GridPane evaluationGP = new GridPane();
 		evaluationGP.setVgap(5);
 		evaluationGP.getStyleClass().add("bigCharCell");
@@ -272,7 +237,7 @@ public class DisplayTemplate extends GridPane {
 		}
 	}
 
-	private GridPane makeBinaryGrid(LinkedList<int[]> binDigitList) {
+	protected GridPane makeBinaryGrid(LinkedList<int[]> binDigitList) {
 		GridPane binaryGP = new GridPane();
 		binaryGP.getStyleClass().add("bigCharCell");
 		for (int i = 0; i < binDigitList.size(); i++) {
@@ -285,7 +250,7 @@ public class DisplayTemplate extends GridPane {
 		return binaryGP;
 	}
 
-	private void makeEmptyRow(GridPane parentGP, int indexRow) {
+	protected void makeEmptyRow(GridPane parentGP, int indexRow) {
 		Rectangle emptyRect = new Rectangle();
 		parentGP.add(emptyRect, 0, indexRow);
 		emptyRect.setWidth(40);
