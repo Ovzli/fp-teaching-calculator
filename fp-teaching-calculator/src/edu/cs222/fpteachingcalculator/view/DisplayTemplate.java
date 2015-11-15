@@ -55,17 +55,15 @@ public class DisplayTemplate extends GridPane {
 		stepGP.setGridLinesVisible(false);
 		return stepGP;
 	}
-	
-	protected Label addStepComment(int stepID, String commentID){
+
+	protected Label addStepComment(int stepID, String comment) {
 		Label tutorText = new Label();
-		CommentLibrary comment = new CommentLibrary();
-		tutorText.setText("Step " + stepID + " "
-				+ comment.readComment(commentID));
+		tutorText.setText("Step " + stepID + " " + comment);
 		tutorText.setWrapText(true);
 		tutorText.setMinWidth(350);
 		tutorText.getStyleClass().add("commentTag");
 		GridPane.setValignment(tutorText, VPos.TOP);
-		return tutorText;		
+		return tutorText;
 	}
 
 	private Rectangle horizontalLine() {

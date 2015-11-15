@@ -24,12 +24,15 @@ public class GUI extends Application {
 	public final GridPane rootLayout = new GridPane();
 	private final ScrollPane scrollDisplay = new ScrollPane();
 	private final AnchorPane displayPane = new AnchorPane();
-	public HexDecPanel sideBarPanel = new HexDecPanel("HEX to DEC\nEQUIVALENTS");
-	public HexToBinTemplate displayTemplate = new HexToBinTemplate();
+	public SideBarPanel sideBarPanel = new SideBarPanel();
+	//public HexDecPanel sideBarPanel = new HexDecPanel("HEX to DEC\nEQUIVALENTS");
+	public HexToBinTemplate hexToBinDisplay = new HexToBinTemplate();
 	public final InputToolbar hexInputToolbar = new InputToolbar();
 	public final ModeOptionBar modeOptionBar = new ModeOptionBar();
 	public final FooterToolbar footerToolbar = new FooterToolbar();
 	public String displayMode = "SUMMARY";
+	public int slideOnDisplay;
+	public int totalSlides;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -58,7 +61,9 @@ public class GUI extends Application {
 	}
 
 	private void formatRoot() {
-		rootPane.getStylesheets().add(this.getClass().getResource("layoutStyles.css").toExternalForm());
+		rootPane.getStylesheets().add(
+				this.getClass().getResource("layoutStyles.css")
+						.toExternalForm());
 		rootPane.getStyleClass().add("rootPane");
 		rootLayout.getStyleClass().add("rootLayout");
 	}
@@ -83,8 +88,8 @@ public class GUI extends Application {
 		scrollDisplay.setFitToWidth(true);
 		scrollDisplay.setFitToHeight(true);
 		displayPane.getStyleClass().add("displayPane");
-		displayPane.getChildren().add(displayTemplate);
-		displayTemplate.setMinHeight(424);
+		displayPane.getChildren().add(hexToBinDisplay);
+		hexToBinDisplay.setMinHeight(424);
 		handleConvert(hexInputToolbar.convertButton);
 		handleGenerate(hexInputToolbar.generateButton);
 		handlePreviousSlide(footerToolbar.previousButton);
@@ -109,29 +114,34 @@ public class GUI extends Application {
 			return;
 		} catch (InvalidHexSymbolException e) {
 			if (callee == "CONVERT") {
-				hexInputToolbar.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
+				hexInputToolbar
+						.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
 			}
 			return;
 		} catch (InvalidHexNumberLengthException e) {
 			if (callee == "CONVERT") {
-				hexInputToolbar.updateErrorText("THE INPUT ENTERED IS TOO LONG");
+				hexInputToolbar
+						.updateErrorText("THE INPUT ENTERED IS TOO LONG");
 			}
 			return;
 		}
-		displayTemplate.hexSymbols = conversion.getParsedListOfHexInput();
-		displayTemplate.decValues = conversion.getListOfDecEquivalents();
-		displayTemplate.binDigits = conversion.getListOfSeparatedBinNibbles();
+		hexToBinDisplay.hexSymbols = conversion.getParsedListOfHexInput();
+		hexToBinDisplay.decValues = conversion.getListOfDecEquivalents();
+		hexToBinDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();
 		updateDisplay();
 	}
 
 	public void updateDisplay() {
-		displayTemplate.getChildren().clear();
+		hexToBinDisplay.getChildren().clear();
+		slideOnDisplay = 0;
+		totalSlides = 4;
+		footerToolbar.resetFooterToDefaults(totalSlides);
 		if (displayMode.equals("PRACTICE")) {
 			sideBarPanel.setVisible(false);
 		} else {
 			sideBarPanel.setVisible(true);
 		}
-		displayTemplate.throttleTemplate(displayMode);
+		hexToBinDisplay.defineTemplateSetup(displayMode);
 	}
 
 	public void handleConvert(Button button) {
@@ -178,7 +188,18 @@ public class GUI extends Application {
 	public void handlePreviousSlide(Button button) {
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				// TO DO
+				if (slideOnDisplay > 0) {
+					hexToBinDisplay.hideSlide(slideOnDisplay);
+					slideOnDisplay--;
+					footerToolbar.decrementSlideDisplay();
+					hexToBinDisplay.displaySlide(slideOnDisplay);
+					footerToolbar.enableNextButton();
+					if (slideOnDisplay == 0) {
+						footerToolbar.disablePreviousButton();
+					} else{
+						footerToolbar.enablePreviousButton();
+					}
+				}
 			}
 		});
 	}
@@ -186,7 +207,18 @@ public class GUI extends Application {
 	public void handleNextSlide(Button button) {
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				// TO DO
+				if (slideOnDisplay < totalSlides - 1) {
+					hexToBinDisplay.hideSlide(slideOnDisplay);
+					slideOnDisplay++;
+					footerToolbar.incrementSlideDisplay();
+					hexToBinDisplay.displaySlide(slideOnDisplay);
+					footerToolbar.enablePreviousButton();
+					if (slideOnDisplay == totalSlides - 1) {
+						footerToolbar.disableNextButton();
+					} else{
+						footerToolbar.enableNextButton();
+					}
+				}
 			}
 		});
 	}
