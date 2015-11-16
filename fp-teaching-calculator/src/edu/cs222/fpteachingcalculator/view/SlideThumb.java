@@ -32,7 +32,6 @@ public class SlideThumb extends GridPane {
 			backgroundRectangle.setFill(Color.ROYALBLUE);
 			backgroundRectangle.setStroke(Color.BLACK);
 			slideLabel.setTextFill(Color.WHITE);
-
 		} else {
 			backgroundRectangle.setFill(Paint.valueOf("#FFFFFF"));
 			backgroundRectangle.setStroke(Color.ROYALBLUE);

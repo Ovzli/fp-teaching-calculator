@@ -25,7 +25,6 @@ public class GUI extends Application {
 	private final ScrollPane scrollDisplay = new ScrollPane();
 	private final AnchorPane displayPane = new AnchorPane();
 	public SideBarPanel sideBarPanel = new SideBarPanel();
-	//public HexDecPanel sideBarPanel = new HexDecPanel("HEX to DEC\nEQUIVALENTS");
 	public HexToBinTemplate hexToBinDisplay = new HexToBinTemplate();
 	public final InputToolbar hexInputToolbar = new InputToolbar();
 	public final ModeOptionBar modeOptionBar = new ModeOptionBar();

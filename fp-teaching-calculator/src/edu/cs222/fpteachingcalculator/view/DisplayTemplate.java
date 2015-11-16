@@ -18,6 +18,7 @@ public class DisplayTemplate extends GridPane {
 	public LinkedList<String> decValues = new LinkedList<String>();
 	public LinkedList<int[]> binDigits = new LinkedList<int[]>();
 	private final int column1Width = 200;
+	private GridPane expansionGP = new GridPane();
 
 	public DisplayTemplate() {
 		super();
@@ -37,7 +38,10 @@ public class DisplayTemplate extends GridPane {
 		setColumn1Constraints(inputRowGP);
 		Label rowTag = makeRowTag("original input:  ");
 		inputRowGP.add(rowTag, 0, 0);
-		GridPane inputLabel = makeBigCharLabelGrid(hexSymbols, "#0066CC");
+		GridPane inputLabel = makeBigCharLabelGrid(hexSymbols);
+		for (int i = 0; i < hexSymbols.size(); i++) {
+			// UNIQUE LABEL COLOR: "#0066CC"			
+		}
 		inputRowGP.add(inputLabel, 1, 0);
 		return inputRowGP;
 	}
@@ -108,76 +112,74 @@ public class DisplayTemplate extends GridPane {
 		return rowTagLabel;
 	}
 
-	protected GridPane makeBigCharLabelGrid(LinkedList<String> charList,
-			String colorHex) {
+	protected GridPane makeBigCharLabelGrid(LinkedList<String> charList) {
 		GridPane bigCharGP = new GridPane();
 		bigCharGP.setHgap(5);
 		bigCharGP.getStyleClass().add("bigCharCell");
 		for (int i = 0; i < charList.size(); i++) {
-			makeBigCharLabelBox(bigCharGP, i, 0, charList.get(i), colorHex);
+			makeBigCharLabelBox(bigCharGP, i, 0, charList.get(i));
 		}
 		bigCharGP.setGridLinesVisible(false);
 		return bigCharGP;
 	}
 
 	private void makeBigCharLabelBox(GridPane parentGP, int indexCol,
-			int indexRow, String charElem, String colorHex) {
+			int indexRow, String charElem) {
 		Rectangle bgRect = new Rectangle();
 		parentGP.add(bgRect, indexCol, indexRow);
 		bgRect.setWidth(40);
 		bgRect.setHeight(40);
 		bgRect.setStroke(Color.ROYALBLUE);
 		bgRect.setFill(Paint.valueOf("#E6E6E6"));
-		makeBigChar(parentGP, indexCol, indexRow, charElem, colorHex);
+		makeBigChar(parentGP, indexCol, indexRow, charElem);
 	}
 
 	private void makeBigChar(GridPane parentGP, int indexCol, int indexRow,
-			String charElem, String colorHex) {
+			String charElem) {
 		Label bigLabel = new Label(charElem);
 		parentGP.add(bigLabel, indexCol, indexRow);
 		GridPane.setHalignment(bigLabel, HPos.CENTER);
 		bigLabel.getStyleClass().add("bigChar");
-		bigLabel.setTextFill(Color.web(colorHex));
+		bigLabel.setTextFill(Color.web("#9900ff"));
 	}
 
 	protected GridPane makeExpansionGrid(LinkedList<String> charList) {
-		GridPane expansionGP = new GridPane();
 		expansionGP.setVgap(5);
 		expansionGP.getStyleClass().add("bigCharCell");
 		for (int i = 0; i < charList.size(); i++) {
-			makeBigCharLabelBox(expansionGP, 0, i, charList.get(i), "#9900ff");
-			makeBigChar(expansionGP, 1, i, "=", "#9900ff");
-			makeExpansionBit(expansionGP, 2, i, binDigits.get(i)[0], "3");
-			makeBigChar(expansionGP, 3, i, "+", "#9900ff");
-			makeExpansionBit(expansionGP, 4, i, binDigits.get(i)[1], "2");
-			makeBigChar(expansionGP, 5, i, "+", "#9900ff");
-			makeExpansionBit(expansionGP, 6, i, binDigits.get(i)[2], "1");
-			makeBigChar(expansionGP, 7, i, "+", "#9900ff");
-			makeExpansionBit(expansionGP, 8, i, binDigits.get(i)[3], "0");
-			makeBigChar(expansionGP, 9, i, "=", "#9900ff");
-			makeBigChar(expansionGP, 10, i, "(", "#9900ff");
+			makeBigCharLabelBox(expansionGP, 0, i, charList.get(i));
+			makeBigChar(expansionGP, 1, i, "=");
+			makeExpansionBit(2, i, binDigits.get(i)[0], "3");
+			makeBigChar(expansionGP, 3, i, "+");
+			makeExpansionBit(4, i, binDigits.get(i)[1], "2");
+			makeBigChar(expansionGP, 5, i, "+");
+			makeExpansionBit(6, i, binDigits.get(i)[2], "1");
+			makeBigChar(expansionGP, 7, i, "+");
+			makeExpansionBit(8, i, binDigits.get(i)[3], "0");
+			makeBigChar(expansionGP, 9, i, "=");
+			makeBigChar(expansionGP, 10, i, "(");
 			makeBigChar(expansionGP, 11, i,
-					String.valueOf(binDigits.get(i)[0] * 8), "#9900ff");
-			makeBigChar(expansionGP, 12, i, "+", "#9900ff");
+					String.valueOf(binDigits.get(i)[0] * 8));
+			makeBigChar(expansionGP, 12, i, "+");
 			makeBigChar(expansionGP, 13, i,
-					String.valueOf(binDigits.get(i)[1] * 4), "#9900ff");
-			makeBigChar(expansionGP, 14, i, "+", "#9900ff");
+					String.valueOf(binDigits.get(i)[1] * 4));
+			makeBigChar(expansionGP, 14, i, "+");
 			makeBigChar(expansionGP, 15, i,
-					String.valueOf(binDigits.get(i)[2] * 2), "#9900ff");
-			makeBigChar(expansionGP, 16, i, "+", "#9900ff");
+					String.valueOf(binDigits.get(i)[2] * 2));
+			makeBigChar(expansionGP, 16, i, "+");
 			makeBigChar(expansionGP, 17, i,
-					String.valueOf(binDigits.get(i)[3] * 1), "#9900ff");
-			makeBigChar(expansionGP, 18, i, ")", "#9900ff");
+					String.valueOf(binDigits.get(i)[3] * 1));
+			makeBigChar(expansionGP, 18, i, ")");
 		}
 		expansionGP.setGridLinesVisible(false);
 		return expansionGP;
 	}
 
-	private void makeExpansionBit(GridPane parentGP, int indexCol,
-			int indexRow, int binaryElem, String exponentElem) {
+	private void makeExpansionBit(int indexCol, int indexRow, int binaryElem,
+			String exponentElem) {
 		GridPane bitGP = new GridPane();
 		bitGP.setAlignment(Pos.CENTER);
-		parentGP.add(bitGP, indexCol, indexRow);
+		expansionGP.add(bitGP, indexCol, indexRow);
 		Label binaryDigit = new Label(binaryElem + "x2");
 		bitGP.add(binaryDigit, 0, 0);
 		binaryDigit.getStyleClass().add("bigExpansionChar");
@@ -200,24 +202,24 @@ public class DisplayTemplate extends GridPane {
 		evaluationGP.setVgap(5);
 		evaluationGP.getStyleClass().add("bigCharCell");
 		for (int i = 0; i < charList.size(); i++) {
-			makeBigCharLabelBox(evaluationGP, 0, i, charList.get(i), "#9900ff");
-			makeBigChar(evaluationGP, 1, i, "=", "#9900ff");
+			makeBigCharLabelBox(evaluationGP, 0, i, charList.get(i));
+			makeBigChar(evaluationGP, 1, i, "=");
 			makeEvaluationBit(evaluationGP, 2, i, binDigits.get(i)[0]);
-			makeBigChar(evaluationGP, 3, i, "⌒", "#9900ff");
+			makeBigChar(evaluationGP, 3, i, "⌒");
 			makeEvaluationBit(evaluationGP, 4, i, binDigits.get(i)[1]);
-			makeBigChar(evaluationGP, 5, i, "⌒", "#9900ff");
+			makeBigChar(evaluationGP, 5, i, "⌒");
 			makeEvaluationBit(evaluationGP, 6, i, binDigits.get(i)[2]);
-			makeBigChar(evaluationGP, 7, i, "⌒", "#9900ff");
+			makeBigChar(evaluationGP, 7, i, "⌒");
 			makeEvaluationBit(evaluationGP, 8, i, binDigits.get(i)[3]);
-			makeBigChar(evaluationGP, 9, i, "=", "#9900ff");
+			makeBigChar(evaluationGP, 9, i, "=");
 			makeBigChar(evaluationGP, 10, i,
-					String.valueOf(binDigits.get(i)[0]), "#9900ff");
+					String.valueOf(binDigits.get(i)[0]));
 			makeBigChar(evaluationGP, 11, i,
-					String.valueOf(binDigits.get(i)[1]), "#9900ff");
+					String.valueOf(binDigits.get(i)[1]));
 			makeBigChar(evaluationGP, 12, i,
-					String.valueOf(binDigits.get(i)[2]), "#9900ff");
+					String.valueOf(binDigits.get(i)[2]));
 			makeBigChar(evaluationGP, 13, i,
-					String.valueOf(binDigits.get(i)[3]), "#9900ff");
+					String.valueOf(binDigits.get(i)[3]));
 		}
 		evaluationGP.setGridLinesVisible(false);
 		return evaluationGP;
@@ -243,14 +245,14 @@ public class DisplayTemplate extends GridPane {
 					+ String.valueOf(binDigits.get(i)[1])
 					+ String.valueOf(binDigits.get(i)[2])
 					+ String.valueOf(binDigits.get(i)[3]);
-			makeBigChar(binaryGP, i, 0, binDigit, "#9900ff");
+			makeBigChar(binaryGP, i, 0, binDigit);
 		}
 		return binaryGP;
 	}
 
-	protected void makeEmptyRow(GridPane parentGP, int indexRow) {
+	protected void makeEmptyRow(int indexRow) {
 		Rectangle emptyRect = new Rectangle();
-		parentGP.add(emptyRect, 0, indexRow);
+		this.add(emptyRect, 0, indexRow);
 		emptyRect.setWidth(40);
 		emptyRect.setHeight(80);
 		emptyRect.setFill(Paint.valueOf("#FFFFFF"));

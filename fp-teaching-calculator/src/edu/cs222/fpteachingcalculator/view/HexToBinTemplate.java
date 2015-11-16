@@ -31,7 +31,7 @@ public class HexToBinTemplate extends DisplayTemplate {
 		H2BSummaryTemplate.addStepRow(makeStep2Pane());
 		H2BSummaryTemplate.addStepRow(makeStep3Pane());
 		H2BSummaryTemplate.addStepRow(makeStep4Pane());
-		makeEmptyRow(this, 5);
+		makeEmptyRow(5);
 	}
 
 	public void setupHexToBinTutorialTemplate() {
@@ -43,7 +43,7 @@ public class HexToBinTemplate extends DisplayTemplate {
 		H2BTutorialTemplate.addStepSlide(makeStep2Pane());
 		H2BTutorialTemplate.addStepSlide(makeStep3Pane());
 		H2BTutorialTemplate.addStepSlide(makeStep4Pane());
-		makeEmptyRow(this, 5);
+		makeEmptyRow(5);
 	}
 
 	public void setupHexToBinPracticeTemplate() {
@@ -59,7 +59,7 @@ public class HexToBinTemplate extends DisplayTemplate {
 				+ "equivalency table shown to the right.";
 		Label Step1Label = addStepComment(1, comment);
 		step1GP.add(Step1Label, 1, 1);
-		GridPane decimalChars = makeBigCharLabelGrid(decValues, "#9900ff");
+		GridPane decimalChars = makeBigCharLabelGrid(decValues);
 		step1GP.add(decimalChars, 1, 2);
 		return step1GP;
 	}
@@ -104,7 +104,7 @@ public class HexToBinTemplate extends DisplayTemplate {
 		if (currentMode.equals("TUTORIAL")) {
 			H2BTutorialTemplate.slideList.get(slideToHide).setVisible(false);
 		} else {
-			// TO DO (NEXT USER STORY)
+			// TODO (NEXT USER STORY)
 		}
 
 	}
@@ -113,7 +113,7 @@ public class HexToBinTemplate extends DisplayTemplate {
 		if (currentMode.equals("TUTORIAL")) {
 			H2BTutorialTemplate.slideList.get(slideToDisplay).setVisible(true);
 		} else {
-			// TO DO (NEXT USER STORY)
+			// TODO (NEXT USER STORY)
 		}
 	}
 
