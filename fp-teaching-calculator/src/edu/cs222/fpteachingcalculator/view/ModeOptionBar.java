@@ -44,5 +44,4 @@ public class ModeOptionBar extends GridPane {
 		label.getStyleClass().add("boldedLabel");
 		return label;
 	}
-
 }

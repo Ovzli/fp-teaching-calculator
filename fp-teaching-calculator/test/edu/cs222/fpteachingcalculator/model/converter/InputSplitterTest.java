@@ -12,13 +12,13 @@ import org.junit.Assert;
 
 public class InputSplitterTest {
 
-	private InputSplitter inputParser = new InputSplitter();
+	private InputSplitter inputSplitter = new InputSplitter();
 
 	@Test
-	public void testParseHexidecimalInput() {
+	public void testSplitHexInput() {
 		String hexString = "C2A";
 		LinkedList<String> correctOutput = createLinkedListOfStrings("C 2 A");
-		LinkedList<String> methodOutput = inputParser.parseHexInput(hexString);
+		LinkedList<String> methodOutput = inputSplitter.splitHexInput(hexString);
 		Assert.assertEquals(methodOutput, correctOutput);
 	}
 	

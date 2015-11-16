@@ -6,11 +6,10 @@ public class ValueGenerator {
 		String hexValue = "";
 		int hexLength = (int) Math.round(Math.random() * 5) + 3;
 		for (int i = 1; i <= hexLength; i++) {
-			int randomDecimalNumber = (int) (Math.round(Math.random() * 15));
-			String hexEquivalent = Integer.toHexString(randomDecimalNumber);
+			int randomDecNumber = (int) (Math.round(Math.random() * 15));
+			String hexEquivalent = Integer.toHexString(randomDecNumber);
 			hexValue = hexValue + hexEquivalent;
 		}
 		return hexValue.toUpperCase();
 	}
-
 }

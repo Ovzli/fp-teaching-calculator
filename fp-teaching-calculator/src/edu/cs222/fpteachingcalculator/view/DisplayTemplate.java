@@ -40,7 +40,7 @@ public class DisplayTemplate extends GridPane {
 		inputRowGP.add(rowTag, 0, 0);
 		GridPane inputLabel = makeBigCharLabelGrid(hexSymbols);
 		for (int i = 0; i < hexSymbols.size(); i++) {
-			// UNIQUE LABEL COLOR: "#0066CC"			
+			// UNIQUE LABEL COLOR: "#0066CC"
 		}
 		inputRowGP.add(inputLabel, 1, 0);
 		return inputRowGP;
@@ -123,8 +123,7 @@ public class DisplayTemplate extends GridPane {
 		return bigCharGP;
 	}
 
-	private void makeBigCharLabelBox(GridPane parentGP, int indexCol,
-			int indexRow, String charElem) {
+	private void makeBigCharLabelBox(GridPane parentGP, int indexCol, int indexRow, String charElem) {
 		Rectangle bgRect = new Rectangle();
 		parentGP.add(bgRect, indexCol, indexRow);
 		bgRect.setWidth(40);
@@ -134,8 +133,7 @@ public class DisplayTemplate extends GridPane {
 		makeBigChar(parentGP, indexCol, indexRow, charElem);
 	}
 
-	private void makeBigChar(GridPane parentGP, int indexCol, int indexRow,
-			String charElem) {
+	private void makeBigChar(GridPane parentGP, int indexCol, int indexRow, String charElem) {
 		Label bigLabel = new Label(charElem);
 		parentGP.add(bigLabel, indexCol, indexRow);
 		GridPane.setHalignment(bigLabel, HPos.CENTER);
@@ -158,25 +156,20 @@ public class DisplayTemplate extends GridPane {
 			makeExpansionBit(8, i, binDigits.get(i)[3], "0");
 			makeBigChar(expansionGP, 9, i, "=");
 			makeBigChar(expansionGP, 10, i, "(");
-			makeBigChar(expansionGP, 11, i,
-					String.valueOf(binDigits.get(i)[0] * 8));
+			makeBigChar(expansionGP, 11, i, String.valueOf(binDigits.get(i)[0] * 8));
 			makeBigChar(expansionGP, 12, i, "+");
-			makeBigChar(expansionGP, 13, i,
-					String.valueOf(binDigits.get(i)[1] * 4));
+			makeBigChar(expansionGP, 13, i, String.valueOf(binDigits.get(i)[1] * 4));
 			makeBigChar(expansionGP, 14, i, "+");
-			makeBigChar(expansionGP, 15, i,
-					String.valueOf(binDigits.get(i)[2] * 2));
+			makeBigChar(expansionGP, 15, i, String.valueOf(binDigits.get(i)[2] * 2));
 			makeBigChar(expansionGP, 16, i, "+");
-			makeBigChar(expansionGP, 17, i,
-					String.valueOf(binDigits.get(i)[3] * 1));
+			makeBigChar(expansionGP, 17, i, String.valueOf(binDigits.get(i)[3] * 1));
 			makeBigChar(expansionGP, 18, i, ")");
 		}
 		expansionGP.setGridLinesVisible(false);
 		return expansionGP;
 	}
 
-	private void makeExpansionBit(int indexCol, int indexRow, int binaryElem,
-			String exponentElem) {
+	private void makeExpansionBit(int indexCol, int indexRow, int binaryElem, String exponentElem) {
 		GridPane bitGP = new GridPane();
 		bitGP.setAlignment(Pos.CENTER);
 		expansionGP.add(bitGP, indexCol, indexRow);
@@ -212,21 +205,16 @@ public class DisplayTemplate extends GridPane {
 			makeBigChar(evaluationGP, 7, i, "⌒");
 			makeEvaluationBit(evaluationGP, 8, i, binDigits.get(i)[3]);
 			makeBigChar(evaluationGP, 9, i, "=");
-			makeBigChar(evaluationGP, 10, i,
-					String.valueOf(binDigits.get(i)[0]));
-			makeBigChar(evaluationGP, 11, i,
-					String.valueOf(binDigits.get(i)[1]));
-			makeBigChar(evaluationGP, 12, i,
-					String.valueOf(binDigits.get(i)[2]));
-			makeBigChar(evaluationGP, 13, i,
-					String.valueOf(binDigits.get(i)[3]));
+			makeBigChar(evaluationGP, 10, i, String.valueOf(binDigits.get(i)[0]));
+			makeBigChar(evaluationGP, 11, i, String.valueOf(binDigits.get(i)[1]));
+			makeBigChar(evaluationGP, 12, i, String.valueOf(binDigits.get(i)[2]));
+			makeBigChar(evaluationGP, 13, i, String.valueOf(binDigits.get(i)[3]));
 		}
 		evaluationGP.setGridLinesVisible(false);
 		return evaluationGP;
 	}
 
-	private void makeEvaluationBit(GridPane parentGP, int indexCol,
-			int indexRow, int binaryElem) {
+	private void makeEvaluationBit(GridPane parentGP, int indexCol, int indexRow, int binaryElem) {
 		Label binaryDigit = new Label(String.valueOf(binaryElem));
 		parentGP.add(binaryDigit, indexCol, indexRow);
 		binaryDigit.getStyleClass().add("bigExpansionChar");
@@ -241,10 +229,8 @@ public class DisplayTemplate extends GridPane {
 		GridPane binaryGP = new GridPane();
 		binaryGP.getStyleClass().add("bigCharCell");
 		for (int i = 0; i < binDigitList.size(); i++) {
-			String binDigit = String.valueOf(binDigits.get(i)[0])
-					+ String.valueOf(binDigits.get(i)[1])
-					+ String.valueOf(binDigits.get(i)[2])
-					+ String.valueOf(binDigits.get(i)[3]);
+			String binDigit = String.valueOf(binDigits.get(i)[0]) + String.valueOf(binDigits.get(i)[1])
+					+ String.valueOf(binDigits.get(i)[2]) + String.valueOf(binDigits.get(i)[3]);
 			makeBigChar(binaryGP, i, 0, binDigit);
 		}
 		return binaryGP;
@@ -262,5 +248,4 @@ public class DisplayTemplate extends GridPane {
 		ColumnConstraints col1 = new ColumnConstraints(column1Width);
 		gridPane.getColumnConstraints().add(col1);
 	}
-
 }

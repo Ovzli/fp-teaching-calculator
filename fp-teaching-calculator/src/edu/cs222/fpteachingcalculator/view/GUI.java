@@ -60,9 +60,7 @@ public class GUI extends Application {
 	}
 
 	private void formatRoot() {
-		rootPane.getStylesheets().add(
-				this.getClass().getResource("layoutStyles.css")
-						.toExternalForm());
+		rootPane.getStylesheets().add(this.getClass().getResource("layoutStyles.css").toExternalForm());
 		rootPane.getStyleClass().add("rootPane");
 		rootLayout.getStyleClass().add("rootLayout");
 	}
@@ -113,14 +111,12 @@ public class GUI extends Application {
 			return;
 		} catch (InvalidHexSymbolException e) {
 			if (callee == "CONVERT") {
-				hexInputToolbar
-						.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
+				hexInputToolbar.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
 			}
 			return;
 		} catch (InvalidHexNumberLengthException e) {
 			if (callee == "CONVERT") {
-				hexInputToolbar
-						.updateErrorText("THE INPUT ENTERED IS TOO LONG");
+				hexInputToolbar.updateErrorText("THE INPUT ENTERED IS TOO LONG");
 			}
 			return;
 		}
@@ -195,7 +191,7 @@ public class GUI extends Application {
 					footerToolbar.enableNextButton();
 					if (slideOnDisplay == 0) {
 						footerToolbar.disablePreviousButton();
-					} else{
+					} else {
 						footerToolbar.enablePreviousButton();
 					}
 				}
@@ -214,7 +210,7 @@ public class GUI extends Application {
 					footerToolbar.enablePreviousButton();
 					if (slideOnDisplay == totalSlides - 1) {
 						footerToolbar.disableNextButton();
-					} else{
+					} else {
 						footerToolbar.enableNextButton();
 					}
 				}
@@ -225,5 +221,4 @@ public class GUI extends Application {
 	private void resetErrorText() {
 		hexInputToolbar.updateErrorText("");
 	}
-
 }

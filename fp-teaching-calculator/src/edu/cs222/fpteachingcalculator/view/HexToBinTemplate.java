@@ -69,8 +69,7 @@ public class HexToBinTemplate extends DisplayTemplate {
 		String comment = "shows how using 2 as base multipler can represent a decimal number "
 				+ "in the form of an expanded sum algorithm. The expansions in "
 				+ "red represent values of zero in the sum (not needed). The green "
-				+ "expansions show values that are used in constructing the base 2 "
-				+ "value of the decimal.";
+				+ "expansions show values that are used in constructing the base 2 " + "value of the decimal.";
 		Label Step2Label = addStepComment(2, comment);
 		step2GP.add(Step2Label, 1, 1);
 		GridPane expansionGrid = makeExpansionGrid(decValues);
@@ -81,8 +80,7 @@ public class HexToBinTemplate extends DisplayTemplate {
 	private GridPane makeStep3Pane() {
 		GridPane step3GP = buildStep(3, "binary concatenation:  ");
 		String comment = "shows how the binary multipliers in the decimal expansions algorithms "
-				+ "(of the previous step) are then extracted and combined into "
-				+ "expanded binary representation.";
+				+ "(of the previous step) are then extracted and combined into " + "expanded binary representation.";
 		Label Step3Label = addStepComment(3, comment);
 		step3GP.add(Step3Label, 1, 1);
 		GridPane evaluationGrid = makeEvaluationGrid(decValues);
@@ -106,7 +104,6 @@ public class HexToBinTemplate extends DisplayTemplate {
 		} else {
 			// TODO (NEXT USER STORY)
 		}
-
 	}
 
 	public void displaySlide(int slideToDisplay) {
@@ -116,5 +113,4 @@ public class HexToBinTemplate extends DisplayTemplate {
 			// TODO (NEXT USER STORY)
 		}
 	}
-
 }

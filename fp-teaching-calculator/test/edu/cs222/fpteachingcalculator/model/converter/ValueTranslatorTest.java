@@ -28,8 +28,8 @@ public class ValueTranslatorTest {
 		LinkedList<String> outputList = valueTranslator.translateDecToBin(decList);
 		Assert.assertEquals(correctList, outputList);
 	}
-	
-	private LinkedList<String> createLinkedListOfStrings(String input){
+
+	private LinkedList<String> createLinkedListOfStrings(String input) {
 		LinkedList<String> output = new LinkedList<String>();
 		output.addAll(new ArrayList<String>(Arrays.asList(input.split(" "))));
 		return output;

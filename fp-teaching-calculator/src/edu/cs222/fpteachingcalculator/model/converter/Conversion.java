@@ -16,23 +16,24 @@ public class Conversion {
 		this.listOfDecEquivalents = builder.listOfDecEquivalents;
 		this.listOfSeparatedBinNibbles = builder.listOfSeparatedBinNibbles;
 	}
-	
-	public String getOriginalInput(){
+
+	public String getOriginalInput() {
 		return originalInput;
 	}
-	
-	public LinkedList<String> getParsedListOfHexInput(){
+
+	public LinkedList<String> getParsedListOfHexInput() {
 		return parsedListOfHexInput;
 	}
-	public LinkedList<String> getListOfDecEquivalents(){
+
+	public LinkedList<String> getListOfDecEquivalents() {
 		return listOfDecEquivalents;
 	}
-	
-	public LinkedList<String> getListOfBinEquivalents(){
+
+	public LinkedList<String> getListOfBinEquivalents() {
 		return listOfBinEquivalents;
 	}
-	
-	public LinkedList<int[]> getListOfSeparatedBinNibbles(){
+
+	public LinkedList<int[]> getListOfSeparatedBinNibbles() {
 		return listOfSeparatedBinNibbles;
 	}
 

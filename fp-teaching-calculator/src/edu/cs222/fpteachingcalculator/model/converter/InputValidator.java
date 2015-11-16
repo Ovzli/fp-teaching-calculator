@@ -12,12 +12,12 @@ public class InputValidator {
 			throw new EmptyInputException();
 		}
 	}
-	
-	public void checkIfHexValueIsValid(LinkedList<String> hexSymbols) throws InvalidHexSymbolException, InvalidHexNumberLengthException {
+
+	public void checkIfHexValueIsValid(LinkedList<String> hexSymbols)
+			throws InvalidHexSymbolException, InvalidHexNumberLengthException {
 		areHexSymbolsValid(hexSymbols);
 		isHexNumberTooLong(hexSymbols);
 	}
-
 
 	private void areHexSymbolsValid(LinkedList<String> hexSymbols) throws InvalidHexSymbolException {
 		for (String hexChar : hexSymbols) {

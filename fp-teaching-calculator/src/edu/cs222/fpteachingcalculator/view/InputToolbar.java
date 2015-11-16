@@ -29,8 +29,8 @@ public class InputToolbar extends Toolbar {
 		Label sizeLabel = makeButtonSubLabel("(3-8 SYMBOLS LONG)");
 		this.add(sizeLabel, 3, 1);
 	}
-	
-	private Label makeButtonSubLabel(String labelName){
+
+	private Label makeButtonSubLabel(String labelName) {
 		Label label = new Label(labelName);
 		label.getStyleClass().add("smallItalicLabel");
 		GridPane.setHalignment(label, HPos.CENTER);
@@ -49,5 +49,4 @@ public class InputToolbar extends Toolbar {
 		String hexValue = valueGenerator.generateHexValue();
 		hexInputField.setText(hexValue);
 	}
-
 }

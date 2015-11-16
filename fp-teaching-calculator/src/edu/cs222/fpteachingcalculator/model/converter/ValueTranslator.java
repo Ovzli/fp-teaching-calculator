@@ -18,11 +18,11 @@ public class ValueTranslator {
 		}
 		return binValues;
 	}
-	
-	private String fillOutBinValue(String binValue){
-		if (binValue.length() < 4){
+
+	private String fillOutBinValue(String binValue) {
+		if (binValue.length() < 4) {
 			int orignalLength = binValue.length();
-			for (int i = 0; i < (4-orignalLength); i++){
+			for (int i = 0; i < (4 - orignalLength); i++) {
 				binValue = "0" + binValue;
 			}
 		}

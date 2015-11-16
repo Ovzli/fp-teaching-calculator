@@ -49,7 +49,7 @@ public class FooterToolbar extends GridPane {
 		slideThumbList.clear();
 		currentSlideIndex = 0;
 		for (int i = 0; i < totalSlides; i++) {
-			slideThumbList.add(new SlideThumb(i+1));
+			slideThumbList.add(new SlideThumb(i + 1));
 			slideThumbRibbon.add(slideThumbList.get(i), i, 0);
 		}
 	}
@@ -104,5 +104,4 @@ public class FooterToolbar extends GridPane {
 			this.setVisible(true);
 		}
 	}
-
 }

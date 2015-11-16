@@ -25,5 +25,4 @@ public class TutorialTemplate extends GridPane {
 		slideCount = 0;
 		slideList.clear();
 	}
-
 }

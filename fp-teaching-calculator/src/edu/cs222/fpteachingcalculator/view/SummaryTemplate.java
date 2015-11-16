@@ -14,5 +14,4 @@ public class SummaryTemplate extends GridPane {
 		this.add(rowContent, 0, rowCount);
 		rowCount++;
 	}
-
 }

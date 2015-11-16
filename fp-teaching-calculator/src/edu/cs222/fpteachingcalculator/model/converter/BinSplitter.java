@@ -10,8 +10,8 @@ public class BinSplitter {
 		}
 		return listOfSeparatedBinaryNibbles;
 	}
-	
-	private int[] createIntArrayOfBinDigits(String binValue){
+
+	private int[] createIntArrayOfBinDigits(String binValue) {
 		char[] binDigits = binValue.toCharArray();
 		int[] binDigitsAsInts = new int[4];
 		for (int i = 0; i < binDigits.length; i++) {

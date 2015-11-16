@@ -34,5 +34,4 @@ public class Toolbar extends GridPane {
 		inputField.setMaxWidth(160);
 		return inputField;
 	}
-
 }

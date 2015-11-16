@@ -13,5 +13,4 @@ public class SideBarPanel extends GridPane {
 		this.add(decHexBinTable, 0, 0);
 		this.setVisible(false);
 	}
-
 }
