@@ -60,7 +60,9 @@ public class GUI extends Application {
 	}
 
 	private void formatRoot() {
-		rootPane.getStylesheets().add(this.getClass().getResource("layoutStyles.css").toExternalForm());
+		rootPane.getStylesheets().add(
+				this.getClass().getResource("layoutStyles.css")
+						.toExternalForm());
 		rootPane.getStyleClass().add("rootPane");
 		rootLayout.getStyleClass().add("rootLayout");
 	}
@@ -111,12 +113,14 @@ public class GUI extends Application {
 			return;
 		} catch (InvalidHexSymbolException e) {
 			if (callee == "CONVERT") {
-				hexInputToolbar.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
+				hexInputToolbar
+						.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
 			}
 			return;
 		} catch (InvalidHexNumberLengthException e) {
 			if (callee == "CONVERT") {
-				hexInputToolbar.updateErrorText("THE INPUT ENTERED IS TOO LONG");
+				hexInputToolbar
+						.updateErrorText("THE INPUT ENTERED IS TOO LONG");
 			}
 			return;
 		}
@@ -127,16 +131,21 @@ public class GUI extends Application {
 	}
 
 	public void updateDisplay() {
-		hexToBinDisplay.getChildren().clear();
-		slideOnDisplay = 0;
-		totalSlides = 4;
-		footerToolbar.resetFooterToDefaults(totalSlides);
+		resetDisplay();
 		if (displayMode.equals("PRACTICE")) {
 			sideBarPanel.setVisible(false);
 		} else {
 			sideBarPanel.setVisible(true);
 		}
 		hexToBinDisplay.defineTemplateSetup(displayMode);
+	}
+
+	public void resetDisplay() {
+		hexToBinDisplay.clearHexToBinTemplates();
+		slideOnDisplay = 0;
+		totalSlides = 4;
+		footerToolbar.resetFooterToDefaults(totalSlides);
+		scrollDisplay.setVvalue(0);
 	}
 
 	public void handleConvert(Button button) {
@@ -194,6 +203,7 @@ public class GUI extends Application {
 					} else {
 						footerToolbar.enablePreviousButton();
 					}
+					scrollDisplay.setVvalue(0);
 				}
 			}
 		});
@@ -213,6 +223,7 @@ public class GUI extends Application {
 					} else {
 						footerToolbar.enableNextButton();
 					}
+					scrollDisplay.setVvalue(0);
 				}
 			}
 		});

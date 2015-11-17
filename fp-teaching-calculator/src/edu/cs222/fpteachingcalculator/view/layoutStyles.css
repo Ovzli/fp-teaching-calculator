@@ -52,11 +52,10 @@
     -fx-font-weight: bold;
 }
 
-.rowTag{
+.stepTitle{
     -fx-font: 12.0px "Serif";
     -fx-text-fill: #222222;
     -fx-font-style: italic;
-    -fx-text-alignment: right;
 }
 
 .commentTag{
