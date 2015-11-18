@@ -95,7 +95,6 @@ public class GUI extends Application {
 		handleNextSlide(footerToolbar.nextButton);
 		addRadioButtonHandler(modeOptionBar.summaryModeRadio, "SUMMARY");
 		addRadioButtonHandler(modeOptionBar.tutorialModeRadio, "TUTORIAL");
-		addRadioButtonHandler(modeOptionBar.practiceModeRadio, "PRACTICE");
 		rootLayout.setGridLinesVisible(false);
 	}
 
@@ -169,10 +168,7 @@ public class GUI extends Application {
 		displayMode = mode;
 		modeOptionBar.summaryModeRadio.setSelected(false);
 		modeOptionBar.tutorialModeRadio.setSelected(false);
-		modeOptionBar.practiceModeRadio.setSelected(false);
-		if (displayMode.equals("PRACTICE")) {
-			modeOptionBar.practiceModeRadio.setSelected(true);
-		} else if (displayMode.equals("TUTORIAL")) {
+		if (displayMode.equals("TUTORIAL")) {
 			modeOptionBar.tutorialModeRadio.setSelected(true);
 		} else {
 			modeOptionBar.summaryModeRadio.setSelected(true);
