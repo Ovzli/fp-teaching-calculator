@@ -106,18 +106,18 @@ public class GUI extends Application {
 			String inputValue = hexInputToolbar.getInputText();
 			conversion = hexToBin.convertHexToBin(inputValue);
 		} catch (EmptyInputException e) {
-			if (callee == "CONVERT") {
+			if (callee.equals("CONVERT")) {
 				hexInputToolbar.updateErrorText("NO VALUE WAS ENTERED");
 			}
 			return;
 		} catch (InvalidHexSymbolException e) {
-			if (callee == "CONVERT") {
+			if (callee.equals("CONVERT")) {
 				hexInputToolbar
 						.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
 			}
 			return;
 		} catch (InvalidHexNumberLengthException e) {
-			if (callee == "CONVERT") {
+			if (callee.equals("CONVERT")) {
 				hexInputToolbar
 						.updateErrorText("THE INPUT ENTERED IS TOO LONG");
 			}
