@@ -1,20 +1,25 @@
 package edu.cs222.fpteachingcalculator.model.converter;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class ValueTranslator {
-	public LinkedList<String> translateHexToDec(LinkedList<String> listOfHexSymbols) {
+	
+	public LinkedList<String> translateHexToDec(
+			List<String> parsedListOfHexInput) {
 		LinkedList<String> decValues = new LinkedList<String>();
-		for (String hexSymbol : listOfHexSymbols) {
+		for (String hexSymbol : parsedListOfHexInput) {
 			decValues.add(Integer.toString(Integer.parseInt(hexSymbol, 16)));
 		}
 		return decValues;
 	}
 
-	public LinkedList<String> translateDecToBin(LinkedList<String> listOfDecValues) {
+	public LinkedList<String> translateDecToBin(
+			List<String> listOfDecimalEquivalents) {
 		LinkedList<String> binValues = new LinkedList<String>();
-		for (String decValue : listOfDecValues) {
-			binValues.add(fillOutBinValue(Integer.toBinaryString(Integer.parseInt(decValue, 10))));
+		for (String decValue : listOfDecimalEquivalents) {
+			binValues.add(fillOutBinValue(Integer.toBinaryString(Integer
+					.parseInt(decValue, 10))));
 		}
 		return binValues;
 	}

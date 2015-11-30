@@ -1,6 +1,7 @@
 package edu.cs222.fpteachingcalculator.view;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -13,7 +14,7 @@ public class FooterToolbar extends GridPane {
 	public final Button previousButton = new Button("<< PREV");
 	public final Button nextButton = new Button("NEXT >>");
 	public final GridPane slideThumbRibbon = new GridPane();
-	LinkedList<SlideThumb> slideThumbList = new LinkedList<SlideThumb>();
+	public final List<SlideThumb> slideThumbList = new LinkedList<>();
 
 	public FooterToolbar() {
 		formatToolbar();
@@ -92,9 +93,6 @@ public class FooterToolbar extends GridPane {
 		setupSlideThumbPane(totalSlides);
 		disablePreviousButton();
 		enableNextButton();
-	}
-
-	public void updateSlideThumbDisplay(int totalSlides) {
 	}
 
 	public void updateFooterVisibility(String mode) {

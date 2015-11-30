@@ -1,6 +1,7 @@
 package edu.cs222.fpteachingcalculator.model.converter;
 
-import java.util.LinkedList;
+import java.util.List;
+
 import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.*;
 
 public class InputValidator {
@@ -13,22 +14,24 @@ public class InputValidator {
 		}
 	}
 
-	public void checkIfHexValueIsValid(LinkedList<String> hexSymbols)
+	public void checkIfHexValueIsValid(List<String> parsedListOfHexInput)
 			throws InvalidHexSymbolException, InvalidHexNumberLengthException {
-		areHexSymbolsValid(hexSymbols);
-		isHexNumberTooLong(hexSymbols);
+		areHexSymbolsValid(parsedListOfHexInput);
+		isHexNumberTooLong(parsedListOfHexInput);
 	}
 
-	private void areHexSymbolsValid(LinkedList<String> hexSymbols) throws InvalidHexSymbolException {
-		for (String hexChar : hexSymbols) {
+	private void areHexSymbolsValid(List<String> parsedListOfHexInput)
+			throws InvalidHexSymbolException {
+		for (String hexChar : parsedListOfHexInput) {
 			if (!validHexSymbols.contains(hexChar)) {
 				throw new InvalidHexSymbolException();
 			}
 		}
 	}
 
-	private void isHexNumberTooLong(LinkedList<String> hexSymbols) throws InvalidHexNumberLengthException {
-		if (hexSymbols.size() > maxHexInputLength) {
+	private void isHexNumberTooLong(List<String> parsedListOfHexInput)
+			throws InvalidHexNumberLengthException {
+		if (parsedListOfHexInput.size() > maxHexInputLength) {
 			throw new InvalidHexNumberLengthException();
 		}
 	}
