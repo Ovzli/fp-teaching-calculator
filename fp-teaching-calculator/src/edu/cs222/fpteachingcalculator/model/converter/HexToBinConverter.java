@@ -1,18 +1,20 @@
 package edu.cs222.fpteachingcalculator.model.converter;
 
 import java.util.LinkedList;
+import java.util.List;
+
 import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.*;
 
 public class HexToBinConverter {
-	private LinkedList<String> parsedListOfHexInput = new LinkedList<String>();
-	private LinkedList<String> listOfDecimalEquivalents = new LinkedList<String>();
-	private LinkedList<String> listOfBinaryEquivalents = new LinkedList<String>();
-	private LinkedList<int[]> listOfSeparatedBinaryNibbles = new LinkedList<int[]>();
+	private List<String> parsedListOfHexInput = new LinkedList<>();
+	private List<String> listOfDecimalEquivalents = new LinkedList<>();
+	private List<String> listOfBinaryEquivalents = new LinkedList<>();
+	private List<int[]> listOfSeparatedBinaryNibbles = new LinkedList<>();
 
-	private InputSplitter inputSplitter = new InputSplitter();
-	private InputValidator inputValidator = new InputValidator();
-	private ValueTranslator valueTranslator = new ValueTranslator();
-	private BinSplitter binaryParser = new BinSplitter();
+	private final InputSplitter inputSplitter = new InputSplitter();
+	private final InputValidator inputValidator = new InputValidator();
+	private final ValueTranslator valueTranslator = new ValueTranslator();
+	private final BinSplitter binaryParser = new BinSplitter();
 
 	public Conversion convertHexToBin(String hexInputValue)
 			throws InvalidHexSymbolException, InvalidHexNumberLengthException, EmptyInputException {

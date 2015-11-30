@@ -7,6 +7,7 @@ import edu.cs222.fpteachingcalculator.model.converter.InputSplitter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.Assert;
 
@@ -17,13 +18,13 @@ public class InputSplitterTest {
 	@Test
 	public void testSplitHexInput() {
 		String hexString = "C2A";
-		LinkedList<String> correctOutput = createLinkedListOfStrings("C 2 A");
-		LinkedList<String> methodOutput = inputSplitter.splitHexInput(hexString);
+		List<String> correctOutput = createListOfStrings("C 2 A");
+		List<String> methodOutput = inputSplitter.splitHexInput(hexString);
 		Assert.assertEquals(methodOutput, correctOutput);
 	}
-	
-	private LinkedList<String> createLinkedListOfStrings(String input){
-		LinkedList<String> output = new LinkedList<String>();
+
+	private List<String> createListOfStrings(String input) {
+		List<String> output = new LinkedList<>();
 		output.addAll(new ArrayList<String>(Arrays.asList(input.split(" "))));
 		return output;
 	}

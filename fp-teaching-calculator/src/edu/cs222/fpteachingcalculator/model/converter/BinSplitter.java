@@ -1,11 +1,14 @@
 package edu.cs222.fpteachingcalculator.model.converter;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class BinSplitter {
-	public LinkedList<int[]> separateBinValuesIntoDigits(LinkedList<String> inputValues) {
-		LinkedList<int[]> listOfSeparatedBinaryNibbles = new LinkedList<int[]>();
-		for (String binValue : inputValues) {
+	
+	public List<int[]> separateBinValuesIntoDigits(
+			List<String> listOfBinaryEquivalents) {
+		List<int[]> listOfSeparatedBinaryNibbles = new LinkedList<>();
+		for (String binValue : listOfBinaryEquivalents) {
 			listOfSeparatedBinaryNibbles.add(createIntArrayOfBinDigits(binValue));
 		}
 		return listOfSeparatedBinaryNibbles;

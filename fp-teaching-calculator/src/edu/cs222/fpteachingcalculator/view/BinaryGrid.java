@@ -1,12 +1,12 @@
 package edu.cs222.fpteachingcalculator.view;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import javafx.scene.layout.GridPane;
 
 public class BinaryGrid extends GridPane {
 
-	public BinaryGrid(LinkedList<int[]> binDigits) {
+	public BinaryGrid(List<int[]> binDigits) {
 		super();
 		this.getStyleClass().add("bigCharCell");
 		for (int i = 0; i < binDigits.size(); i++) {

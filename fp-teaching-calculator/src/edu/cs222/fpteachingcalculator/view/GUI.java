@@ -24,8 +24,8 @@ public class GUI extends Application {
 	public final GridPane rootLayout = new GridPane();
 	private final ScrollPane scrollDisplay = new ScrollPane();
 	private final AnchorPane displayPane = new AnchorPane();
-	public SideBarPanel sideBarPanel = new SideBarPanel();
-	public HexToBinTemplate hexToBinDisplay = new HexToBinTemplate();
+	public final SideBarPanel sideBarPanel = new SideBarPanel();
+	public final HexToBinResultDisplay hexToBinDisplay = new HexToBinResultDisplay();
 	public final InputToolbar hexInputToolbar = new InputToolbar();
 	public final ModeOptionBar modeOptionBar = new ModeOptionBar();
 	public final FooterToolbar footerToolbar = new FooterToolbar();

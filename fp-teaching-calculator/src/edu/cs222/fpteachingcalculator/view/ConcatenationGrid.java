@@ -1,13 +1,12 @@
 package edu.cs222.fpteachingcalculator.view;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import javafx.scene.layout.GridPane;
 
 public class ConcatenationGrid extends GridPane {
 
-	public ConcatenationGrid(LinkedList<String> charList,
-			LinkedList<int[]> binDigits) {
+	public ConcatenationGrid(List<String> charList, List<int[]> binDigits) {
 		super();
 		this.setVgap(5);
 		this.getStyleClass().add("bigCharCell");

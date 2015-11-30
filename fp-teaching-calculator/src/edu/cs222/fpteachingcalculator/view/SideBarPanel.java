@@ -6,7 +6,7 @@ import javafx.scene.layout.GridPane;
 
 public class SideBarPanel extends GridPane {
 	public final ImageView decHexBinTable = new ImageView(
-			"file:src/edu/cs222/fpteachingcalculator/view/decHexBinTable.png");
+			"file:src/assets/decHexBinTable.png");
 
 	public SideBarPanel() {
 		this.setAlignment(Pos.TOP_CENTER);
