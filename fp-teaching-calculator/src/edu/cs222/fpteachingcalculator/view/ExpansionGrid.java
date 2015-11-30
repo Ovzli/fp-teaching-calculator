@@ -1,13 +1,12 @@
 package edu.cs222.fpteachingcalculator.view;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import javafx.scene.layout.GridPane;
 
 public class ExpansionGrid extends GridPane {
 
-	public ExpansionGrid(LinkedList<String> charList,
-			LinkedList<int[]> binDigits) {
+	public ExpansionGrid(List<String> charList, List<int[]> binDigits) {
 		super();
 		this.setVgap(5);
 		this.getStyleClass().add("bigCharCell");

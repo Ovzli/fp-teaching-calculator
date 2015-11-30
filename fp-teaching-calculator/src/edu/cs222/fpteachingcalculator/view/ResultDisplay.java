@@ -1,6 +1,7 @@
 package edu.cs222.fpteachingcalculator.view;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -8,12 +9,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
-public class DisplayTemplate extends GridPane {
-	protected LinkedList<String> hexSymbols = new LinkedList<String>();
-	protected LinkedList<String> decValues = new LinkedList<String>();
-	protected LinkedList<int[]> binDigits = new LinkedList<int[]>();
+public class ResultDisplay extends GridPane {
+	protected List<String> hexSymbols = new LinkedList<String>();
+	protected List<String> decValues = new LinkedList<String>();
+	protected List<int[]> binDigits = new LinkedList<int[]>();
 
-	public DisplayTemplate() {
+	public ResultDisplay() {
 		super();
 		AnchorPane.setTopAnchor(this, 0.0);
 		AnchorPane.setLeftAnchor(this, 0.0);

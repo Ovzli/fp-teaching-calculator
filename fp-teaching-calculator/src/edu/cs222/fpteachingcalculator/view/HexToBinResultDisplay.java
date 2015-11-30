@@ -1,26 +1,27 @@
 package edu.cs222.fpteachingcalculator.view;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import javafx.scene.layout.GridPane;
 
-public class HexToBinTemplate extends DisplayTemplate {
-	public GridPane H2BSummaryTemplate = new GridPane();
-	public GridPane H2BTutorialTemplate = new GridPane();
-	private TemplateStep inputReprintRow = new TemplateStep(0);
-	private TemplateStep step1GP = new TemplateStep(1);
-	private TemplateStep step2GP = new TemplateStep(2);
-	private TemplateStep step3GP = new TemplateStep(3);
-	private TemplateStep step4GP = new TemplateStep(4);
+public class HexToBinResultDisplay extends ResultDisplay {
+	public final GridPane hexToBinSummaryTemplate = new GridPane();
+	public final GridPane hexToBinTutorialTemplate = new GridPane();
+	private final ResultStep inputReprintRow = new ResultStep(0);
+	private final ResultStep step1GP = new ResultStep(1);
+	private final ResultStep step2GP = new ResultStep(2);
+	private final ResultStep step3GP = new ResultStep(3);
+	private final ResultStep step4GP = new ResultStep(4);
 	private GridPane tableOfInputValues = new GridPane();
 	private GridPane decimalChars = new GridPane();
 	private ExpansionGrid expansionGrid;
 	private ConcatenationGrid concatenationGrid;
 	private BinaryGrid binaryGrid;
-	private LinkedList<GridPane> slideList = new LinkedList<GridPane>();
+	private final List<GridPane> slideList = new LinkedList<>();
 	private String currentMode = "SUMMARY";
 
-	public HexToBinTemplate() {
+	public HexToBinResultDisplay() {
 		super();
 	}
 
@@ -48,13 +49,13 @@ public class HexToBinTemplate extends DisplayTemplate {
 	}
 
 	public void setupHexToBinSummaryTemplate() {
-		this.add(H2BSummaryTemplate, 0, 0);
-		H2BSummaryTemplate.setVgap(20);
-		H2BSummaryTemplate.add(inputReprintRow, 0, 0);
-		H2BSummaryTemplate.add(step1GP, 0, 1);
-		H2BSummaryTemplate.add(step2GP, 0, 2);
-		H2BSummaryTemplate.add(step3GP, 0, 3);
-		H2BSummaryTemplate.add(step4GP, 0, 4);
+		this.add(hexToBinSummaryTemplate, 0, 0);
+		hexToBinSummaryTemplate.setVgap(20);
+		hexToBinSummaryTemplate.add(inputReprintRow, 0, 0);
+		hexToBinSummaryTemplate.add(step1GP, 0, 1);
+		hexToBinSummaryTemplate.add(step2GP, 0, 2);
+		hexToBinSummaryTemplate.add(step3GP, 0, 3);
+		hexToBinSummaryTemplate.add(step4GP, 0, 4);
 		makeStep1Pane();
 		makeStep2Pane();
 		makeStep3Pane();
@@ -67,13 +68,13 @@ public class HexToBinTemplate extends DisplayTemplate {
 	}
 
 	public void setupHexToBinTutorialTemplate() {
-		this.add(H2BTutorialTemplate, 0, 0);
-		H2BTutorialTemplate.setVgap(20);
-		H2BTutorialTemplate.add(inputReprintRow, 0, 0);
-		H2BTutorialTemplate.add(step1GP, 0, 1);
-		H2BTutorialTemplate.add(step2GP, 0, 1);
-		H2BTutorialTemplate.add(step3GP, 0, 1);
-		H2BTutorialTemplate.add(step4GP, 0, 1);
+		this.add(hexToBinTutorialTemplate, 0, 0);
+		hexToBinTutorialTemplate.setVgap(20);
+		hexToBinTutorialTemplate.add(inputReprintRow, 0, 0);
+		hexToBinTutorialTemplate.add(step1GP, 0, 1);
+		hexToBinTutorialTemplate.add(step2GP, 0, 1);
+		hexToBinTutorialTemplate.add(step3GP, 0, 1);
+		hexToBinTutorialTemplate.add(step4GP, 0, 1);
 		step1GP.setVisible(true);
 		step2GP.setVisible(false);
 		step3GP.setVisible(false);
@@ -148,8 +149,8 @@ public class HexToBinTemplate extends DisplayTemplate {
 	public void clearHexToBinTemplates() {
 		this.getChildren().clear();
 		slideList.clear();
-		H2BTutorialTemplate.getChildren().clear();
-		H2BSummaryTemplate.getChildren().clear();
+		hexToBinTutorialTemplate.getChildren().clear();
+		hexToBinSummaryTemplate.getChildren().clear();
 		tableOfInputValues.getChildren().clear();
 		step1GP.getChildren().clear();
 		step2GP.getChildren().clear();

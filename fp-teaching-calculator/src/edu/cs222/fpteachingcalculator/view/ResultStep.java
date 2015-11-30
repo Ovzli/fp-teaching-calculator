@@ -8,12 +8,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
-public class TemplateStep extends GridPane {
+public class ResultStep extends GridPane {
 	private int stepID;
-	Label stepTitle = new Label("x");
-	GridPane stepHeader = new GridPane();
+	private final Label stepTitle = new Label("x");
+	private final GridPane stepHeader = new GridPane();
 
-	public TemplateStep(int stepIDassigned) {
+	public ResultStep(int stepIDassigned) {
 		super();
 		stepID = stepIDassigned;
 		ColumnConstraints col1 = new ColumnConstraints(200);

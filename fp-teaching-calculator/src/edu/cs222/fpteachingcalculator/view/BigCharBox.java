@@ -5,6 +5,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class BigCharBox extends Rectangle {
+
 	public BigCharBox() {
 		super();
 		this.setWidth(40);

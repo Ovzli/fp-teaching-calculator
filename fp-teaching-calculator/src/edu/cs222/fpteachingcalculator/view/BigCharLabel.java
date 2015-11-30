@@ -6,6 +6,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 public class BigCharLabel extends Label {
+	
 	public BigCharLabel(String labelName) {
 		super(labelName);
 		GridPane.setHalignment(this, HPos.CENTER);

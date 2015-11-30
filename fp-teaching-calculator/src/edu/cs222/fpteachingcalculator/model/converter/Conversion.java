@@ -1,13 +1,13 @@
 package edu.cs222.fpteachingcalculator.model.converter;
 
-import java.util.LinkedList;
+import java.util.List;
 
 public class Conversion {
 	private final String originalInput;
-	private final LinkedList<String> parsedListOfHexInput;
-	private final LinkedList<String> listOfDecEquivalents;
-	private final LinkedList<String> listOfBinEquivalents;
-	private final LinkedList<int[]> listOfSeparatedBinNibbles;
+	private final List<String> parsedListOfHexInput;
+	private final List<String> listOfDecEquivalents;
+	private final List<String> listOfBinEquivalents;
+	private final List<int[]> listOfSeparatedBinNibbles;
 
 	public Conversion(ConversionBuilder builder) {
 		this.originalInput = builder.originalInput;
@@ -21,52 +21,55 @@ public class Conversion {
 		return originalInput;
 	}
 
-	public LinkedList<String> getParsedListOfHexInput() {
+	public List<String> getParsedListOfHexInput() {
 		return parsedListOfHexInput;
 	}
 
-	public LinkedList<String> getListOfDecEquivalents() {
+	public List<String> getListOfDecEquivalents() {
 		return listOfDecEquivalents;
 	}
 
-	public LinkedList<String> getListOfBinEquivalents() {
+	public List<String> getListOfBinEquivalents() {
 		return listOfBinEquivalents;
 	}
 
-	public LinkedList<int[]> getListOfSeparatedBinNibbles() {
+	public List<int[]> getListOfSeparatedBinNibbles() {
 		return listOfSeparatedBinNibbles;
 	}
 
 	public static class ConversionBuilder {
-
 		public String originalInput;
-		public LinkedList<String> parsedListOfHexInput;
-		public LinkedList<String> listOfDecEquivalents;
-		public LinkedList<String> listOfBinEquivalents;
-		public LinkedList<int[]> listOfSeparatedBinNibbles;
+		public List<String> parsedListOfHexInput;
+		public List<String> listOfDecEquivalents;
+		public List<String> listOfBinEquivalents;
+		public List<int[]> listOfSeparatedBinNibbles;
 
 		public ConversionBuilder originalInput(String input) {
 			this.originalInput = input;
 			return this;
 		}
 
-		public ConversionBuilder parsedListOfHexInput(LinkedList<String> listOfHexInput) {
-			this.parsedListOfHexInput = listOfHexInput;
+		public ConversionBuilder parsedListOfHexInput(
+				List<String> parsedListOfHexInput2) {
+			this.parsedListOfHexInput = parsedListOfHexInput2;
 			return this;
 		}
 
-		public ConversionBuilder listOfDecEquivalents(LinkedList<String> listOfDecEquivalents) {
-			this.listOfDecEquivalents = listOfDecEquivalents;
+		public ConversionBuilder listOfDecEquivalents(
+				List<String> listOfDecimalEquivalents) {
+			this.listOfDecEquivalents = listOfDecimalEquivalents;
 			return this;
 		}
 
-		public ConversionBuilder listOfBinEquivalents(LinkedList<String> listOfBinEquivalents) {
-			this.listOfBinEquivalents = listOfBinEquivalents;
+		public ConversionBuilder listOfBinEquivalents(
+				List<String> listOfBinaryEquivalents) {
+			this.listOfBinEquivalents = listOfBinaryEquivalents;
 			return this;
 		}
 
-		public ConversionBuilder listOfSeparatedBinNibbles(LinkedList<int[]> listOfNibbles) {
-			this.listOfSeparatedBinNibbles = listOfNibbles;
+		public ConversionBuilder listOfSeparatedBinNibbles(
+				List<int[]> listOfSeparatedBinaryNibbles) {
+			this.listOfSeparatedBinNibbles = listOfSeparatedBinaryNibbles;
 			return this;
 		}
 
