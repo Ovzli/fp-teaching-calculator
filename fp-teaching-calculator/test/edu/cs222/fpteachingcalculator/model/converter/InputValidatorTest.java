@@ -3,10 +3,10 @@ package edu.cs222.fpteachingcalculator.model.converter;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import edu.cs222.fpteachingcalculator.model.converter.InputValidator;
-import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.EmptyInputException;
-import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.InvalidHexNumberLengthException;
-import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.InvalidHexSymbolException;
+import edu.cs222.fpteachingcalculator.view.InputValidator;
+import edu.cs222.fpteachingcalculator.view.inputexceptions.EmptyInputException;
+import edu.cs222.fpteachingcalculator.view.inputexceptions.InvalidHexNumberLengthException;
+import edu.cs222.fpteachingcalculator.view.inputexceptions.InvalidHexSymbolException;
 
 import java.util.ArrayList;
 import java.util.Arrays;

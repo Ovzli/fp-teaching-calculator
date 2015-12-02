@@ -4,9 +4,9 @@ import org.junit.Test;
 
 import edu.cs222.fpteachingcalculator.model.converter.Conversion;
 import edu.cs222.fpteachingcalculator.model.converter.HexToBinConverter;
-import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.EmptyInputException;
-import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.InvalidHexNumberLengthException;
-import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.InvalidHexSymbolException;
+import edu.cs222.fpteachingcalculator.view.inputexceptions.EmptyInputException;
+import edu.cs222.fpteachingcalculator.view.inputexceptions.InvalidHexNumberLengthException;
+import edu.cs222.fpteachingcalculator.view.inputexceptions.InvalidHexSymbolException;
 
 import java.util.ArrayList;
 import java.util.Arrays;

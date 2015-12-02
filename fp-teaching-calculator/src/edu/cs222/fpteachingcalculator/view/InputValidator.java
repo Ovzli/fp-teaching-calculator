@@ -1,8 +1,8 @@
-package edu.cs222.fpteachingcalculator.model.converter;
+package edu.cs222.fpteachingcalculator.view;
 
 import java.util.List;
 
-import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.*;
+import edu.cs222.fpteachingcalculator.view.inputexceptions.*;
 
 public class InputValidator {
 	private final int maxHexInputLength = 8;

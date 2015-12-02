@@ -13,9 +13,8 @@ public class ResultStep extends GridPane {
 	private final Label stepTitle = new Label("x");
 	private final GridPane stepHeader = new GridPane();
 
-	public ResultStep(int stepIDassigned) {
+	public ResultStep() {
 		super();
-		stepID = stepIDassigned;
 		ColumnConstraints col1 = new ColumnConstraints(200);
 		this.getColumnConstraints().add(col1);
 		this.setHgap(2);
@@ -23,6 +22,10 @@ public class ResultStep extends GridPane {
 		stepTitle.getStyleClass().add("stepTitle");
 		GridPane.setHalignment(stepTitle, HPos.RIGHT);
 		GridPane.setValignment(stepTitle, VPos.TOP);
+	}
+	
+	public void setResultStepID(int stepIDassigned){
+		stepID = stepIDassigned;		
 	}
 
 	public void addFormattedStepHeader(String rowTagString) {

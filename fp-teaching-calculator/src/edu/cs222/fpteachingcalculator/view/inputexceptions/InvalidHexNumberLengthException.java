@@ -1,4 +1,4 @@
-package edu.cs222.fpteachingcalculator.model.converter.inputexceptions;
+package edu.cs222.fpteachingcalculator.view.inputexceptions;
 
 public class InvalidHexNumberLengthException extends Exception {
 

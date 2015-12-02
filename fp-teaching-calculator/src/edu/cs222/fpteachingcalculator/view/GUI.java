@@ -2,9 +2,11 @@ package edu.cs222.fpteachingcalculator.view;
 
 import edu.cs222.fpteachingcalculator.model.converter.Conversion;
 import edu.cs222.fpteachingcalculator.model.converter.HexToBinConverter;
-import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.EmptyInputException;
-import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.InvalidHexNumberLengthException;
-import edu.cs222.fpteachingcalculator.model.converter.inputexceptions.InvalidHexSymbolException;
+import edu.cs222.fpteachingcalculator.model.converter.InputSplitter;
+import edu.cs222.fpteachingcalculator.view.InputValidator;
+import edu.cs222.fpteachingcalculator.view.inputexceptions.EmptyInputException;
+import edu.cs222.fpteachingcalculator.view.inputexceptions.InvalidHexNumberLengthException;
+import edu.cs222.fpteachingcalculator.view.inputexceptions.InvalidHexSymbolException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -101,10 +103,14 @@ public class GUI extends Application {
 	public void doConversion(String callee) {
 		HexToBinConverter hexToBin = new HexToBinConverter();
 		Conversion conversion = null;
+		InputValidator inputValidator = new InputValidator();
+		InputSplitter inputSplitter = new InputSplitter();
 		footerToolbar.updateFooterVisibility(displayMode);
+		String inputValue;
 		try {
-			String inputValue = hexInputToolbar.getInputText();
-			conversion = hexToBin.convertHexToBin(inputValue);
+			inputValue = hexInputToolbar.getInputText();
+			inputValidator.checkIfInputIsEmpty(inputValue);
+			inputValidator.checkIfHexValueIsValid(inputSplitter.splitHexInput(inputValue));
 		} catch (EmptyInputException e) {
 			if (callee.equals("CONVERT")) {
 				hexInputToolbar.updateErrorText("NO VALUE WAS ENTERED");
@@ -123,6 +129,7 @@ public class GUI extends Application {
 			}
 			return;
 		}
+		conversion = hexToBin.convertHexToBin(inputValue);
 		hexToBinDisplay.hexSymbols = conversion.getParsedListOfHexInput();
 		hexToBinDisplay.decValues = conversion.getListOfDecEquivalents();
 		hexToBinDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();
