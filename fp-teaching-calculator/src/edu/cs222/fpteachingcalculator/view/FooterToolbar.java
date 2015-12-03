@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 public class FooterToolbar extends GridPane {
 	public int currentSlideIndex = 0;
 	public final GridPane buttonPane = new GridPane();
+	public final Button autoCompleteButton = new Button("AUTO-COMPLETE");
 	public final Button previousButton = new Button("<< PREV");
 	public final Button nextButton = new Button("NEXT >>");
 	public final GridPane slideThumbRibbon = new GridPane();
@@ -29,16 +30,20 @@ public class FooterToolbar extends GridPane {
 		this.setMinWidth(600);
 		this.setMinHeight(80);
 		this.setHgap(20);
-		ColumnConstraints col1 = new ColumnConstraints(400);
-		col1.setPercentWidth(65);
-		ColumnConstraints col2 = new ColumnConstraints(200);
+		ColumnConstraints col1 = new ColumnConstraints(250);
+		col1.setPercentWidth(35);
+		ColumnConstraints col2 = new ColumnConstraints(250);
 		col2.setPercentWidth(35);
-		this.getColumnConstraints().addAll(col1, col2);
+		ColumnConstraints col3 = new ColumnConstraints(200);
+		col3.setPercentWidth(30);
+		this.getColumnConstraints().addAll(col1, col2, col3);
 		this.setAlignment(Pos.TOP_RIGHT);
 	}
 
 	private void formatButtonPane() {
-		this.add(buttonPane, 1, 0);
+		this.add(autoCompleteButton, 1, 0);
+		autoCompleteButton.setAlignment(Pos.TOP_RIGHT);
+		this.add(buttonPane, 2, 0);
 		buttonPane.setHgap(10);
 		buttonPane.setAlignment(Pos.TOP_RIGHT);
 		buttonPane.add(previousButton, 0, 0);
@@ -99,7 +104,13 @@ public class FooterToolbar extends GridPane {
 		if (mode.equals("SUMMARY")) {
 			this.setVisible(false);
 		} else {
+			if (mode.equals("TUTORIAL")) {
+				autoCompleteButton.setVisible(false);
+			} else {
+				autoCompleteButton.setVisible(true);	
+			}
 			this.setVisible(true);
 		}
+		
 	}
 }

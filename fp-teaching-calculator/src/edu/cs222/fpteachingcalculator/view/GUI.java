@@ -97,6 +97,7 @@ public class GUI extends Application {
 		handleNextSlide(footerToolbar.nextButton);
 		addRadioButtonHandler(modeOptionBar.summaryModeRadio, "SUMMARY");
 		addRadioButtonHandler(modeOptionBar.tutorialModeRadio, "TUTORIAL");
+		addRadioButtonHandler(modeOptionBar.practiceModeRadio, "PRACTICE");
 		rootLayout.setGridLinesVisible(false);
 	}
 
@@ -110,7 +111,8 @@ public class GUI extends Application {
 		try {
 			inputValue = hexInputToolbar.getInputText();
 			inputValidator.checkIfInputIsEmpty(inputValue);
-			inputValidator.checkIfHexValueIsValid(inputSplitter.splitHexInput(inputValue));
+			inputValidator.checkIfHexValueIsValid(inputSplitter
+					.splitHexInput(inputValue));
 		} catch (EmptyInputException e) {
 			if (callee.equals("CONVERT")) {
 				hexInputToolbar.updateErrorText("NO VALUE WAS ENTERED");
@@ -137,21 +139,19 @@ public class GUI extends Application {
 	}
 
 	public void updateDisplay() {
-		resetDisplay();
+		slideOnDisplay = 0;
+		hexToBinDisplay.clearHexToBinTemplates();
 		if (displayMode.equals("PRACTICE")) {
 			sideBarPanel.setVisible(false);
 		} else {
 			sideBarPanel.setVisible(true);
+		}		
+		if (!displayMode.equals("SUMMARY")) {
+			scrollDisplay.setVvalue(0);
+			totalSlides = hexToBinDisplay.setTotalSlideCount(displayMode);
+			footerToolbar.resetFooterToDefaults(totalSlides);
 		}
 		hexToBinDisplay.defineTemplateSetup(displayMode);
-	}
-
-	public void resetDisplay() {
-		hexToBinDisplay.clearHexToBinTemplates();
-		slideOnDisplay = 0;
-		totalSlides = 4;
-		footerToolbar.resetFooterToDefaults(totalSlides);
-		scrollDisplay.setVvalue(0);
 	}
 
 	public void handleConvert(Button button) {
@@ -175,7 +175,10 @@ public class GUI extends Application {
 		displayMode = mode;
 		modeOptionBar.summaryModeRadio.setSelected(false);
 		modeOptionBar.tutorialModeRadio.setSelected(false);
-		if (displayMode.equals("TUTORIAL")) {
+		modeOptionBar.practiceModeRadio.setSelected(false);
+		if (displayMode.equals("PRACTICE")) {
+			modeOptionBar.practiceModeRadio.setSelected(true);
+		} else if (displayMode.equals("TUTORIAL")) {
 			modeOptionBar.tutorialModeRadio.setSelected(true);
 		} else {
 			modeOptionBar.summaryModeRadio.setSelected(true);

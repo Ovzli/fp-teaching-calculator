@@ -19,6 +19,18 @@ public class ExpansionBit extends GridPane {
 		exponentDigit.getStyleClass().add("bigExpansionExponent");
 		GridPane.setValignment(exponentDigit, VPos.TOP);
 	}
+	
+	public ExpansionBit(int binaryDigitValue, int exponentDigitValue) {
+		super();
+		this.setAlignment(Pos.CENTER);
+		this.add(binaryDigit, 0, 0);
+		binaryDigit.getStyleClass().add("bigExpansionChar");
+		this.add(exponentDigit, 2, 0);
+		exponentDigit.getStyleClass().add("bigExpansionExponent");
+		GridPane.setValignment(exponentDigit, VPos.TOP);
+		setBinaryDigit(binaryDigitValue);
+		setExponentDigit(exponentDigitValue);
+	}
 
 	public void setBinaryDigit(int binaryDigitValue) {
 		binaryDigit.setText(binaryDigitValue + "x2");

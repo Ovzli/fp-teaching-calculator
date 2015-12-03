@@ -11,6 +11,7 @@ import javafx.scene.shape.Rectangle;
 public class ResultStep extends GridPane {
 	private int stepID;
 	private final Label stepTitle = new Label("x");
+	private final Label stepIDTag = new Label("x");
 	private final GridPane stepHeader = new GridPane();
 
 	public ResultStep() {
@@ -25,10 +26,12 @@ public class ResultStep extends GridPane {
 	}
 	
 	public void setResultStepID(int stepIDassigned){
-		stepID = stepIDassigned;		
+		stepID = stepIDassigned;	
+		stepIDTag.setText("  STEP " + stepID);
 	}
 
 	public void addFormattedStepHeader(String rowTagString) {
+		stepHeader.getChildren().clear();
 		this.add(stepTitle, 0, 1);
 		setStepTitle(rowTagString);
 		this.add(stepHeader, 0, 0);
@@ -44,8 +47,6 @@ public class ResultStep extends GridPane {
 		bgRectBlue.setFill(Paint.valueOf("#0066CC"));
 		stepHeader.add(bgRectBlue, 0, 0);
 		GridPane.setValignment(bgRectBlue, VPos.TOP);
-		Label stepIDTag = new Label();
-		stepIDTag.setText("  STEP " + stepID);
 		stepIDTag.getStyleClass().add("stepLabel");
 		stepHeader.add(stepIDTag, 0, 0);
 	}
@@ -56,9 +57,10 @@ public class ResultStep extends GridPane {
 
 	public void addStepComment(String comment) {
 		Label tutorText = new Label();
-		tutorText.setText("Step " + stepID + " " + comment);
+		tutorText.setText(comment);
 		tutorText.setWrapText(true);
 		tutorText.setMinWidth(350);
+		tutorText.setDisable(false);
 		tutorText.getStyleClass().add("commentTag");
 		GridPane.setValignment(tutorText, VPos.TOP);
 		this.add(tutorText, 1, 0);
