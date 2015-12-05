@@ -28,12 +28,15 @@ public class GUI extends Application {
 	private final AnchorPane displayPane = new AnchorPane();
 	public final SideBarPanel sideBarPanel = new SideBarPanel();
 	public final HexToBinResultDisplay hexToBinDisplay = new HexToBinResultDisplay();
-	public final InputToolbar hexInputToolbar = new InputToolbar();
+	public final Toolbar inputToolbar = new Toolbar();
+	public final ConversionOptionBar convertOptionBar = new ConversionOptionBar();
 	public final ModeOptionBar modeOptionBar = new ModeOptionBar();
 	public final FooterToolbar footerToolbar = new FooterToolbar();
 	public String displayMode = "SUMMARY";
 	public int slideOnDisplay;
 	public int totalSlides;
+	public String inputMode = "HEX";
+	public String convertMode = "BIN";
 
 	public static void main(String[] args) {
 		launch(args);
@@ -75,10 +78,11 @@ public class GUI extends Application {
 		ColumnConstraints col2 = new ColumnConstraints(200);
 		col2.setPercentWidth(20);
 		rootLayout.getColumnConstraints().addAll(col1, col2);
-		rootLayout.add(sideBarPanel, 1, 4);
-		rootLayout.add(hexInputToolbar, 0, 1);
+		rootLayout.add(convertOptionBar, 0, 0);
+		rootLayout.add(inputToolbar, 0, 1);
 		rootLayout.add(modeOptionBar, 0, 3);
 		rootLayout.add(footerToolbar, 0, 5);
+		rootLayout.add(sideBarPanel, 1, 4);
 	}
 
 	private void setupDisplay() {
@@ -91,13 +95,21 @@ public class GUI extends Application {
 		displayPane.getStyleClass().add("displayPane");
 		displayPane.getChildren().add(hexToBinDisplay);
 		hexToBinDisplay.setMinHeight(424);
-		handleConvert(hexInputToolbar.convertButton);
-		handleGenerate(hexInputToolbar.generateButton);
+		handleConvert(inputToolbar.convertButton);
+		handleGenerate(inputToolbar.generateButton);
 		handlePreviousSlide(footerToolbar.previousButton);
 		handleNextSlide(footerToolbar.nextButton);
-		addRadioButtonHandler(modeOptionBar.summaryModeRadio, "SUMMARY");
-		addRadioButtonHandler(modeOptionBar.tutorialModeRadio, "TUTORIAL");
-		addRadioButtonHandler(modeOptionBar.practiceModeRadio, "PRACTICE");
+		addModeRadioHandler(modeOptionBar.summaryModeRadio, "SUMMARY");
+		addModeRadioHandler(modeOptionBar.tutorialModeRadio, "TUTORIAL");
+		addModeRadioHandler(modeOptionBar.practiceModeRadio, "PRACTICE");
+
+		addConvertModeHandler(convertOptionBar.hexInputType, "HEX");
+		addConvertModeHandler(convertOptionBar.decInputType, "DEC");
+		addConvertModeHandler(convertOptionBar.binInputType, "BIN");
+		addConvertToOptionHandler(convertOptionBar.hexConvert, "HEX");
+		addConvertToOptionHandler(convertOptionBar.decConvert, "DEC");
+		addConvertToOptionHandler(convertOptionBar.binConvert, "BIN");
+
 		rootLayout.setGridLinesVisible(false);
 	}
 
@@ -109,25 +121,24 @@ public class GUI extends Application {
 		footerToolbar.updateFooterVisibility(displayMode);
 		String inputValue;
 		try {
-			inputValue = hexInputToolbar.getInputText();
+			inputValue = inputToolbar.getInputText();
 			inputValidator.checkIfInputIsEmpty(inputValue);
 			inputValidator.checkIfHexValueIsValid(inputSplitter
 					.splitHexInput(inputValue));
 		} catch (EmptyInputException e) {
 			if (callee.equals("CONVERT")) {
-				hexInputToolbar.updateErrorText("NO VALUE WAS ENTERED");
+				inputToolbar.updateErrorText("NO VALUE WAS ENTERED");
 			}
 			return;
 		} catch (InvalidHexSymbolException e) {
 			if (callee.equals("CONVERT")) {
-				hexInputToolbar
+				inputToolbar
 						.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
 			}
 			return;
 		} catch (InvalidHexNumberLengthException e) {
 			if (callee.equals("CONVERT")) {
-				hexInputToolbar
-						.updateErrorText("THE INPUT ENTERED IS TOO LONG");
+				inputToolbar.updateErrorText("THE INPUT ENTERED IS TOO LONG");
 			}
 			return;
 		}
@@ -145,7 +156,7 @@ public class GUI extends Application {
 			sideBarPanel.setVisible(false);
 		} else {
 			sideBarPanel.setVisible(true);
-		}		
+		}
 		if (!displayMode.equals("SUMMARY")) {
 			scrollDisplay.setVvalue(0);
 			totalSlides = hexToBinDisplay.setTotalSlideCount(displayMode);
@@ -163,8 +174,8 @@ public class GUI extends Application {
 		});
 	}
 
-	private void addRadioButtonHandler(RadioButton radioButton, String mode) {
-		radioButton.setOnAction(new EventHandler<ActionEvent>() {
+	private void addModeRadioHandler(RadioButton radio, String mode) {
+		radio.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				radioSetModeOption(mode);
 			}
@@ -186,11 +197,70 @@ public class GUI extends Application {
 		doConversion("MODE");
 	}
 
+	private void addConvertModeHandler(RadioButton radio, String inputType) {
+		radio.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				radioSetConvertInputOption(inputType);
+			}
+		});
+	}
+
+	private void radioSetConvertInputOption(String inputType) {
+		inputMode = inputType;
+		convertOptionBar.hexInputType.setSelected(false);
+		convertOptionBar.decInputType.setSelected(false);
+		convertOptionBar.binInputType.setSelected(false);
+		convertOptionBar.hexConvert.setDisable(false);
+		convertOptionBar.decConvert.setDisable(false);
+		convertOptionBar.binConvert.setDisable(false);
+		if (inputMode.equals("HEX")) {
+			convertOptionBar.hexInputType.setSelected(true);
+			convertOptionBar.hexConvert.setDisable(true);
+		} else if (inputMode.equals("DEC")) {
+			convertOptionBar.decInputType.setSelected(true);
+			convertOptionBar.decConvert.setDisable(true);
+		} else {
+			convertOptionBar.binInputType.setSelected(true);
+			convertOptionBar.binConvert.setDisable(true);
+		}
+		if (inputMode.equals(convertMode)) {
+			convertMode = convertOptionBar.forceUnmatchingMode(inputMode);
+		}
+		radioSetConvertToOption(convertMode);
+		
+		inputToolbar.changeInstruction(inputMode);
+		// TODO - update toolbar...
+		
+		
+	}
+
+	private void addConvertToOptionHandler(RadioButton radio, String convertType) {
+		radio.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				radioSetConvertToOption(convertType);
+			}
+		});
+	}
+
+	private void radioSetConvertToOption(String convertType) {
+		convertMode = convertType;
+		convertOptionBar.hexConvert.setSelected(false);
+		convertOptionBar.decConvert.setSelected(false);
+		convertOptionBar.binConvert.setSelected(false);
+		if (convertMode.equals("HEX")) {
+			convertOptionBar.hexConvert.setSelected(true);
+		} else if (convertMode.equals("DEC")) {
+			convertOptionBar.decConvert.setSelected(true);
+		} else {
+			convertOptionBar.binConvert.setSelected(true);
+		}
+	}
+
 	public void handleGenerate(Button button) {
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				resetErrorText();
-				hexInputToolbar.setInputText();
+				inputToolbar.setInputText(inputMode);
 			}
 		});
 	}
@@ -236,6 +306,6 @@ public class GUI extends Application {
 	}
 
 	private void resetErrorText() {
-		hexInputToolbar.updateErrorText("");
+		inputToolbar.updateErrorText("");
 	}
 }

@@ -9,11 +9,12 @@ public class ModeOptionBar extends GridPane {
 	public final RadioButton summaryModeRadio = new RadioButton();
 	public final RadioButton tutorialModeRadio = new RadioButton();
 	public final RadioButton practiceModeRadio = new RadioButton();
+	private final Label modeSelectTitle = new Label("MODE SELECT:  ");
 
 	public ModeOptionBar() {
 		formatModeOptionGridPane();
 		formatRadios();
-		Label modeSelectTitle = makeModeLabel("MODE SELECT:   ");
+		modeSelectTitle.getStyleClass().add("boldedLabel");
 		this.add(modeSelectTitle, 0, 0);
 		this.setGridLinesVisible(false);
 	}
@@ -37,10 +38,5 @@ public class ModeOptionBar extends GridPane {
 		practiceModeRadio.setAlignment(Pos.TOP_RIGHT);
 		summaryModeRadio.setSelected(true);
 	}
-
-	private Label makeModeLabel(String labelName) {
-		Label label = new Label(labelName);
-		label.getStyleClass().add("boldedLabel");
-		return label;
-	}
+	
 }
