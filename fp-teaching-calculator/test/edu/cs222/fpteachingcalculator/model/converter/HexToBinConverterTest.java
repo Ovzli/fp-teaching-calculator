@@ -11,6 +11,7 @@ import edu.cs222.fpteachingcalculator.view.inputexceptions.InvalidHexSymbolExcep
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.Assert;
 
@@ -25,7 +26,7 @@ public class HexToBinConverterTest {
 		LinkedList<String> expectedParsedHex = createLinkedListOfStrings("C 2 A");
 		LinkedList<String> expectedParsedDec = createLinkedListOfStrings("12 2 10");
 		LinkedList<String> expectedBinList = createLinkedListOfStrings("1100 0010 1010");
-		LinkedList<int[]> expectedSeparatedNibbles = createListOfExpectedSeparatedNibbles();
+		List<List<Integer>> expectedSeparatedNibbles = createListOfExpectedSeparatedNibbles();
 		Conversion expectedResult = new Conversion.ConversionBuilder().originalInput(validInput)
 				.parsedListOfHexInput(expectedParsedHex).listOfDecEquivalents(expectedParsedDec)
 				.listOfBinEquivalents(expectedBinList).listOfSeparatedBinNibbles(expectedSeparatedNibbles).build();
@@ -38,20 +39,32 @@ public class HexToBinConverterTest {
 		return output;
 	}
 
-	private LinkedList<int[]> createListOfExpectedSeparatedNibbles() {
-		LinkedList<int[]> expectedSeparatedNibbles = new LinkedList<int[]>();
-		int[] a = { 1, 1, 0, 0 };
-		int[] b = { 0, 0, 1, 0 };
-		int[] c = { 1, 0, 1, 0 };
+	private List<List<Integer>> createListOfExpectedSeparatedNibbles() {
+		List<List<Integer>> expectedSeparatedNibbles = new LinkedList<>();
+		List<Integer> a = new ArrayList<>();
+		a.add(1);
+		a.add(1);
+		a.add(0);
+		a.add(0);
+		List<Integer> b = new ArrayList<>();
+		a.add(0);
+		a.add(0);
+		a.add(1);
+		a.add(0);
+		List<Integer> c = new ArrayList<>();
+		a.add(1);
+		a.add(0);
+		a.add(1);
+		a.add(0);
 		expectedSeparatedNibbles.add(a);
 		expectedSeparatedNibbles.add(b);
 		expectedSeparatedNibbles.add(c);
 		return expectedSeparatedNibbles;
 	}
 
-	private void AssertArraysAreEqual(int[] correctOutput, int[] testOutput) {
+	private void AssertArraysAreEqual(List<Integer> list, List<Integer> list2) {
 		for (int c = 0; c < 4; c++) {
-			Assert.assertEquals(correctOutput[c], testOutput[c]);
+			Assert.assertEquals(list.get(c), list2.get(c));
 		}
 	}
 

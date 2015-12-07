@@ -7,17 +7,17 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 public class BigValueExpansion extends GridPane {
-	protected int[] binaryDigits;
+	protected List<Integer> binaryDigits;
 	protected List<BigCharLabel> bigCharLabelList = new LinkedList<>();
 
 	public BigValueExpansion() {
 		super();
 	}
 
-	public BigValueExpansion(int[] binDigits) {
+	public BigValueExpansion(List<Integer> binDigits) {
 		binaryDigits = binDigits;
 		for (int i = 0; i <= 3; i++) {
-			String value = String.valueOf(binaryDigits[i]);
+			String value = String.valueOf(binaryDigits.get(i));
 			bigCharLabelList.add(new BigCharLabel(value));
 			this.add(bigCharLabelList.get(i), (i * 2) + 1, 0);
 		}
@@ -39,14 +39,14 @@ public class BigValueExpansion extends GridPane {
 	public void multiplyByExpansion() {
 		for (int i = 0; i <= 3; i++) {
 			int m = (int) (8 / Math.pow(2, i));
-			String value = String.valueOf(binaryDigits[i] * m);
+			String value = String.valueOf(binaryDigits.get(i) * m);
 			bigCharLabelList.get(i).setText(value);
 		}
 	}
 
 	public void makeRedGreenValues() {
 		for (int i = 0; i <= 3; i++) {
-			if (binaryDigits[i] == 0) {
+			if (binaryDigits.get(i) == 0) {
 				bigCharLabelList.get(i).setCharColor(Color.RED);
 			} else {
 				bigCharLabelList.get(i).setCharColor(Color.GREEN);

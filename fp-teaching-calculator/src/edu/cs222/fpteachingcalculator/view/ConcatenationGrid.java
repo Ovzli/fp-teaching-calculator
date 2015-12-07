@@ -24,7 +24,7 @@ public class ConcatenationGrid extends GridPane {
 		}
 	}
 
-	public void addTutorialContent(List<int[]> binDigits) {
+	public void addTutorialContent(List<List<Integer>> binDigits) {
 		for (int i = 0; i < charList.size(); i++) {
 			bigValueConcateList.add(new BigValueExpansion(binDigits.get(i)));
 			this.add(bigValueConcateList.get(i), 2, i);
@@ -37,7 +37,7 @@ public class ConcatenationGrid extends GridPane {
 
 	}
 
-	public void addPracticeContent(List<int[]> binDigits) {
+	public void addPracticeContent(List<List<Integer>> binDigits) {
 		for (int i = 0; i < charList.size(); i++) {
 			AnswerInputField inputField = new AnswerInputField(60);
 			answerInputFieldList.add(inputField);

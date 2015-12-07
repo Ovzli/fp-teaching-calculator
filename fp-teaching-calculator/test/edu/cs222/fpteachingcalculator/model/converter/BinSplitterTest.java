@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import edu.cs222.fpteachingcalculator.model.converter.BinSplitter;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,16 +16,16 @@ public class BinSplitterTest {
 	@Test
 	public void testSeparateBinValueIntoDigits() {
 		List<String> binList = createBinList();
-		List<int[]> correctOutput = createCorrectOutput();
-		List<int[]> testOutput = binParser.separateBinValuesIntoDigits(binList);
+		List<List<Integer>> correctOutput = createCorrectOutput();
+		List<List<Integer>> testOutput = binParser.separateBinValuesIntoDigits(binList);
 		for (int i = 0; i < correctOutput.size(); i++) {
 			AssertArraysAreEqual(correctOutput.get(i), testOutput.get(i));
 		}
 	}
 
-	private void AssertArraysAreEqual(int[] correctOutput, int[] testOutput) {
+	private void AssertArraysAreEqual(List<Integer> list, List<Integer> list2) {
 		for (int c = 0; c < 4; c++) {
-			Assert.assertEquals(correctOutput[c], testOutput[c]);
+			Assert.assertEquals(list.get(c), list2.get(c));
 		}
 	}
 
@@ -35,10 +36,19 @@ public class BinSplitterTest {
 		return binList;
 	}
 
-	private List<int[]> createCorrectOutput() {
-		List<int[]> correctOutput = new LinkedList<>();
-		int[] a = { 1, 0, 1, 0 };
-		int[] b = { 1, 1, 1, 1 };
+	private List<List<Integer>> createCorrectOutput() {
+		List<List<Integer>> correctOutput = new LinkedList<>();
+		List<Integer> a = new ArrayList<>();
+		a.add(1);
+		a.add(0);
+		a.add(1);
+		a.add(0);
+		List<Integer> b = new ArrayList<>();
+		b.add(1);
+		b.add(1);
+		b.add(1);
+		b.add(1);
+		b.add(1);
 		correctOutput.add(a);
 		correctOutput.add(b);
 		return correctOutput;

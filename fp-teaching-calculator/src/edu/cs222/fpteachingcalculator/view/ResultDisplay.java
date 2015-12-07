@@ -12,7 +12,7 @@ import javafx.scene.shape.Rectangle;
 public class ResultDisplay extends GridPane {
 	protected List<String> hexSymbols = new LinkedList<String>();
 	protected List<String> decValues = new LinkedList<String>();
-	protected List<int[]> binDigits = new LinkedList<int[]>();
+	protected List<List<Integer>> binDigits = new LinkedList<>();
 
 	public ResultDisplay() {
 		super();

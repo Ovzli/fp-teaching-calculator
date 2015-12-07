@@ -7,7 +7,7 @@ public class Conversion {
 	private final List<String> parsedListOfHexInput;
 	private final List<String> listOfDecEquivalents;
 	private final List<String> listOfBinEquivalents;
-	private final List<int[]> listOfSeparatedBinNibbles;
+	private final List<List<Integer>> listOfSeparatedBinNibbles;
 
 	public Conversion(ConversionBuilder builder) {
 		this.originalInput = builder.originalInput;
@@ -33,7 +33,7 @@ public class Conversion {
 		return listOfBinEquivalents;
 	}
 
-	public List<int[]> getListOfSeparatedBinNibbles() {
+	public List<List<Integer>> getListOfSeparatedBinNibbles() {
 		return listOfSeparatedBinNibbles;
 	}
 
@@ -42,7 +42,7 @@ public class Conversion {
 		public List<String> parsedListOfHexInput;
 		public List<String> listOfDecEquivalents;
 		public List<String> listOfBinEquivalents;
-		public List<int[]> listOfSeparatedBinNibbles;
+		public List<List<Integer>> listOfSeparatedBinNibbles;
 
 		public ConversionBuilder originalInput(String input) {
 			this.originalInput = input;
@@ -68,7 +68,7 @@ public class Conversion {
 		}
 
 		public ConversionBuilder listOfSeparatedBinNibbles(
-				List<int[]> listOfSeparatedBinaryNibbles) {
+				List<List<Integer>> listOfSeparatedBinaryNibbles) {
 			this.listOfSeparatedBinNibbles = listOfSeparatedBinaryNibbles;
 			return this;
 		}

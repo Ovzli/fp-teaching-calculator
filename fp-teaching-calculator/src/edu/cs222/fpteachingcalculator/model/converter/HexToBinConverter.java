@@ -7,7 +7,7 @@ public class HexToBinConverter {
 	private List<String> parsedListOfHexInput = new LinkedList<>();
 	private List<String> listOfDecimalEquivalents = new LinkedList<>();
 	private List<String> listOfBinaryEquivalents = new LinkedList<>();
-	private List<int[]> listOfSeparatedBinaryNibbles = new LinkedList<>();
+	private List<List<Integer>> listOfSeparatedBinaryNibbles = new LinkedList<>();
 
 	private final InputSplitter inputSplitter = new InputSplitter();
 	private final ValueTranslator valueTranslator = new ValueTranslator();

@@ -9,7 +9,7 @@ public class ExpansionGrid extends GridPane {
 	private final List<BigValueExpansion> bigValueExpansionList = new LinkedList<>();
 	private final List<BigValueExpansion> bigValueDecExpansionList = new LinkedList<>();
 
-	public ExpansionGrid(List<String> charList, List<int[]> binDigits) {
+	public ExpansionGrid(List<String> charList, List<List<Integer>> binDigits) {
 		super();
 		this.setVgap(5);
 		this.getStyleClass().add("bigCharCell");
