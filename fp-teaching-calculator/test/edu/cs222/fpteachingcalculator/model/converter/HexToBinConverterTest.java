@@ -22,10 +22,10 @@ public class HexToBinConverterTest {
 	public void testConvertHexToBinSuccess() throws InvalidHexSymbolException, InvalidHexNumberLengthException, EmptyInputException {
 		String validInput = "C2a";
 		Conversion completedConversion = null;
-		completedConversion = hexToBinConverter.convertHexToBin(validInput);
-		LinkedList<String> expectedParsedHex = createLinkedListOfStrings("C 2 A");
-		LinkedList<String> expectedParsedDec = createLinkedListOfStrings("12 2 10");
-		LinkedList<String> expectedBinList = createLinkedListOfStrings("1100 0010 1010");
+		completedConversion = hexToBinConverter.convertHexValue(validInput);
+		List<String> expectedParsedHex = createLinkedListOfStrings("C 2 A");
+		List<String> expectedParsedDec = createLinkedListOfStrings("12 2 10");
+		List<String> expectedBinList = createLinkedListOfStrings("1100 0010 1010");
 		List<List<Integer>> expectedSeparatedNibbles = createListOfExpectedSeparatedNibbles();
 		Conversion expectedResult = new Conversion.ConversionBuilder().originalInput(validInput)
 				.parsedListOfHexInput(expectedParsedHex).listOfDecEquivalents(expectedParsedDec)
@@ -47,15 +47,15 @@ public class HexToBinConverterTest {
 		a.add(0);
 		a.add(0);
 		List<Integer> b = new ArrayList<>();
-		a.add(0);
-		a.add(0);
-		a.add(1);
-		a.add(0);
+		b.add(0);
+		b.add(0);
+		b.add(1);
+		b.add(0);
 		List<Integer> c = new ArrayList<>();
-		a.add(1);
-		a.add(0);
-		a.add(1);
-		a.add(0);
+		c.add(1);
+		c.add(0);
+		c.add(1);
+		c.add(0);
 		expectedSeparatedNibbles.add(a);
 		expectedSeparatedNibbles.add(b);
 		expectedSeparatedNibbles.add(c);
