@@ -14,6 +14,7 @@ public class BinToDecConverter extends ValueConverter {
 				.listOfBinEquivalents(listOfBinaryEquivalents)
 				.parsedListOfUserInput(parsedListOfUserInput)
 				.listOfDecEquivalents(listOfDecimalEquivalents)
+				.listOfHexEquivalents(listOfHexadecimalEquivalents)
 				.build();
 	}
 

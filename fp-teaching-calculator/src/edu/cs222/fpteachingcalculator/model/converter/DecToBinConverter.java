@@ -11,6 +11,7 @@ public class DecToBinConverter extends ValueConverter {
 				.separateBinValuesIntoDigits(listOfBinaryEquivalents);
 		return new Conversion.ConversionBuilder().originalInput(userInputValue)
 				.parsedListOfUserInput(parsedListOfUserInput)
+				.listOfHexEquivalents(listOfHexadecimalEquivalents)
 				.listOfBinEquivalents(listOfBinaryEquivalents)
 				.listOfDecEquivalents(listOfDecimalEquivalents)
 				.listOfSeparatedBinNibbles(listOfSeparatedBinaryNibbles)

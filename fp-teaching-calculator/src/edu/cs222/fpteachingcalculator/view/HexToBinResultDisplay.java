@@ -6,7 +6,7 @@ public class HexToBinResultDisplay extends ResultDisplay {
 	public final GridPane hexToBinSummaryDisplay;
 	public final GridPane hexToBinTutorialDisplay;
 	public final GridPane hexToBinPracticeDisplay;
-	private final ResultStep decEquivalentStep;
+	private ResultStep decEquivalentStep;
 	private final ResultStep decExpandStep;
 	private final ResultStep binConcateStep;
 	private final ResultStep binRepresentStep;
@@ -20,12 +20,11 @@ public class HexToBinResultDisplay extends ResultDisplay {
 		decExpandStep = displaySteps.get(1);
 		binConcateStep = displaySteps.get(2);
 		binRepresentStep = displaySteps.get(3);
+		tutorialSlideCount = 4;
+		practiceSlideCount = 3;
 	}
 
-	public void defineDisplaySetup(String mode) {
-		currentMode = mode;
-		makeHexInputReprintRow();
-		addStepsToDisplay();
+	public void defineDisplaySetup() {
 		if (currentMode.equals("SUMMARY")) {
 			setupHexToBinSummaryDisplay();
 		} else if (currentMode.equals("TUTORIAL")) {
@@ -33,10 +32,9 @@ public class HexToBinResultDisplay extends ResultDisplay {
 		} else {
 			setupHexToBinPracticeDisplay();
 		}
-		makeEmptyRow(10);
 	}
 
-	public void setupHexToBinSummaryDisplay() {
+	private void setupHexToBinSummaryDisplay() {
 		this.add(hexToBinSummaryDisplay, 0, 0);
 		makeDecEquivalentStep(1);
 		makeDecExpandStep(2);
@@ -44,7 +42,7 @@ public class HexToBinResultDisplay extends ResultDisplay {
 		makeBinRepresentStep(4);
 	}
 
-	public void setupHexToBinTutorialDisplay() {
+	private void setupHexToBinTutorialDisplay() {
 		this.add(hexToBinTutorialDisplay, 0, 0);
 		slideList.add(decEquivalentStep);
 		slideList.add(decExpandStep);
@@ -56,8 +54,8 @@ public class HexToBinResultDisplay extends ResultDisplay {
 		makeBinRepresentStep(4);
 	}
 
-	public void setupHexToBinPracticeDisplay() {
-		this.add(hexToBinPracticeDisplay, 0, 0);		
+	private void setupHexToBinPracticeDisplay() {
+		this.add(hexToBinPracticeDisplay, 0, 0);
 		slideList.add(decEquivalentStep);
 		slideList.add(binConcateStep);
 		slideList.add(binRepresentStep);
@@ -69,33 +67,8 @@ public class HexToBinResultDisplay extends ResultDisplay {
 	private void makeDecEquivalentStep(int stepID) {
 		decEquivalentStep.addFormattedStepHeader("decimal equivalents");
 		decEquivalentStep.setResultStepID(stepID);
-		decimalChars = makeBigCharTable();
-		for (int i = 0; i < hexSymbols.size(); i++) {
-			BigCharBox bigCharBox = new BigCharBox();
-			decimalChars.add(bigCharBox, i, 0);
-			if (currentMode.equals("PRACTICE")) {
-
-				// TODO - implement practice input fields here...
-
-			} else {
-				BigCharLabel bigCharLabel = new BigCharLabel(decValues.get(i));
-				decimalChars.add(bigCharLabel, i, 0);
-			}
-		}
-
-		if (currentMode.equals("PRACTICE")) {
-			decEquivalentStep
-					.addStepComment("Enter the decimal equivalents for each hexadecimal value above."
-							+ "\nHINT: These are pre-determined representations.");
-		} else {
-			decEquivalentStep
-					.addStepComment("This step shows each input symbol must be assigned a "
-							+ "representative equivalent for each symbol needing "
-							+ "converted. This is done through pre-determined "
-							+ "representations of each individual symbol as outlined in the "
-							+ "equivalency table shown to the right.");
-		}
-		decEquivalentStep.addStepContent(decimalChars);
+		decEquivalentStep.addStepComment(writeDecEquivalentComment());
+		decEquivalentStep.addStepContent(makeBigDecimalTable());
 	}
 
 	private void makeDecExpandStep(int stepID) {
@@ -140,14 +113,6 @@ public class HexToBinResultDisplay extends ResultDisplay {
 						+ "binary number.");
 		binaryGrid = new BinaryGrid(binDigits);
 		binRepresentStep.addStepContent(binaryGrid);
-	}
-
-	public int setTotalSlideCount(String displayMode) {
-		if (displayMode.equals("PRACTICE")) {
-			return 3;
-		} else {
-			return 4;
-		}
 	}
 
 }

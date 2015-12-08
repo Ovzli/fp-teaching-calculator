@@ -9,6 +9,7 @@ public class HexToDecConverter extends ValueConverter {
 				.translateHexToDec(parsedListOfUserInput);
 		return new Conversion.ConversionBuilder().originalInput(userInputValue)
 				.parsedListOfUserInput(parsedListOfUserInput)
+				.listOfHexEquivalents(listOfHexadecimalEquivalents)
 				.listOfDecEquivalents(listOfDecimalEquivalents)
 				.build();
 	}

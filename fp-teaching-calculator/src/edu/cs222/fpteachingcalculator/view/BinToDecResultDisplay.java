@@ -20,11 +20,11 @@ public class BinToDecResultDisplay extends ResultDisplay {
 		stepName2 = displaySteps.get(1);
 		stepName3 = displaySteps.get(2);
 		stepName4 = displaySteps.get(3);
+		tutorialSlideCount = 4;
+		practiceSlideCount = 3;
 	}
 
-	public void defineDisplaySetup(String mode) {
-		currentMode = mode;
-		makeBinInputReprintRow();
+	public void defineDisplaySetup() {
 		if (currentMode.equals("SUMMARY")) {
 			setupBinToDecSummaryDisplay();
 		} else if (currentMode.equals("TUTORIAL")) {
@@ -32,7 +32,6 @@ public class BinToDecResultDisplay extends ResultDisplay {
 		} else {
 			setupBinToDecPracticeDisplay();
 		}
-		makeEmptyRow(10);
 	}
 
 	private void setupBinToDecSummaryDisplay() {
@@ -109,14 +108,6 @@ public class BinToDecResultDisplay extends ResultDisplay {
 			stepName4.addStepComment("SUMMARY AND TUTORIAL COMMENT");
 		}
 		// stepName4.addStepContent( stepContentObject? );
-	}
-
-	public int setTotalSlideCount(String displayMode) {
-		if (displayMode.equals("PRACTICE")) {
-			return 3;
-		} else {
-			return 4;
-		}
 	}
 
 }

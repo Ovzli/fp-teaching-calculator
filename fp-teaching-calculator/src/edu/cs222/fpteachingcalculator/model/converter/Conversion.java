@@ -65,7 +65,7 @@ public class Conversion {
 		public ConversionBuilder listOfHexEquivalents(
 				List<String> listOfHexadecimalEquivalents) {
 			this.listOfHexEquivalents = listOfHexadecimalEquivalents;
-			return null;
+			return this;
 		}
 
 		public ConversionBuilder listOfDecEquivalents(

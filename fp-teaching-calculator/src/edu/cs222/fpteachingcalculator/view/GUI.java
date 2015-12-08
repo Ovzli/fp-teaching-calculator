@@ -47,6 +47,7 @@ public class GUI extends Application {
 	public int totalSlides;
 	public String inputMode = "HEX";
 	public String convertMode = "BIN";
+	private ResultDisplay targetDisplay = new ResultDisplay();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -103,6 +104,11 @@ public class GUI extends Application {
 		scrollDisplay.setFitToWidth(true);
 		scrollDisplay.setFitToHeight(true);
 		displayPane.getStyleClass().add("displayPane");
+		displayPane.getChildren().add(binToHexDisplay);
+		displayPane.getChildren().add(binToDecDisplay);
+		displayPane.getChildren().add(decToHexDisplay);
+		displayPane.getChildren().add(decToBinDisplay);
+		displayPane.getChildren().add(hexToDecDisplay);
 		displayPane.getChildren().add(hexToBinDisplay);
 		binToHexDisplay.setMinHeight(424);
 		binToDecDisplay.setMinHeight(424);
@@ -134,8 +140,8 @@ public class GUI extends Application {
 		try {
 			inputValue = inputToolbar.getInputText();
 			inputValidator.checkIfInputIsEmpty(inputValue);
-			inputValidator.checkIfValueIsValid(inputSplitter
-					.splitInput(inputValue), inputMode);
+			inputValidator.checkIfValueIsValid(
+					inputSplitter.splitInput(inputValue), inputMode);
 		} catch (EmptyInputException e) {
 			if (callee.equals("CONVERT")) {
 				inputToolbar.updateErrorText("NO VALUE WAS ENTERED");
@@ -153,95 +159,77 @@ public class GUI extends Application {
 			}
 			return;
 		}
+		resetDisplay();
 		selectDisplay(inputValue);
 		updateDisplay();
 	}
-	
-	private void selectDisplay(String inputValue){
+
+	private void resetDisplay() {
+		slideOnDisplay = 0;
+		scrollDisplay.setVvalue(0);
+		targetDisplay.setVisible(false);
+		sideBarPanel.setVisible(!displayMode.equals("PRACTICE"));		
+	}
+
+	private void selectDisplay(String inputValue) {
 		Conversion conversion = null;
 		if (inputMode.equals("HEX") && (convertMode.equals("BIN"))) {
 			HexToBinConverter hexToBin = new HexToBinConverter();
 			conversion = hexToBin.convertHexToBin(inputValue);
-			hexToBinDisplay.hexSymbols = conversion.getParsedListOfUserInput();
-			hexToBinDisplay.decValues = conversion.getListOfDecEquivalents();
-			hexToBinDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();			
+			targetDisplay = hexToBinDisplay;
 		} else if (inputMode.equals("HEX") && (convertMode.equals("DEC"))) {
 			HexToDecConverter hexToDec = new HexToDecConverter();
 			conversion = hexToDec.convertHexToDec(inputValue);
-			hexToDecDisplay.hexSymbols = conversion.getParsedListOfUserInput();
-			hexToDecDisplay.decValues = conversion.getListOfDecEquivalents();
-			hexToDecDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();			
+			targetDisplay = hexToDecDisplay;
 		} else if (inputMode.equals("DEC") && (convertMode.equals("HEX"))) {
 			DecToHexConverter decToHex = new DecToHexConverter();
 			conversion = decToHex.convertDecToHex(inputValue);
-			decToHexDisplay.hexSymbols = conversion.getParsedListOfUserInput();
-			decToHexDisplay.decValues = conversion.getListOfDecEquivalents();
-			decToHexDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();			
+			targetDisplay = decToHexDisplay;
 		} else if (inputMode.equals("DEC") && (convertMode.equals("BIN"))) {
 			DecToBinConverter decToBin = new DecToBinConverter();
 			conversion = decToBin.convertDecToBin(inputValue);
-			decToBinDisplay.hexSymbols = conversion.getParsedListOfUserInput();
-			decToBinDisplay.decValues = conversion.getListOfDecEquivalents();
-			decToBinDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();			
+			targetDisplay = decToBinDisplay;
 		} else if (inputMode.equals("BIN") && (convertMode.equals("HEX"))) {
 			BinToHexConverter binToHex = new BinToHexConverter();
 			conversion = binToHex.convertBinToHex(inputValue);
-			binToHexDisplay.hexSymbols = conversion.getParsedListOfUserInput();
-			binToHexDisplay.decValues = conversion.getListOfDecEquivalents();
-			binToHexDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();			
+			targetDisplay = binToHexDisplay;
 		} else if (inputMode.equals("BIN") && (convertMode.equals("DEC"))) {
 			BinToDecConverter binToDec = new BinToDecConverter();
 			conversion = binToDec.convertBinToDec(inputValue);
-			binToDecDisplay.hexSymbols = conversion.getParsedListOfUserInput();
-			binToDecDisplay.decValues = conversion.getListOfDecEquivalents();
-			binToDecDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();			
+			targetDisplay = binToDecDisplay;
 		}
-		
+		targetDisplay.hexSymbols = conversion.getListOfHexEquivalents();
+		targetDisplay.decValues = conversion.getListOfDecEquivalents();
+		targetDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();
 	}
 
 	public void updateDisplay() {
-		slideOnDisplay = 0;
-		if (displayMode.equals("PRACTICE")) {
-			sideBarPanel.setVisible(false);
-		} else {
-			sideBarPanel.setVisible(true);
-		}
 		if (!displayMode.equals("SUMMARY")) {
-			scrollDisplay.setVvalue(0);
-			totalSlides = hexToBinDisplay.setTotalSlideCount(displayMode);
+			totalSlides = targetDisplay.getTotalSlideCount(displayMode);
 			footerToolbar.resetFooterToDefaults(totalSlides);
 		}
-		hexToBinDisplay.setVisible(false);
-		hexToDecDisplay.setVisible(false);
-		decToHexDisplay.setVisible(false);
-		decToBinDisplay.setVisible(false);
-		binToHexDisplay.setVisible(false);
-		binToDecDisplay.setVisible(false);
+		
+		targetDisplay.clearEntireDisplay();
+		targetDisplay.setCurrentMode(displayMode);
+		targetDisplay.makeInputReprintRow(inputMode);
+		
 		if (inputMode.equals("HEX") && (convertMode.equals("BIN"))) {
-			hexToBinDisplay.clearEntireDisplay();
-			hexToBinDisplay.defineDisplaySetup(displayMode);
-			hexToBinDisplay.setVisible(true);
+			hexToBinDisplay.defineDisplaySetup();
 		} else if (inputMode.equals("HEX") && (convertMode.equals("DEC"))) {
-			hexToDecDisplay.clearEntireDisplay();
-			hexToDecDisplay.defineDisplaySetup(displayMode);
-			hexToDecDisplay.setVisible(true);
+			hexToDecDisplay.defineDisplaySetup();
 		} else if (inputMode.equals("DEC") && (convertMode.equals("HEX"))) {
-			decToHexDisplay.clearEntireDisplay();
-			decToHexDisplay.defineDisplaySetup(displayMode);
-			decToHexDisplay.setVisible(true);
+			decToHexDisplay.defineDisplaySetup();
 		} else if (inputMode.equals("DEC") && (convertMode.equals("BIN"))) {
-			decToBinDisplay.clearEntireDisplay();
-			decToBinDisplay.setVisible(true);
-			decToBinDisplay.defineDisplaySetup(displayMode);
+			decToBinDisplay.defineDisplaySetup();
 		} else if (inputMode.equals("BIN") && (convertMode.equals("HEX"))) {
-			binToHexDisplay.clearEntireDisplay();
-			binToHexDisplay.setVisible(true);
-			binToHexDisplay.defineDisplaySetup(displayMode);
+			binToHexDisplay.defineDisplaySetup();
 		} else if (inputMode.equals("BIN") && (convertMode.equals("DEC"))) {
-			binToDecDisplay.clearEntireDisplay();
-			binToDecDisplay.defineDisplaySetup(displayMode);
-			binToDecDisplay.setVisible(true);
+			binToDecDisplay.defineDisplaySetup();
 		}
+		
+		targetDisplay.makeEmptyRow(10);
+		targetDisplay.addStepsToDisplay();
+		targetDisplay.setVisible(true);
 	}
 
 	public void handleConvert(Button button) {
@@ -306,11 +294,7 @@ public class GUI extends Application {
 			convertMode = convertOptionBar.forceUnmatchingMode(inputMode);
 		}
 		radioSetConvertToOption(convertMode);
-		
 		inputToolbar.changeInstruction(inputMode);
-		// TODO - update toolbar...
-		
-		
 	}
 
 	private void addConvertToOptionHandler(RadioButton radio, String convertType) {
@@ -348,10 +332,10 @@ public class GUI extends Application {
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				if (slideOnDisplay > 0) {
-					hexToBinDisplay.hideSlide(slideOnDisplay);
+					targetDisplay.hideSlide(slideOnDisplay);
 					slideOnDisplay--;
 					footerToolbar.decrementSlideDisplay();
-					hexToBinDisplay.displaySlide(slideOnDisplay);
+					targetDisplay.displaySlide(slideOnDisplay);
 					footerToolbar.enableNextButton();
 					if (slideOnDisplay == 0) {
 						footerToolbar.disablePreviousButton();
@@ -368,10 +352,10 @@ public class GUI extends Application {
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				if (slideOnDisplay < totalSlides - 1) {
-					hexToBinDisplay.hideSlide(slideOnDisplay);
+					targetDisplay.hideSlide(slideOnDisplay);
 					slideOnDisplay++;
 					footerToolbar.incrementSlideDisplay();
-					hexToBinDisplay.displaySlide(slideOnDisplay);
+					targetDisplay.displaySlide(slideOnDisplay);
 					footerToolbar.enablePreviousButton();
 					if (slideOnDisplay == totalSlides - 1) {
 						footerToolbar.disableNextButton();
@@ -387,4 +371,5 @@ public class GUI extends Application {
 	private void resetErrorText() {
 		inputToolbar.updateErrorText("");
 	}
+
 }

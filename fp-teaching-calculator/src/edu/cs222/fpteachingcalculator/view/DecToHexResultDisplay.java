@@ -20,11 +20,11 @@ public class DecToHexResultDisplay extends ResultDisplay {
 		stepName2 = displaySteps.get(1);
 		stepName3 = displaySteps.get(2);
 		stepName4 = displaySteps.get(3);
+		tutorialSlideCount = 4;
+		practiceSlideCount = 3;
 	}
 
-	public void defineDisplaySetup(String mode) {
-		currentMode = mode;
-		makeDecInputReprintRow();
+	public void defineDisplaySetup() {
 		if (currentMode.equals("SUMMARY")) {
 			setupDecToHexSummaryDisplay();
 		} else if (currentMode.equals("TUTORIAL")) {
@@ -32,7 +32,6 @@ public class DecToHexResultDisplay extends ResultDisplay {
 		} else {
 			setupDecToHexPracticeDisplay();
 		}
-		makeEmptyRow(10);
 	}
 
 	private void setupDecToHexSummaryDisplay() {
@@ -110,13 +109,4 @@ public class DecToHexResultDisplay extends ResultDisplay {
 		}
 		// stepName4.addStepContent( stepContentObject? );
 	}
-
-	public int setTotalSlideCount(String displayMode) {
-		if (displayMode.equals("PRACTICE")) {
-			return 3;
-		} else {
-			return 4;
-		}
-	}
-
 }
