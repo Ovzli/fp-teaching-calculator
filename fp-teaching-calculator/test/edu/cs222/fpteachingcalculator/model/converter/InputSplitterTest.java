@@ -19,7 +19,7 @@ public class InputSplitterTest {
 	public void testSplitHexInput() {
 		String hexString = "C2A";
 		List<String> correctOutput = createListOfStrings("C 2 A");
-		List<String> methodOutput = inputSplitter.splitHexInput(hexString);
+		List<String> methodOutput = inputSplitter.splitInput(hexString);
 		Assert.assertEquals(methodOutput, correctOutput);
 	}
 

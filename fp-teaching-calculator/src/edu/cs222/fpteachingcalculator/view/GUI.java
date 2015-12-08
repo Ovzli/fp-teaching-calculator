@@ -1,12 +1,17 @@
 package edu.cs222.fpteachingcalculator.view;
 
+import edu.cs222.fpteachingcalculator.model.converter.BinToDecConverter;
+import edu.cs222.fpteachingcalculator.model.converter.BinToHexConverter;
 import edu.cs222.fpteachingcalculator.model.converter.Conversion;
+import edu.cs222.fpteachingcalculator.model.converter.DecToBinConverter;
+import edu.cs222.fpteachingcalculator.model.converter.DecToHexConverter;
 import edu.cs222.fpteachingcalculator.model.converter.HexToBinConverter;
+import edu.cs222.fpteachingcalculator.model.converter.HexToDecConverter;
 import edu.cs222.fpteachingcalculator.model.converter.InputSplitter;
 import edu.cs222.fpteachingcalculator.view.InputValidator;
 import edu.cs222.fpteachingcalculator.view.inputexceptions.EmptyInputException;
-import edu.cs222.fpteachingcalculator.view.inputexceptions.InvalidHexNumberLengthException;
-import edu.cs222.fpteachingcalculator.view.inputexceptions.InvalidHexSymbolException;
+import edu.cs222.fpteachingcalculator.view.inputexceptions.InvalidNumberLengthException;
+import edu.cs222.fpteachingcalculator.view.inputexceptions.InvalidSymbolException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,6 +32,11 @@ public class GUI extends Application {
 	private final ScrollPane scrollDisplay = new ScrollPane();
 	private final AnchorPane displayPane = new AnchorPane();
 	public final SideBarPanel sideBarPanel = new SideBarPanel();
+	public final BinToHexResultDisplay binToHexDisplay = new BinToHexResultDisplay();
+	public final BinToDecResultDisplay binToDecDisplay = new BinToDecResultDisplay();
+	public final DecToHexResultDisplay decToHexDisplay = new DecToHexResultDisplay();
+	public final DecToBinResultDisplay decToBinDisplay = new DecToBinResultDisplay();
+	public final HexToDecResultDisplay hexToDecDisplay = new HexToDecResultDisplay();
 	public final HexToBinResultDisplay hexToBinDisplay = new HexToBinResultDisplay();
 	public final Toolbar inputToolbar = new Toolbar();
 	public final ConversionOptionBar convertOptionBar = new ConversionOptionBar();
@@ -94,6 +104,11 @@ public class GUI extends Application {
 		scrollDisplay.setFitToHeight(true);
 		displayPane.getStyleClass().add("displayPane");
 		displayPane.getChildren().add(hexToBinDisplay);
+		binToHexDisplay.setMinHeight(424);
+		binToDecDisplay.setMinHeight(424);
+		decToHexDisplay.setMinHeight(424);
+		decToBinDisplay.setMinHeight(424);
+		hexToDecDisplay.setMinHeight(424);
 		hexToBinDisplay.setMinHeight(424);
 		handleConvert(inputToolbar.convertButton);
 		handleGenerate(inputToolbar.generateButton);
@@ -102,20 +117,16 @@ public class GUI extends Application {
 		addModeRadioHandler(modeOptionBar.summaryModeRadio, "SUMMARY");
 		addModeRadioHandler(modeOptionBar.tutorialModeRadio, "TUTORIAL");
 		addModeRadioHandler(modeOptionBar.practiceModeRadio, "PRACTICE");
-
 		addConvertModeHandler(convertOptionBar.hexInputType, "HEX");
 		addConvertModeHandler(convertOptionBar.decInputType, "DEC");
 		addConvertModeHandler(convertOptionBar.binInputType, "BIN");
 		addConvertToOptionHandler(convertOptionBar.hexConvert, "HEX");
 		addConvertToOptionHandler(convertOptionBar.decConvert, "DEC");
 		addConvertToOptionHandler(convertOptionBar.binConvert, "BIN");
-
 		rootLayout.setGridLinesVisible(false);
 	}
 
 	public void doConversion(String callee) {
-		HexToBinConverter hexToBin = new HexToBinConverter();
-		Conversion conversion = null;
 		InputValidator inputValidator = new InputValidator();
 		InputSplitter inputSplitter = new InputSplitter();
 		footerToolbar.updateFooterVisibility(displayMode);
@@ -123,35 +134,73 @@ public class GUI extends Application {
 		try {
 			inputValue = inputToolbar.getInputText();
 			inputValidator.checkIfInputIsEmpty(inputValue);
-			inputValidator.checkIfHexValueIsValid(inputSplitter
-					.splitHexInput(inputValue));
+			inputValidator.checkIfValueIsValid(inputSplitter
+					.splitInput(inputValue), inputMode);
 		} catch (EmptyInputException e) {
 			if (callee.equals("CONVERT")) {
 				inputToolbar.updateErrorText("NO VALUE WAS ENTERED");
 			}
 			return;
-		} catch (InvalidHexSymbolException e) {
+		} catch (InvalidSymbolException e) {
 			if (callee.equals("CONVERT")) {
 				inputToolbar
 						.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
 			}
 			return;
-		} catch (InvalidHexNumberLengthException e) {
+		} catch (InvalidNumberLengthException e) {
 			if (callee.equals("CONVERT")) {
 				inputToolbar.updateErrorText("THE INPUT ENTERED IS TOO LONG");
 			}
 			return;
 		}
-		conversion = hexToBin.convertHexToBin(inputValue);
-		hexToBinDisplay.hexSymbols = conversion.getParsedListOfHexInput();
-		hexToBinDisplay.decValues = conversion.getListOfDecEquivalents();
-		hexToBinDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();
+		selectDisplay(inputValue);
 		updateDisplay();
+	}
+	
+	private void selectDisplay(String inputValue){
+		Conversion conversion = null;
+		if (inputMode.equals("HEX") && (convertMode.equals("BIN"))) {
+			HexToBinConverter hexToBin = new HexToBinConverter();
+			conversion = hexToBin.convertHexToBin(inputValue);
+			hexToBinDisplay.hexSymbols = conversion.getParsedListOfUserInput();
+			hexToBinDisplay.decValues = conversion.getListOfDecEquivalents();
+			hexToBinDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();			
+		} else if (inputMode.equals("HEX") && (convertMode.equals("DEC"))) {
+			HexToDecConverter hexToDec = new HexToDecConverter();
+			conversion = hexToDec.convertHexToDec(inputValue);
+			hexToDecDisplay.hexSymbols = conversion.getParsedListOfUserInput();
+			hexToDecDisplay.decValues = conversion.getListOfDecEquivalents();
+			hexToDecDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();			
+		} else if (inputMode.equals("DEC") && (convertMode.equals("HEX"))) {
+			DecToHexConverter decToHex = new DecToHexConverter();
+			conversion = decToHex.convertDecToHex(inputValue);
+			decToHexDisplay.hexSymbols = conversion.getParsedListOfUserInput();
+			decToHexDisplay.decValues = conversion.getListOfDecEquivalents();
+			decToHexDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();			
+		} else if (inputMode.equals("DEC") && (convertMode.equals("BIN"))) {
+			DecToBinConverter decToBin = new DecToBinConverter();
+			conversion = decToBin.convertDecToBin(inputValue);
+			decToBinDisplay.hexSymbols = conversion.getParsedListOfUserInput();
+			decToBinDisplay.decValues = conversion.getListOfDecEquivalents();
+			decToBinDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();			
+		} else if (inputMode.equals("BIN") && (convertMode.equals("HEX"))) {
+			BinToHexConverter binToHex = new BinToHexConverter();
+			conversion = binToHex.convertBinToHex(inputValue);
+			binToHexDisplay.hexSymbols = conversion.getParsedListOfUserInput();
+			binToHexDisplay.decValues = conversion.getListOfDecEquivalents();
+			binToHexDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();			
+		} else if (inputMode.equals("BIN") && (convertMode.equals("DEC"))) {
+			BinToDecConverter binToDec = new BinToDecConverter();
+			conversion = binToDec.convertBinToDec(inputValue);
+			binToDecDisplay.hexSymbols = conversion.getParsedListOfUserInput();
+			binToDecDisplay.decValues = conversion.getListOfDecEquivalents();
+			binToDecDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();			
+		}
+		
 	}
 
 	public void updateDisplay() {
 		slideOnDisplay = 0;
-		hexToBinDisplay.clearEntireDisplay();
 		if (displayMode.equals("PRACTICE")) {
 			sideBarPanel.setVisible(false);
 		} else {
@@ -162,7 +211,37 @@ public class GUI extends Application {
 			totalSlides = hexToBinDisplay.setTotalSlideCount(displayMode);
 			footerToolbar.resetFooterToDefaults(totalSlides);
 		}
-		hexToBinDisplay.defineDisplaySetup(displayMode);
+		hexToBinDisplay.setVisible(false);
+		hexToDecDisplay.setVisible(false);
+		decToHexDisplay.setVisible(false);
+		decToBinDisplay.setVisible(false);
+		binToHexDisplay.setVisible(false);
+		binToDecDisplay.setVisible(false);
+		if (inputMode.equals("HEX") && (convertMode.equals("BIN"))) {
+			hexToBinDisplay.clearEntireDisplay();
+			hexToBinDisplay.defineDisplaySetup(displayMode);
+			hexToBinDisplay.setVisible(true);
+		} else if (inputMode.equals("HEX") && (convertMode.equals("DEC"))) {
+			hexToDecDisplay.clearEntireDisplay();
+			hexToDecDisplay.defineDisplaySetup(displayMode);
+			hexToDecDisplay.setVisible(true);
+		} else if (inputMode.equals("DEC") && (convertMode.equals("HEX"))) {
+			decToHexDisplay.clearEntireDisplay();
+			decToHexDisplay.defineDisplaySetup(displayMode);
+			decToHexDisplay.setVisible(true);
+		} else if (inputMode.equals("DEC") && (convertMode.equals("BIN"))) {
+			decToBinDisplay.clearEntireDisplay();
+			decToBinDisplay.setVisible(true);
+			decToBinDisplay.defineDisplaySetup(displayMode);
+		} else if (inputMode.equals("BIN") && (convertMode.equals("HEX"))) {
+			binToHexDisplay.clearEntireDisplay();
+			binToHexDisplay.setVisible(true);
+			binToHexDisplay.defineDisplaySetup(displayMode);
+		} else if (inputMode.equals("BIN") && (convertMode.equals("DEC"))) {
+			binToDecDisplay.clearEntireDisplay();
+			binToDecDisplay.defineDisplaySetup(displayMode);
+			binToDecDisplay.setVisible(true);
+		}
 	}
 
 	public void handleConvert(Button button) {

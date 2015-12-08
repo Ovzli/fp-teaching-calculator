@@ -1,12 +1,10 @@
 package edu.cs222.fpteachingcalculator.model.converter;
 
-public class HexToBinConverter extends ValueConverter {
-
-	public Conversion convertHexToBin(String userInputValue){
+public class DecToBinConverter extends ValueConverter {
+	
+	public Conversion convertDecToBin(String userInputValue) {
 		parsedListOfUserInput = inputSplitter.splitInput(userInputValue);
-		listOfHexadecimalEquivalents = parsedListOfUserInput;
-		listOfDecimalEquivalents = valueTranslator
-				.translateHexToDec(parsedListOfUserInput);
+		listOfDecimalEquivalents = parsedListOfUserInput;
 		listOfBinaryEquivalents = valueTranslator
 				.translateDecToBin(listOfDecimalEquivalents);
 		listOfSeparatedBinaryNibbles = binaryParser

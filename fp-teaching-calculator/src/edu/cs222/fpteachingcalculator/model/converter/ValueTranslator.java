@@ -14,6 +14,11 @@ public class ValueTranslator {
 		return decValues;
 	}
 
+	public List<String> translateDecToHex(List<String> parsedListOfUserInput) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public LinkedList<String> translateDecToBin(
 			List<String> listOfDecimalEquivalents) {
 		LinkedList<String> binValues = new LinkedList<String>();
@@ -22,6 +27,16 @@ public class ValueTranslator {
 					.parseInt(decValue, 10))));
 		}
 		return binValues;
+	}
+
+	public List<String> translateBinToDec(List<String> listOfDecimalEquivalents) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<String> translateBinToBin(List<String> listOfDecimalEquivalents) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private String fillOutBinValue(String binValue) {
@@ -43,4 +58,5 @@ public class ValueTranslator {
 		}
 		return indexPosition;
 	}
+	
 }

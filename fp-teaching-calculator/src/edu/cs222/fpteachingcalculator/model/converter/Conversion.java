@@ -4,16 +4,18 @@ import java.util.List;
 
 public class Conversion {
 	private final String originalInput;
-	private final List<String> parsedListOfHexInput;
+	private final List<String> parsedListOfUserInput;
+	private final List<String> listOfHexEquivalents;
 	private final List<String> listOfDecEquivalents;
 	private final List<String> listOfBinEquivalents;
 	private final List<List<Integer>> listOfSeparatedBinNibbles;
 
 	public Conversion(ConversionBuilder builder) {
 		this.originalInput = builder.originalInput;
-		this.parsedListOfHexInput = builder.parsedListOfHexInput;
+		this.parsedListOfUserInput = builder.parsedListOfUserInput;
 		this.listOfBinEquivalents = builder.listOfBinEquivalents;
 		this.listOfDecEquivalents = builder.listOfDecEquivalents;
+		this.listOfHexEquivalents = builder.listOfHexEquivalents;
 		this.listOfSeparatedBinNibbles = builder.listOfSeparatedBinNibbles;
 	}
 
@@ -21,8 +23,12 @@ public class Conversion {
 		return originalInput;
 	}
 
-	public List<String> getParsedListOfHexInput() {
-		return parsedListOfHexInput;
+	public List<String> getParsedListOfUserInput() {
+		return parsedListOfUserInput;
+	}
+
+	public List<String> getListOfHexEquivalents() {
+		return listOfHexEquivalents;
 	}
 
 	public List<String> getListOfDecEquivalents() {
@@ -39,7 +45,8 @@ public class Conversion {
 
 	public static class ConversionBuilder {
 		public String originalInput;
-		public List<String> parsedListOfHexInput;
+		public List<String> parsedListOfUserInput;
+		public List<String> listOfHexEquivalents;
 		public List<String> listOfDecEquivalents;
 		public List<String> listOfBinEquivalents;
 		public List<List<Integer>> listOfSeparatedBinNibbles;
@@ -49,10 +56,16 @@ public class Conversion {
 			return this;
 		}
 
-		public ConversionBuilder parsedListOfHexInput(
-				List<String> parsedListOfHexInput2) {
-			this.parsedListOfHexInput = parsedListOfHexInput2;
+		public ConversionBuilder parsedListOfUserInput(
+				List<String> listOfUserInput) {
+			this.parsedListOfUserInput = listOfUserInput;
 			return this;
+		}
+
+		public ConversionBuilder listOfHexEquivalents(
+				List<String> listOfHexadecimalEquivalents) {
+			this.listOfHexEquivalents = listOfHexadecimalEquivalents;
+			return null;
 		}
 
 		public ConversionBuilder listOfDecEquivalents(

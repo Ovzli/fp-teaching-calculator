@@ -5,8 +5,8 @@ import org.junit.Test;
 import edu.cs222.fpteachingcalculator.model.converter.Conversion;
 import edu.cs222.fpteachingcalculator.model.converter.HexToBinConverter;
 import edu.cs222.fpteachingcalculator.view.inputexceptions.EmptyInputException;
-import edu.cs222.fpteachingcalculator.view.inputexceptions.InvalidHexNumberLengthException;
-import edu.cs222.fpteachingcalculator.view.inputexceptions.InvalidHexSymbolException;
+import edu.cs222.fpteachingcalculator.view.inputexceptions.InvalidNumberLengthException;
+import edu.cs222.fpteachingcalculator.view.inputexceptions.InvalidSymbolException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ public class HexToBinConverterTest {
 	private HexToBinConverter hexToBinConverter = new HexToBinConverter();
 
 	@Test
-	public void testConvertHexToBinSuccess() throws InvalidHexSymbolException, InvalidHexNumberLengthException, EmptyInputException {
+	public void testConvertHexToBinSuccess() throws InvalidSymbolException, InvalidNumberLengthException, EmptyInputException {
 		String validInput = "C2a";
 		Conversion completedConversion = null;
 		completedConversion = hexToBinConverter.convertHexToBin(validInput);
@@ -28,7 +28,7 @@ public class HexToBinConverterTest {
 		List<String> expectedBinList = createLinkedListOfStrings("1100 0010 1010");
 		List<List<Integer>> expectedSeparatedNibbles = createListOfExpectedSeparatedNibbles();
 		Conversion expectedResult = new Conversion.ConversionBuilder().originalInput(validInput)
-				.parsedListOfHexInput(expectedParsedHex).listOfDecEquivalents(expectedParsedDec)
+				.parsedListOfUserInput(expectedParsedHex).listOfDecEquivalents(expectedParsedDec)
 				.listOfBinEquivalents(expectedBinList).listOfSeparatedBinNibbles(expectedSeparatedNibbles).build();
 		AssertConversionContainersAreEqual(completedConversion, expectedResult);
 	}
@@ -71,7 +71,7 @@ public class HexToBinConverterTest {
 	private void AssertConversionContainersAreEqual(Conversion completedConversion,
 			Conversion expectedResult) {
 		Assert.assertEquals(expectedResult.getOriginalInput(), completedConversion.getOriginalInput());
-		Assert.assertEquals(expectedResult.getParsedListOfHexInput(), completedConversion.getParsedListOfHexInput());
+		Assert.assertEquals(expectedResult.getParsedListOfUserInput(), completedConversion.getParsedListOfUserInput());
 		Assert.assertEquals(expectedResult.getListOfDecEquivalents(), completedConversion.getListOfDecEquivalents());
 		Assert.assertEquals(expectedResult.getListOfBinEquivalents(), completedConversion.getListOfBinEquivalents());
 		for (int i = 0; i < expectedResult.getListOfSeparatedBinNibbles().size(); i++) {

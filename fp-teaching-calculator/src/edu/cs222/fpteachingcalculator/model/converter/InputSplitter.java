@@ -5,11 +5,11 @@ import java.util.List;
 
 public class InputSplitter {
 
-	public List<String> splitHexInput(String input) {
-		List<String> hexSymbols = new LinkedList<>();
+	public List<String> splitInput(String input) {
+		List<String> inputSymbols = new LinkedList<>();
 		for (int i = 0; i < input.length(); i++) {
-			hexSymbols.add(Character.toString(input.charAt(i)).toUpperCase());
+			inputSymbols.add(Character.toString(input.charAt(i)).toUpperCase());
 		}
-		return hexSymbols;
+		return inputSymbols;
 	}
 }
