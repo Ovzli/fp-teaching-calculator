@@ -1,88 +1,51 @@
 package edu.cs222.fpteachingcalculator.view;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import javafx.scene.layout.GridPane;
 
 public class HexToBinResultDisplay extends ResultDisplay {
-	public final GridPane hexToBinSummaryTemplate = new GridPane();
-	public final GridPane hexToBinTutorialTemplate = new GridPane();
-	public final GridPane hexToBinPracticeTemplate = new GridPane();
-	private final ResultStep inputReprintRow = new ResultStep();
-	private final ResultStep decEquivalentStep = new ResultStep();
-	private final ResultStep decExpandStep = new ResultStep();
-	private final ResultStep binConcateStep = new ResultStep();
-	private final ResultStep binRepresentStep = new ResultStep();
-	private GridPane tableOfInputValues = new GridPane();
-	private GridPane decimalChars = new GridPane();
-	private ExpansionGrid expansionGrid;
-	private ConcatenationGrid concatenationGrid;
-	private BinaryGrid binaryGrid;
-	private final List<GridPane> slideList = new LinkedList<>();
-	private String currentMode = "SUMMARY";
+	public final GridPane hexToBinSummaryDisplay;
+	public final GridPane hexToBinTutorialDisplay;
+	public final GridPane hexToBinPracticeDisplay;
+	private final ResultStep decEquivalentStep;
+	private final ResultStep decExpandStep;
+	private final ResultStep binConcateStep;
+	private final ResultStep binRepresentStep;
 
 	public HexToBinResultDisplay() {
-		super();
+		super(4);
+		hexToBinSummaryDisplay = summaryDisplay;
+		hexToBinTutorialDisplay = tutorialDisplay;
+		hexToBinPracticeDisplay = practiceDisplay;
+		decEquivalentStep = displaySteps.get(0);
+		decExpandStep = displaySteps.get(1);
+		binConcateStep = displaySteps.get(2);
+		binRepresentStep = displaySteps.get(3);
 	}
 
-	public void defineTemplateSetup(String mode) {
+	public void defineDisplaySetup(String mode) {
 		currentMode = mode;
-		makeInputReprintRow();
+		makeHexInputReprintRow();
+		addStepsToDisplay();
 		if (currentMode.equals("SUMMARY")) {
-			setupHexToBinSummaryTemplate();
+			setupHexToBinSummaryDisplay();
 		} else if (currentMode.equals("TUTORIAL")) {
-			setupHexToBinTutorialTemplate();
+			setupHexToBinTutorialDisplay();
 		} else {
-			setupHexToBinPracticeTemplate();
+			setupHexToBinPracticeDisplay();
 		}
 		makeEmptyRow(10);
 	}
 
-	private void makeInputReprintRow() {
-		inputReprintRow.setStepTitle("original input");
-		inputReprintRow.setResultStepID(0);
-		tableOfInputValues = makeBigCharTable();
-		for (int i = 0; i < hexSymbols.size(); i++) {
-			BigCharBox bigCharBox = new BigCharBox();
-			tableOfInputValues.add(bigCharBox, i, 0);
-			BigCharLabel bigCharLabel = new BigCharLabel(hexSymbols.get(i));
-			tableOfInputValues.add(bigCharLabel, i, 0);
-			bigCharLabel.overrideCharHexColor("#0066CC");
-		}
-		inputReprintRow.add(tableOfInputValues, 1, 0);
-	}
-
-	public void setupHexToBinSummaryTemplate() {
-		this.add(hexToBinSummaryTemplate, 0, 0);
-		hexToBinSummaryTemplate.setVgap(20);
-		hexToBinSummaryTemplate.add(inputReprintRow, 0, 0);
-		hexToBinSummaryTemplate.add(decEquivalentStep, 0, 1);
-		hexToBinSummaryTemplate.add(decExpandStep, 0, 2);
-		hexToBinSummaryTemplate.add(binConcateStep, 0, 3);
-		hexToBinSummaryTemplate.add(binRepresentStep, 0, 4);
+	public void setupHexToBinSummaryDisplay() {
+		this.add(hexToBinSummaryDisplay, 0, 0);
 		makeDecEquivalentStep(1);
 		makeDecExpandStep(2);
 		makeBinConcateStep(3);
 		makeBinRepresentStep(4);
-		decEquivalentStep.setVisible(true);
-		decExpandStep.setVisible(true);
-		binConcateStep.setVisible(true);
-		binRepresentStep.setVisible(true);
 	}
 
-	public void setupHexToBinTutorialTemplate() {
-		this.add(hexToBinTutorialTemplate, 0, 0);
-		hexToBinTutorialTemplate.setVgap(20);
-		hexToBinTutorialTemplate.add(inputReprintRow, 0, 0);
-		hexToBinTutorialTemplate.add(decEquivalentStep, 0, 1);
-		hexToBinTutorialTemplate.add(decExpandStep, 0, 1);
-		hexToBinTutorialTemplate.add(binConcateStep, 0, 1);
-		hexToBinTutorialTemplate.add(binRepresentStep, 0, 1);
-		decEquivalentStep.setVisible(true);
-		decExpandStep.setVisible(false);
-		binConcateStep.setVisible(false);
-		binRepresentStep.setVisible(false);
+	public void setupHexToBinTutorialDisplay() {
+		this.add(hexToBinTutorialDisplay, 0, 0);
 		slideList.add(decEquivalentStep);
 		slideList.add(decExpandStep);
 		slideList.add(binConcateStep);
@@ -93,18 +56,8 @@ public class HexToBinResultDisplay extends ResultDisplay {
 		makeBinRepresentStep(4);
 	}
 
-	public void setupHexToBinPracticeTemplate() {
-		this.add(hexToBinPracticeTemplate, 0, 0);
-		hexToBinPracticeTemplate.setVgap(20);
-		hexToBinPracticeTemplate.add(inputReprintRow, 0, 0);
-		hexToBinPracticeTemplate.add(decEquivalentStep, 0, 1);
-		hexToBinPracticeTemplate.add(decExpandStep, 0, 1);
-		hexToBinPracticeTemplate.add(binConcateStep, 0, 1);
-		hexToBinPracticeTemplate.add(binRepresentStep, 0, 1);
-		decEquivalentStep.setVisible(true);
-		decExpandStep.setVisible(false);
-		binConcateStep.setVisible(false);
-		binRepresentStep.setVisible(false);
+	public void setupHexToBinPracticeDisplay() {
+		this.add(hexToBinPracticeDisplay, 0, 0);		
 		slideList.add(decEquivalentStep);
 		slideList.add(binConcateStep);
 		slideList.add(binRepresentStep);
@@ -189,28 +142,6 @@ public class HexToBinResultDisplay extends ResultDisplay {
 		binRepresentStep.addStepContent(binaryGrid);
 	}
 
-	public void hideSlide(int slideToHide) {
-		slideList.get(slideToHide).setVisible(false);
-	}
-
-	public void displaySlide(int slideToDisplay) {
-		slideList.get(slideToDisplay).setVisible(true);
-	}
-
-	public void clearHexToBinTemplates() {
-		this.getChildren().clear();
-		slideList.clear();
-		hexToBinPracticeTemplate.getChildren().clear();
-		hexToBinTutorialTemplate.getChildren().clear();
-		hexToBinSummaryTemplate.getChildren().clear();
-		tableOfInputValues.getChildren().clear();
-		decEquivalentStep.getChildren().clear();
-		decExpandStep.getChildren().clear();
-		binConcateStep.getChildren().clear();
-		binRepresentStep.getChildren().clear();
-		decEquivalentStep.setVisible(true);
-	}
-
 	public int setTotalSlideCount(String displayMode) {
 		if (displayMode.equals("PRACTICE")) {
 			return 3;
@@ -218,4 +149,5 @@ public class HexToBinResultDisplay extends ResultDisplay {
 			return 4;
 		}
 	}
+
 }

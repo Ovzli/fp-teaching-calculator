@@ -151,7 +151,7 @@ public class GUI extends Application {
 
 	public void updateDisplay() {
 		slideOnDisplay = 0;
-		hexToBinDisplay.clearHexToBinTemplates();
+		hexToBinDisplay.clearEntireDisplay();
 		if (displayMode.equals("PRACTICE")) {
 			sideBarPanel.setVisible(false);
 		} else {
@@ -162,7 +162,7 @@ public class GUI extends Application {
 			totalSlides = hexToBinDisplay.setTotalSlideCount(displayMode);
 			footerToolbar.resetFooterToDefaults(totalSlides);
 		}
-		hexToBinDisplay.defineTemplateSetup(displayMode);
+		hexToBinDisplay.defineDisplaySetup(displayMode);
 	}
 
 	public void handleConvert(Button button) {
