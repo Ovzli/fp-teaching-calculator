@@ -22,7 +22,7 @@ public class HexToBinConverterTest {
 	public void testConvertHexToBinSuccess() throws InvalidHexSymbolException, InvalidHexNumberLengthException, EmptyInputException {
 		String validInput = "C2a";
 		Conversion completedConversion = null;
-		completedConversion = hexToBinConverter.convertHexValue(validInput);
+		completedConversion = hexToBinConverter.convertHexToBin(validInput);
 		List<String> expectedParsedHex = createLinkedListOfStrings("C 2 A");
 		List<String> expectedParsedDec = createLinkedListOfStrings("12 2 10");
 		List<String> expectedBinList = createLinkedListOfStrings("1100 0010 1010");
