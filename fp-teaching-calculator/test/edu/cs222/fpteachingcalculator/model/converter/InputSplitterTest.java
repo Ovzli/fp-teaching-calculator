@@ -16,11 +16,23 @@ public class InputSplitterTest {
 	private InputSplitter inputSplitter = new InputSplitter();
 
 	@Test
-	public void testSplitHexInput() {
-		String hexString = "C2A";
+	public void testSplitString() {
+		String validInput = "C2A";
 		List<String> correctOutput = createListOfStrings("C 2 A");
-		List<String> methodOutput = inputSplitter.splitInput(hexString);
+		List<String> methodOutput = inputSplitter.splitString(validInput);
 		Assert.assertEquals(methodOutput, correctOutput);
+	}
+	
+	@Test
+	public void testSplitBinInput(){
+		String validInput = "110000101010";
+		List<String> correctOutput = createListOfStrings("1100 0010 1010");
+		List<String> methodOutput = inputSplitter.splitBinString(validInput);
+		Assert.assertEquals(correctOutput, methodOutput);	
+		String validInput2 = "1110000101010";
+		List<String> correctOutput2 = createListOfStrings("0001 1100 0010 1010");
+		List<String> methodOutput2 = inputSplitter.splitBinString(validInput2);
+		Assert.assertEquals(correctOutput2, methodOutput2);	
 	}
 
 	private List<String> createListOfStrings(String input) {
