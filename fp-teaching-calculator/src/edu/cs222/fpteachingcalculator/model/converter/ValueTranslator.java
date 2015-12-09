@@ -5,38 +5,66 @@ import java.util.List;
 
 public class ValueTranslator {
 	
-	public LinkedList<String> translateHexToDec(
-			List<String> parsedListOfHexInput) {
-		LinkedList<String> decValues = new LinkedList<String>();
-		for (String hexSymbol : parsedListOfHexInput) {
+	public List<String> translateDecListToHexList(List<String> decList){
+		List<String> hexValues = new LinkedList<>();
+		for (String decValue : decList) {
+			hexValues.add(Integer.toHexString(Integer.parseInt(decValue)).toUpperCase());
+		}
+		return hexValues;
+	}
+	
+	public List<String> translateHexListToDecList(List<String> hexList) {
+		List<String> decValues = new LinkedList<>();
+		for (String hexSymbol : hexList) {
 			decValues.add(Integer.toString(Integer.parseInt(hexSymbol, 16)));
 		}
 		return decValues;
 	}
-
-	public List<String> translateDecToHex(List<String> parsedListOfUserInput) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public String translateDecListToDecValue(List<String> decList){
+		int decNum = 0;
+		for (int i = 0; i < decList.size(); i++){
+			int tempValue = Integer.parseInt(decList.get(decList.size()-i-1));
+			decNum += tempValue * Math.pow(16, i);
+		}
+		String finalValue = Integer.toString(decNum);
+		return finalValue;
 	}
-
-	public LinkedList<String> translateDecToBin(
-			List<String> listOfDecimalEquivalents) {
-		LinkedList<String> binValues = new LinkedList<String>();
+	
+	public List<String> translateBinListToDecList(List<List<Integer>> binList){
+		List<String> decList = new LinkedList<String>();
+		for(List<Integer> binNibble : binList){
+			String binValue = "";
+			for(int binDigit : binNibble){ //refactor out inside for loop
+				binValue = binValue + Integer.toString(binDigit);
+			}
+			decList.add(Integer.toString(Integer.parseInt(binValue, 2)));
+		}
+		return decList;
+		
+	}
+	//*****************************************************************
+	//actually returns a single string within a list. determine whether to refactor
+	public String translateDecValueToHexValue(String decValue){
+		String hexValue;
+		hexValue = Integer.toHexString(Integer.parseInt(decValue)).toUpperCase();
+		return hexValue;
+	}
+	
+	public String translateDecValueToBinValue(String decValue){
+		String binValue;
+		binValue = Integer.toBinaryString(Integer.parseInt(decValue));
+		return binValue;
+	}
+	
+	
+	//************************************************************************
+	public List<String> translateDecListToBinList(List<String> listOfDecimalEquivalents) {
+		List<String> binValues = new LinkedList<>();
 		for (String decValue : listOfDecimalEquivalents) {
-			binValues.add(fillOutBinValue(Integer.toBinaryString(Integer
-					.parseInt(decValue, 10))));
+			binValues.add(fillOutBinValue(Integer.toBinaryString(Integer.parseInt(decValue))));
 		}
 		return binValues;
-	}
-
-	public List<String> translateBinToDec(List<String> listOfDecimalEquivalents) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<String> translateBinToBin(List<String> listOfDecimalEquivalents) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	private String fillOutBinValue(String binValue) {
@@ -58,5 +86,4 @@ public class ValueTranslator {
 		}
 		return indexPosition;
 	}
-	
 }

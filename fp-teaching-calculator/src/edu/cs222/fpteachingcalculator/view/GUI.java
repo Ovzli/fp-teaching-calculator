@@ -1,13 +1,8 @@
 package edu.cs222.fpteachingcalculator.view;
 
-import edu.cs222.fpteachingcalculator.model.converter.BinToDecConverter;
-import edu.cs222.fpteachingcalculator.model.converter.BinToHexConverter;
 import edu.cs222.fpteachingcalculator.model.converter.Conversion;
-import edu.cs222.fpteachingcalculator.model.converter.DecToBinConverter;
-import edu.cs222.fpteachingcalculator.model.converter.DecToHexConverter;
-import edu.cs222.fpteachingcalculator.model.converter.HexToBinConverter;
-import edu.cs222.fpteachingcalculator.model.converter.HexToDecConverter;
 import edu.cs222.fpteachingcalculator.model.converter.InputSplitter;
+import edu.cs222.fpteachingcalculator.model.converter.ValueConverter;
 import edu.cs222.fpteachingcalculator.view.InputValidator;
 import edu.cs222.fpteachingcalculator.view.inputexceptions.EmptyInputException;
 import edu.cs222.fpteachingcalculator.view.inputexceptions.InvalidNumberLengthException;
@@ -141,7 +136,7 @@ public class GUI extends Application {
 			inputValue = inputToolbar.getInputText();
 			inputValidator.checkIfInputIsEmpty(inputValue);
 			inputValidator.checkIfValueIsValid(
-					inputSplitter.splitInput(inputValue), inputMode);
+					inputSplitter.splitString(inputValue), inputMode);
 		} catch (EmptyInputException e) {
 			if (callee.equals("CONVERT")) {
 				inputToolbar.updateErrorText("NO VALUE WAS ENTERED");
@@ -173,33 +168,28 @@ public class GUI extends Application {
 
 	private void selectDisplay(String inputValue) {
 		Conversion conversion = null;
+		ValueConverter valueConverter = new ValueConverter();
 		if (inputMode.equals("HEX") && (convertMode.equals("BIN"))) {
-			HexToBinConverter hexToBin = new HexToBinConverter();
-			conversion = hexToBin.convertHexToBin(inputValue);
+			conversion = valueConverter.convertHexValue(inputValue);
 			targetDisplay = hexToBinDisplay;
 		} else if (inputMode.equals("HEX") && (convertMode.equals("DEC"))) {
-			HexToDecConverter hexToDec = new HexToDecConverter();
-			conversion = hexToDec.convertHexToDec(inputValue);
+			conversion = valueConverter.convertHexValue(inputValue);
 			targetDisplay = hexToDecDisplay;
 		} else if (inputMode.equals("DEC") && (convertMode.equals("HEX"))) {
-			DecToHexConverter decToHex = new DecToHexConverter();
-			conversion = decToHex.convertDecToHex(inputValue);
+			conversion = valueConverter.convertDecValue(inputValue);
 			targetDisplay = decToHexDisplay;
 		} else if (inputMode.equals("DEC") && (convertMode.equals("BIN"))) {
-			DecToBinConverter decToBin = new DecToBinConverter();
-			conversion = decToBin.convertDecToBin(inputValue);
+			conversion = valueConverter.convertDecValue(inputValue);
 			targetDisplay = decToBinDisplay;
 		} else if (inputMode.equals("BIN") && (convertMode.equals("HEX"))) {
-			BinToHexConverter binToHex = new BinToHexConverter();
-			conversion = binToHex.convertBinToHex(inputValue);
+			conversion = valueConverter.convertBinValue(inputValue);
 			targetDisplay = binToHexDisplay;
 		} else if (inputMode.equals("BIN") && (convertMode.equals("DEC"))) {
-			BinToDecConverter binToDec = new BinToDecConverter();
-			conversion = binToDec.convertBinToDec(inputValue);
+			conversion = valueConverter.convertBinValue(inputValue);
 			targetDisplay = binToDecDisplay;
 		}
-		targetDisplay.hexSymbols = conversion.getListOfHexEquivalents();
-		targetDisplay.decValues = conversion.getListOfDecEquivalents();
+		targetDisplay.hexSymbols = conversion.getListOfRepresentativeHexChars();
+		targetDisplay.decValues = conversion.getListOfRepresentativeDecChars();
 		targetDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();
 	}
 

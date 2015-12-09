@@ -4,18 +4,18 @@ import java.util.List;
 
 public class Conversion {
 	private final String originalInput;
-	private final List<String> parsedListOfUserInput;
-	private final List<String> listOfHexEquivalents;
-	private final List<String> listOfDecEquivalents;
-	private final List<String> listOfBinEquivalents;
+	private final String decValue;
+	private final List<String> listOfRepresentativeHexChars;
+	private final List<String> listOfRepresentativeDecChars;
+	private final List<String> listOfRepresentationBinChars;
 	private final List<List<Integer>> listOfSeparatedBinNibbles;
 
 	public Conversion(ConversionBuilder builder) {
 		this.originalInput = builder.originalInput;
-		this.parsedListOfUserInput = builder.parsedListOfUserInput;
-		this.listOfBinEquivalents = builder.listOfBinEquivalents;
-		this.listOfDecEquivalents = builder.listOfDecEquivalents;
-		this.listOfHexEquivalents = builder.listOfHexEquivalents;
+		this.decValue = builder.decValue;
+		this.listOfRepresentativeHexChars = builder.listOfRepresentativeHexChars;
+		this.listOfRepresentationBinChars = builder.listOfRepresentationBinChars;
+		this.listOfRepresentativeDecChars = builder.listOfRepresentativeDecChars;
 		this.listOfSeparatedBinNibbles = builder.listOfSeparatedBinNibbles;
 	}
 
@@ -23,20 +23,20 @@ public class Conversion {
 		return originalInput;
 	}
 
-	public List<String> getParsedListOfUserInput() {
-		return parsedListOfUserInput;
+	public String getDecValue() {
+		return decValue;
+	}
+	
+	public List<String> getListOfRepresentativeHexChars() {
+		return listOfRepresentativeHexChars;
 	}
 
-	public List<String> getListOfHexEquivalents() {
-		return listOfHexEquivalents;
+	public List<String> getListOfRepresentativeDecChars() {
+		return listOfRepresentativeDecChars;
 	}
 
-	public List<String> getListOfDecEquivalents() {
-		return listOfDecEquivalents;
-	}
-
-	public List<String> getListOfBinEquivalents() {
-		return listOfBinEquivalents;
+	public List<String> getListOfRepresentationBinChars() {
+		return listOfRepresentationBinChars;
 	}
 
 	public List<List<Integer>> getListOfSeparatedBinNibbles() {
@@ -45,44 +45,43 @@ public class Conversion {
 
 	public static class ConversionBuilder {
 		public String originalInput;
-		public List<String> parsedListOfUserInput;
-		public List<String> listOfHexEquivalents;
-		public List<String> listOfDecEquivalents;
-		public List<String> listOfBinEquivalents;
+		public String decValue;
+		public List<String> listOfRepresentativeHexChars;
+		public List<String> listOfRepresentativeDecChars;
+		public List<String> listOfRepresentationBinChars;
 		public List<List<Integer>> listOfSeparatedBinNibbles;
 
-		public ConversionBuilder originalInput(String input) {
-			this.originalInput = input;
+		public ConversionBuilder originalInput(String originalInput) {
+			this.originalInput = originalInput;
+			return this;
+		}
+		
+		public ConversionBuilder decValue(String decValue){
+			this.decValue = decValue;
 			return this;
 		}
 
-		public ConversionBuilder parsedListOfUserInput(
-				List<String> listOfUserInput) {
-			this.parsedListOfUserInput = listOfUserInput;
+		public ConversionBuilder listOfRepresentativeHexChars(
+				List<String> listOfRepresentativeHexChars) {
+			this.listOfRepresentativeHexChars = listOfRepresentativeHexChars;
 			return this;
 		}
 
-		public ConversionBuilder listOfHexEquivalents(
-				List<String> listOfHexadecimalEquivalents) {
-			this.listOfHexEquivalents = listOfHexadecimalEquivalents;
+		public ConversionBuilder listOfRepresentativeDecChars(
+				List<String> listOfRepresentativeDecChars) {
+			this.listOfRepresentativeDecChars = listOfRepresentativeDecChars;
 			return this;
 		}
 
-		public ConversionBuilder listOfDecEquivalents(
-				List<String> listOfDecimalEquivalents) {
-			this.listOfDecEquivalents = listOfDecimalEquivalents;
-			return this;
-		}
-
-		public ConversionBuilder listOfBinEquivalents(
-				List<String> listOfBinaryEquivalents) {
-			this.listOfBinEquivalents = listOfBinaryEquivalents;
+		public ConversionBuilder listOfRepresentationBinChars(
+				List<String> listOfRepresentationBinChars) {
+			this.listOfRepresentationBinChars = listOfRepresentationBinChars;
 			return this;
 		}
 
 		public ConversionBuilder listOfSeparatedBinNibbles(
-				List<List<Integer>> listOfSeparatedBinaryNibbles) {
-			this.listOfSeparatedBinNibbles = listOfSeparatedBinaryNibbles;
+				List<List<Integer>> listOfSeparatedBinNibbles) {
+			this.listOfSeparatedBinNibbles = listOfSeparatedBinNibbles;
 			return this;
 		}
 
