@@ -35,7 +35,7 @@ public class HexToDecResultDisplay extends ResultDisplay {
 	}
 
 	private void setupHexToDecSummaryDisplay() {
-		this.add(hexToDecSummaryDisplay, 0, 0);;
+		this.add(hexToDecSummaryDisplay, 0, 0);
 		makeDecEquivalentStep(1);
 		makeStep2(2);
 		makeStep3(3);

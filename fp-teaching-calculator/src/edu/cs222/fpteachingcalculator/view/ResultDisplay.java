@@ -13,7 +13,7 @@ public class ResultDisplay extends GridPane {
 	protected final GridPane summaryDisplay = new GridPane();
 	protected final GridPane tutorialDisplay = new GridPane();
 	protected final GridPane practiceDisplay = new GridPane();
-	protected GridPane tableOfInputValues = new GridPane();
+	protected GridPane reprintValue = new GridPane();
 	protected List<String> hexSymbols = new LinkedList<String>();
 	protected List<String> decValues = new LinkedList<String>();
 	protected List<List<Integer>> binDigits = new LinkedList<>();
@@ -91,7 +91,7 @@ public class ResultDisplay extends GridPane {
 		practiceDisplay.getChildren().clear();
 		tutorialDisplay.getChildren().clear();
 		summaryDisplay.getChildren().clear();
-		tableOfInputValues.getChildren().clear();
+		reprintValue.getChildren().clear();
 		displaySteps.get(0).getChildren().clear();
 		displaySteps.get(1).getChildren().clear();
 		displaySteps.get(2).getChildren().clear();
@@ -109,18 +109,15 @@ public class ResultDisplay extends GridPane {
 		List<String> inputList = null;
 		if (inputType.equals("HEX")) {
 			inputList = hexSymbols;
+			reprintValue = makeBigCharTable();
+			fillOutBigCharTable(inputList);
 		} else if (inputType.equals("DEC")) {
 			inputList = decValues;
-		}
-		if (inputType.equals("BIN")) {
-
-			// TODO - make BIN REPRINT ROW
-
-		} else {
-			tableOfInputValues = makeBigCharTable();
-			fillOutBigCharTable(inputList);
-		}
-		inputReprintRow.add(tableOfInputValues, 1, 0);
+			//reprintValue = formatted decValue
+		} else if (inputType.equals("BIN")) {
+			reprintValue = new BinaryGrid(binDigits);
+		} 
+		inputReprintRow.add(reprintValue, 1, 0);
 	}
 
 	protected GridPane makeBigCharTable() {
@@ -165,9 +162,9 @@ public class ResultDisplay extends GridPane {
 	private void fillOutBigCharTable(List<String> inputList) {
 		for (int i = 0; i < inputList.size(); i++) {
 			BigCharBox bigCharBox = new BigCharBox();
-			tableOfInputValues.add(bigCharBox, i, 0);
+			reprintValue.add(bigCharBox, i, 0);
 			BigCharLabel bigCharLabel = new BigCharLabel(inputList.get(i));
-			tableOfInputValues.add(bigCharLabel, i, 0);
+			reprintValue.add(bigCharLabel, i, 0);
 			bigCharLabel.overrideCharHexColor("#0066CC");
 		}
 	}
