@@ -17,6 +17,7 @@ public class ResultDisplay extends GridPane {
 	protected List<String> hexSymbols = new LinkedList<String>();
 	protected List<String> decValues = new LinkedList<String>();
 	protected List<List<Integer>> binDigits = new LinkedList<>();
+	protected String decString = "";
 	protected final List<GridPane> slideList = new LinkedList<>();
 	protected GridPane decimalChars = new GridPane();
 	protected ExpansionGrid expansionGrid;
@@ -113,7 +114,8 @@ public class ResultDisplay extends GridPane {
 			fillOutBigCharTable(inputList);
 		} else if (inputType.equals("DEC")) {
 			inputList = decValues;
-			//reprintValue = formatted decValue
+			reprintValue = new GridPane();
+			reprintValue.add(new BigCharLabel(decString), 0, 0);
 		} else if (inputType.equals("BIN")) {
 			reprintValue = new BinaryGrid(binDigits);
 		} 
@@ -133,9 +135,8 @@ public class ResultDisplay extends GridPane {
 			BigCharBox bigCharBox = new BigCharBox();
 			gridPane.add(bigCharBox, i, 0);
 			if (currentMode.equals("PRACTICE")) {
-
-				// TODO - implement practice input fields here...
-
+				AnswerInputField inputField = new AnswerInputField(40);
+				gridPane.add(inputField, i, 0);
 			} else {
 				BigCharLabel bigCharLabel = new BigCharLabel(decValues.get(i));
 				gridPane.add(bigCharLabel, i, 0);

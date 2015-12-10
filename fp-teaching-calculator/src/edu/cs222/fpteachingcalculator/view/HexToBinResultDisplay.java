@@ -114,5 +114,9 @@ public class HexToBinResultDisplay extends ResultDisplay {
 		binaryGrid = new BinaryGrid(binDigits);
 		binRepresentStep.addStepContent(binaryGrid);
 	}
+	
+	public void autoComplete(int slideOnDisplay) {
+		// TODO
+	}
 
 }

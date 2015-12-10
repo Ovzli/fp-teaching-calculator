@@ -34,9 +34,8 @@ public class ConcatenationGrid extends GridPane {
 			bigValueExpansionList.add(new BigValueExpansion(binDigits.get(i)));
 			this.add(bigValueExpansionList.get(i), 10, i);
 		}
-
 	}
-
+	
 	public void addPracticeContent(List<List<Integer>> binDigits) {
 		for (int i = 0; i < charList.size(); i++) {
 			AnswerInputField inputField = new AnswerInputField(60);
@@ -50,5 +49,7 @@ public class ConcatenationGrid extends GridPane {
 			bigValueExpansionList.get(i).multiplyByExpansion();
 		}
 	}
+	
+	//public void addPractiveContentForDecEquivalents
 
 }

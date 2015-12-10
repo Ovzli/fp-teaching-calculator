@@ -109,5 +109,9 @@ public class BinToDecResultDisplay extends ResultDisplay {
 		}
 		// stepName4.addStepContent( stepContentObject? );
 	}
+	
+	public void autoComplete(int slideOnDisplay) {
+		// TODO
+	}
 
 }

@@ -71,9 +71,7 @@ public class GUI extends Application {
 	}
 
 	private void formatRoot() {
-		rootPane.getStylesheets().add(
-				this.getClass().getResource("layoutStyles.css")
-						.toExternalForm());
+		rootPane.getStylesheets().add(this.getClass().getResource("layoutStyles.css").toExternalForm());
 		rootPane.getStyleClass().add("rootPane");
 		rootLayout.getStyleClass().add("rootLayout");
 	}
@@ -135,8 +133,7 @@ public class GUI extends Application {
 		try {
 			inputValue = inputToolbar.getInputText();
 			inputValidator.checkIfInputIsEmpty(inputValue);
-			inputValidator.checkIfValueIsValid(
-					inputSplitter.splitString(inputValue), inputMode);
+			inputValidator.checkIfValueIsValid(inputSplitter.splitString(inputValue), inputMode);
 		} catch (EmptyInputException e) {
 			if (callee.equals("CONVERT")) {
 				inputToolbar.updateErrorText("NO VALUE WAS ENTERED");
@@ -144,8 +141,7 @@ public class GUI extends Application {
 			return;
 		} catch (InvalidSymbolException e) {
 			if (callee.equals("CONVERT")) {
-				inputToolbar
-						.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
+				inputToolbar.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
 			}
 			return;
 		} catch (InvalidNumberLengthException e) {
@@ -163,7 +159,7 @@ public class GUI extends Application {
 		slideOnDisplay = 0;
 		scrollDisplay.setVvalue(0);
 		targetDisplay.setVisible(false);
-		sideBarPanel.setVisible(!displayMode.equals("PRACTICE"));		
+		sideBarPanel.setVisible(!displayMode.equals("PRACTICE"));
 	}
 
 	private void selectDisplay(String inputValue) {
@@ -183,6 +179,7 @@ public class GUI extends Application {
 		} else if (inputMode.equals("BIN") && (convertMode.equals("DEC"))) {
 			targetDisplay = binToDecDisplay;
 		}
+		targetDisplay.decString = conversion.getDecValue();
 		targetDisplay.hexSymbols = conversion.getListOfRepresentativeHexChars();
 		targetDisplay.decValues = conversion.getListOfRepresentativeDecChars();
 		targetDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();
@@ -193,11 +190,11 @@ public class GUI extends Application {
 			totalSlides = targetDisplay.getTotalSlideCount(displayMode);
 			footerToolbar.resetFooterToDefaults(totalSlides);
 		}
-		
+
 		targetDisplay.clearEntireDisplay();
 		targetDisplay.setCurrentMode(displayMode);
 		targetDisplay.makeInputReprintRow(inputMode);
-		
+
 		if (inputMode.equals("HEX") && (convertMode.equals("BIN"))) {
 			hexToBinDisplay.defineDisplaySetup();
 		} else if (inputMode.equals("HEX") && (convertMode.equals("DEC"))) {
@@ -211,7 +208,7 @@ public class GUI extends Application {
 		} else if (inputMode.equals("BIN") && (convertMode.equals("DEC"))) {
 			binToDecDisplay.defineDisplaySetup();
 		}
-		
+
 		targetDisplay.makeEmptyRow(10);
 		targetDisplay.addStepsToDisplay();
 		targetDisplay.setVisible(true);
@@ -348,6 +345,26 @@ public class GUI extends Application {
 						footerToolbar.enableNextButton();
 					}
 					scrollDisplay.setVvalue(0);
+				}
+			}
+		});
+	}
+
+	public void handleAutoComplete(Button button) {
+		button.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				if (inputMode.equals("HEX") && (convertMode.equals("BIN"))) {
+					hexToBinDisplay.autoComplete(slideOnDisplay);
+				} else if (inputMode.equals("HEX") && (convertMode.equals("DEC"))) {
+					hexToDecDisplay.autoComplete(slideOnDisplay);
+				} else if (inputMode.equals("DEC") && (convertMode.equals("HEX"))) {
+					decToHexDisplay.autoComplete(slideOnDisplay);
+				} else if (inputMode.equals("DEC") && (convertMode.equals("BIN"))) {
+					decToBinDisplay.autoComplete(slideOnDisplay);
+				} else if (inputMode.equals("BIN") && (convertMode.equals("HEX"))) {
+					binToHexDisplay.autoComplete(slideOnDisplay);
+				} else if (inputMode.equals("BIN") && (convertMode.equals("DEC"))) {
+					binToDecDisplay.autoComplete(slideOnDisplay);
 				}
 			}
 		});
