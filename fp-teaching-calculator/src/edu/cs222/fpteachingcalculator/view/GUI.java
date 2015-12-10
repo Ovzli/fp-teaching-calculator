@@ -168,24 +168,19 @@ public class GUI extends Application {
 
 	private void selectDisplay(String inputValue) {
 		Conversion conversion = null;
-		ValueConverter valueConverter = new ValueConverter();
+		ValueConverter valueConverter = new ValueConverter(inputValue);
+		conversion = valueConverter.convert(inputMode);
 		if (inputMode.equals("HEX") && (convertMode.equals("BIN"))) {
-			conversion = valueConverter.convertHexValue(inputValue);
 			targetDisplay = hexToBinDisplay;
 		} else if (inputMode.equals("HEX") && (convertMode.equals("DEC"))) {
-			conversion = valueConverter.convertHexValue(inputValue);
 			targetDisplay = hexToDecDisplay;
 		} else if (inputMode.equals("DEC") && (convertMode.equals("HEX"))) {
-			conversion = valueConverter.convertDecValue(inputValue);
 			targetDisplay = decToHexDisplay;
 		} else if (inputMode.equals("DEC") && (convertMode.equals("BIN"))) {
-			conversion = valueConverter.convertDecValue(inputValue);
 			targetDisplay = decToBinDisplay;
 		} else if (inputMode.equals("BIN") && (convertMode.equals("HEX"))) {
-			conversion = valueConverter.convertBinValue(inputValue);
 			targetDisplay = binToHexDisplay;
 		} else if (inputMode.equals("BIN") && (convertMode.equals("DEC"))) {
-			conversion = valueConverter.convertBinValue(inputValue);
 			targetDisplay = binToDecDisplay;
 		}
 		targetDisplay.hexSymbols = conversion.getListOfRepresentativeHexChars();

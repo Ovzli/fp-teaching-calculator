@@ -5,6 +5,7 @@ import java.util.List;
 public class Conversion {
 	private final String originalInput;
 	private final String decValue;
+	private final List<String> listOfUserInputChars;
 	private final List<String> listOfRepresentativeHexChars;
 	private final List<String> listOfRepresentativeDecChars;
 	private final List<String> listOfRepresentationBinChars;
@@ -13,6 +14,7 @@ public class Conversion {
 	public Conversion(ConversionBuilder builder) {
 		this.originalInput = builder.originalInput;
 		this.decValue = builder.decValue;
+		this.listOfUserInputChars = builder.listOfUserInputChars;
 		this.listOfRepresentativeHexChars = builder.listOfRepresentativeHexChars;
 		this.listOfRepresentationBinChars = builder.listOfRepresentationBinChars;
 		this.listOfRepresentativeDecChars = builder.listOfRepresentativeDecChars;
@@ -25,6 +27,10 @@ public class Conversion {
 
 	public String getDecValue() {
 		return decValue;
+	}
+	
+	public List<String> getListOfUserInputChars(){
+		return listOfUserInputChars;
 	}
 	
 	public List<String> getListOfRepresentativeHexChars() {
@@ -46,6 +52,7 @@ public class Conversion {
 	public static class ConversionBuilder {
 		public String originalInput;
 		public String decValue;
+		public List<String> listOfUserInputChars;
 		public List<String> listOfRepresentativeHexChars;
 		public List<String> listOfRepresentativeDecChars;
 		public List<String> listOfRepresentationBinChars;
@@ -58,6 +65,11 @@ public class Conversion {
 		
 		public ConversionBuilder decValue(String decValue){
 			this.decValue = decValue;
+			return this;
+		}
+		
+		public ConversionBuilder listOfUserInputChars(List<String> listOfUserInputChars){
+			this.listOfUserInputChars = listOfUserInputChars;
 			return this;
 		}
 

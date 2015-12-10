@@ -6,11 +6,11 @@ import java.util.List;
 public class InputSplitter {
 
 	public List<String> splitString(String input) {
-		List<String> hexSymbols = new LinkedList<>();
+		List<String> symbols = new LinkedList<>();
 		for (int i = 0; i < input.length(); i++) {
-			hexSymbols.add(Character.toString(input.charAt(i)).toUpperCase());
+			symbols.add(Character.toString(input.charAt(i)).toUpperCase());
 		}
-		return hexSymbols;
+		return symbols;
 	}
 	
 	public List<String> splitBinString(String input) {

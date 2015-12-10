@@ -4,19 +4,38 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ValueConverter {
-	protected List<String> parsedListOfUserInput = new LinkedList<>();
-	protected List<String> listOfRepresentativeHexChars = new LinkedList<>();
-	protected List<String> listOfRepresentativeDecChars = new LinkedList<>();
-	protected List<String> listOfRepresentationBinChars = new LinkedList<>();
-	protected List<List<Integer>> listOfSeparatedBinNibbles = new LinkedList<>();
-	protected String decValue = "";
+	private String userInputValue = "";
+	private List<String> listOfUserInputChars = new LinkedList<>();
+	private List<String> listOfRepresentativeHexChars = new LinkedList<>();
+	private List<String> listOfRepresentativeDecChars = new LinkedList<>();
+	private List<String> listOfRepresentationBinChars = new LinkedList<>();
+	private List<List<Integer>> listOfSeparatedBinNibbles = new LinkedList<>();
+	private String decValue = "";
 	
-	protected final InputSplitter inputSplitter = new InputSplitter();
-	protected final ValueTranslator valueTranslator = new ValueTranslator();
-	protected final BinSplitter binSplitter = new BinSplitter();
+	private final InputSplitter inputSplitter = new InputSplitter();
+	private final ValueTranslator valueTranslator = new ValueTranslator();
+	private final BinSplitter binSplitter = new BinSplitter();
 
-	public Conversion convertHexValue(String hexInputValue){
-		listOfRepresentativeHexChars = inputSplitter.splitString(hexInputValue);
+	public ValueConverter(String input){
+		userInputValue = input;
+		listOfUserInputChars = inputSplitter.splitString(userInputValue);
+	}
+	
+	public Conversion convert(String inputMode){
+		if(inputMode.equals("HEX")){
+			return convertHexValue();
+		}
+		else if(inputMode.equals("DEC")){
+			return convertDecValue();
+		}
+		else if(inputMode.equals("BIN")){
+			return convertBinValue();	
+		}
+		return null;
+	}
+	
+	private Conversion convertHexValue(){
+		listOfRepresentativeHexChars = inputSplitter.splitString(userInputValue);
 		listOfRepresentativeDecChars = valueTranslator
 				.translateHexListToDecList(listOfRepresentativeHexChars);
 		decValue = valueTranslator.translateDecListToDecValue(listOfRepresentativeDecChars);
@@ -24,33 +43,29 @@ public class ValueConverter {
 				.translateDecListToBinList(listOfRepresentativeDecChars);
 		listOfSeparatedBinNibbles = binSplitter
 				.separateBinValuesIntoDigits(listOfRepresentationBinChars);
-		return new Conversion.ConversionBuilder().originalInput(hexInputValue)				
-				.listOfRepresentativeHexChars(listOfRepresentativeHexChars)
-				.listOfRepresentativeDecChars(listOfRepresentativeDecChars)
-				.listOfRepresentationBinChars(listOfRepresentationBinChars)
-				.listOfSeparatedBinNibbles(listOfSeparatedBinNibbles)
-				.decValue(decValue)
-				.build();
+		return returnConversion();
 	}
 	
-	public Conversion convertDecValue(String decInputValue){
-		listOfRepresentationBinChars = inputSplitter.splitBinString(valueTranslator.translateDecValueToBinValue(decInputValue));
+	private Conversion convertDecValue(){
+		decValue = userInputValue;
+		listOfRepresentationBinChars = inputSplitter.splitBinString(valueTranslator.translateDecValueToBinValue(userInputValue));
 		listOfSeparatedBinNibbles = binSplitter.separateBinValuesIntoDigits(listOfRepresentationBinChars);
-		listOfRepresentativeHexChars = inputSplitter.splitString(valueTranslator.translateDecValueToHexValue(decInputValue));
-		return new Conversion.ConversionBuilder().originalInput(decInputValue)
-				.listOfRepresentativeHexChars(listOfRepresentativeHexChars)
-				.listOfRepresentationBinChars(listOfRepresentationBinChars)
-				.listOfSeparatedBinNibbles(listOfSeparatedBinNibbles) //possibly needed decValuelist
-				.build();
+		listOfRepresentativeHexChars = inputSplitter.splitString(valueTranslator.translateDecValueToHexValue(userInputValue));
+		return returnConversion();
 	}
 	
-	public Conversion convertBinValue(String binInputValue){
-		listOfRepresentationBinChars = inputSplitter.splitBinString(binInputValue);
+	private Conversion convertBinValue(){
+		listOfRepresentationBinChars = inputSplitter.splitBinString(userInputValue);
 		listOfSeparatedBinNibbles = binSplitter.separateBinValuesIntoDigits(listOfRepresentationBinChars);
 		listOfRepresentativeDecChars = valueTranslator.translateBinListToDecList(listOfSeparatedBinNibbles);
 		decValue = valueTranslator.translateDecListToDecValue(listOfRepresentativeDecChars);
 		listOfRepresentativeHexChars = valueTranslator.translateDecListToHexList(listOfRepresentativeDecChars);
-		return new Conversion.ConversionBuilder().originalInput(binInputValue)
+		return returnConversion();
+	}
+	
+	private Conversion returnConversion(){
+		return new Conversion.ConversionBuilder().originalInput(userInputValue)
+				.listOfUserInputChars(listOfUserInputChars)
 				.listOfRepresentativeHexChars(listOfRepresentativeHexChars)
 				.listOfRepresentativeDecChars(listOfRepresentativeDecChars)
 				.listOfRepresentationBinChars(listOfRepresentationBinChars)

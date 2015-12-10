@@ -15,13 +15,13 @@ import java.util.List;
 import org.junit.Assert;
 
 public class ValueConverterTest {
-	private ValueConverter converter = new ValueConverter();
 	private BinSplitter binSplitter = new BinSplitter();
 
 	@Test
 	public void testConvertHexSuccess() throws InvalidSymbolException, InvalidNumberLengthException, EmptyInputException {
 		String validInput = "C2a";
-		Conversion completedConversion = converter.convertHexValue(validInput);
+		ValueConverter converter = new ValueConverter(validInput);
+		Conversion completedConversion = converter.convert("HEX");
 		String expectedDecValue = "3114";
 		List<String> expectedParsedHex = createListOfStrings("C 2 A");
 		List<String> expectedParsedDec = createListOfStrings("12 2 10");
@@ -37,7 +37,8 @@ public class ValueConverterTest {
 	@Test
 	public void testConvertDecSuccess(){
 		String validInput = "3114";
-		Conversion completedConversion = converter.convertDecValue(validInput);
+		ValueConverter converter = new ValueConverter(validInput);
+		Conversion completedConversion = converter.convert("DEC");
 		List<String> expectedHexList = createListOfStrings("C 2 A");
 		List<String> expectedBinList = createListOfStrings("1100 0010 1010");
 		List<List<Integer>> expectedSeparatedNibbles = binSplitter.separateBinValuesIntoDigits(expectedBinList);
@@ -52,7 +53,8 @@ public class ValueConverterTest {
 	@Test
 	public void testConvertBinSuccess() throws InvalidSymbolException, InvalidNumberLengthException, EmptyInputException {
 		String validInput = "110000101010";
-		Conversion completedConversion = converter.convertBinValue(validInput);
+		ValueConverter converter = new ValueConverter(validInput);
+		Conversion completedConversion = converter.convert("BIN");
 		String expectedDecValue = "3114";
 		List<String> expectedParsedHex = createListOfStrings("C 2 A");
 		List<String> expectedParsedDec = createListOfStrings("12 2 10");
