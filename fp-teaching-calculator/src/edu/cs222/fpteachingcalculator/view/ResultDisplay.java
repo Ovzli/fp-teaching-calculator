@@ -33,7 +33,6 @@ public class ResultDisplay extends GridPane {
 	protected int practiceSlideCount;
 	protected GridPane targetDisplay;
 	protected final List<TextField> answerInputFieldList = new LinkedList<>();
-	
 
 	public ResultDisplay() {
 		super();
@@ -57,36 +56,43 @@ public class ResultDisplay extends GridPane {
 		for (int i = 1; i <= numberSteps; i++) {
 			displaySteps.add(new ResultStep());
 		}
+		displaySteps.get(0).setVisible(true);
+		displaySteps.get(1).setVisible(true);
 	}
 
 	protected void addStepsToDisplay() {
 		displaySteps.get(0).setVisible(true);
-
 		if (currentMode.equals("SUMMARY")) {
 			targetDisplay = summaryDisplay;
-			displaySteps.get(1).setVisible(true);
-			displaySteps.get(2).setVisible(true);
-			displaySteps.get(3).setVisible(true);
-		} else {
-			displaySteps.get(1).setVisible(false);
-			displaySteps.get(2).setVisible(false);
-			displaySteps.get(3).setVisible(false);
-		}
-		if (currentMode.equals("TUTORIAL")) {
+			setAllStepVisibility(true);
+			insertSummaryDisplaySteps();
+		} else if (currentMode.equals("TUTORIAL")) {
 			targetDisplay = tutorialDisplay;
+			setAllStepVisibility(false);
+			insertTutorialDisplaySteps();
 		} else if (currentMode.equals("PRACTICE")) {
 			targetDisplay = practiceDisplay;
+			setAllStepVisibility(false);
+			insertTutorialDisplaySteps();
 		}
 		targetDisplay.add(inputReprintRow, 0, 0);
-		targetDisplay.add(displaySteps.get(0), 0, 1);
-		if (currentMode.equals("SUMMARY")) {
-			targetDisplay.add(displaySteps.get(1), 0, 2);
-			targetDisplay.add(displaySteps.get(2), 0, 3);
-			targetDisplay.add(displaySteps.get(3), 0, 4);
-		} else {
-			targetDisplay.add(displaySteps.get(1), 0, 1);
-			targetDisplay.add(displaySteps.get(2), 0, 1);
-			targetDisplay.add(displaySteps.get(3), 0, 1);
+	}
+
+	private void setAllStepVisibility(boolean visibility) {
+		for (int i = 1; i < displaySteps.size(); i++) {
+			displaySteps.get(i).setVisible(visibility);
+		}
+	}
+
+	private void insertSummaryDisplaySteps() {
+		for (int i = 0; i < displaySteps.size(); i++) {
+			targetDisplay.add(displaySteps.get(i), 0, i + 1);
+		}
+	}
+
+	private void insertTutorialDisplaySteps() {
+		for (int i = 0; i < displaySteps.size(); i++) {
+			targetDisplay.add(displaySteps.get(i), 0, 1);
 		}
 	}
 
@@ -97,15 +103,11 @@ public class ResultDisplay extends GridPane {
 		tutorialDisplay.getChildren().clear();
 		summaryDisplay.getChildren().clear();
 		reprintValue.getChildren().clear();
-		displaySteps.get(0).getChildren().clear();
-		displaySteps.get(1).getChildren().clear();
-		displaySteps.get(2).getChildren().clear();
-		displaySteps.get(3).getChildren().clear();
-		displaySteps.get(1).setVisible(true);
-	}
-
-	protected void setCurrentMode(String mode) {
-		currentMode = mode;
+		for (int i = 0; i < displaySteps.size(); i++) {
+			displaySteps.get(i).getChildren().clear();
+		}
+		// displaySteps.get(0).setVisible(true);
+		// displaySteps.get(1).setVisible(true);
 	}
 
 	protected void makeInputReprintRow(String inputType) {
@@ -118,11 +120,10 @@ public class ResultDisplay extends GridPane {
 			fillOutBigCharTable(inputList);
 		} else if (inputType.equals("DEC")) {
 			inputList = decValues;
-			reprintValue = new GridPane();
 			reprintValue.add(new BigCharLabel(decString), 0, 0);
 		} else if (inputType.equals("BIN")) {
 			reprintValue = new BinaryGrid(binDigits);
-		} 
+		}
 		inputReprintRow.add(reprintValue, 1, 0);
 	}
 
@@ -146,7 +147,7 @@ public class ResultDisplay extends GridPane {
 				BigCharLabel bigCharLabel = new BigCharLabel(decValues.get(i));
 				gridPane.add(bigCharLabel, i, 0);
 			}
-		}		
+		}
 		return gridPane;
 	}
 
@@ -154,13 +155,13 @@ public class ResultDisplay extends GridPane {
 		String DecEquivalentComment;
 		if (currentMode.equals("PRACTICE")) {
 			DecEquivalentComment = "Enter the decimal equivalents for each hexadecimal value above."
-							+ "\nHINT: These are pre-determined representations.";
+					+ "\nHINT: These are pre-determined representations.";
 		} else {
 			DecEquivalentComment = "This step shows each input symbol must be assigned a "
-							+ "representative equivalent for each symbol needing "
-							+ "converted. This is done through pre-determined "
-							+ "representations of each individual symbol as outlined in the "
-							+ "equivalency table shown to the right.";
+					+ "representative equivalent for each symbol needing "
+					+ "converted. This is done through pre-determined "
+					+ "representations of each individual symbol as outlined in the "
+					+ "equivalency table shown to the right.";
 		}
 		return DecEquivalentComment;
 	}
@@ -181,6 +182,10 @@ public class ResultDisplay extends GridPane {
 		emptyRect.setWidth(40);
 		emptyRect.setHeight(80);
 		emptyRect.setFill(Paint.valueOf("#FFFFFF"));
+	}
+
+	protected void setCurrentMode(String mode) {
+		currentMode = mode;
 	}
 
 	public int getTotalSlideCount(String displayMode) {

@@ -20,12 +20,12 @@ public class ExpansionGrid extends GridPane {
 			bigValueDecExpansionList.add(new BigValueDecExpansion(binDigits
 					.get(i)));
 			this.add(bigValueDecExpansionList.get(i), 2, i);
-			bigValueDecExpansionList.get(i).addPlusSigns();
+			bigValueDecExpansionList.get(i).addPlusSigns(3);
 			this.add(new BigCharLabel("="), 9, i);
 			bigValueExpansionList.add(new BigValueExpansion(binDigits.get(i)));
 			this.add(bigValueExpansionList.get(i), 10, i);
-			bigValueExpansionList.get(i).addParenthesis();
-			bigValueExpansionList.get(i).addPlusSigns();
+			bigValueExpansionList.get(i).addParenthesis(8);
+			bigValueExpansionList.get(i).addPlusSigns(3);
 			bigValueExpansionList.get(i).multiplyByExpansion();
 		}
 	}

@@ -3,6 +3,7 @@ package edu.cs222.fpteachingcalculator.view;
 import java.util.LinkedList;
 import java.util.List;
 
+import javafx.geometry.VPos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -15,6 +16,7 @@ public class ConcatenationGrid extends GridPane {
 	public ConcatenationGrid(List<String> charListReceived) {
 		super();
 		this.setVgap(5);
+		GridPane.setValignment(this, VPos.CENTER);
 		this.getStyleClass().add("bigCharCell");
 		charList = charListReceived;
 		for (int i = 0; i < charList.size(); i++) {
@@ -44,12 +46,10 @@ public class ConcatenationGrid extends GridPane {
 			this.add(new BigCharLabel("="), 3, i);
 			bigValueExpansionList.add(new BigValueExpansion(binDigits.get(i)));
 			this.add(bigValueExpansionList.get(i), 4, i);
-			bigValueExpansionList.get(i).addParenthesis();
-			bigValueExpansionList.get(i).addPlusSigns();
+			bigValueExpansionList.get(i).addParenthesis(8);
+			bigValueExpansionList.get(i).addPlusSigns(3);
 			bigValueExpansionList.get(i).multiplyByExpansion();
 		}
 	}
-	
-	//public void addPractiveContentForDecEquivalents
 
 }

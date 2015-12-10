@@ -70,4 +70,9 @@ public class ResultStep extends GridPane {
 		this.add(content, 1, 1);
 	}
 
+	public void addStepBigCharLabel(BigCharLabel content) {
+		this.add(content, 1, 1);
+		content.updateHalignment(HPos.LEFT);
+	}
+
 }

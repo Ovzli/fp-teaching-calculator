@@ -121,8 +121,8 @@ public class HexToBinResultDisplay extends ResultDisplay {
 			}
 		} else if (slideOnDisplay == 2) {
 			for (int i = 0; i < hexSymbols.size(); i++) {
-				concatenationGrid.answerInputFieldList.get(i).setText(binChars.get(i));
-				System.out.println(binChars.get(i));
+				concatenationGrid.answerInputFieldList.get(i).setText(
+						binChars.get(i));
 			}
 		}
 	}
