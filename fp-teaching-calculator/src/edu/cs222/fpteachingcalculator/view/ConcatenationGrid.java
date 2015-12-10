@@ -8,7 +8,7 @@ import javafx.scene.layout.GridPane;
 
 public class ConcatenationGrid extends GridPane {
 	private final List<String> charList;
-	private final List<TextField> answerInputFieldList = new LinkedList<>();
+	public final List<TextField> answerInputFieldList = new LinkedList<>();
 	private final List<BigValueExpansion> bigValueExpansionList = new LinkedList<>();
 	private final List<BigValueExpansion> bigValueConcateList = new LinkedList<>();
 

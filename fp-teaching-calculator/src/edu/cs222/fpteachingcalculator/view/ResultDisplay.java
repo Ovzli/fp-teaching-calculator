@@ -3,6 +3,7 @@ package edu.cs222.fpteachingcalculator.view;
 import java.util.LinkedList;
 import java.util.List;
 
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -17,6 +18,7 @@ public class ResultDisplay extends GridPane {
 	protected List<String> hexSymbols = new LinkedList<String>();
 	protected List<String> decValues = new LinkedList<String>();
 	protected List<List<Integer>> binDigits = new LinkedList<>();
+	protected List<String> binChars = new LinkedList<>();
 	protected String decString = "";
 	protected final List<GridPane> slideList = new LinkedList<>();
 	protected GridPane decimalChars = new GridPane();
@@ -30,6 +32,8 @@ public class ResultDisplay extends GridPane {
 	protected int tutorialSlideCount;
 	protected int practiceSlideCount;
 	protected GridPane targetDisplay;
+	protected final List<TextField> answerInputFieldList = new LinkedList<>();
+	
 
 	public ResultDisplay() {
 		super();
@@ -131,12 +135,13 @@ public class ResultDisplay extends GridPane {
 
 	protected GridPane makeBigDecimalTable() {
 		GridPane gridPane = makeBigCharTable();
+		answerInputFieldList.clear();
 		for (int i = 0; i < hexSymbols.size(); i++) {
 			BigCharBox bigCharBox = new BigCharBox();
 			gridPane.add(bigCharBox, i, 0);
 			if (currentMode.equals("PRACTICE")) {
-				AnswerInputField inputField = new AnswerInputField(40);
-				gridPane.add(inputField, i, 0);
+				answerInputFieldList.add(new AnswerInputField(40));
+				gridPane.add(answerInputFieldList.get(i), i, 0);
 			} else {
 				BigCharLabel bigCharLabel = new BigCharLabel(decValues.get(i));
 				gridPane.add(bigCharLabel, i, 0);

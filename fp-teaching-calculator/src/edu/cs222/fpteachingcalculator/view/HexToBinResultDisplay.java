@@ -108,15 +108,23 @@ public class HexToBinResultDisplay extends ResultDisplay {
 	private void makeBinRepresentStep(int stepID) {
 		binRepresentStep.addFormattedStepHeader("binary representation");
 		binRepresentStep.setResultStepID(stepID);
-		binRepresentStep
-				.addStepComment("This step shows the final binary representation rewritten as a "
-						+ "binary number.");
+		binRepresentStep.addStepComment("This step shows the final binary "
+				+ "representation rewritten as a binary number.");
 		binaryGrid = new BinaryGrid(binDigits);
 		binRepresentStep.addStepContent(binaryGrid);
 	}
-	
+
 	public void autoComplete(int slideOnDisplay) {
-		// TODO
+		if (slideOnDisplay == 1) {
+			for (int i = 0; i < hexSymbols.size(); i++) {
+				answerInputFieldList.get(i).setText(decValues.get(i));
+			}
+		} else if (slideOnDisplay == 2) {
+			for (int i = 0; i < hexSymbols.size(); i++) {
+				concatenationGrid.answerInputFieldList.get(i).setText(binChars.get(i));
+				System.out.println(binChars.get(i));
+			}
+		}
 	}
 
 }
