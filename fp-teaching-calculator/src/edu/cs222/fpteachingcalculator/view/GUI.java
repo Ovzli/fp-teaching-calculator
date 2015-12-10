@@ -111,6 +111,7 @@ public class GUI extends Application {
 		decToBinDisplay.setMinHeight(424);
 		hexToDecDisplay.setMinHeight(424);
 		hexToBinDisplay.setMinHeight(424);
+		hexToBinDisplay.setVisible(false);
 		handleConvert(inputToolbar.convertButton);
 		handleGenerate(inputToolbar.generateButton);
 		handlePreviousSlide(footerToolbar.previousButton);

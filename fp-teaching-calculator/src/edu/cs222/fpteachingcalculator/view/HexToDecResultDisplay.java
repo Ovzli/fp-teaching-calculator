@@ -71,14 +71,11 @@ public class HexToDecResultDisplay extends ResultDisplay {
 	private void setupHexToDecPracticeDisplay() {
 		this.add(hexToDecPracticeDisplay, 0, 0);
 		slideList.add(decEquivalentStep);
-		slideList.add(base16multiplyStep);
 		slideList.add(hexExpandStep);
-		slideList.add(expansionProductStep);
+		slideList.add(productSumStep);
 		makeDecEquivalentStep(1);
-		makeBase16Step(2);
-		makeHexExpandStep(3);
-		makeCalcProductStep(4);
-		makeProductSumStep(5);
+		makeHexExpandStep(2);
+		makeProductSumStep(3);
 	}
 
 	private void makeDecEquivalentStep(int stepID) {
@@ -109,17 +106,19 @@ public class HexToDecResultDisplay extends ResultDisplay {
 	private void makeHexExpandStep(int stepID) {
 		hexExpandStep.addFormattedStepHeader("hexadecimal expansion");
 		hexExpandStep.setResultStepID(stepID);
+		hexExpansionGrid = new HexExpansionGrid(hexSymbols, decValues);
 		if (currentMode.equals("PRACTICE")) {
 			hexExpandStep
-					.addStepComment("Enter each decimal value needing to be muliplied "
-							+ "by the base 16 multiplier.");
+					.addStepComment("Enter each exponent value for the base 16 "
+							+ "multiplier that is applied to each decimal equivalent.");
+			hexExpansionGrid.addPracticeContent(decValues);
 		} else {
 			hexExpandStep
 					.addStepComment("This step shows how 16 is used as base multipler to "
 							+ "determine the decimal product for each decimal numeric equivalent "
 							+ "to the original hexadecimal base values.");
+			hexExpansionGrid.addTutorialContent(decValues);
 		}
-		hexExpansionGrid = new HexExpansionGrid(hexSymbols, decValues);
 		hexExpandStep.addStepContent(hexExpansionGrid);
 	}
 
@@ -139,7 +138,7 @@ public class HexToDecResultDisplay extends ResultDisplay {
 		}
 		productExpansion = new BigValueExpansion();
 		productExpansion.expandBigValueCharExpansion(listOfProducts);
-		if (decValues.size() > 5) {
+		if (decValues.size() > 6) {
 			productExpansion.makeSmallFonts();
 		}
 		productExpansion.addPlusSigns(listOfProducts.size() - 1);

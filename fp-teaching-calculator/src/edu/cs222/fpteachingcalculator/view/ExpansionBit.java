@@ -17,10 +17,10 @@ public class ExpansionBit extends GridPane {
 		baseValue = baseNumber;
 		this.setAlignment(Pos.CENTER);
 		prefixChars.getStyleClass().add("bigExpansionChar");
-		this.add(baseDigit, 1, 0);
+		this.add(baseDigit, 2, 0);
 		baseDigit.setText(String.valueOf(baseValue));
 		baseDigit.getStyleClass().add("bigExpansionChar");
-		this.add(exponentDigit, 2, 0);
+		this.add(exponentDigit, 3, 0);
 		exponentDigit.getStyleClass().add("bigExpansionExponent");
 		GridPane.setValignment(exponentDigit, VPos.TOP);
 	}
@@ -55,13 +55,17 @@ public class ExpansionBit extends GridPane {
 	}
 
 	public void setExpansionBitHexColor(String hexColor) {
-		baseDigit.setTextFill(Color.web(hexColor));
+		setExpansionBaseHexColor(hexColor);
 		exponentDigit.setTextFill(Color.web(hexColor));
+	}
+
+	public void setExpansionBaseHexColor(String hexColor) {
+		baseDigit.setTextFill(Color.web(hexColor));
 	}
 
 	public void addPrefix(String prefix) {
 		prefixChars.setText(prefix);
-		this.add(prefixChars, 0, 0);
+		this.add(prefixChars, 1, 0);
 		prefixChars.setTextFill(Color.web("#9900ff"));
 	}
 
