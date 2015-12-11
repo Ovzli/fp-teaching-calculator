@@ -40,7 +40,7 @@ public class DecToHexResultDisplay extends ResultDisplay {
 		this.add(decToHexSummaryDisplay, 0, 0);
 		makeGreatMultiplierStep(1, 16);
 		makeRemainderStep(2, 16);
-		makeBaseExpansionStep(3);
+		makeBaseExpansionStep(3, 16);
 		makeRemainderEvaluationStep(4);
 		makeHexEquivalentStep(5);
 	}
@@ -53,7 +53,7 @@ public class DecToHexResultDisplay extends ResultDisplay {
 		slideList.add(remainderEvaluationStep);
 		makeGreatMultiplierStep(1, 16);
 		makeRemainderStep(2, 16);
-		makeBaseExpansionStep(3);
+		makeBaseExpansionStep(3, 16);
 		makeRemainderEvaluationStep(4);
 		makeHexEquivalentStep(5);
 	}
@@ -66,7 +66,7 @@ public class DecToHexResultDisplay extends ResultDisplay {
 		slideList.add(remainderEvaluationStep);
 		makeGreatMultiplierStep(1, 16);
 		makeRemainderStep(2, 16);
-		makeBaseExpansionStep(3);
+		makeBaseExpansionStep(3, 16);
 		makeRemainderEvaluationStep(4);
 		makeHexEquivalentStep(5);
 	}

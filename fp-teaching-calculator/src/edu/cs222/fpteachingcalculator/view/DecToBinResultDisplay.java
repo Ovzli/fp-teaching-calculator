@@ -40,7 +40,7 @@ public class DecToBinResultDisplay extends ResultDisplay {
 		this.add(decToBinSummaryDisplay, 0, 0);
 		makeGreatMultiplierStep(1, 2);
 		makeRemainderStep(2, 2);
-		makeBaseExpansionStep(3);
+		makeBaseExpansionStep(3, 2);
 		makeRemainderEvaluationStep(4);
 		makeBinRepresentStep(5);
 	}
@@ -54,7 +54,7 @@ public class DecToBinResultDisplay extends ResultDisplay {
 		slideList.add(binRepresentStep);
 		makeGreatMultiplierStep(1, 2);
 		makeRemainderStep(2, 2);
-		makeBaseExpansionStep(3);
+		makeBaseExpansionStep(3, 2);
 		makeRemainderEvaluationStep(4);
 		makeBinRepresentStep(5);
 	}

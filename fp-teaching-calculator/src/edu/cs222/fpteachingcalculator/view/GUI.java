@@ -355,7 +355,6 @@ public class GUI extends Application {
 	}
 	
 	private boolean validateCorrectAnswers(){
-
 		if (inputMode.equals("HEX") && (convertMode.equals("BIN"))) {
 				return hexToBinDisplay.checkAnswers(slideOnDisplay + 1);
 			} else if (inputMode.equals("HEX") && (convertMode.equals("DEC"))) {
@@ -369,7 +368,6 @@ public class GUI extends Application {
 			} else if (inputMode.equals("BIN") && (convertMode.equals("DEC"))) {
 				return binToDecDisplay.checkAnswers(slideOnDisplay + 1);
 			}
-		
 		return true;
 	}
 
