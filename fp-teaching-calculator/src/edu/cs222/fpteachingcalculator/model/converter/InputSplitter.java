@@ -16,7 +16,7 @@ public class InputSplitter {
 	public List<String> splitBinList(List<String> input) {
 		List<String> symbols = new LinkedList<>();
 		for (int i = 0; i < input.size(); i++) {
-			for (int j = 0; i < input.get(i).length(); j++){
+			for (int j = 0; j < input.get(i).length(); j++){
 				symbols.add(Character.toString(input.get(i).charAt(j)));
 			}
 		}

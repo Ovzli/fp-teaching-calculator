@@ -91,9 +91,9 @@ public class BinToDecResultDisplay extends ResultDisplay {
 					+ "digits value in decimal form.");
 
 		}
-		for (int i = 0; i < binChars.size(); i++) {
-			double baseMultiplier = Math.pow(2, (binChars.size() - i - 1));
-			double product = Integer.parseInt(binChars.get(i))
+		for (int i = 0; i < individualBinChars.size(); i++) {
+			double baseMultiplier = Math.pow(2, (individualBinChars.size() - i - 1));
+			double product = Integer.parseInt(individualBinChars.get(i))
 					* baseMultiplier;
 			listOfProducts.add(String.valueOf((int) product));
 		}

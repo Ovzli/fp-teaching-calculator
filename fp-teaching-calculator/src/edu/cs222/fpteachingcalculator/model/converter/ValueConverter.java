@@ -61,6 +61,7 @@ public class ValueConverter {
 		listOfRepresentationBinChars = inputSplitter.splitBinString(userInputValue);
 		listOfSeparatedBinNibbles = binSplitter.separateBinValuesIntoDigits(listOfRepresentationBinChars);
 		listOfRepresentativeDecChars = valueTranslator.translateBinListToDecList(listOfSeparatedBinNibbles);
+		listOfIndividualBinChars = inputSplitter.splitBinList(listOfRepresentationBinChars);
 		decValue = valueTranslator.translateDecListToDecValue(listOfRepresentativeDecChars);
 		listOfRepresentativeHexChars = valueTranslator.translateDecListToHexList(listOfRepresentativeDecChars);
 		return returnConversion();
