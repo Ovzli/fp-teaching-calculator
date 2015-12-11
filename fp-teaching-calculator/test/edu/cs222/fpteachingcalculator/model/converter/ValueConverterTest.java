@@ -18,40 +18,49 @@ public class ValueConverterTest {
 	private BinSplitter binSplitter = new BinSplitter();
 
 	@Test
-	public void testConvertHexSuccess() throws InvalidSymbolException, InvalidNumberLengthException, EmptyInputException {
+	public void testConvertHexSuccess()
+			throws InvalidSymbolException, InvalidNumberLengthException, EmptyInputException {
 		String validInput = "C2a";
 		ValueConverter converter = new ValueConverter(validInput);
 		Conversion completedConversion = converter.convert("HEX");
 		String expectedDecValue = "3114";
-		List<String> expectedParsedHex = createListOfStrings("C 2 A");
-		List<String> expectedParsedDec = createListOfStrings("12 2 10");
+		List<String> expectedSplitHex = createListOfStrings("C 2 A");
+		List<String> expectedSplitdDec = createListOfStrings("12 2 10");
 		List<String> expectedBinList = createListOfStrings("1100 0010 1010");
 		List<List<Integer>> expectedSeparatedNibbles = createListOfExpectedSeparatedNibbles();
+		List<String> expectedUserCharList = expectedSplitHex;
+		List<String> expectedSeparatedBinList = createListOfStrings("1 1 0 0 0 0 1 0 1 0 1 0");
 		Conversion expectedResult = new Conversion.ConversionBuilder().originalInput(validInput)
-				.decValue(expectedDecValue)
-				.listOfRepresentativeHexChars(expectedParsedHex).listOfRepresentativeDecChars(expectedParsedDec)
-				.listOfRepresentationBinChars(expectedBinList).listOfSeparatedBinNibbles(expectedSeparatedNibbles).build();
+				.decValue(expectedDecValue).listOfRepresentativeHexChars(expectedSplitHex)
+				.listOfRepresentativeDecChars(expectedSplitdDec).listOfRepresentationBinChars(expectedBinList)
+				.listOfSeparatedBinNibbles(expectedSeparatedNibbles).listOfUserInputChars(expectedUserCharList)
+				.listOfIndividualBinChars(expectedSeparatedBinList).build();
 		assertConversionsAreEqual(completedConversion, expectedResult);
 	}
-	
+
 	@Test
-	public void testConvertDecSuccess(){
+	public void testConvertDecSuccess() {
 		String validInput = "3114";
 		ValueConverter converter = new ValueConverter(validInput);
 		Conversion completedConversion = converter.convert("DEC");
 		List<String> expectedHexList = createListOfStrings("C 2 A");
 		List<String> expectedBinList = createListOfStrings("1100 0010 1010");
 		List<List<Integer>> expectedSeparatedNibbles = binSplitter.separateBinValuesIntoDigits(expectedBinList);
-		Conversion expectedResult = new Conversion.ConversionBuilder()
-				.originalInput(validInput)
-				.listOfRepresentationBinChars(expectedBinList)
-				.listOfRepresentativeHexChars(expectedHexList)
-				.listOfSeparatedBinNibbles(expectedSeparatedNibbles).build();
+		List<String> expectedDecList = createListOfStrings("12 2 10");
+		List<String> expectedUserCharList = createListOfStrings("3 1 1 4");
+		List<String> expectedSeparatedBinList = createListOfStrings("1 1 0 0 0 0 1 0 1 0 1 0");
+		String expectedDecValue = validInput;
+		Conversion expectedResult = new Conversion.ConversionBuilder().originalInput(validInput)
+				.listOfRepresentationBinChars(expectedBinList).listOfRepresentativeHexChars(expectedHexList)
+				.listOfSeparatedBinNibbles(expectedSeparatedNibbles).listOfRepresentativeDecChars(expectedDecList)
+				.listOfIndividualBinChars(expectedSeparatedBinList).listOfUserInputChars(expectedUserCharList)
+				.decValue(expectedDecValue).build();
 		assertConversionsAreEqual(completedConversion, expectedResult);
 	}
-	
+
 	@Test
-	public void testConvertBinSuccess() throws InvalidSymbolException, InvalidNumberLengthException, EmptyInputException {
+	public void testConvertBinSuccess()
+			throws InvalidSymbolException, InvalidNumberLengthException, EmptyInputException {
 		String validInput = "110000101010";
 		ValueConverter converter = new ValueConverter(validInput);
 		Conversion completedConversion = converter.convert("BIN");
@@ -59,15 +68,18 @@ public class ValueConverterTest {
 		List<String> expectedParsedHex = createListOfStrings("C 2 A");
 		List<String> expectedParsedDec = createListOfStrings("12 2 10");
 		List<String> expectedBinList = createListOfStrings("1100 0010 1010");
+		List<String> expectedUserInputList = createListOfStrings("1 1 0 0 0 0 1 0 1 0 1 0");
+		List<String> expectedSeparatedBinList = expectedUserInputList;
 		List<List<Integer>> expectedSeparatedNibbles = createListOfExpectedSeparatedNibbles();
 		Conversion expectedResult = new Conversion.ConversionBuilder().originalInput(validInput)
-				.decValue(expectedDecValue)
-				.listOfRepresentativeHexChars(expectedParsedHex).listOfRepresentativeDecChars(expectedParsedDec)
-				.listOfRepresentationBinChars(expectedBinList).listOfSeparatedBinNibbles(expectedSeparatedNibbles).build();
+				.decValue(expectedDecValue).listOfRepresentativeHexChars(expectedParsedHex)
+				.listOfRepresentativeDecChars(expectedParsedDec).listOfRepresentationBinChars(expectedBinList)
+				.listOfSeparatedBinNibbles(expectedSeparatedNibbles).listOfUserInputChars(expectedUserInputList)
+				.listOfIndividualBinChars(expectedSeparatedBinList).build();
 		assertConversionsAreEqual(completedConversion, expectedResult);
 	}
 
-	private List<String> createListOfStrings(String input){
+	private List<String> createListOfStrings(String input) {
 		List<String> output = new LinkedList<>();
 		output.addAll(new ArrayList<String>(Arrays.asList(input.split(" "))));
 		return output;
@@ -102,16 +114,21 @@ public class ValueConverterTest {
 		}
 	}
 
-	private void assertConversionsAreEqual(Conversion completedConversion,
-			Conversion expectedResult) {
+	private void assertConversionsAreEqual(Conversion completedConversion, Conversion expectedResult) {
 		Assert.assertEquals(expectedResult.getOriginalInput(), completedConversion.getOriginalInput());
-		Assert.assertEquals(expectedResult.getListOfRepresentationBinChars(), completedConversion.getListOfRepresentationBinChars());
+		Assert.assertEquals(expectedResult.getListOfRepresentationBinChars(),
+				completedConversion.getListOfRepresentationBinChars());
 		for (int i = 0; i < expectedResult.getListOfSeparatedBinNibbles().size(); i++) {
 			assertArraysAreEqual(expectedResult.getListOfSeparatedBinNibbles().get(i),
 					completedConversion.getListOfSeparatedBinNibbles().get(i));
 		}
-		Assert.assertEquals(expectedResult.getListOfRepresentativeDecChars(), completedConversion.getListOfRepresentativeDecChars());
-		Assert.assertEquals(expectedResult.getListOfRepresentativeHexChars(), completedConversion.getListOfRepresentativeHexChars());		
+		Assert.assertEquals(expectedResult.getListOfRepresentativeDecChars(),
+				completedConversion.getListOfRepresentativeDecChars());
+		Assert.assertEquals(expectedResult.getListOfRepresentativeHexChars(),
+				completedConversion.getListOfRepresentativeHexChars());
 		Assert.assertEquals(expectedResult.getDecValue(), completedConversion.getDecValue());
+		Assert.assertEquals(expectedResult.getListOfUserInputChars(), completedConversion.getListOfUserInputChars());
+		Assert.assertEquals(expectedResult.getListOfIndividualBinChars(),
+				completedConversion.getListOfIndividualBinChars());
 	}
 }

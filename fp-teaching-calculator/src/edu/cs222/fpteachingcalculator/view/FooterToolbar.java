@@ -107,10 +107,9 @@ public class FooterToolbar extends GridPane {
 			if (mode.equals("TUTORIAL")) {
 				autoCompleteButton.setVisible(false);
 			} else {
-				autoCompleteButton.setVisible(true);	
+				autoCompleteButton.setVisible(true);
 			}
 			this.setVisible(true);
 		}
-		
 	}
 }

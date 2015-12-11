@@ -64,5 +64,4 @@ public class ConversionOptionBar extends GridPane {
 			return "HEX";
 		}
 	}
-
 }

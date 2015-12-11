@@ -28,7 +28,6 @@ public class GUI extends Application {
 	private final AnchorPane displayPane = new AnchorPane();
 	public final SideBarPanel sideBarPanel = new SideBarPanel();
 	public final BinToHexResultDisplay binToHexDisplay = new BinToHexResultDisplay();
-	public final BinToDecResultDisplay binToDecDisplay = new BinToDecResultDisplay();
 	public final DecToHexResultDisplay decToHexDisplay = new DecToHexResultDisplay();
 	public final DecToBinResultDisplay decToBinDisplay = new DecToBinResultDisplay();
 	public final HexToDecResultDisplay hexToDecDisplay = new HexToDecResultDisplay();
@@ -98,7 +97,6 @@ public class GUI extends Application {
 		scrollDisplay.setFitToHeight(true);
 		displayPane.getStyleClass().add("displayPane");
 		displayPane.getChildren().add(binToHexDisplay);
-		displayPane.getChildren().add(binToDecDisplay);
 		displayPane.getChildren().add(decToHexDisplay);
 		displayPane.getChildren().add(decToBinDisplay);
 		displayPane.getChildren().add(hexToDecDisplay);
@@ -107,10 +105,8 @@ public class GUI extends Application {
 		handleGenerate(inputToolbar.generateButton);
 		handlePreviousSlide(footerToolbar.previousButton);
 		handleNextSlide(footerToolbar.nextButton);
-		handleAutoComplete(footerToolbar.autoCompleteButton);
 		addModeRadioHandler(modeOptionBar.summaryModeRadio, "SUMMARY");
 		addModeRadioHandler(modeOptionBar.tutorialModeRadio, "TUTORIAL");
-		addModeRadioHandler(modeOptionBar.practiceModeRadio, "PRACTICE");
 		addConvertModeHandler(convertOptionBar.hexInputType, "HEX");
 		addConvertModeHandler(convertOptionBar.decInputType, "DEC");
 		addConvertModeHandler(convertOptionBar.binInputType, "BIN");
@@ -154,7 +150,6 @@ public class GUI extends Application {
 		slideOnDisplay = 0;
 		scrollDisplay.setVvalue(0);
 		targetDisplay.setVisible(false);
-		sideBarPanel.setVisible(!displayMode.equals("PRACTICE"));
 	}
 
 	private void selectDisplay(String inputValue) {
@@ -171,8 +166,6 @@ public class GUI extends Application {
 			targetDisplay = decToBinDisplay;
 		} else if (inputMode.equals("BIN") && (convertMode.equals("HEX"))) {
 			targetDisplay = binToHexDisplay;
-		} else if (inputMode.equals("BIN") && (convertMode.equals("DEC"))) {
-			targetDisplay = binToDecDisplay;
 		}
 		targetDisplay.decString = conversion.getDecValue();
 		targetDisplay.hexSymbols = conversion.getListOfRepresentativeHexChars();
@@ -200,8 +193,6 @@ public class GUI extends Application {
 			decToBinDisplay.defineDisplaySetup();
 		} else if (inputMode.equals("BIN") && (convertMode.equals("HEX"))) {
 			binToHexDisplay.defineDisplaySetup();
-		} else if (inputMode.equals("BIN") && (convertMode.equals("DEC"))) {
-			binToDecDisplay.defineDisplaySetup();
 		}
 		targetDisplay.makeEmptyRow(10);
 		targetDisplay.addStepsToDisplay();
@@ -229,10 +220,7 @@ public class GUI extends Application {
 		displayMode = mode;
 		modeOptionBar.summaryModeRadio.setSelected(false);
 		modeOptionBar.tutorialModeRadio.setSelected(false);
-		modeOptionBar.practiceModeRadio.setSelected(false);
-		if (displayMode.equals("PRACTICE")) {
-			modeOptionBar.practiceModeRadio.setSelected(true);
-		} else if (displayMode.equals("TUTORIAL")) {
+		if (displayMode.equals("TUTORIAL")) {
 			modeOptionBar.tutorialModeRadio.setSelected(true);
 		} else {
 			modeOptionBar.summaryModeRadio.setSelected(true);
@@ -265,6 +253,7 @@ public class GUI extends Application {
 		} else {
 			convertOptionBar.binInputType.setSelected(true);
 			convertOptionBar.binConvert.setDisable(true);
+			convertOptionBar.decConvert.setDisable(true);
 		}
 		if (inputMode.equals(convertMode)) {
 			convertMode = convertOptionBar.forceUnmatchingMode(inputMode);
@@ -340,67 +329,6 @@ public class GUI extends Application {
 					}
 					scrollDisplay.setVvalue(0);
 				}
-//				boolean correctAnswers = validateCorrectAnswers();
-//				if (displayMode.equals("TUTORIAL") || displayMode.equals("PRACTICE") && correctAnswers) {
-//					inputToolbar.updateErrorText("");
-//					advanceSlide();
-//				}
-//				else if(correctAnswers == false){
-//					inputToolbar.updateErrorText("INCORRECT ANSWER!");
-//				}
-			}
-		});
-	}
-
-//	private void advanceSlide() {
-//		if (slideOnDisplay < totalSlides - 1) {
-//			targetDisplay.hideSlide(slideOnDisplay);
-//			slideOnDisplay++;
-//			footerToolbar.incrementSlideDisplay();
-//			targetDisplay.displaySlide(slideOnDisplay);
-//			footerToolbar.enablePreviousButton();
-//			if (slideOnDisplay == totalSlides - 1) {
-//				footerToolbar.disableNextButton();
-//			} else {
-//				footerToolbar.enableNextButton();
-//			}
-//			scrollDisplay.setVvalue(0);
-//		}
-//	}
-	
-	private boolean validateCorrectAnswers(){
-		if (inputMode.equals("HEX") && (convertMode.equals("BIN"))) {
-				return hexToBinDisplay.checkAnswers(slideOnDisplay + 1);
-			} else if (inputMode.equals("HEX") && (convertMode.equals("DEC"))) {
-				return hexToDecDisplay.checkAnswers(slideOnDisplay + 1);
-			} else if (inputMode.equals("DEC") && (convertMode.equals("HEX"))) {
-				return decToHexDisplay.checkAnswers(slideOnDisplay + 1);
-			} else if (inputMode.equals("DEC") && (convertMode.equals("BIN"))) {
-				return decToBinDisplay.checkAnswers(slideOnDisplay + 1);
-			} else if (inputMode.equals("BIN") && (convertMode.equals("HEX"))) {
-				return binToHexDisplay.checkAnswers(slideOnDisplay + 1);
-			} else if (inputMode.equals("BIN") && (convertMode.equals("DEC"))) {
-				return binToDecDisplay.checkAnswers(slideOnDisplay + 1);
-			}
-		return true;
-	}
-
-	public void handleAutoComplete(Button button) {
-		button.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				if (inputMode.equals("HEX") && (convertMode.equals("BIN"))) {
-					hexToBinDisplay.autoComplete(slideOnDisplay + 1);
-				} else if (inputMode.equals("HEX") && (convertMode.equals("DEC"))) {
-					hexToDecDisplay.autoComplete(slideOnDisplay + 1);
-				} else if (inputMode.equals("DEC") && (convertMode.equals("HEX"))) {
-					decToHexDisplay.autoComplete(slideOnDisplay + 1);
-				} else if (inputMode.equals("DEC") && (convertMode.equals("BIN"))) {
-					decToBinDisplay.autoComplete(slideOnDisplay + 1);
-				} else if (inputMode.equals("BIN") && (convertMode.equals("HEX"))) {
-					binToHexDisplay.autoComplete(slideOnDisplay + 1);
-				} else if (inputMode.equals("BIN") && (convertMode.equals("DEC"))) {
-					binToDecDisplay.autoComplete(slideOnDisplay + 1);
-				}
 			}
 		});
 	}
@@ -408,5 +336,4 @@ public class GUI extends Application {
 	private void resetErrorText() {
 		inputToolbar.updateErrorText("");
 	}
-
 }

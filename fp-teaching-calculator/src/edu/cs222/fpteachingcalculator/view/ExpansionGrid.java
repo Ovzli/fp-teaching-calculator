@@ -17,8 +17,7 @@ public class ExpansionGrid extends GridPane {
 			this.add(new BigCharBox(), 0, i);
 			this.add(new BigCharLabel(charList.get(i)), 0, i);
 			this.add(new BigCharLabel("="), 1, i);
-			bigValueDecExpansionList.add(new BigValueDecExpansion(binDigits
-					.get(i)));
+			bigValueDecExpansionList.add(new BigValueDecExpansion(binDigits.get(i)));
 			this.add(bigValueDecExpansionList.get(i), 2, i);
 			bigValueDecExpansionList.get(i).addPlusSigns(3);
 			this.add(new BigCharLabel("="), 9, i);
@@ -29,5 +28,4 @@ public class ExpansionGrid extends GridPane {
 			bigValueExpansionList.get(i).multiplyByExpansion();
 		}
 	}
-
 }

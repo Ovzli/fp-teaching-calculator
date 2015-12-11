@@ -10,5 +10,4 @@ public class SmallCharLabel extends BigCharLabel {
 		this.changeToSmallChar();
 		GridPane.setHalignment(this, HPos.RIGHT);
 	}
-
 }

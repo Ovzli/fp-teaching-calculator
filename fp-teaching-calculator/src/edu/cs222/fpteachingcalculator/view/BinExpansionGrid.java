@@ -8,7 +8,7 @@ import javafx.scene.layout.GridPane;
 public class BinExpansionGrid extends GridPane {
 	private final List<BigValueExpansion> bigValueBinaryList = new LinkedList<>();
 	private final List<BigValueExpansion> bigValueSumExpansionList = new LinkedList<>();
-	
+
 	public BinExpansionGrid(List<List<Integer>> binDigits) {
 		super();
 		this.setVgap(5);
@@ -21,7 +21,6 @@ public class BinExpansionGrid extends GridPane {
 			bigValueSumExpansionList.get(i).addParenthesis(8);
 			bigValueSumExpansionList.get(i).addPlusSigns(3);
 			bigValueSumExpansionList.get(i).multiplyByExpansion();
-			
 		}
 	}
 }

@@ -8,7 +8,6 @@ import javafx.scene.layout.GridPane;
 public class HexToDecResultDisplay extends ResultDisplay {
 	public final GridPane hexToDecSummaryDisplay;
 	public final GridPane hexToDecTutorialDisplay;
-	public final GridPane hexToDecPracticeDisplay;
 	private ResultStep decEquivalentStep;
 	private final ResultStep base16multiplyStep;
 	private final ResultStep hexExpandStep;
@@ -24,14 +23,12 @@ public class HexToDecResultDisplay extends ResultDisplay {
 		super(5);
 		hexToDecSummaryDisplay = summaryDisplay;
 		hexToDecTutorialDisplay = tutorialDisplay;
-		hexToDecPracticeDisplay = practiceDisplay;
 		decEquivalentStep = displaySteps.get(0);
 		base16multiplyStep = displaySteps.get(1);
 		hexExpandStep = displaySteps.get(2);
 		expansionProductStep = displaySteps.get(3);
 		productSumStep = displaySteps.get(4);
 		tutorialSlideCount = 5;
-		practiceSlideCount = 3;
 	}
 
 	public void defineDisplaySetup() {
@@ -39,8 +36,6 @@ public class HexToDecResultDisplay extends ResultDisplay {
 			setupHexToDecSummaryDisplay();
 		} else if (currentMode.equals("TUTORIAL")) {
 			setupHexToDecTutorialDisplay();
-		} else {
-			setupHexToDecPracticeDisplay();
 		}
 	}
 
@@ -67,16 +62,6 @@ public class HexToDecResultDisplay extends ResultDisplay {
 		makeProductSumStep(5);
 	}
 
-	private void setupHexToDecPracticeDisplay() {
-		this.add(hexToDecPracticeDisplay, 0, 0);
-		slideList.add(decEquivalentStep);
-		slideList.add(hexExpandStep);
-		slideList.add(productSumStep);
-		makeDecEquivalentStep(1);
-		makeHexExpandStep(2);
-		makeProductSumStep(3);
-	}
-
 	private void makeDecEquivalentStep(int stepID) {
 		decEquivalentStep.addFormattedStepHeader("decimal equivalents");
 		decEquivalentStep.setResultStepID(stepID);
@@ -88,9 +73,8 @@ public class HexToDecResultDisplay extends ResultDisplay {
 		listOfBase16s.clear();
 		base16multiplyStep.addFormattedStepHeader("base 16 multipliers");
 		base16multiplyStep.setResultStepID(stepID);
-		base16multiplyStep
-				.addStepComment("Base 16 multipliers are assigned to each decimal "
-						+ "equivalent to determine their product weight.");
+		base16multiplyStep.addStepComment(
+				"Base 16 multipliers are assigned to each decimal " + "equivalent to determine their product weight.");
 		for (int i = 0; i < decValues.size(); i++) {
 			listOfBase16s.add(new ExpansionBit(16));
 			listOfBase16s.get(i).setExponentDigit(decValues.size() - i - 1);
@@ -106,18 +90,10 @@ public class HexToDecResultDisplay extends ResultDisplay {
 		hexExpandStep.addFormattedStepHeader("hexadecimal expansion");
 		hexExpandStep.setResultStepID(stepID);
 		hexExpansionGrid = new HexExpansionGrid(hexSymbols, decValues);
-		if (currentMode.equals("PRACTICE")) {
-			hexExpandStep
-					.addStepComment("Enter each exponent value for the base 16 "
-							+ "multiplier that is applied to each decimal equivalent.");
-			hexExpansionGrid.addPracticeContent(decValues);
-		} else {
-			hexExpandStep
-					.addStepComment("This step shows how 16 is used as base multipler to "
-							+ "determine the decimal product for each decimal numeric equivalent "
-							+ "to the original hexadecimal base values.");
-			hexExpansionGrid.addTutorialContent(decValues);
-		}
+		hexExpandStep.addStepComment("This step shows how 16 is used as base multipler to "
+				+ "determine the decimal product for each decimal numeric equivalent "
+				+ "to the original hexadecimal base values.");
+		hexExpansionGrid.addTutorialContent(decValues);
 		hexExpandStep.addStepContent(hexExpansionGrid);
 	}
 
@@ -125,13 +101,11 @@ public class HexToDecResultDisplay extends ResultDisplay {
 		listOfProducts.clear();
 		expansionProductStep.addFormattedStepHeader("expansion products");
 		expansionProductStep.setResultStepID(stepID);
-		expansionProductStep
-				.addStepComment("Below is a sum expansion of the products of each "
-						+ "hexadecimal symbol's value in decimal form.");
+		expansionProductStep.addStepComment(
+				"Below is a sum expansion of the products of each " + "hexadecimal symbol's value in decimal form.");
 		for (int i = 0; i < decValues.size(); i++) {
 			double baseMultiplier = Math.pow(16, (decValues.size() - i - 1));
-			double product = Integer.parseInt(decValues.get(i))
-					* baseMultiplier;
+			double product = Integer.parseInt(decValues.get(i)) * baseMultiplier;
 			listOfProducts.add(String.valueOf((int) product));
 		}
 		productExpansion = new BigValueExpansion();
@@ -142,15 +116,4 @@ public class HexToDecResultDisplay extends ResultDisplay {
 		productExpansion.addPlusSigns(listOfProducts.size() - 1);
 		expansionProductStep.addStepContent(productExpansion);
 	}
-
-	public void autoComplete(int slideOnDisplay) {
-		// TODO
-	}
-
-	public boolean checkAnswers(int i) {
-		return true;
-		// TODO Auto-generated method stub
-		
-	}
-
 }

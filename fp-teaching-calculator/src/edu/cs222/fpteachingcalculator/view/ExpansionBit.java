@@ -75,5 +75,4 @@ public class ExpansionBit extends GridPane {
 		baseDigit.getStyleClass().add("smallExpansionChar");
 		exponentDigit.getStyleClass().add("smallExpansionExponent");
 	}
-
 }

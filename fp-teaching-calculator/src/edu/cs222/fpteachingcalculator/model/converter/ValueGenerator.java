@@ -35,14 +35,11 @@ public class ValueGenerator {
 		if (valueType.equals("BIN")) {
 			iInitial = 1;
 		} else {
-			valueGenerated = Long.toHexString(1 + (Math.round(Math.random()
-					* (digitRange - 1))));
+			valueGenerated = Long.toHexString(1 + (Math.round(Math.random() * (digitRange - 1))));
 		}
 		for (int i = iInitial; i <= valueLength; i++) {
-			valueGenerated = valueGenerated
-					+ Long.toHexString((Math.round(Math.random() * digitRange)));
+			valueGenerated = valueGenerated + Long.toHexString((Math.round(Math.random() * digitRange)));
 		}
 		return valueGenerated.toUpperCase();
 	}
-
 }

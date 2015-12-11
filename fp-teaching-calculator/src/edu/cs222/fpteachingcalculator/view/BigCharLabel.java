@@ -30,5 +30,4 @@ public class BigCharLabel extends Label {
 	public void updateHalignment(HPos newPos) {
 		GridPane.setHalignment(this, newPos);
 	}
-
 }

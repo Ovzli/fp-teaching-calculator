@@ -18,9 +18,8 @@ public class InputValidator {
 		}
 	}
 
-	public void checkIfValueIsValid(List<String> parsedListOfUserInput,
-			String inputMode) throws InvalidSymbolException,
-			InvalidNumberLengthException {
+	public void checkIfValueIsValid(List<String> parsedListOfUserInput, String inputMode)
+			throws InvalidSymbolException, InvalidNumberLengthException {
 		if (inputMode.equals("HEX")) {
 			areHexSymbolsValid(parsedListOfUserInput);
 			isHexNumberTooLong(parsedListOfUserInput);
@@ -33,29 +32,25 @@ public class InputValidator {
 		}
 	}
 
-	private void isHexNumberTooLong(List<String> parsedListOfHexInput)
-			throws InvalidNumberLengthException {
+	private void isHexNumberTooLong(List<String> parsedListOfHexInput) throws InvalidNumberLengthException {
 		if (parsedListOfHexInput.size() > maxHexInputLength) {
 			throw new InvalidNumberLengthException();
 		}
 	}
 
-	private void isDecNumberTooLong(List<String> parsedListOfDecInput)
-			throws InvalidNumberLengthException {
+	private void isDecNumberTooLong(List<String> parsedListOfDecInput) throws InvalidNumberLengthException {
 		if (parsedListOfDecInput.size() > maxDecInputLength) {
 			throw new InvalidNumberLengthException();
 		}
 	}
 
-	private void isBinNumberTooLong(List<String> parsedListOfBinInput)
-			throws InvalidNumberLengthException {
+	private void isBinNumberTooLong(List<String> parsedListOfBinInput) throws InvalidNumberLengthException {
 		if (parsedListOfBinInput.size() > maxBinInputLength) {
 			throw new InvalidNumberLengthException();
 		}
 	}
 
-	private void areHexSymbolsValid(List<String> parsedListOfHexInput)
-			throws InvalidSymbolException {
+	private void areHexSymbolsValid(List<String> parsedListOfHexInput) throws InvalidSymbolException {
 		for (String hexChar : parsedListOfHexInput) {
 			if (!validHexSymbols.contains(hexChar)) {
 				throw new InvalidSymbolException();
@@ -63,8 +58,7 @@ public class InputValidator {
 		}
 	}
 
-	private void areDecSymbolsValid(List<String> parsedListOfDecInput)
-			throws InvalidSymbolException {
+	private void areDecSymbolsValid(List<String> parsedListOfDecInput) throws InvalidSymbolException {
 		for (String decChar : parsedListOfDecInput) {
 			if (!validDecSymbols.contains(decChar)) {
 				throw new InvalidSymbolException();
@@ -72,13 +66,11 @@ public class InputValidator {
 		}
 	}
 
-	private void areBinSymbolsValid(List<String> parsedListOfBinInput)
-			throws InvalidSymbolException {
+	private void areBinSymbolsValid(List<String> parsedListOfBinInput) throws InvalidSymbolException {
 		for (String binChar : parsedListOfBinInput) {
 			if (!validBinSymbols.contains(binChar)) {
 				throw new InvalidSymbolException();
 			}
 		}
 	}
-
 }

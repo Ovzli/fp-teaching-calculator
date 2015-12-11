@@ -24,9 +24,9 @@ public class ResultStep extends GridPane {
 		GridPane.setHalignment(stepTitle, HPos.RIGHT);
 		GridPane.setValignment(stepTitle, VPos.TOP);
 	}
-	
-	public void setResultStepID(int stepIDassigned){
-		stepID = stepIDassigned;	
+
+	public void setResultStepID(int stepIDassigned) {
+		stepID = stepIDassigned;
 		stepIDTag.setText("  STEP " + stepID);
 	}
 
@@ -68,10 +68,10 @@ public class ResultStep extends GridPane {
 		this.add(tutorText, 1, 0);
 	}
 
-	public void addStepPostContent(GridPane content){
+	public void addStepPostContent(GridPane content) {
 		this.add(content, 1, 2);
 	}
-	
+
 	public void addStepContent(GridPane content) {
 		this.add(content, 1, 1);
 	}

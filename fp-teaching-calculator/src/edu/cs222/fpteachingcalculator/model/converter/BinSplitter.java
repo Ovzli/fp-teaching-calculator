@@ -5,9 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class BinSplitter {
-	
-	public List<List<Integer>> separateBinValuesIntoDigits(
-			List<String> listOfBinaryEquivalents) {
+
+	public List<List<Integer>> separateBinValuesIntoDigits(List<String> listOfBinaryEquivalents) {
 		List<List<Integer>> listOfSeparatedBinaryNibbles = new LinkedList<>();
 		for (String binValue : listOfBinaryEquivalents) {
 			listOfSeparatedBinaryNibbles.add(createIntArrayOfBinDigits(binValue));

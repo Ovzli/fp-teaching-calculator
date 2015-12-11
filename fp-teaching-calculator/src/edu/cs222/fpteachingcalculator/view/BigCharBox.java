@@ -13,5 +13,4 @@ public class BigCharBox extends Rectangle {
 		this.setStroke(Color.ROYALBLUE);
 		this.setFill(Paint.valueOf("#E6E6E6"));
 	}
-
 }

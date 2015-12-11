@@ -16,5 +16,4 @@ public class BigValueDecExpansion extends BigValueExpansion {
 			this.add(new ExpansionBit(binaryDigits.get(i), (3 - i)), (i * 2) + 1, 0);
 		}
 	}
-
 }

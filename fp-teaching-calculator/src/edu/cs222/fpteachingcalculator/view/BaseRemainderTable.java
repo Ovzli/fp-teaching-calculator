@@ -37,8 +37,6 @@ public class BaseRemainderTable extends GridPane {
 			decValue = newCarry;
 			finalRowTotal++;
 		}
-		System.out.println(carryValues);
-		System.out.println(remainderValues);
 		for (int i = 1; i < finalRowTotal; i++) {
 			this.add(new SmallCharLabel(carryValues.get(i - 1)), 0, i);
 			this.add(new SmallCharLabel("÷"), 1, i);
@@ -46,8 +44,7 @@ public class BaseRemainderTable extends GridPane {
 			this.add(new SmallCharLabel("="), 3, i);
 			this.add(new SmallCharLabel(carryValues.get(i)), 4, i);
 		}
-		this.add(new SmallCharLabel(carryValues.get(finalRowTotal - 1)), 0,
-				finalRowTotal);
+		this.add(new SmallCharLabel(carryValues.get(finalRowTotal - 1)), 0, finalRowTotal);
 		this.add(new SmallCharLabel(Integer.toString(base)), 2, finalRowTotal);
 		this.add(new SmallCharLabel("="), 3, finalRowTotal);
 		if (Integer.parseInt(carryValues.get(finalRowTotal - 1)) < base) {
@@ -57,41 +54,21 @@ public class BaseRemainderTable extends GridPane {
 			this.add(Xlabel, 4, finalRowTotal);
 		} else {
 			this.add(new SmallCharLabel("÷"), 1, finalRowTotal);
-			this.add(new SmallCharLabel(carryValues.get(finalRowTotal)), 4,
-					finalRowTotal);
+			this.add(new SmallCharLabel(carryValues.get(finalRowTotal)), 4, finalRowTotal);
 		}
 	}
 
-	public void insertInputField(List<String> individualBinChars) {
-		for (int i = 1; i <= finalRowTotal; i++) {
-			AnswerInputField inputField = new AnswerInputField(35);
-			answerInputFieldList.add(inputField);
-			GridPane.setHalignment(inputField, HPos.CENTER);
-			this.add(inputField, 5, i);	
-		}
-	}
-
-	public void insertRemainderValue(List<String> individualBinChars) {
-		for (int i = finalRowTotal-1; i >= 0; i--) {
-			SmallCharLabel remainder = new SmallCharLabel(remainderValues.get(i));
-			if(remainderValues.get(i).equals("1")){
-				remainder.setCharColor(Color.GREEN);				
-			}else{
-				remainder.setCharColor(Color.RED);				
+	public void insertRemainderValue(List<Integer> individualBinChars) {
+		int listPos = individualBinChars.size() - 1;
+		for (int i = finalRowTotal - 1; i >= 0; i--) {
+			SmallCharLabel remainder = new SmallCharLabel(individualBinChars.get(listPos).toString());
+			if (individualBinChars.get(listPos) == 0) {
+				remainder.setCharColor(Color.RED);
+			} else {
+				remainder.setCharColor(Color.GREEN);
 			}
-			this.add(remainder, 5, i+1);		
+			this.add(remainder, 5, i + 1);
+			listPos--;
 		}
-		// int listPosition = individualBinChars.size() - 1;
-		// for (int i = finalRowTotal + 1; i > 0; i--) {
-		// SmallCharLabel remainder = new SmallCharLabel(
-		// individualBinChars.get(listPosition));
-		// if (individualBinChars.get(listPosition).equals(0)) {
-		// remainder.setCharColor(Color.RED);
-		// } else {
-		// remainder.setCharColor(Color.GREEN);
-		// }
-		// this.add(remainder, 7, i);
-		// listPosition--;
-		// }
 	}
 }

@@ -53,8 +53,7 @@ public class Toolbar extends GridPane {
 			typeString = "binary";
 			symbolLength = 24;
 		}
-		instructionLabel.setText("Enter a " + typeString + " value:\n"
-				+ "(up to " + symbolLength + " digits long) ");
+		instructionLabel.setText("Enter a " + typeString + " value:\n" + "(up to " + symbolLength + " digits long) ");
 	}
 
 	public TextField addInputField() {
@@ -68,9 +67,9 @@ public class Toolbar extends GridPane {
 
 	public void setInputText(String inputMode) {
 		String genValue;
-		if(inputMode.equals("HEX")){
+		if (inputMode.equals("HEX")) {
 			genValue = valueGenerator.generateHexValue();
-		} else if(inputMode.equals("DEC")){
+		} else if (inputMode.equals("DEC")) {
 			genValue = valueGenerator.generateDecValue();
 		} else {
 			genValue = valueGenerator.generateBinValue();

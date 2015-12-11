@@ -2,7 +2,6 @@ package edu.cs222.fpteachingcalculator.view;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -13,7 +12,6 @@ import javafx.scene.shape.Rectangle;
 public class ResultDisplay extends GridPane {
 	protected final GridPane summaryDisplay = new GridPane();
 	protected final GridPane tutorialDisplay = new GridPane();
-	protected final GridPane practiceDisplay = new GridPane();
 	protected GridPane reprintValue = new GridPane();
 	protected List<String> hexSymbols = new LinkedList<>();
 	protected List<String> decValues = new LinkedList<>();
@@ -34,7 +32,6 @@ public class ResultDisplay extends GridPane {
 	protected String currentMode = "SUMMARY";
 	protected int numberDisplaySteps;
 	protected int tutorialSlideCount;
-	protected int practiceSlideCount;
 	protected GridPane targetDisplay;
 	protected final List<TextField> answerInputFieldList = new LinkedList<>();
 
@@ -56,7 +53,6 @@ public class ResultDisplay extends GridPane {
 		this.setGridLinesVisible(false);
 		summaryDisplay.setVgap(20);
 		tutorialDisplay.setVgap(20);
-		practiceDisplay.setVgap(20);
 		numberDisplaySteps = numberSteps;
 		for (int i = 1; i <= numberSteps; i++) {
 			displaySteps.add(new ResultStep());
@@ -75,10 +71,6 @@ public class ResultDisplay extends GridPane {
 			insertSummaryDisplaySteps();
 		} else if (currentMode.equals("TUTORIAL")) {
 			targetDisplay = tutorialDisplay;
-			setAllStepVisibility(false);
-			insertTutorialDisplaySteps();
-		} else if (currentMode.equals("PRACTICE")) {
-			targetDisplay = practiceDisplay;
 			setAllStepVisibility(false);
 			insertTutorialDisplaySteps();
 		}
@@ -106,7 +98,6 @@ public class ResultDisplay extends GridPane {
 	protected void clearEntireDisplay() {
 		this.getChildren().clear();
 		slideList.clear();
-		practiceDisplay.getChildren().clear();
 		tutorialDisplay.getChildren().clear();
 		summaryDisplay.getChildren().clear();
 		reprintValue.getChildren().clear();
@@ -147,34 +138,19 @@ public class ResultDisplay extends GridPane {
 		for (int i = 0; i < hexSymbols.size(); i++) {
 			BigCharBox bigCharBox = new BigCharBox();
 			gridPane.add(bigCharBox, i, 0);
-			if (currentMode.equals("PRACTICE")) {
-				answerInputFieldList.add(new AnswerInputField(40));
-				gridPane.add(answerInputFieldList.get(i), i, 0);
-			} else {
-				BigCharLabel bigCharLabel = new BigCharLabel(decValues.get(i));
-				gridPane.add(bigCharLabel, i, 0);
-			}
+			BigCharLabel bigCharLabel = new BigCharLabel(decValues.get(i));
+			gridPane.add(bigCharLabel, i, 0);
 		}
 		return gridPane;
 	}
 
 	protected void makeGreatMultiplierStep(int stepID, int baseValue) {
 		int stepIDindex = stepID - 1;
-		displaySteps.get(stepIDindex).addFormattedStepHeader(
-				"greatest base " + baseValue + " multiplier");
+		displaySteps.get(stepIDindex).addFormattedStepHeader("greatest base " + baseValue + " multiplier");
 		displaySteps.get(stepIDindex).setResultStepID(stepID);
 		greatMultiplier = new GreatestMultiplier(baseValue, decString);
-		if (currentMode.equals("PRACTICE")) {
-			displaySteps.get(stepIDindex).addStepComment(
-					"Determine the greatest exponent of the base without going "
-							+ "over the value being converted");
-			greatMultiplier.setupForPracticeMode();
-		} else {
-			displaySteps.get(stepIDindex).addStepComment(
-					"This step is used to determine the greatest exponential "
-							+ "multiplier of the base without going over the "
-							+ "value needing to be coverted.");
-		}
+		displaySteps.get(stepIDindex).addStepComment("This step is used to determine the greatest exponential "
+				+ "multiplier of the base without going over the " + "value needing to be coverted.");
 		displaySteps.get(stepIDindex).addStepContent(greatMultiplier);
 	}
 
@@ -182,90 +158,49 @@ public class ResultDisplay extends GridPane {
 		int stepIDindex = stepID - 1;
 		displaySteps.get(stepIDindex).addFormattedStepHeader("binary representation");
 		displaySteps.get(stepIDindex).setResultStepID(stepID);
-		displaySteps.get(stepIDindex).addStepComment("This step shows the final binary "
-				+ "representation rewritten as a binary number.");
+		displaySteps.get(stepIDindex)
+				.addStepComment("This step shows the final binary " + "representation rewritten as a binary number.");
 		binaryGrid = new BinaryGrid(binDigits);
 		displaySteps.get(stepIDindex).addStepContent(binaryGrid);
 	}
-	
+
 	protected void makeRemainderStep(int stepID, int baseValue) {
-		System.out.println(individualBinChars);
 		int stepIDindex = stepID - 1;
-		displaySteps.get(stepIDindex).addFormattedStepHeader(
-				"calculate remainders");
+		displaySteps.get(stepIDindex).addFormattedStepHeader("calculate remainders");
 		displaySteps.get(stepIDindex).setResultStepID(stepID);
 		remainderCalcs = new BaseRemainderTable(baseValue, decString);
-		if (currentMode.equals("PRACTICE")) {
-			displaySteps.get(stepIDindex).addStepComment(
-					"PRACTICE STEP COMMENT.");
-			remainderCalcs.insertInputField(individualBinChars);
-		} else {
-			displaySteps.get(stepIDindex).addStepComment(
-					"SUMMARY AND TUTORIAL COMMENT");
-			remainderCalcs.insertRemainderValue(individualBinChars);
-		}
+		displaySteps.get(stepIDindex).addStepComment(
+				"This step shows using arithmetic to find the remainders of the original value when divided by its base, to show the values of the characters.");
+		createRemainders(baseValue);
+		remainderCalcs.insertRemainderValue(remainders);
 		displaySteps.get(stepIDindex).addStepContent(remainderCalcs);
 	}
 
-	protected void makeBaseExpansionStep(int stepID, int baseValue) {
-		int stepIDindex = stepID - 1;
-		displaySteps.get(stepIDindex).addFormattedStepHeader("step header title");
-		displaySteps.get(stepIDindex).setResultStepID(stepID);
-		createRemainders(baseValue);
-		if (currentMode.equals("PRACTICE")) {
-			displaySteps.get(stepIDindex).addStepComment("PRACTICE STEP COMMENT.");
-		} else {
-			displaySteps.get(stepIDindex).addStepComment("SUMMARY AND TUTORIAL COMMENT");
-		}
-		
-		displaySteps.get(stepIDindex).addStepContent(new BinExpansion(baseValue, remainders));
-	}
-	
-	private void createRemainders(int baseValue){
-		remainders.clear(); 
+	private void createRemainders(int baseValue) {
+		remainders.clear();
 		int value = Integer.valueOf(decString);
-		while(value > 0){
-			remainders.add(0, value%baseValue);
-			value = value/baseValue;
+		while (value > 0) {
+			remainders.add(0, value % baseValue);
+			value = value / baseValue;
 		}
-	}
-
-	protected void makeRemainderEvaluationStep(int stepID) {
-		int stepIDindex = stepID - 1;
-		displaySteps.get(stepIDindex).addFormattedStepHeader("decimal evaluation");
-		displaySteps.get(stepIDindex).setResultStepID(stepID);
-		if (currentMode.equals("PRACTICE")) {
-			displaySteps.get(stepIDindex).addStepComment("PRACTICE STEP COMMENT.");
-		} else {
-			displaySteps.get(stepIDindex).addStepComment("SUMMARY AND TUTORIAL COMMENT");
-		}
-		// stepName4.addStepContent( stepContentObject? );
 	}
 
 	protected void makeProductSumStep(int stepID) {
 		int stepIDindex = stepID - 1;
 		displaySteps.get(stepIDindex).addFormattedStepHeader("product sum");
 		displaySteps.get(stepIDindex).setResultStepID(stepID);
-		displaySteps.get(stepIDindex).addStepComment(
-				"Below is the final product sum of the product expansion.");
+		displaySteps.get(stepIDindex).addStepComment("Below is the final product sum of the product expansion.");
 		BigCharLabel productSumLabel = new BigCharLabel(decString);
 		productSumLabel.overrideCharHexColor("#0066CC");
 		displaySteps.get(stepIDindex).addStepBigCharLabel(productSumLabel);
 	}
 
 	protected String writeDecEquivalentComment() {
-		String DecEquivalentComment;
-		if (currentMode.equals("PRACTICE")) {
-			DecEquivalentComment = "Enter the decimal equivalents for each hexadecimal value above."
-					+ "\nHINT: These are pre-determined representations.";
-		} else {
-			DecEquivalentComment = "This step shows each input symbol must be assigned a "
-					+ "representative equivalent for each symbol needing "
-					+ "converted. This is done through pre-determined "
-					+ "representations of each individual symbol as outlined in the "
-					+ "equivalency table shown to the right.";
-		}
-		return DecEquivalentComment;
+		return "This step shows each input symbol must be assigned a "
+				+ "representative equivalent for each symbol needing "
+				+ "converted. This is done through pre-determined "
+				+ "representations of each individual symbol as outlined in the "
+				+ "equivalency table shown to the right.";
 	}
 
 	protected void fillOutBigCharTable(List<String> inputList) {
@@ -291,11 +226,8 @@ public class ResultDisplay extends GridPane {
 	}
 
 	public int getTotalSlideCount(String displayMode) {
-		if (displayMode.equals("PRACTICE")) {
-			return practiceSlideCount;
-		} else {
-			return tutorialSlideCount;
-		}
+		return tutorialSlideCount;
+
 	}
 
 	public void hideSlide(int slideToHide) {

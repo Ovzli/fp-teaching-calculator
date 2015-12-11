@@ -21,7 +21,7 @@ public class ValueTranslatorTest {
 		List<String> outputList = valueTranslator.translateHexListToDecList(hexList);
 		Assert.assertEquals(correctList, outputList);
 	}
-	
+
 	@Test
 	public void testTranslateDecListToDecValue() {
 		List<String> decList = createListOfStrings("12 2 10");
@@ -29,9 +29,9 @@ public class ValueTranslatorTest {
 		String outputValue = valueTranslator.translateDecListToDecValue(decList);
 		Assert.assertEquals(correctValue, outputValue);
 	}
-	
+
 	@Test
-	public void testTranslateBinListToDecList(){
+	public void testTranslateBinListToDecList() {
 		List<List<Integer>> validInput = createValidInput();
 		List<String> correctList = createListOfStrings("12 2 10");
 		List<String> outputList = valueTranslator.translateBinListToDecList(validInput);
@@ -45,7 +45,7 @@ public class ValueTranslatorTest {
 		String outputValue = valueTranslator.translateDecValueToHexValue(decValue);
 		Assert.assertEquals(correctValue, outputValue);
 	}
-	
+
 	@Test
 	public void testTranslateDecValueToBinValue() {
 		String decValue = "3114";
@@ -53,7 +53,7 @@ public class ValueTranslatorTest {
 		String outputValue = valueTranslator.translateDecValueToBinValue(decValue);
 		Assert.assertEquals(correctValue, outputValue);
 	}
-	
+
 	@Test
 	public void testTranslateDecToBin() {
 		List<String> decList = createListOfStrings("12 2 10");
@@ -85,8 +85,8 @@ public class ValueTranslatorTest {
 		int testOutput = valueTranslator.getPostitionOfValue(hexValues, test);
 		Assert.assertEquals(correctOutput, testOutput);
 	}
-	
-	private List<List<Integer>> createValidInput() { //"1100 0010 1010"
+
+	private List<List<Integer>> createValidInput() {
 		List<List<Integer>> correctOutput = new LinkedList<>();
 		List<Integer> a = new ArrayList<>();
 		a.add(1);

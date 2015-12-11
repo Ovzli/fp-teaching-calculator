@@ -100,7 +100,6 @@ public class BigValueExpansion extends GridPane {
 	public void makeSmallFonts() {
 		for (int i = 0; i < bigCharLabelList.size(); i++) {
 			bigCharLabelList.get(i).changeToSmallChar();
-		}	
+		}
 	}
-
 }

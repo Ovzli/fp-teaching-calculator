@@ -22,17 +22,17 @@ public class InputSplitterTest {
 		List<String> methodOutput = inputSplitter.splitString(validInput);
 		Assert.assertEquals(methodOutput, correctOutput);
 	}
-	
+
 	@Test
-	public void testSplitBinInput(){
+	public void testSplitBinInput() {
 		String validInput = "110000101010";
 		List<String> correctOutput = createListOfStrings("1100 0010 1010");
 		List<String> methodOutput = inputSplitter.splitBinString(validInput);
-		Assert.assertEquals(correctOutput, methodOutput);	
+		Assert.assertEquals(correctOutput, methodOutput);
 		String validInput2 = "1110000101010";
 		List<String> correctOutput2 = createListOfStrings("0001 1100 0010 1010");
 		List<String> methodOutput2 = inputSplitter.splitBinString(validInput2);
-		Assert.assertEquals(correctOutput2, methodOutput2);	
+		Assert.assertEquals(correctOutput2, methodOutput2);
 	}
 
 	private List<String> createListOfStrings(String input) {
