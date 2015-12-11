@@ -1,25 +1,30 @@
 package edu.cs222.fpteachingcalculator.view;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javafx.scene.layout.GridPane;
 
 public class BinToHexResultDisplay extends ResultDisplay {
 	public final GridPane binToHexSummaryDisplay;
 	public final GridPane binToHexTutorialDisplay;
 	public final GridPane binToHexPracticeDisplay;
-	private final ResultStep stepName1;
-	private final ResultStep stepName2;
-	private final ResultStep stepName3;
-	private final ResultStep stepName4;
+	private final ResultStep binarySumExpandStep;
+	private final ResultStep decSumStep;
+	private final ResultStep hexEquivalentStep;
+	private final ResultStep hexRepresentStep;
+	private BinExpansionGrid binarySums;
+	private List<Integer> decSums = new LinkedList<>();
 
 	public BinToHexResultDisplay() {
 		super(4);
 		binToHexSummaryDisplay = summaryDisplay;
 		binToHexTutorialDisplay = tutorialDisplay;
 		binToHexPracticeDisplay = practiceDisplay;
-		stepName1 = displaySteps.get(0);
-		stepName2 = displaySteps.get(1);
-		stepName3 = displaySteps.get(2);
-		stepName4 = displaySteps.get(3);
+		binarySumExpandStep = displaySteps.get(0);
+		decSumStep = displaySteps.get(1);
+		hexEquivalentStep = displaySteps.get(2);
+		hexRepresentStep = displaySteps.get(3);
 		tutorialSlideCount = 4;
 		practiceSlideCount = 3;
 	}
@@ -36,80 +41,95 @@ public class BinToHexResultDisplay extends ResultDisplay {
 
 	private void setupBinToHexSummaryDisplay() {
 		this.add(binToHexSummaryDisplay, 0, 0);
-		makeStep1(1);
-		makeStep2(2);
-		makeStep3(3);
-		makeStep4(4);
+		makeBinarySumExpansionStep(1);
+		makeDecSumStep(2);
+		makeHexEquivalentStep(3);
+		makeHexRepresentStep(4);
 	}
 
 	private void setupBinToHexTutorialDisplay() {
 		this.add(binToHexTutorialDisplay, 0, 0);
-		slideList.add(stepName1);
-		slideList.add(stepName2);
-		slideList.add(stepName3);
-		slideList.add(stepName4);
-		makeStep1(1);
-		makeStep2(2);
-		makeStep3(3);
-		makeStep4(4);
+		slideList.add(binarySumExpandStep);
+		slideList.add(decSumStep);
+		slideList.add(hexEquivalentStep);
+		slideList.add(hexRepresentStep);
+		makeBinarySumExpansionStep(1);
+		makeDecSumStep(2);
+		makeHexEquivalentStep(3);
+		makeHexRepresentStep(4);
 	}
 
 	private void setupBinToHexPracticeDisplay() {
 		this.add(binToHexPracticeDisplay, 0, 0);
-		slideList.add(stepName1);
-		slideList.add(stepName2);
-		slideList.add(stepName3);
-		slideList.add(stepName4);
-		makeStep1(1);
-		makeStep2(2);
-		makeStep3(3);
-		makeStep4(4);
+		slideList.add(binarySumExpandStep);
+		slideList.add(hexEquivalentStep);
+		slideList.add(hexRepresentStep);
+		makeBinarySumExpansionStep(1);
+		makeHexEquivalentStep(2);
+		makeHexRepresentStep(3);
 	}
 
-	private void makeStep1(int stepID) {
-		stepName1.addFormattedStepHeader("step header title");
-		stepName1.setResultStepID(stepID);
+	private void makeBinarySumExpansionStep(int stepID) {
+		binarySumExpandStep.addFormattedStepHeader("binary sum expansion");
+		binarySumExpandStep.setResultStepID(stepID);
 		if (currentMode.equals("PRACTICE")) {
-			stepName1.addStepComment("PRACTICE STEP COMMENT.");
+			binarySumExpandStep.addStepComment("Enter each decimal "
+					+ "value in the base 2 sum expansion.");
 		} else {
-			stepName1.addStepComment("SUMMARY AND TUTORIAL COMMENT");
+			binarySumExpandStep.addStepComment("This step demonstrates "
+					+ "how each 4 bit binary nibble of base 2 digits "
+					+ "(of the original bit string being converted) "
+					+ "represents a base 10 decimal sum expansion.");
 		}
-		// stepName1.addStepContent( stepContentObject? );
+		binarySums = new BinExpansionGrid(binDigits);
+		binarySumExpandStep.addStepContent(binarySums);
 	}
 
-	private void makeStep2(int stepID) {
-		stepName2.addFormattedStepHeader("step header title");
-		stepName2.setResultStepID(stepID);
+	private void makeDecSumStep(int stepID) {
+		decSumStep.addFormattedStepHeader("decimal summation");
+		decSumStep.setResultStepID(stepID);
 		if (currentMode.equals("PRACTICE")) {
-			stepName2.addStepComment("PRACTICE STEP COMMENT.");
+			decSumStep.addStepComment("PRACTICE STEP COMMENT.");
 		} else {
-			stepName2.addStepComment("SUMMARY AND TUTORIAL COMMENT");
+			decSumStep.addStepComment("This step outlines how each of "
+					+ "the decimal sum expansions have been added to a"
+					+ "single decimal value.");
 		}
 		// stepName2.addStepContent( stepContentObject? );
 	}
 
-	private void makeStep3(int stepID) {
-		stepName3.addFormattedStepHeader("step header title");
-		stepName3.setResultStepID(stepID);
+	private void makeHexEquivalentStep(int stepID) {
+		hexEquivalentStep.addFormattedStepHeader("hexadecimal equivalencies");
+		hexEquivalentStep.setResultStepID(stepID);
 		if (currentMode.equals("PRACTICE")) {
-			stepName3.addStepComment("PRACTICE STEP COMMENT.");
+			hexEquivalentStep.addStepComment("Enter the hexadecimal "
+					+ "equivalent of each decimal value.");
 		} else {
-			stepName3.addStepComment("SUMMARY AND TUTORIAL COMMENT");
+			hexEquivalentStep.addStepComment("This step shows each "
+					+ "decimal value is assigned a representative equivalent "
+					+ "converted. This is done through pre-determined "
+					+ "representations of each individual symbol as outlined "
+					+ "in the equivalency table shown to the right.");
 		}
-		// stepName3.addStepContent( stepContentObject? );
+		GridPane equivalencyTable = new GridPane();
+		equivalencyTable = makeBigCharTable();
+		for (int i = 0; i < hexSymbols.size(); i++) {
+			BigCharBox bigCharBox = new BigCharBox();
+			equivalencyTable.add(bigCharBox, i, 0);
+			BigCharLabel bigCharLabel = new BigCharLabel(hexSymbols.get(i));
+			equivalencyTable.add(bigCharLabel, i, 0);
+			bigCharLabel.overrideCharHexColor("#0066CC");
+		}
+		hexRepresentStep.addStepContent(equivalencyTable);
 	}
 
-	private void makeStep4(int stepID) {
-		stepName4.addFormattedStepHeader("step header title");
-		stepName4.setResultStepID(stepID);
-		if (currentMode.equals("PRACTICE")) {
-			stepName4.addStepComment("PRACTICE STEP COMMENT.");
-		} else {
-			stepName4.addStepComment("SUMMARY AND TUTORIAL COMMENT");
-		}
-		// stepName4.addStepContent( stepContentObject? );
+	private void makeHexRepresentStep(int stepID) {
+		hexRepresentStep.addFormattedStepHeader("hexadecimal representation");
+		hexRepresentStep.setResultStepID(stepID);
+		hexRepresentStep.addStepComment("The final hexadecimal "
+				+ "value is now displayed.");
 	}
-	
+
 	public void autoComplete(int slideOnDisplay) {
 		// TODO
 	}
@@ -117,7 +137,7 @@ public class BinToHexResultDisplay extends ResultDisplay {
 	public boolean checkAnswers(int i) {
 		return true;
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
