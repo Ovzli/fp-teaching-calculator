@@ -6,22 +6,24 @@ public class DecToBinResultDisplay extends ResultDisplay {
 	public final GridPane decToBinSummaryDisplay;
 	public final GridPane decToBinTutorialDisplay;
 	public final GridPane decToBinPracticeDisplay;
-	private final ResultStep stepName1;
-	private final ResultStep stepName2;
-	private final ResultStep stepName3;
-	private final ResultStep stepName4;
+	private final ResultStep greatMultiplierStep;
+	private final ResultStep remainderStep;
+	private final ResultStep baseExpansionStep;
+	private final ResultStep remainderEvaluationStep;
+	private final ResultStep binRepresentStep;
 
 	public DecToBinResultDisplay() {
-		super(4);
+		super(5);
 		decToBinSummaryDisplay = summaryDisplay;
 		decToBinTutorialDisplay = tutorialDisplay;
 		decToBinPracticeDisplay = practiceDisplay;
-		stepName1 = displaySteps.get(0);
-		stepName2 = displaySteps.get(1);
-		stepName3 = displaySteps.get(2);
-		stepName4 = displaySteps.get(3);
-		tutorialSlideCount = 4;
-		practiceSlideCount = 3;
+		greatMultiplierStep = displaySteps.get(0);
+		remainderStep = displaySteps.get(1);
+		baseExpansionStep = displaySteps.get(2);
+		remainderEvaluationStep = displaySteps.get(3);
+		binRepresentStep = displaySteps.get(4);
+		tutorialSlideCount = 5;
+		practiceSlideCount = 4;
 	}
 
 	public void defineDisplaySetup() {
@@ -37,66 +39,36 @@ public class DecToBinResultDisplay extends ResultDisplay {
 	private void setupDecToBinSummaryDisplay() {
 		this.add(decToBinSummaryDisplay, 0, 0);
 		makeGreatMultiplierStep(1, 2);
-		makeStep2(2);
-		makeStep3(3);
-		makeStep4(4);
+		makeRemainderStep(2, 2);
+		makeBaseExpansionStep(3);
+		makeRemainderEvaluationStep(4);
+		makeBinRepresentStep(5);
 	}
 
 	private void setupDecToBinTutorialDisplay() {
 		this.add(decToBinTutorialDisplay, 0, 0);
-		slideList.add(stepName1);
-		slideList.add(stepName2);
-		slideList.add(stepName3);
-		slideList.add(stepName4);
+		slideList.add(greatMultiplierStep);
+		slideList.add(remainderStep);
+		slideList.add(baseExpansionStep);
+		slideList.add(remainderEvaluationStep);
+		slideList.add(binRepresentStep);
 		makeGreatMultiplierStep(1, 2);
-		makeStep2(2);
-		makeStep3(3);
-		makeStep4(4);
+		makeRemainderStep(2, 2);
+		makeBaseExpansionStep(3);
+		makeRemainderEvaluationStep(4);
+		makeBinRepresentStep(5);
 	}
 
 	private void setupDecToBinPracticeDisplay() {
 		this.add(decToBinPracticeDisplay, 0, 0);
-		slideList.add(stepName1);
-		slideList.add(stepName2);
-		slideList.add(stepName3);
-		slideList.add(stepName4);
+		slideList.add(greatMultiplierStep);
+		slideList.add(remainderStep);
+		slideList.add(remainderEvaluationStep);
+		slideList.add(binRepresentStep);
 		makeGreatMultiplierStep(1, 2);
-		makeStep2(2);
-		makeStep3(3);
-		makeStep4(4);
-	}
-	
-	private void makeStep2(int stepID) {
-		stepName2.addFormattedStepHeader("step header title");
-		stepName2.setResultStepID(stepID);
-		if (currentMode.equals("PRACTICE")) {
-			stepName2.addStepComment("PRACTICE STEP COMMENT.");
-		} else {
-			stepName2.addStepComment("SUMMARY AND TUTORIAL COMMENT");
-		}
-		// stepName2.addStepContent( stepContentObject? );
-	}
-
-	private void makeStep3(int stepID) {
-		stepName3.addFormattedStepHeader("step header title");
-		stepName3.setResultStepID(stepID);
-		if (currentMode.equals("PRACTICE")) {
-			stepName3.addStepComment("PRACTICE STEP COMMENT.");
-		} else {
-			stepName3.addStepComment("SUMMARY AND TUTORIAL COMMENT");
-		}
-		// stepName3.addStepContent( stepContentObject? );
-	}
-
-	private void makeStep4(int stepID) {
-		stepName4.addFormattedStepHeader("step header title");
-		stepName4.setResultStepID(stepID);
-		if (currentMode.equals("PRACTICE")) {
-			stepName4.addStepComment("PRACTICE STEP COMMENT.");
-		} else {
-			stepName4.addStepComment("SUMMARY AND TUTORIAL COMMENT");
-		}
-		// stepName4.addStepContent( stepContentObject? );
+		makeRemainderStep(2, 2);
+		makeRemainderEvaluationStep(3);
+		makeBinRepresentStep(4);
 	}
 	
 	public void autoComplete(int slideOnDisplay) {

@@ -15,8 +15,8 @@ public class ResultDisplay extends GridPane {
 	protected final GridPane tutorialDisplay = new GridPane();
 	protected final GridPane practiceDisplay = new GridPane();
 	protected GridPane reprintValue = new GridPane();
-	protected List<String> hexSymbols = new LinkedList<String>();
-	protected List<String> decValues = new LinkedList<String>();
+	protected List<String> hexSymbols = new LinkedList<>();
+	protected List<String> decValues = new LinkedList<>();
 	protected List<List<Integer>> binDigits = new LinkedList<>();
 	protected List<String> binChars = new LinkedList<>();
 	protected String decString = "";
@@ -26,6 +26,8 @@ public class ResultDisplay extends GridPane {
 	protected ConcatenationGrid concatenationGrid;
 	protected BinaryGrid binaryGrid;
 	protected GreatestMultiplier greatMultiplier;
+	protected BaseRemainderTable remainderCalcs;
+	protected List<Integer> remainders = new LinkedList<>();
 	protected final ResultStep inputReprintRow = new ResultStep();
 	protected List<ResultStep> displaySteps = new LinkedList<>();
 	protected String currentMode = "SUMMARY";
@@ -175,6 +177,57 @@ public class ResultDisplay extends GridPane {
 		displaySteps.get(stepIDindex).addStepContent(greatMultiplier);
 	}
 
+	protected void makeBinRepresentStep(int stepID) {
+		int stepIDindex = stepID - 1;
+		displaySteps.get(stepIDindex).addFormattedStepHeader("binary representation");
+		displaySteps.get(stepIDindex).setResultStepID(stepID);
+		displaySteps.get(stepIDindex).addStepComment("This step shows the final binary "
+				+ "representation rewritten as a binary number.");
+		binaryGrid = new BinaryGrid(binDigits);
+		displaySteps.get(stepIDindex).addStepContent(binaryGrid);
+	}
+	
+	protected void makeRemainderStep(int stepID, int baseValue) {
+		int stepIDindex = stepID - 1;
+		int greatestExponent = greatMultiplier.getGreatestExponent();
+		displaySteps.get(stepIDindex).addFormattedStepHeader(
+				"calculate remainders");
+		displaySteps.get(stepIDindex).setResultStepID(stepID);
+		if (currentMode.equals("PRACTICE")) {
+			displaySteps.get(stepIDindex).addStepComment(
+					"PRACTICE STEP COMMENT.");
+		} else {
+			displaySteps.get(stepIDindex).addStepComment(
+					"SUMMARY AND TUTORIAL COMMENT");
+		}
+		remainderCalcs = new BaseRemainderTable(baseValue, decString);
+		displaySteps.get(stepIDindex).addStepContent(remainderCalcs);
+	}
+
+	protected void makeBaseExpansionStep(int stepID) {
+		int stepIDindex = stepID - 1;
+		displaySteps.get(stepIDindex).addFormattedStepHeader("step header title");
+		displaySteps.get(stepIDindex).setResultStepID(stepID);
+		if (currentMode.equals("PRACTICE")) {
+			displaySteps.get(stepIDindex).addStepComment("PRACTICE STEP COMMENT.");
+		} else {
+			displaySteps.get(stepIDindex).addStepComment("SUMMARY AND TUTORIAL COMMENT");
+		}
+		// stepName3.addStepContent( stepContentObject? );
+	}
+
+	protected void makeRemainderEvaluationStep(int stepID) {
+		int stepIDindex = stepID - 1;
+		displaySteps.get(stepIDindex).addFormattedStepHeader("decimal evaluation");
+		displaySteps.get(stepIDindex).setResultStepID(stepID);
+		if (currentMode.equals("PRACTICE")) {
+			displaySteps.get(stepIDindex).addStepComment("PRACTICE STEP COMMENT.");
+		} else {
+			displaySteps.get(stepIDindex).addStepComment("SUMMARY AND TUTORIAL COMMENT");
+		}
+		// stepName4.addStepContent( stepContentObject? );
+	}
+
 	protected String writeDecEquivalentComment() {
 		String DecEquivalentComment;
 		if (currentMode.equals("PRACTICE")) {
@@ -190,7 +243,7 @@ public class ResultDisplay extends GridPane {
 		return DecEquivalentComment;
 	}
 
-	private void fillOutBigCharTable(List<String> inputList) {
+	protected void fillOutBigCharTable(List<String> inputList) {
 		for (int i = 0; i < inputList.size(); i++) {
 			BigCharBox bigCharBox = new BigCharBox();
 			reprintValue.add(bigCharBox, i, 0);

@@ -7,20 +7,22 @@ public class DecToHexResultDisplay extends ResultDisplay {
 	public final GridPane decToHexTutorialDisplay;
 	public final GridPane decToHexPracticeDisplay;
 	private final ResultStep greatMultiplierStep;
-	private final ResultStep stepName2;
-	private final ResultStep stepName3;
-	private final ResultStep stepName4;
+	private final ResultStep remainderStep;
+	private final ResultStep baseExpansionStep;
+	private final ResultStep remainderEvaluationStep;
+	private final ResultStep hexEquivalentStep;
 
 	public DecToHexResultDisplay() {
-		super(4);
+		super(5);
 		decToHexSummaryDisplay = summaryDisplay;
 		decToHexTutorialDisplay = tutorialDisplay;
 		decToHexPracticeDisplay = practiceDisplay;
 		greatMultiplierStep = displaySteps.get(0);
-		stepName2 = displaySteps.get(1);
-		stepName3 = displaySteps.get(2);
-		stepName4 = displaySteps.get(3);
-		tutorialSlideCount = 4;
+		remainderStep = displaySteps.get(1);
+		baseExpansionStep = displaySteps.get(2);
+		remainderEvaluationStep = displaySteps.get(3);
+		hexEquivalentStep = displaySteps.get(4);
+		tutorialSlideCount = 5;
 		practiceSlideCount = 3;
 	}
 
@@ -37,68 +39,58 @@ public class DecToHexResultDisplay extends ResultDisplay {
 	private void setupDecToHexSummaryDisplay() {
 		this.add(decToHexSummaryDisplay, 0, 0);
 		makeGreatMultiplierStep(1, 16);
-		makeStep2(2);
-		makeStep3(3);
-		makeStep4(4);
+		makeRemainderStep(2, 16);
+		makeBaseExpansionStep(3);
+		makeRemainderEvaluationStep(4);
+		makeHexEquivalentStep(5);
 	}
 
 	private void setupDecToHexTutorialDisplay() {
 		this.add(decToHexTutorialDisplay, 0, 0);
 		slideList.add(greatMultiplierStep);
-		slideList.add(stepName2);
-		slideList.add(stepName3);
-		slideList.add(stepName4);
+		slideList.add(remainderStep);
+		slideList.add(baseExpansionStep);
+		slideList.add(remainderEvaluationStep);
 		makeGreatMultiplierStep(1, 16);
-		makeStep2(2);
-		makeStep3(3);
-		makeStep4(4);
+		makeRemainderStep(2, 16);
+		makeBaseExpansionStep(3);
+		makeRemainderEvaluationStep(4);
+		makeHexEquivalentStep(5);
 	}
 
 	private void setupDecToHexPracticeDisplay() {
 		this.add(decToHexPracticeDisplay, 0, 0);
 		slideList.add(greatMultiplierStep);
-		slideList.add(stepName2);
-		slideList.add(stepName3);
-		slideList.add(stepName4);
+		slideList.add(remainderStep);
+		slideList.add(baseExpansionStep);
+		slideList.add(remainderEvaluationStep);
 		makeGreatMultiplierStep(1, 16);
-		makeStep2(2);
-		makeStep3(3);
-		makeStep4(4);
+		makeRemainderStep(2, 16);
+		makeBaseExpansionStep(3);
+		makeRemainderEvaluationStep(4);
+		makeHexEquivalentStep(5);
 	}
 
-	private void makeStep2(int stepID) {
-		stepName2.addFormattedStepHeader("step header title");
-		stepName2.setResultStepID(stepID);
+	protected void makeHexEquivalentStep(int stepID) {
+		hexEquivalentStep.addFormattedStepHeader("hexadecimal equivalents");
+		hexEquivalentStep.setResultStepID(stepID);
 		if (currentMode.equals("PRACTICE")) {
-			stepName2.addStepComment("PRACTICE STEP COMMENT.");
+			hexEquivalentStep.addStepComment("PRACTICE STEP COMMENT.");
 		} else {
-			stepName2.addStepComment("SUMMARY AND TUTORIAL COMMENT");
+			hexEquivalentStep.addStepComment("SUMMARY AND TUTORIAL COMMENT");
 		}
-		// stepName2.addStepContent( stepContentObject? );
+		GridPane hexTable = new GridPane();
+		hexTable = makeBigCharTable();
+		for (int i = 0; i < hexSymbols.size(); i++) {
+			BigCharBox bigCharBox = new BigCharBox();
+			hexTable.add(bigCharBox, i, 0);
+			BigCharLabel bigCharLabel = new BigCharLabel(hexSymbols.get(i));
+			hexTable.add(bigCharLabel, i, 0);
+			bigCharLabel.overrideCharHexColor("#0066CC");
+		}
+		hexEquivalentStep.addStepContent(hexTable);
 	}
 
-	private void makeStep3(int stepID) {
-		stepName3.addFormattedStepHeader("step header title");
-		stepName3.setResultStepID(stepID);
-		if (currentMode.equals("PRACTICE")) {
-			stepName3.addStepComment("PRACTICE STEP COMMENT.");
-		} else {
-			stepName3.addStepComment("SUMMARY AND TUTORIAL COMMENT");
-		}
-		// stepName3.addStepContent( stepContentObject? );
-	}
-
-	private void makeStep4(int stepID) {
-		stepName4.addFormattedStepHeader("step header title");
-		stepName4.setResultStepID(stepID);
-		if (currentMode.equals("PRACTICE")) {
-			stepName4.addStepComment("PRACTICE STEP COMMENT.");
-		} else {
-			stepName4.addStepComment("SUMMARY AND TUTORIAL COMMENT");
-		}
-		// stepName4.addStepContent( stepContentObject? );
-	}
-	
 	public void autoComplete(int slideOnDisplay) {
 		// TODO
 	}
@@ -106,6 +98,6 @@ public class DecToHexResultDisplay extends ResultDisplay {
 	public boolean checkAnswers(int i) {
 		return true;
 		// TODO Auto-generated method stub
-		
+
 	}
 }
