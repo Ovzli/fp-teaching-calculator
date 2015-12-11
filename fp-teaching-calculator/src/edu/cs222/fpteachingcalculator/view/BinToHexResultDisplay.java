@@ -2,8 +2,8 @@ package edu.cs222.fpteachingcalculator.view;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 public class BinToHexResultDisplay extends ResultDisplay {
 	public final GridPane binToHexSummaryDisplay;
@@ -95,7 +95,8 @@ public class BinToHexResultDisplay extends ResultDisplay {
 					+ "the decimal sum expansions have been added to a"
 					+ "single decimal value.");
 		}
-		// stepName2.addStepContent( stepContentObject? );
+		binarySums = new BinExpansionGrid(binDigits);
+		decSumStep.addStepContent(binarySums);
 	}
 
 	private void makeHexEquivalentStep(int stepID) {
@@ -111,6 +112,15 @@ public class BinToHexResultDisplay extends ResultDisplay {
 					+ "representations of each individual symbol as outlined "
 					+ "in the equivalency table shown to the right.");
 		}
+		GridPane decimalTable = new GridPane();
+		decimalTable = makeBigCharTable();
+		for (int i = 0; i < decValues.size(); i++) {
+			BigCharBox bigCharBox = new BigCharBox();
+			decimalTable.add(bigCharBox, i, 0);
+			BigCharLabel bigCharLabel = new BigCharLabel(decValues.get(i));
+			decimalTable.add(bigCharLabel, i, 0);
+			bigCharLabel.overrideCharHexColor("#0066CC");
+		}
 		GridPane equivalencyTable = new GridPane();
 		equivalencyTable = makeBigCharTable();
 		for (int i = 0; i < hexSymbols.size(); i++) {
@@ -120,7 +130,8 @@ public class BinToHexResultDisplay extends ResultDisplay {
 			equivalencyTable.add(bigCharLabel, i, 0);
 			bigCharLabel.overrideCharHexColor("#0066CC");
 		}
-		hexRepresentStep.addStepContent(equivalencyTable);
+		hexEquivalentStep.addStepContent(decimalTable);
+		hexEquivalentStep.addStepPostContent(equivalencyTable);
 	}
 
 	private void makeHexRepresentStep(int stepID) {
@@ -128,6 +139,13 @@ public class BinToHexResultDisplay extends ResultDisplay {
 		hexRepresentStep.setResultStepID(stepID);
 		hexRepresentStep.addStepComment("The final hexadecimal "
 				+ "value is now displayed.");
+		String hexString = "";
+		for(String value : hexSymbols){
+			hexString += value;
+		}
+		BigCharLabel endHexString = new BigCharLabel(hexString);
+		endHexString.setCharColor(Color.BLUE);
+		hexRepresentStep.addStepBigCharLabel(endHexString);
 	}
 
 	public void autoComplete(int slideOnDisplay) {
