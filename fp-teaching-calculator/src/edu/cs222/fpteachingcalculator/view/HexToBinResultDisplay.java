@@ -135,7 +135,7 @@ public class HexToBinResultDisplay extends ResultDisplay {
 			}
 		} else if (slideOnDisplay == 2) {
 			for (int i = 0; i < hexSymbols.size(); i++) {
-				allCorrect = allCorrect && answerInputFieldList.get(i).getText().equals(binChars.get(i));
+				allCorrect = allCorrect && concatenationGrid.answerInputFieldList.get(i).getText().equals(binChars.get(i));
 			}
 		}
 		return allCorrect;
