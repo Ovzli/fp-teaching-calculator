@@ -24,5 +24,5 @@ public class BinExpansionGrid extends GridPane {
 			
 		}
 	}
-
+	}
 }

@@ -66,6 +66,10 @@ public class ResultStep extends GridPane {
 		this.add(tutorText, 1, 0);
 	}
 
+	public void addStepPostContent(GridPane content){
+		this.add(content, 1, 2);
+	}
+	
 	public void addStepContent(GridPane content) {
 		this.add(content, 1, 1);
 	}
