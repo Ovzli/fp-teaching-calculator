@@ -1,5 +1,6 @@
 package edu.cs222.fpteachingcalculator.view;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -206,16 +207,27 @@ public class ResultDisplay extends GridPane {
 		displaySteps.get(stepIDindex).addStepContent(remainderCalcs);
 	}
 
-	protected void makeBaseExpansionStep(int stepID) {
+	protected void makeBaseExpansionStep(int stepID, int baseValue) {
 		int stepIDindex = stepID - 1;
 		displaySteps.get(stepIDindex).addFormattedStepHeader("step header title");
 		displaySteps.get(stepIDindex).setResultStepID(stepID);
+		createRemainders(baseValue);
 		if (currentMode.equals("PRACTICE")) {
 			displaySteps.get(stepIDindex).addStepComment("PRACTICE STEP COMMENT.");
 		} else {
 			displaySteps.get(stepIDindex).addStepComment("SUMMARY AND TUTORIAL COMMENT");
 		}
-		// stepName3.addStepContent( stepContentObject? );
+		
+		displaySteps.get(stepIDindex).addStepContent(new BinExpansion(baseValue, remainders));
+	}
+	
+	private void createRemainders(int baseValue){
+		remainders.clear(); 
+		int value = Integer.valueOf(decString);
+		while(value > 0){
+			remainders.add(0, value%baseValue);
+			value = value/baseValue;
+		}
 	}
 
 	protected void makeRemainderEvaluationStep(int stepID) {

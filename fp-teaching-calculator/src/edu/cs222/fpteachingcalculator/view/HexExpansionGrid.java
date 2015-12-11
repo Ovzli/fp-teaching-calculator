@@ -38,26 +38,25 @@ public class HexExpansionGrid extends GridPane {
 		}
 	}
 
-	public void addPracticeContent(List<String> decValues) {
-		for (int i = 0; i < decValues.size(); i++) {
+	public void addPracticeContent(List<String> remainder) {
+		for (int i = 0; i < remainder.size(); i++) {
 			listOfExpansionBits.get(i).setExpansionBaseHexColor("FF6600");
 			AnswerInputField inputField = new AnswerInputField(35);
 			answerInputFieldList.add(inputField);
 			listOfExpansionBits.get(i).add(inputField, 3, 0);
 		}
-		changeToSmallFonts(decValues.size());
+		changeToSmallFonts(remainder.size());
 	}
 
-	public void addTutorialContent(List<String> decValues) {
+	public void addTutorialContent(List<String> remainder) {
 		this.add(bigValueHexSumList, 0, 0);
-		for (int i = 0; i < decValues.size(); i++) {
+		for (int i = 0; i < remainder.size(); i++) {
 			listOfExpansionBits.get(i).setExponentDigit(
-					decValues.size() - i - 1);
+					remainder.size() - i - 1);
 			listOfExpansionBits.get(i).setExpansionBitHexColor("FF6600");
 		}
 		if (listOfExpansionBits.size() > 5) {
-			changeToSmallFonts(decValues.size());
+			changeToSmallFonts(remainder.size());
 		}
 	}
-
 }
