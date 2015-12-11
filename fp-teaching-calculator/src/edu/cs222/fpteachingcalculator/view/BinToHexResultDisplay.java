@@ -96,7 +96,6 @@ public class BinToHexResultDisplay extends ResultDisplay {
 					+ "single decimal value.");
 		}
 		binarySums = new BinExpansionGrid(binDigits);
-		binarySums.replaceSumWithDecValues(decValues);
 		decSumStep.addStepContent(binarySums);
 	}
 
