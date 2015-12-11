@@ -1,6 +1,5 @@
 package edu.cs222.fpteachingcalculator.view;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
@@ -191,19 +189,21 @@ public class ResultDisplay extends GridPane {
 	}
 	
 	protected void makeRemainderStep(int stepID, int baseValue) {
+		System.out.println(individualBinChars);
 		int stepIDindex = stepID - 1;
-		int greatestExponent = greatMultiplier.getGreatestExponent();
 		displaySteps.get(stepIDindex).addFormattedStepHeader(
 				"calculate remainders");
 		displaySteps.get(stepIDindex).setResultStepID(stepID);
+		remainderCalcs = new BaseRemainderTable(baseValue, decString);
 		if (currentMode.equals("PRACTICE")) {
 			displaySteps.get(stepIDindex).addStepComment(
 					"PRACTICE STEP COMMENT.");
+			remainderCalcs.insertInputField(individualBinChars);
 		} else {
 			displaySteps.get(stepIDindex).addStepComment(
 					"SUMMARY AND TUTORIAL COMMENT");
+			remainderCalcs.insertRemainderValue(individualBinChars);
 		}
-		remainderCalcs = new BaseRemainderTable(baseValue, decString);
 		displaySteps.get(stepIDindex).addStepContent(remainderCalcs);
 	}
 

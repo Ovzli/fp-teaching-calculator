@@ -1,76 +1,97 @@
 package edu.cs222.fpteachingcalculator.view;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 public class BaseRemainderTable extends GridPane {
 	private int base;
 	private int decValue;
-	private int currentRow = 0;
+	private int finalRowTotal = 0;
+	public final List<TextField> answerInputFieldList = new LinkedList<>();
+	public final List<String> carryValues = new LinkedList<>();
+	public final List<String> remainderValues = new LinkedList<>();
 
 	public BaseRemainderTable(int baseValue, String decString) {
 		GridPane.setHalignment(this, HPos.RIGHT);
 		GridPane.setValignment(this, VPos.CENTER);
 		base = baseValue;
 		decValue = Integer.parseInt(decString);
-		//add labels
-		while(decValue >= 1){
-			createLine(generateLineContent(decValue));
-			currentRow++;
-			decValue = decValue/base;
+		SmallCharLabel arithmeticTitle = new SmallCharLabel("arithmetic");
+		this.add(arithmeticTitle, 0, 0);
+		GridPane.setColumnSpan(arithmeticTitle, 4);
+		SmallCharLabel remainderTitle = new SmallCharLabel("remainder");
+		this.add(remainderTitle, 5, 0);
+		remainderTitle.setCharColor(Color.GREEN);
+		carryValues.add(decString);
+		int newCarry;
+		while (decValue >= 1) {
+			newCarry = decValue / base;
+			remainderValues.add(Integer.toString(decValue % base));
+			carryValues.add(Integer.toString(newCarry));
+			decValue = newCarry;
+			finalRowTotal++;
 		}
-		
+		System.out.println(carryValues);
+		System.out.println(remainderValues);
+		for (int i = 1; i < finalRowTotal; i++) {
+			this.add(new SmallCharLabel(carryValues.get(i - 1)), 0, i);
+			this.add(new SmallCharLabel("÷"), 1, i);
+			this.add(new SmallCharLabel(Integer.toString(base)), 2, i);
+			this.add(new SmallCharLabel("="), 3, i);
+			this.add(new SmallCharLabel(carryValues.get(i)), 4, i);
+		}
+		this.add(new SmallCharLabel(carryValues.get(finalRowTotal - 1)), 0,
+				finalRowTotal);
+		this.add(new SmallCharLabel(Integer.toString(base)), 2, finalRowTotal);
+		this.add(new SmallCharLabel("="), 3, finalRowTotal);
+		if (Integer.parseInt(carryValues.get(finalRowTotal - 1)) < base) {
+			this.add(new SmallCharLabel("<"), 1, finalRowTotal);
+			SmallCharLabel Xlabel = new SmallCharLabel("X");
+			Xlabel.setCharColor(Color.RED);
+			this.add(Xlabel, 4, finalRowTotal);
+		} else {
+			this.add(new SmallCharLabel("÷"), 1, finalRowTotal);
+			this.add(new SmallCharLabel(carryValues.get(finalRowTotal)), 4,
+					finalRowTotal);
+		}
 	}
 
-	private List<BigCharLabel> generateLineContent(int lineValue){
-		List<BigCharLabel> content = new LinkedList<>();
-		content.add(new BigCharLabel(String.valueOf(lineValue)));
-		if(lineValue >= 2){
-			content.add(new BigCharLabel("÷"));
-		}
-		else{
-			content.add(new BigCharLabel("<"));
-		}
-		content.add(new BigCharLabel(String.valueOf(base)));
-		content.add(new BigCharLabel("="));
-		if(lineValue >= 2){
-			content.add(new BigCharLabel(String.valueOf(lineValue/base)));
-		}
-		else{
-			BigCharLabel X = new BigCharLabel("X");
-			X.setCharColor(Color.RED);
-			content.add(X);
-		}
-		content.add(new BigCharLabel(" "));
-		BigCharLabel remainder = new BigCharLabel(String.valueOf(lineValue%base));
-		if(lineValue%base == 0){
-			remainder.setCharColor(Color.RED);
-		}
-		else{
-			remainder.setCharColor(Color.GREEN);
-		}
-		content.add(remainder);
-		return content;
-	}
-	
-	private void createLine(List<BigCharLabel> lineMembers) {
-		int currentColumn = 0;
-		for (BigCharLabel member : lineMembers) {
-			this.add(member, currentColumn, currentRow);
-			currentColumn++;
+	public void insertInputField(List<String> individualBinChars) {
+		for (int i = 1; i <= finalRowTotal; i++) {
+			AnswerInputField inputField = new AnswerInputField(35);
+			answerInputFieldList.add(inputField);
+			GridPane.setHalignment(inputField, HPos.CENTER);
+			this.add(inputField, 5, i);	
 		}
 	}
-//
-//	private void generateCell(){
-//		BigCharLabel value = new BigCharLabel(String.valueOf(decValue));
-//		this.
-//	}
 
+	public void insertRemainderValue(List<String> individualBinChars) {
+		for (int i = finalRowTotal-1; i >= 0; i--) {
+			SmallCharLabel remainder = new SmallCharLabel(remainderValues.get(i));
+			if(remainderValues.get(i).equals("1")){
+				remainder.setCharColor(Color.GREEN);				
+			}else{
+				remainder.setCharColor(Color.RED);				
+			}
+			this.add(remainder, 5, i+1);		
+		}
+		// int listPosition = individualBinChars.size() - 1;
+		// for (int i = finalRowTotal + 1; i > 0; i--) {
+		// SmallCharLabel remainder = new SmallCharLabel(
+		// individualBinChars.get(listPosition));
+		// if (individualBinChars.get(listPosition).equals(0)) {
+		// remainder.setCharColor(Color.RED);
+		// } else {
+		// remainder.setCharColor(Color.GREEN);
+		// }
+		// this.add(remainder, 7, i);
+		// listPosition--;
+		// }
+	}
 }

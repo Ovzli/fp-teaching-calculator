@@ -80,8 +80,5 @@ public class GreatestMultiplier extends GridPane {
 		GridPane.setHalignment(answerField, HPos.CENTER);
 		GridPane.setValignment(answerField, VPos.CENTER);
 	}
-
-	public int getGreatestExponent() {
-		return exponent;
-	}
+	
 }

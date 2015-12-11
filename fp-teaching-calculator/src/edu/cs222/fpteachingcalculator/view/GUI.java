@@ -327,33 +327,46 @@ public class GUI extends Application {
 	public void handleNextSlide(Button button) {
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				boolean correctAnswers = validateCorrectAnswers();
-				if (displayMode.equals("TUTORIAL") || displayMode.equals("PRACTICE") && correctAnswers) {
-					inputToolbar.updateErrorText("");
-					advanceSlide();
+				if (slideOnDisplay < totalSlides - 1) {
+					targetDisplay.hideSlide(slideOnDisplay);
+					slideOnDisplay++;
+					footerToolbar.incrementSlideDisplay();
+					targetDisplay.displaySlide(slideOnDisplay);
+					footerToolbar.enablePreviousButton();
+					if (slideOnDisplay == totalSlides - 1) {
+						footerToolbar.disableNextButton();
+					} else {
+						footerToolbar.enableNextButton();
+					}
+					scrollDisplay.setVvalue(0);
 				}
-				else if(correctAnswers == false){
-					inputToolbar.updateErrorText("INCORRECT ANSWER!");
-				}
+//				boolean correctAnswers = validateCorrectAnswers();
+//				if (displayMode.equals("TUTORIAL") || displayMode.equals("PRACTICE") && correctAnswers) {
+//					inputToolbar.updateErrorText("");
+//					advanceSlide();
+//				}
+//				else if(correctAnswers == false){
+//					inputToolbar.updateErrorText("INCORRECT ANSWER!");
+//				}
 			}
 		});
 	}
 
-	private void advanceSlide() {
-		if (slideOnDisplay < totalSlides - 1) {
-			targetDisplay.hideSlide(slideOnDisplay);
-			slideOnDisplay++;
-			footerToolbar.incrementSlideDisplay();
-			targetDisplay.displaySlide(slideOnDisplay);
-			footerToolbar.enablePreviousButton();
-			if (slideOnDisplay == totalSlides - 1) {
-				footerToolbar.disableNextButton();
-			} else {
-				footerToolbar.enableNextButton();
-			}
-			scrollDisplay.setVvalue(0);
-		}
-	}
+//	private void advanceSlide() {
+//		if (slideOnDisplay < totalSlides - 1) {
+//			targetDisplay.hideSlide(slideOnDisplay);
+//			slideOnDisplay++;
+//			footerToolbar.incrementSlideDisplay();
+//			targetDisplay.displaySlide(slideOnDisplay);
+//			footerToolbar.enablePreviousButton();
+//			if (slideOnDisplay == totalSlides - 1) {
+//				footerToolbar.disableNextButton();
+//			} else {
+//				footerToolbar.enableNextButton();
+//			}
+//			scrollDisplay.setVvalue(0);
+//		}
+//	}
 	
 	private boolean validateCorrectAnswers(){
 		if (inputMode.equals("HEX") && (convertMode.equals("BIN"))) {

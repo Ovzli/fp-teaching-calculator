@@ -32,6 +32,8 @@ public class ResultStep extends GridPane {
 
 	public void addFormattedStepHeader(String rowTagString) {
 		stepHeader.getChildren().clear();
+		this.getChildren().remove(stepTitle);
+		this.getChildren().remove(stepHeader);
 		this.add(stepTitle, 0, 1);
 		setStepTitle(rowTagString);
 		this.add(stepHeader, 0, 0);

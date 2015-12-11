@@ -15,7 +15,6 @@ public class BinExpansion extends GridPane {
 		this.setVgap(5);
 		this.getStyleClass().add("bigCharCell");
 		for (int i = 0; i < remainders.size(); i++) {
-			System.out.println("test");
 			listOfExpansionBits.add(new ExpansionBit(base));
 			binExpansionGrid.add(listOfExpansionBits.get(i), i * 2 + 1, 0);
 			listOfExpansionBits.get(i).addPrefix(remainders.get(i) + "x");
