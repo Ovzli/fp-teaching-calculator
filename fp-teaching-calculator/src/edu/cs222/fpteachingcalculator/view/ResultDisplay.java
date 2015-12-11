@@ -25,6 +25,7 @@ public class ResultDisplay extends GridPane {
 	protected ExpansionGrid expansionGrid;
 	protected ConcatenationGrid concatenationGrid;
 	protected BinaryGrid binaryGrid;
+	protected GreatestMultiplier greatMultiplier;
 	protected final ResultStep inputReprintRow = new ResultStep();
 	protected List<ResultStep> displaySteps = new LinkedList<>();
 	protected String currentMode = "SUMMARY";
@@ -36,6 +37,7 @@ public class ResultDisplay extends GridPane {
 
 	public ResultDisplay() {
 		super();
+		this.setVisible(false);
 	}
 
 	public ResultDisplay(int numberSteps) {
@@ -58,6 +60,8 @@ public class ResultDisplay extends GridPane {
 		}
 		displaySteps.get(0).setVisible(true);
 		displaySteps.get(1).setVisible(true);
+		this.setVisible(false);
+		this.setMinHeight(424);
 	}
 
 	protected void addStepsToDisplay() {
@@ -106,14 +110,14 @@ public class ResultDisplay extends GridPane {
 		for (int i = 0; i < displaySteps.size(); i++) {
 			displaySteps.get(i).getChildren().clear();
 		}
-		// displaySteps.get(0).setVisible(true);
-		// displaySteps.get(1).setVisible(true);
 	}
 
 	protected void makeInputReprintRow(String inputType) {
 		inputReprintRow.setStepTitle("original input");
 		inputReprintRow.setResultStepID(0);
 		List<String> inputList = null;
+		reprintValue.getChildren().clear();
+		inputReprintRow.getChildren().remove(reprintValue);
 		if (inputType.equals("HEX")) {
 			inputList = hexSymbols;
 			reprintValue = makeBigCharTable();
@@ -149,6 +153,26 @@ public class ResultDisplay extends GridPane {
 			}
 		}
 		return gridPane;
+	}
+
+	protected void makeGreatMultiplierStep(int stepID, int baseValue) {
+		int stepIDindex = stepID - 1;
+		displaySteps.get(stepIDindex).addFormattedStepHeader(
+				"greatest base " + baseValue + " multiplier");
+		displaySteps.get(stepIDindex).setResultStepID(stepID);
+		greatMultiplier = new GreatestMultiplier(baseValue, decString);
+		if (currentMode.equals("PRACTICE")) {
+			displaySteps.get(stepIDindex).addStepComment(
+					"Determine the greatest exponent of the base without going "
+							+ "over the value being converted");
+			greatMultiplier.setupForPracticeMode();
+		} else {
+			displaySteps.get(stepIDindex).addStepComment(
+					"This step is used to determine the greatest exponential "
+							+ "multiplier of the base without going over the "
+							+ "value needing to be coverted.");
+		}
+		displaySteps.get(stepIDindex).addStepContent(greatMultiplier);
 	}
 
 	protected String writeDecEquivalentComment() {

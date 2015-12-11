@@ -9,7 +9,7 @@ public class ValueGenerator {
 	}
 
 	public String generateDecValue() {
-		valueLength = setRandomLength() + 5;
+		valueLength = setRandomLength() + 2;
 		return generateRandomValueString("DEC");
 	}
 

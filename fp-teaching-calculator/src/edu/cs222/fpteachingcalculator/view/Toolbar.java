@@ -48,7 +48,7 @@ public class Toolbar extends GridPane {
 			symbolLength = 8;
 		} else if (inputMode.equals("DEC")) {
 			typeString = "decimal";
-			symbolLength = 9;
+			symbolLength = 6;
 		} else {
 			typeString = "binary";
 			symbolLength = 24;

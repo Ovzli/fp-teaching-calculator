@@ -36,7 +36,7 @@ public class DecToBinResultDisplay extends ResultDisplay {
 
 	private void setupDecToBinSummaryDisplay() {
 		this.add(decToBinSummaryDisplay, 0, 0);
-		makeStep1(1);
+		makeGreatMultiplierStep(1, 2);
 		makeStep2(2);
 		makeStep3(3);
 		makeStep4(4);
@@ -48,7 +48,7 @@ public class DecToBinResultDisplay extends ResultDisplay {
 		slideList.add(stepName2);
 		slideList.add(stepName3);
 		slideList.add(stepName4);
-		makeStep1(1);
+		makeGreatMultiplierStep(1, 2);
 		makeStep2(2);
 		makeStep3(3);
 		makeStep4(4);
@@ -60,23 +60,12 @@ public class DecToBinResultDisplay extends ResultDisplay {
 		slideList.add(stepName2);
 		slideList.add(stepName3);
 		slideList.add(stepName4);
-		makeStep1(1);
+		makeGreatMultiplierStep(1, 2);
 		makeStep2(2);
 		makeStep3(3);
 		makeStep4(4);
 	}
-
-	private void makeStep1(int stepID) {
-		stepName1.addFormattedStepHeader("step header title");
-		stepName1.setResultStepID(stepID);
-		if (currentMode.equals("PRACTICE")) {
-			stepName1.addStepComment("PRACTICE STEP COMMENT.");
-		} else {
-			stepName1.addStepComment("SUMMARY AND TUTORIAL COMMENT");
-		}
-		// stepName1.addStepContent( stepContentObject? );
-	}
-
+	
 	private void makeStep2(int stepID) {
 		stepName2.addFormattedStepHeader("step header title");
 		stepName2.setResultStepID(stepID);

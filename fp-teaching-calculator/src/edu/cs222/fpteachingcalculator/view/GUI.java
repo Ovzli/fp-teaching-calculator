@@ -103,13 +103,6 @@ public class GUI extends Application {
 		displayPane.getChildren().add(decToBinDisplay);
 		displayPane.getChildren().add(hexToDecDisplay);
 		displayPane.getChildren().add(hexToBinDisplay);
-		binToHexDisplay.setMinHeight(424);
-		binToDecDisplay.setMinHeight(424);
-		decToHexDisplay.setMinHeight(424);
-		decToBinDisplay.setMinHeight(424);
-		hexToDecDisplay.setMinHeight(424);
-		hexToBinDisplay.setMinHeight(424);
-		hexToBinDisplay.setVisible(false);
 		handleConvert(inputToolbar.convertButton);
 		handleGenerate(inputToolbar.generateButton);
 		handlePreviousSlide(footerToolbar.previousButton);

@@ -6,7 +6,7 @@ public class DecToHexResultDisplay extends ResultDisplay {
 	public final GridPane decToHexSummaryDisplay;
 	public final GridPane decToHexTutorialDisplay;
 	public final GridPane decToHexPracticeDisplay;
-	private final ResultStep stepName1;
+	private final ResultStep greatMultiplierStep;
 	private final ResultStep stepName2;
 	private final ResultStep stepName3;
 	private final ResultStep stepName4;
@@ -16,7 +16,7 @@ public class DecToHexResultDisplay extends ResultDisplay {
 		decToHexSummaryDisplay = summaryDisplay;
 		decToHexTutorialDisplay = tutorialDisplay;
 		decToHexPracticeDisplay = practiceDisplay;
-		stepName1 = displaySteps.get(0);
+		greatMultiplierStep = displaySteps.get(0);
 		stepName2 = displaySteps.get(1);
 		stepName3 = displaySteps.get(2);
 		stepName4 = displaySteps.get(3);
@@ -36,7 +36,7 @@ public class DecToHexResultDisplay extends ResultDisplay {
 
 	private void setupDecToHexSummaryDisplay() {
 		this.add(decToHexSummaryDisplay, 0, 0);
-		makeStep1(1);
+		makeGreatMultiplierStep(1, 16);
 		makeStep2(2);
 		makeStep3(3);
 		makeStep4(4);
@@ -44,37 +44,26 @@ public class DecToHexResultDisplay extends ResultDisplay {
 
 	private void setupDecToHexTutorialDisplay() {
 		this.add(decToHexTutorialDisplay, 0, 0);
-		slideList.add(stepName1);
+		slideList.add(greatMultiplierStep);
 		slideList.add(stepName2);
 		slideList.add(stepName3);
 		slideList.add(stepName4);
-		makeStep1(1);
+		makeGreatMultiplierStep(1, 16);
 		makeStep2(2);
 		makeStep3(3);
 		makeStep4(4);
 	}
 
 	private void setupDecToHexPracticeDisplay() {
-		this.add(decToHexTutorialDisplay, 0, 0);
-		slideList.add(stepName1);
+		this.add(decToHexPracticeDisplay, 0, 0);
+		slideList.add(greatMultiplierStep);
 		slideList.add(stepName2);
 		slideList.add(stepName3);
 		slideList.add(stepName4);
-		makeStep1(1);
+		makeGreatMultiplierStep(1, 16);
 		makeStep2(2);
 		makeStep3(3);
 		makeStep4(4);
-	}
-
-	private void makeStep1(int stepID) {
-		stepName1.addFormattedStepHeader("step header title");
-		stepName1.setResultStepID(stepID);
-		if (currentMode.equals("PRACTICE")) {
-			stepName1.addStepComment("PRACTICE STEP COMMENT.");
-		} else {
-			stepName1.addStepComment("SUMMARY AND TUTORIAL COMMENT");
-		}
-		// stepName1.addStepContent( stepContentObject? );
 	}
 
 	private void makeStep2(int stepID) {

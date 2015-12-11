@@ -15,28 +15,29 @@ public class ExpansionBit extends GridPane {
 	public ExpansionBit(int baseNumber) {
 		super();
 		baseValue = baseNumber;
-		this.setAlignment(Pos.CENTER);
-		prefixChars.getStyleClass().add("bigExpansionChar");
-		this.add(baseDigit, 2, 0);
-		baseDigit.setText(String.valueOf(baseValue));
-		baseDigit.getStyleClass().add("bigExpansionChar");
-		this.add(exponentDigit, 3, 0);
-		exponentDigit.getStyleClass().add("bigExpansionExponent");
-		GridPane.setValignment(exponentDigit, VPos.TOP);
+		formatExpansionBit();
+		baseDigit.setText(String.valueOf(baseValue));		
 	}
 
 	public ExpansionBit(int binaryDigitValue, int exponentDigitValue) {
 		super();
 		baseValue = 2;
-		this.setAlignment(Pos.CENTER);
-		this.add(baseDigit, 0, 0);
-		baseDigit.getStyleClass().add("bigExpansionChar");
-		baseDigit.setTextFill(Color.web("#9900ff"));
-		this.add(exponentDigit, 2, 0);
-		exponentDigit.getStyleClass().add("bigExpansionExponent");
-		GridPane.setValignment(exponentDigit, VPos.TOP);
+		formatExpansionBit();
 		setBinaryDigit(binaryDigitValue);
 		setExponentDigit(exponentDigitValue);
+	}
+
+	private void formatExpansionBit() {
+		this.setAlignment(Pos.CENTER);
+		prefixChars.getStyleClass().add("bigExpansionChar");
+		baseDigit.getStyleClass().add("bigExpansionChar");
+		exponentDigit.getStyleClass().add("bigExpansionExponent");
+		prefixChars.setTextFill(Color.web("#9900ff"));
+		baseDigit.setTextFill(Color.web("#9900ff"));
+		exponentDigit.setTextFill(Color.web("#9900ff"));
+		GridPane.setValignment(exponentDigit, VPos.TOP);
+		this.add(baseDigit, 2, 0);
+		this.add(exponentDigit, 3, 0);
 	}
 
 	public void setBinaryDigit(int binaryDigitValue) {

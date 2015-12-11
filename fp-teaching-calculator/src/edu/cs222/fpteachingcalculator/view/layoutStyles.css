@@ -76,7 +76,7 @@
 }
 
 .bigChar{
-    -fx-font: 24.0px "Arial";
+    -fx-font: 22.0px "Arial";
     -fx-font-weight: bold;
     -fx-padding: 4.0;	
 }

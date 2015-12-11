@@ -6,7 +6,7 @@ import edu.cs222.fpteachingcalculator.view.inputexceptions.*;
 
 public class InputValidator {
 	private final int maxHexInputLength = 8;
-	private final int maxDecInputLength = 9;
+	private final int maxDecInputLength = 6;
 	private final int maxBinInputLength = 24;
 	private final String validHexSymbols = "0123456789ABCDEF";
 	private final String validDecSymbols = "0123456789";
