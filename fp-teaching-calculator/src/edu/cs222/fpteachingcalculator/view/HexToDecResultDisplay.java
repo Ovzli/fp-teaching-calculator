@@ -157,4 +157,10 @@ public class HexToDecResultDisplay extends ResultDisplay {
 		// TODO
 	}
 
+	public boolean checkAnswers(int i) {
+		return true;
+		// TODO Auto-generated method stub
+		
+	}
+
 }

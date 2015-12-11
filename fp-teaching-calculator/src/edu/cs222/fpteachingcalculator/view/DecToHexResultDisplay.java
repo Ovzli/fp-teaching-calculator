@@ -113,4 +113,10 @@ public class DecToHexResultDisplay extends ResultDisplay {
 	public void autoComplete(int slideOnDisplay) {
 		// TODO
 	}
+
+	public boolean checkAnswers(int i) {
+		return true;
+		// TODO Auto-generated method stub
+		
+	}
 }

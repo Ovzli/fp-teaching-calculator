@@ -114,4 +114,10 @@ public class BinToDecResultDisplay extends ResultDisplay {
 		// TODO
 	}
 
+	public boolean checkAnswers(int i) {
+		return true;
+		// TODO 
+		
+	}
+
 }

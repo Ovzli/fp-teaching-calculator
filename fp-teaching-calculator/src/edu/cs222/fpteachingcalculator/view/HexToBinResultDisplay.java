@@ -126,5 +126,18 @@ public class HexToBinResultDisplay extends ResultDisplay {
 			}
 		}
 	}
-
+	
+	public boolean checkAnswers(int slideOnDisplay){
+		boolean allCorrect = true;
+		if (slideOnDisplay == 1) {
+			for (int i = 0; i < hexSymbols.size(); i++) {
+				allCorrect = allCorrect && answerInputFieldList.get(i).getText().equals(decValues.get(i));
+			}
+		} else if (slideOnDisplay == 2) {
+			for (int i = 0; i < hexSymbols.size(); i++) {
+				allCorrect = allCorrect && answerInputFieldList.get(i).getText().equals(binChars.get(i));
+			}
+		}
+		return allCorrect;
+	}
 }

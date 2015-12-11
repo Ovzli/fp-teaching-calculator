@@ -71,9 +71,7 @@ public class GUI extends Application {
 	}
 
 	private void formatRoot() {
-		rootPane.getStylesheets().add(
-				this.getClass().getResource("layoutStyles.css")
-						.toExternalForm());
+		rootPane.getStylesheets().add(this.getClass().getResource("layoutStyles.css").toExternalForm());
 		rootPane.getStyleClass().add("rootPane");
 		rootLayout.getStyleClass().add("rootLayout");
 	}
@@ -137,8 +135,7 @@ public class GUI extends Application {
 		try {
 			inputValue = inputToolbar.getInputText();
 			inputValidator.checkIfInputIsEmpty(inputValue);
-			inputValidator.checkIfValueIsValid(
-					inputSplitter.splitString(inputValue), inputMode);
+			inputValidator.checkIfValueIsValid(inputSplitter.splitString(inputValue), inputMode);
 		} catch (EmptyInputException e) {
 			if (callee.equals("CONVERT")) {
 				inputToolbar.updateErrorText("NO VALUE WAS ENTERED");
@@ -146,8 +143,7 @@ public class GUI extends Application {
 			return;
 		} catch (InvalidSymbolException e) {
 			if (callee.equals("CONVERT")) {
-				inputToolbar
-						.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
+				inputToolbar.updateErrorText("AN INVALID CHARCTER WAS DETECTED");
 			}
 			return;
 		} catch (InvalidNumberLengthException e) {
@@ -337,44 +333,67 @@ public class GUI extends Application {
 	public void handleNextSlide(Button button) {
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				if (slideOnDisplay < totalSlides - 1) {
-					targetDisplay.hideSlide(slideOnDisplay);
-					slideOnDisplay++;
-					footerToolbar.incrementSlideDisplay();
-					targetDisplay.displaySlide(slideOnDisplay);
-					footerToolbar.enablePreviousButton();
-					if (slideOnDisplay == totalSlides - 1) {
-						footerToolbar.disableNextButton();
-					} else {
-						footerToolbar.enableNextButton();
-					}
-					scrollDisplay.setVvalue(0);
+				boolean correctAnswers = validateCorrectAnswers();
+				if (displayMode.equals("TUTORIAL") || displayMode.equals("PRACTICE") && correctAnswers) {
+					inputToolbar.updateErrorText("");
+					advanceSlide();
+				}
+				else if(correctAnswers == false){
+					inputToolbar.updateErrorText("INCORRECT ANSWER!");
 				}
 			}
 		});
 	}
 
+	private void advanceSlide() {
+		if (slideOnDisplay < totalSlides - 1) {
+			targetDisplay.hideSlide(slideOnDisplay);
+			slideOnDisplay++;
+			footerToolbar.incrementSlideDisplay();
+			targetDisplay.displaySlide(slideOnDisplay);
+			footerToolbar.enablePreviousButton();
+			if (slideOnDisplay == totalSlides - 1) {
+				footerToolbar.disableNextButton();
+			} else {
+				footerToolbar.enableNextButton();
+			}
+			scrollDisplay.setVvalue(0);
+		}
+	}
+	
+	private boolean validateCorrectAnswers(){
+
+		if (inputMode.equals("HEX") && (convertMode.equals("BIN"))) {
+				return hexToBinDisplay.checkAnswers(slideOnDisplay + 1);
+			} else if (inputMode.equals("HEX") && (convertMode.equals("DEC"))) {
+				return hexToDecDisplay.checkAnswers(slideOnDisplay + 1);
+			} else if (inputMode.equals("DEC") && (convertMode.equals("HEX"))) {
+				return decToHexDisplay.checkAnswers(slideOnDisplay + 1);
+			} else if (inputMode.equals("DEC") && (convertMode.equals("BIN"))) {
+				return decToBinDisplay.checkAnswers(slideOnDisplay + 1);
+			} else if (inputMode.equals("BIN") && (convertMode.equals("HEX"))) {
+				return binToHexDisplay.checkAnswers(slideOnDisplay + 1);
+			} else if (inputMode.equals("BIN") && (convertMode.equals("DEC"))) {
+				return binToDecDisplay.checkAnswers(slideOnDisplay + 1);
+			}
+		
+		return true;
+	}
+
 	public void handleAutoComplete(Button button) {
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				System.out.println(event);
 				if (inputMode.equals("HEX") && (convertMode.equals("BIN"))) {
 					hexToBinDisplay.autoComplete(slideOnDisplay + 1);
-					System.out.println(slideOnDisplay);
-				} else if (inputMode.equals("HEX")
-						&& (convertMode.equals("DEC"))) {
+				} else if (inputMode.equals("HEX") && (convertMode.equals("DEC"))) {
 					hexToDecDisplay.autoComplete(slideOnDisplay + 1);
-				} else if (inputMode.equals("DEC")
-						&& (convertMode.equals("HEX"))) {
+				} else if (inputMode.equals("DEC") && (convertMode.equals("HEX"))) {
 					decToHexDisplay.autoComplete(slideOnDisplay + 1);
-				} else if (inputMode.equals("DEC")
-						&& (convertMode.equals("BIN"))) {
+				} else if (inputMode.equals("DEC") && (convertMode.equals("BIN"))) {
 					decToBinDisplay.autoComplete(slideOnDisplay + 1);
-				} else if (inputMode.equals("BIN")
-						&& (convertMode.equals("HEX"))) {
+				} else if (inputMode.equals("BIN") && (convertMode.equals("HEX"))) {
 					binToHexDisplay.autoComplete(slideOnDisplay + 1);
-				} else if (inputMode.equals("BIN")
-						&& (convertMode.equals("DEC"))) {
+				} else if (inputMode.equals("BIN") && (convertMode.equals("DEC"))) {
 					binToDecDisplay.autoComplete(slideOnDisplay + 1);
 				}
 			}

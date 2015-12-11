@@ -114,4 +114,10 @@ public class DecToBinResultDisplay extends ResultDisplay {
 		// TODO
 	}
 
+	public boolean checkAnswers(int i) {
+		return true;
+		// TODO Auto-generated method stub
+		
+	}
+
 }
