@@ -9,6 +9,7 @@ public class Conversion {
 	private final List<String> listOfRepresentativeHexChars;
 	private final List<String> listOfRepresentativeDecChars;
 	private final List<String> listOfRepresentationBinChars;
+	private final List<String> listOfIndividualBinChars;
 	private final List<List<Integer>> listOfSeparatedBinNibbles;
 
 	public Conversion(ConversionBuilder builder) {
@@ -17,6 +18,7 @@ public class Conversion {
 		this.listOfUserInputChars = builder.listOfUserInputChars;
 		this.listOfRepresentativeHexChars = builder.listOfRepresentativeHexChars;
 		this.listOfRepresentationBinChars = builder.listOfRepresentationBinChars;
+		this.listOfIndividualBinChars = builder.listOfIndividualBinChars;
 		this.listOfRepresentativeDecChars = builder.listOfRepresentativeDecChars;
 		this.listOfSeparatedBinNibbles = builder.listOfSeparatedBinNibbles;
 	}
@@ -44,6 +46,10 @@ public class Conversion {
 	public List<String> getListOfRepresentationBinChars() {
 		return listOfRepresentationBinChars;
 	}
+	
+	public List<String> getListOfIndividualBinChars() {
+		return listOfIndividualBinChars;
+	}
 
 	public List<List<Integer>> getListOfSeparatedBinNibbles() {
 		return listOfSeparatedBinNibbles;
@@ -56,6 +62,7 @@ public class Conversion {
 		public List<String> listOfRepresentativeHexChars;
 		public List<String> listOfRepresentativeDecChars;
 		public List<String> listOfRepresentationBinChars;
+		public List<String> listOfIndividualBinChars;
 		public List<List<Integer>> listOfSeparatedBinNibbles;
 
 		public ConversionBuilder originalInput(String originalInput) {
@@ -88,6 +95,11 @@ public class Conversion {
 		public ConversionBuilder listOfRepresentationBinChars(
 				List<String> listOfRepresentationBinChars) {
 			this.listOfRepresentationBinChars = listOfRepresentationBinChars;
+			return this;
+		}
+		
+		public ConversionBuilder listOfIndividualBinChars(List<String> listOfIndividualBinChars){
+			this.listOfIndividualBinChars = listOfIndividualBinChars;
 			return this;
 		}
 

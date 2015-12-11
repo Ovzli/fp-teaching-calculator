@@ -9,6 +9,7 @@ public class ValueConverter {
 	private List<String> listOfRepresentativeHexChars = new LinkedList<>();
 	private List<String> listOfRepresentativeDecChars = new LinkedList<>();
 	private List<String> listOfRepresentationBinChars = new LinkedList<>();
+	private List<String> listOfIndividualBinChars = new LinkedList<>();
 	private List<List<Integer>> listOfSeparatedBinNibbles = new LinkedList<>();
 	private String decValue = "";
 	
@@ -51,6 +52,7 @@ public class ValueConverter {
 		listOfRepresentativeDecChars = listOfUserInputChars;
 		listOfRepresentationBinChars = inputSplitter.splitBinString(valueTranslator.translateDecValueToBinValue(userInputValue));
 		listOfSeparatedBinNibbles = binSplitter.separateBinValuesIntoDigits(listOfRepresentationBinChars);
+		listOfIndividualBinChars = inputSplitter.splitBinList(listOfRepresentationBinChars);
 		listOfRepresentativeHexChars = inputSplitter.splitString(valueTranslator.translateDecValueToHexValue(userInputValue));
 		return returnConversion();
 	}
@@ -70,6 +72,7 @@ public class ValueConverter {
 				.listOfRepresentativeHexChars(listOfRepresentativeHexChars)
 				.listOfRepresentativeDecChars(listOfRepresentativeDecChars)
 				.listOfRepresentationBinChars(listOfRepresentationBinChars)
+				.listOfIndividualBinChars(listOfIndividualBinChars)
 				.listOfSeparatedBinNibbles(listOfSeparatedBinNibbles)
 				.decValue(decValue)
 				.build();

@@ -179,6 +179,7 @@ public class GUI extends Application {
 		targetDisplay.decValues = conversion.getListOfRepresentativeDecChars();
 		targetDisplay.binDigits = conversion.getListOfSeparatedBinNibbles();
 		targetDisplay.binChars = conversion.getListOfRepresentationBinChars();
+		targetDisplay.individualBinChars = conversion.getListOfIndividualBinChars();
 	}
 
 	public void updateDisplay() {

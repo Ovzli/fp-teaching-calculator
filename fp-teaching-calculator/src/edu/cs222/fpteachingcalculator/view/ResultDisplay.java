@@ -20,6 +20,7 @@ public class ResultDisplay extends GridPane {
 	protected List<String> decValues = new LinkedList<>();
 	protected List<List<Integer>> binDigits = new LinkedList<>();
 	protected List<String> binChars = new LinkedList<>();
+	protected List<String> individualBinChars = new LinkedList<>();
 	protected String decString = "";
 	protected final List<GridPane> slideList = new LinkedList<>();
 	protected GridPane decimalChars = new GridPane();
