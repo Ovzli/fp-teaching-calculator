@@ -1,26 +1,29 @@
 package edu.cs222.fpteachingcalculator.view;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javafx.scene.layout.GridPane;
 
 public class BinToDecResultDisplay extends ResultDisplay {
 	public final GridPane binToDecSummaryDisplay;
 	public final GridPane binToDecTutorialDisplay;
 	public final GridPane binToDecPracticeDisplay;
-	private final ResultStep stepName1;
-	private final ResultStep stepName2;
-	private final ResultStep stepName3;
-	private final ResultStep stepName4;
+	private final ResultStep binExpansionStep;
+	private final ResultStep expansionProductsStep;
+	private final ResultStep productSum;
+	private List<String> listOfProducts = new LinkedList<>();
+	private BigValueExpansion productExpansion = new BigValueExpansion();
 
 	public BinToDecResultDisplay() {
-		super(4);
+		super(3);
 		binToDecSummaryDisplay = summaryDisplay;
 		binToDecTutorialDisplay = tutorialDisplay;
 		binToDecPracticeDisplay = practiceDisplay;
-		stepName1 = displaySteps.get(0);
-		stepName2 = displaySteps.get(1);
-		stepName3 = displaySteps.get(2);
-		stepName4 = displaySteps.get(3);
-		tutorialSlideCount = 4;
+		binExpansionStep = displaySteps.get(0);
+		expansionProductsStep = displaySteps.get(1);
+		productSum = displaySteps.get(2);
+		tutorialSlideCount = 3;
 		practiceSlideCount = 3;
 	}
 
@@ -36,88 +39,79 @@ public class BinToDecResultDisplay extends ResultDisplay {
 
 	private void setupBinToDecSummaryDisplay() {
 		this.add(binToDecSummaryDisplay, 0, 0);
-		makeStep1(1);
-		makeStep2(2);
-		makeStep3(3);
-		makeStep4(4);
+		makeBinExpandStep(1);
+		makeExpandProductStep(2);
+		makeProductSumStep(3);
 	}
 
 	private void setupBinToDecTutorialDisplay() {
 		this.add(binToDecTutorialDisplay, 0, 0);
-		slideList.add(stepName1);
-		slideList.add(stepName2);
-		slideList.add(stepName3);
-		slideList.add(stepName4);
-		makeStep1(1);
-		makeStep2(2);
-		makeStep3(3);
-		makeStep4(4);
+		slideList.add(binExpansionStep);
+		slideList.add(expansionProductsStep);
+		slideList.add(productSum);
+		makeBinExpandStep(1);
+		makeExpandProductStep(2);
+		makeProductSumStep(3);
 	}
 
 	private void setupBinToDecPracticeDisplay() {
 		this.add(binToDecPracticeDisplay, 0, 0);
-		slideList.add(stepName1);
-		slideList.add(stepName2);
-		slideList.add(stepName3);
-		slideList.add(stepName4);
-		makeStep1(1);
-		makeStep2(2);
-		makeStep3(3);
-		makeStep4(4);
+		slideList.add(binExpansionStep);
+		slideList.add(expansionProductsStep);
+		slideList.add(productSum);
+		makeBinExpandStep(1);
+		makeExpandProductStep(2);
+		makeProductSumStep(3);
 	}
 
-	private void makeStep1(int stepID) {
-		stepName1.addFormattedStepHeader("step header title");
-		stepName1.setResultStepID(stepID);
+	private void makeBinExpandStep(int stepID) {
+		binExpansionStep.addFormattedStepHeader("binary expansion");
+		binExpansionStep.setResultStepID(stepID);
 		if (currentMode.equals("PRACTICE")) {
-			stepName1.addStepComment("PRACTICE STEP COMMENT.");
+			binExpansionStep.addStepComment("Enter each exponent "
+					+ "value shown for the base 2 multiplier that is "
+					+ "applied to each binary digit.");
 		} else {
-			stepName1.addStepComment("SUMMARY AND TUTORIAL COMMENT");
+			binExpansionStep.addStepComment("This step shows "
+					+ "how each binary digit represents a weighted "
+					+ "base 2 value when expanded.");
 		}
-		// stepName1.addStepContent( stepContentObject? );
+		// binExpansionStep.addStepContent( binExpansion );
 	}
 
-	private void makeStep2(int stepID) {
-		stepName2.addFormattedStepHeader("step header title");
-		stepName2.setResultStepID(stepID);
+	private void makeExpandProductStep(int stepID) {
+		listOfProducts.clear();
+		expansionProductsStep.addFormattedStepHeader("expansion products");
+		expansionProductsStep.setResultStepID(stepID);
 		if (currentMode.equals("PRACTICE")) {
-			stepName2.addStepComment("PRACTICE STEP COMMENT.");
+			expansionProductsStep.addStepComment("PRACTICE STEP COMMENT.");
 		} else {
-			stepName2.addStepComment("SUMMARY AND TUTORIAL COMMENT");
+			expansionProductsStep.addStepComment("Below is a "
+					+ "sum expansion of the products of each binary "
+					+ "digits value in decimal form.");
+
 		}
-		// stepName2.addStepContent( stepContentObject? );
+		for (int i = 0; i < binChars.size(); i++) {
+			double baseMultiplier = Math.pow(2, (binChars.size() - i - 1));
+			double product = Integer.parseInt(binChars.get(i))
+					* baseMultiplier;
+			listOfProducts.add(String.valueOf((int) product));
+		}
+		productExpansion = new BigValueExpansion();
+		productExpansion.expandBigValueCharExpansion(listOfProducts);
+		productExpansion.makeSmallFonts();
+		productExpansion.addPlusSigns(listOfProducts.size() - 1);
+		expansionProductsStep.addStepContent(productExpansion);
 	}
 
-	private void makeStep3(int stepID) {
-		stepName3.addFormattedStepHeader("step header title");
-		stepName3.setResultStepID(stepID);
-		if (currentMode.equals("PRACTICE")) {
-			stepName3.addStepComment("PRACTICE STEP COMMENT.");
-		} else {
-			stepName3.addStepComment("SUMMARY AND TUTORIAL COMMENT");
-		}
-		// stepName3.addStepContent( stepContentObject? );
-	}
-
-	private void makeStep4(int stepID) {
-		stepName4.addFormattedStepHeader("step header title");
-		stepName4.setResultStepID(stepID);
-		if (currentMode.equals("PRACTICE")) {
-			stepName4.addStepComment("PRACTICE STEP COMMENT.");
-		} else {
-			stepName4.addStepComment("SUMMARY AND TUTORIAL COMMENT");
-		}
-		// stepName4.addStepContent( stepContentObject? );
-	}
-	
 	public void autoComplete(int slideOnDisplay) {
 		// TODO
 	}
 
 	public boolean checkAnswers(int i) {
 		return true;
-		// TODO 
-		
+		// TODO
+
 	}
 
 }

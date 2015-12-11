@@ -16,7 +16,6 @@ public class HexToDecResultDisplay extends ResultDisplay {
 	private final ResultStep productSumStep;
 	private HexExpansionGrid hexExpansionGrid;
 	private List<String> listOfProducts = new LinkedList<>();
-	private final List<String> listOfProductsOverflow = new LinkedList<>();
 	private final List<ExpansionBit> listOfBase16s = new LinkedList<>();
 	private BigValueExpansion base16multipliers = new BigValueExpansion();
 	private BigValueExpansion productExpansion = new BigValueExpansion();
@@ -124,7 +123,6 @@ public class HexToDecResultDisplay extends ResultDisplay {
 
 	private void makeCalcProductStep(int stepID) {
 		listOfProducts.clear();
-		listOfProductsOverflow.clear();
 		expansionProductStep.addFormattedStepHeader("expansion products");
 		expansionProductStep.setResultStepID(stepID);
 		expansionProductStep
@@ -143,14 +141,6 @@ public class HexToDecResultDisplay extends ResultDisplay {
 		}
 		productExpansion.addPlusSigns(listOfProducts.size() - 1);
 		expansionProductStep.addStepContent(productExpansion);
-	}
-
-	private void makeProductSumStep(int stepID) {
-		productSumStep.addFormattedStepHeader("product sum");
-		productSumStep.setResultStepID(stepID);
-		productSumStep
-				.addStepComment("Below is the final product sum of the product expansion.");
-		productSumStep.addStepBigCharLabel(new BigCharLabel(decString));
 	}
 
 	public void autoComplete(int slideOnDisplay) {

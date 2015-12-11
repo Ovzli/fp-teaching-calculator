@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
@@ -226,6 +227,17 @@ public class ResultDisplay extends GridPane {
 			displaySteps.get(stepIDindex).addStepComment("SUMMARY AND TUTORIAL COMMENT");
 		}
 		// stepName4.addStepContent( stepContentObject? );
+	}
+
+	protected void makeProductSumStep(int stepID) {
+		int stepIDindex = stepID - 1;
+		displaySteps.get(stepIDindex).addFormattedStepHeader("product sum");
+		displaySteps.get(stepIDindex).setResultStepID(stepID);
+		displaySteps.get(stepIDindex).addStepComment(
+				"Below is the final product sum of the product expansion.");
+		BigCharLabel productSumLabel = new BigCharLabel(decString);
+		productSumLabel.overrideCharHexColor("#0066CC");
+		displaySteps.get(stepIDindex).addStepBigCharLabel(productSumLabel);
 	}
 
 	protected String writeDecEquivalentComment() {
